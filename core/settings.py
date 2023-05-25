@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,8 +106,8 @@ DATABASES = {
         'NAME': 'mydatabase',
         'USER': 'postgres',
         'PASSWORD': 'mypassword',
-        'HOST': 'db',
-        # 'HOST': '127.0.0.1',
+        # 'HOST': 'db',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }

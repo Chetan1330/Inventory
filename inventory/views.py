@@ -6,7 +6,7 @@ from django.views.generic import (
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Stock
+from .models import Stock, Class1, Category, Subcategory, Manufacturer, Model
 from .forms import StockForm
 from django_filters.views import FilterView
 from .filters import StockFilter
@@ -36,9 +36,59 @@ import csv
 # classes = []
 # for i in Stock.objects.all():
 #     # print("Class is:", i.Class)
-#     classes.append(i.Class)
+#     if i.Class == "False":
+#         pass
+#     else:
+#         classes.append(i.Class)
 
 # print("Classes are:", set(classes))
+
+# print("Cat Data", Class.category_set.get.category_name)
+# stoclass = Class1.objects.all().get(class_name = "Test Debug Card")
+# stocat = stoclass.Categories.all()
+# # manu = stocat.manufacturer.all()
+# for i in stocat:
+    
+#     data1 = i.manufacturer.all()
+#     for j in data1:
+#         print("Yes", j)
+    # for j in data1:
+    #     print("data1 is:", j)
+
+# for i in data1:
+#     for i in set(classes):
+
+#     print("Data is:", i.class_name)
+# Class.objects.all().delete()
+# Category.objects.all().delete()
+# with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
+#     # csv_reader = csv.DictReader(csv_file)
+#     for row in csv.DictReader(csv_file):
+#         if Class1.objects.filter(class_name = row['Class']).exists():
+#             # print("Yes")
+#             pass
+#         elif Manufacturer.objects.filter(manufacturer_name = row['Manufacturer'] ).exists():
+#             # print("Cat exist")
+#             pass
+#         else:
+#             if row['Class']:
+#                 stock_class=Class1.objects.create(class_name = row['Class'])
+#                 print('Stock class:', stock_class.class_name)
+#                 stock_class.save()
+#             if row['Category']:
+#                 category = Category.objects.create(category_name = row['Category'], class_name = stock_class )
+#                 category.save()
+#             if row['Subcategory']:
+#                 subcategory = Category.objects.create(subcategory_name = row['Subcategory'], category_name = category )
+#                 subcategory.save()
+#             if row['Manufacturer']:
+#                 manufacturer = Manufacturer.objects.create(manufacturer_name = row['Manufacturer'], class_name=stock_class, subcat_name = category )
+#                 manufacturer.save()
+#             if row['Model']:
+#                 model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
+#                 model.save()
+        # stock=Class(class_name = row['Class'])
+        # stock.save()
 
 # Assignto = []
 # for i in Stock.objects.all():

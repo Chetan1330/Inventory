@@ -18,3 +18,4 @@ psycopg2==2.9.5
 six==1.13.0
 sqlparse==0.3.0
 wrapt==1.11.2
+whitenoise==3.3.1

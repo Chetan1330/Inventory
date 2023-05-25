@@ -2,18 +2,23 @@
 <!-- Log on to codeastro.com for more projects -->
 {% load static %}
 
+{% load widget_tweaks %}
 
 {% block title %} Home {% endblock title %}
 
 
 {% block content %}
 
-    <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div>
+    <!-- <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div> -->
+    <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">Dashboard</div>
 
+    <div class="col-12">
     <br>
     <select id="assign" class="select" style="width: 20%;">
-        <option value="Total Stocks">Total Stocks</option>
-        <option value="Assigned">Assigned</option>
+        <option value="Total Available">Total Available</option>
+        <option value="Not Available">Not Available</option>
+        <option value="Pending Retirement">Pending Retirement</option>
+        <option value="Reserved">Reserved</option>
         <!-- <option value="2">Two</option>
         <option value="3">Three</option>
         <option value="4">Four</option>
@@ -30,12 +35,90 @@
       </select> -->
       <button type="button" class="btn btn-sm btn-outline-secondary" onclick="filter()">Filter</button>
 
-    <div id="container" style="position: relative; height:45vh;" class="align-middle table-bordered">
+    <div id="container" style="position: relative; height:45vh;" class="col-12 align-middle table-bordered">
         <canvas id="bar-graph"></canvas>
     </div>
 
     <br>
 
+    <div class="table-responsive">
+    <table id="myTable" class="display table" width="100%">
+        <thead>  
+          <tr>  
+            <th>SrNo</th>
+            <th>Name</th>
+            <th>Serial number</th>  
+            <th>DNUSAN</th>  
+            <th>Class</th>
+            <th>Category</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Status(hardware_status)</th>
+            <th>Substatus</th>
+            <th>Program</th>
+            <th>Project</th>
+            <th>PO number</th>
+            <th>PO line number</th>
+            <th>Assigned to</th>
+            <th>Owned by</th>
+            <th>Managed by</th>
+            <th>Home Location</th>
+            <th>Location</th>
+            <th>Location Details</th>
+            <th>Created</th>
+            <th>Created by</th>
+            <th>Updated</th>
+            <th>Updated by</th>
+            <th>Cost center</th>
+            <th>Comments</th>
+            <th>Finance Type</th>
+            <th>Hardware Support Group</th>
+            <th>Hardware Support Service</th>
+            <th>Etag</th>
+          </tr>  
+        </thead>  
+        <tbody>  
+            {% for i,j,k,l,m,n,a,b,c,d,e,f,g,h,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,ee in alldata %}
+          <tr>  
+            <td>{{i}}</td>  
+            <td>{{j}}</td>  
+            <td>{{k}}</td>  
+            <td>{{l}}</td> 
+            <td>{{m}}</td>
+            <td>{{n}}</td>
+
+            <td>{{a}}</td>  
+            <td>{{b}}</td>  
+            <td>{{c}}</td>  
+            <td>{{d}}</td> 
+            <td>{{e}}</td>
+            <td>{{f}}</td>
+
+            <td>{{g}}</td>  
+            <td>{{h}}</td>  
+            <td>{{o}}</td>  
+            <td>{{p}}</td> 
+            <td>{{q}}</td>
+            <td>{{r}}</td>
+
+            <td>{{s}}</td>  
+            <td>{{t}}</td>  
+            <td>{{u}}</td>  
+            <td>{{v}}</td> 
+            <td>{{w}}</td>
+            <td>{{x}}</td>
+
+            <td>{{y}}</td>  
+            <td>{{z}}</td>  
+            <td>{{aa}}</td>  
+            <td>{{bb}}</td> 
+            <td>{{cc}}</td>
+            <td>{{ee}}</td>
+          </tr>  
+          {% endfor %}
+        </tbody>  
+      </table>
+    </div>
     <!-- <div class="row">
         <div class="col-md-6">
             <a href="{% url 'select-supplier' %}" class="btn btn-success btn-lg btn-block btn-huge">New Incoming Stock</a>
@@ -88,7 +171,97 @@
     </div> -->
 
     
-    <script src="{% static 'js/Chart.min.js' %}"></script>  
+
+    <!-- <div class="row" style="color: #4e4e4e; font-style: bold; font-size: 3rem; ">
+        <div class="col-md-8">Inventory List</div>
+        <div class="col-md-4">               
+            <div style="float:right;"> <a class="btn btn-success" href="{% url 'new-stock' %}">Add New Stock</a> </div>
+        </div>
+    </div>
+    
+    <div style="border-bottom: 1px solid white;"></div>
+    
+    <br>
+    
+
+    <table class="table table-css table-bordered table-hover">
+
+	
+        <form method="get">
+            <div class="input-group search">
+                {% render_field filter.form.name class="form-control textinput" placeholder="Search by stock name" %}
+                <div class="input-group-append">
+                   <button type="submit" class="btn btn-pink"> Search </button>
+                </div>
+            </div>
+        </form>
+
+        <br>
+        
+        <thead class="thead-dark align-middle">
+            <tr>
+                <th width="40%">Stock Name</th>
+                <th>Current Stock in Inventory</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+                  
+{% if object_list %}
+
+        <tbody>    
+            {% for stock in object_list %}
+                <tr>
+                    <td>
+                        <p>{{ stock.name }}</p>
+                    </td>
+                    <td class="align-middle">{{ stock.quantity }}</td>
+                    <td class="align-middle">
+                        <a href="{% url 'edit-stock' stock.pk %}" class="btn btn-info btn-sm">Edit Details</a>
+                        <a href="{% url 'delete-stock' stock.pk %}" class="btn btn-danger btn-sm"> Delete Stock </a>
+                    </td>          
+                </tr>
+            {% endfor %}                   
+        </tbody>
+
+    </table>  
+
+    <div class="align-middle">
+        {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+{% else %}
+
+        <tbody></tbody>   
+    </table>
+
+    <br><br><br><br><br><br><br><br>
+    <div style="color: #575757; font-style: bold; font-size: 1.5rem; text-align: center;">The records are empty. Please try adding some.</div>
+    {% endif %} -->
+
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    
+    
+
     <script>
         Chart.defaults.global.defaultFontColor = '#3c3c3c';
         var ctx = document.getElementById('bar-graph').getContext('2d');
@@ -110,6 +283,10 @@
             },
         };
 
+        // // 
+        // , 
+        //     "stockpending": stockpending, 
+        //     "stockreserved": stockreserved
         var barConfig1 = {
             type: 'bar',
             data: {
@@ -126,12 +303,153 @@
             },
         };
 
+        var barConfig2 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    backgroundColor: '#1a79a5',
+                    label: 'Available Stock',
+                    data: {{ Stockin|safe }},
+                },{
+                    backgroundColor: "rgba(255,153,0,0.4)",
+                    label: 'Total Stock',
+                    // barPercentage: 0.5,
+                    // barThickness: 6,
+                    // maxBarThickness: 8,
+                    // minBarLength: 2,
+                    data: {{ stockval|safe }},
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        };
+
+        var barConfig3 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    backgroundColor: '#1a79a5',
+                    label: 'Not Available Stock',
+
+                    barPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    data: {{ stockout|safe }},
+                },{
+                    backgroundColor: "rgba(255,153,0,0.4)",
+                    label: 'Total Stock',
+                    // barPercentage: 0.5,
+                    // barThickness: 6,
+                    // maxBarThickness: 8,
+                    // minBarLength: 2,
+                    data: {{ stockval|safe }},
+                }],
+                labels: {{ labels|safe }}
+            },
+            // options: {
+            //     responsive: true,
+            //     maintainAspectRatio: false,
+            // },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        };
+
+        var barConfig4 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    backgroundColor: '#1a79a5',
+                    label: 'Pending Retirement Stock',
+                    data: {{ stockpending|safe }},
+                },{
+                    backgroundColor: "rgba(255,153,0,0.4)",
+                    label: 'Total Stock',
+                    // barPercentage: 0.5,
+                    // barThickness: 6,
+                    // maxBarThickness: 8,
+                    // minBarLength: 2,
+                    data: {{ stockval|safe }},
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        };
+
+        var barConfig5 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    backgroundColor: '#1a79a5',
+                    label: 'Reserved Stock',
+                    data: {{ stockreserved|safe }},
+                },{
+                    backgroundColor: "rgba(255,153,0,0.4)",
+                    label: 'Total Stock',
+                    // barPercentage: 0.5,
+                    // barThickness: 6,
+                    // maxBarThickness: 8,
+                    // minBarLength: 2,
+                    data: {{ stockval|safe }},
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        };
+
 
 
         //runs all charts on loading the webpage
         window.onload = function() {
             
-            window.BarStock = new Chart(ctx, barConfig);
+            window.BarStock = new Chart(ctx, barConfig2);
         };
 
         function filter() {
@@ -152,15 +470,43 @@
                 window.BarStock = new Chart(ctx1, barConfig1);
             }
 
-            if (value == "Total Stocks"){
+            if (value == "Total Available"){
                 console.log("Total Stocks is seleted...")
-
+                BarStock.destroy();
                 // var ctx1 = document.getElementById('bar-graph').getContext('2d');
-                window.BarStock = new Chart(ctx1, barConfig);
+                window.BarStock = new Chart(ctx1, barConfig2);
+            }
+
+            if (value == "Not Available"){
+                console.log("Total Stocks is seleted...")
+                BarStock.destroy();
+                // var ctx1 = document.getElementById('bar-graph').getContext('2d');
+                window.BarStock = new Chart(ctx1, barConfig3);
+            }
+
+            if (value == "Pending Retirement"){
+                console.log("Total Stocks is seleted...")
+                BarStock.destroy();
+                // var ctx1 = document.getElementById('bar-graph').getContext('2d');
+                window.BarStock = new Chart(ctx1, barConfig4);
+            }
+
+            if (value == "Reserved"){
+                console.log("Total Stocks is seleted...")
+                BarStock.destroy();
+                // var ctx1 = document.getElementById('bar-graph').getContext('2d');
+                window.BarStock = new Chart(ctx1, barConfig5);
             }
         }
         
 
     </script>
+    <script>
+        $(document).ready(function(){
+            $('#myTable').dataTable();
+        });
+    </script>
+
+    </div>
 
 {% endblock content %}

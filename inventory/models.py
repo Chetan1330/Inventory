@@ -42,6 +42,47 @@ class Stock(models.Model):
     def __str__(self):
 	    return self.name
 
+class Class1(models.Model):
+  class_name = models.CharField(max_length=255, unique=True)
+
+  def __str__(self):
+    return self.class_name
+
+
+class Category(models.Model):
+  category_name = models.CharField(max_length=255, unique=True)
+  class_name = models.ForeignKey(Class1, related_name='Categories', on_delete=models.CASCADE)
+#   manufacturer_name = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, default=None)
+  def __str__(self):
+    return self.category_name
+
+
+class Subcategory(models.Model):
+  subcategory_name = models.CharField(max_length=255, unique=True)
+  category_name = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.subcategory_name
+
+
+class Manufacturer(models.Model):
+  manufacturer_name = models.CharField(max_length=255, unique=True)
+  class_name = models.ForeignKey(Class1, on_delete=models.CASCADE, default=None)
+  subcat_name = models.ForeignKey(Category, related_name='manufacturer', on_delete=models.CASCADE)
+  def __str__(self):
+    return self.manufacturer_name
+
+
+class Model(models.Model):
+  model_name = models.CharField(max_length=255, unique=True)
+  class_name = models.ForeignKey(Class1, on_delete=models.CASCADE, default=None)
+  subcat_name = models.ForeignKey(Category, on_delete=models.CASCADE, default=None)
+  manufacturer_name = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, default=None)
+
+  def __str__(self):
+    return self.model_name
+  
+
 # models.py
 from import_export import resources
 
