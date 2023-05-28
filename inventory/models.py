@@ -82,7 +82,23 @@ class Model(models.Model):
   def __str__(self):
     return self.model_name
   
+class ConfigName(models.Model):
+    name = models.CharField(max_length=700, unique=True)
+    
+    def __str__(self):
+	    return self.name
+    
+class Config(models.Model):
+    name = models.ForeignKey(ConfigName, related_name="configname", on_delete=models.CASCADE, default=None)
+    Class = models.CharField(max_length=700, unique=False)
+    Category = models.CharField(max_length=700, unique=False, default=False)
+    Manufacturer = models.CharField(max_length=700, unique=False, default=False)
+    Model = models.CharField(max_length=700, unique=False, default=False)
+    quantity = models.CharField(max_length=700, unique=False, default=False)
 
+    def __str__(self):
+	    return self.Class
+    
 # models.py
 from import_export import resources
 

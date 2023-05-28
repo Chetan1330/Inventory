@@ -19,9 +19,9 @@ import csv
 # with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
 #     # csv_reader = csv.DictReader(csv_file)
 #     for row in csv.DictReader(csv_file):
-#         if Stock.objects.filter(SSN=row['Serial number']).exists() or Stock.objects.filter(name=row['Name']).exists() or Stock.objects.filter(Name=row['Name']).exists():
-#             print("Yes")
-#             # pass
+#         if Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).exists():
+#             # print("count", Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).count())
+#             pass
 #         else:
 #             stock=Stock(name=row['Name'], Name=row['Name'], SSN=row['Serial number'], Class=row['Class'],
 #                         DNUSAN=row['DNUSAN'], Shortdesc=row['Short description'],Category=row['Category'],Subcategory=row['Subcategory'],Manufacturer=row['Manufacturer'],

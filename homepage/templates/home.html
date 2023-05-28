@@ -33,9 +33,9 @@
         <option value="vfg">vfg</option>
         <option value="TURNER, GARY P">TURNER, GARY P</option>
       </select> -->
-      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="filter()">Filter</button>
+      <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
 
-    <div id="container" style="position: relative; height:45vh;" class="col-12 align-middle table-bordered">
+    <div id="container" style="margin-top: 10px; position: relative; height:45vh;" class="col-12 align-middle table-bordered">
         <canvas id="bar-graph"></canvas>
     </div>
 
@@ -504,6 +504,7 @@
     <script>
         $(document).ready(function(){
             $('#myTable').dataTable();
+            $('.selectpicker').selectpicker();
         });
     </script>
 
