@@ -1,0 +1,147 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+
+{% block stylesheets %}
+  <style type="text/css">
+		#for_numrows {
+			padding: 10px;
+			float: left;
+		}
+		#for_filter_by {
+			padding: 0px;
+			float: right;
+		}
+		#pagesControllers {
+			display: block;
+			text-align: center;
+		}
+	</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title text-left"> Stocks Listing</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="tablemanager table" id="">
+                <thead class=" text-primary">
+                  <!-- <tr>
+                    <th class="disableFilterBy">#</th>
+                    <th>
+                      tx_hash
+                    </th>
+                    <th>
+                      tx_index
+                    </th>
+                    <th>
+                      value
+                    </th>
+                    <th class="disableFilterBy">
+                      value_hex
+                    </th>
+                  </tr> -->
+
+                  <tr>  
+                    <th class="disableFilterBy">SrNo</th>
+                    <th>Name</th>
+                    <th>Serial number</th>  
+                    <th>DNUSAN</th>  
+                    <th>Class</th>
+                    <th>Category</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Status(hardware_status)</th>
+                    <th>Substatus</th>
+                    <th>Program</th>
+                    <th>Project</th>
+                    <th>PO number</th>
+                    <th>PO line number</th>
+                    <th>Assigned to</th>
+                    <th>Owned by</th>
+                    <th>Managed by</th>
+                    <th>Home Location</th>
+                    <th>Location</th>
+                    <th>Location Details</th>
+                    <th>Created</th>
+                    <th>Created by</th>
+                    <th>Updated</th>
+                    <th>Updated by</th>
+                    <th>Cost center</th>
+                    <th>Comments</th>
+                    <th>Finance Type</th>
+                    <th>Hardware Support Group</th>
+                    <th>Hardware Support Service</th>
+                    <th>Etag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i,j,k,l,m,n,a,b,c,d,e,f,g,h,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,ee in alldata %}
+                  <tr>  
+                    <td>{{i}}</td>  
+                    <td>{{j}}</td>  
+                    <td>{{k}}</td>  
+                    <td>{{l}}</td> 
+                    <td>{{m}}</td>
+                    <td>{{n}}</td>
+
+                    <td>{{a}}</td>  
+                    <td>{{b}}</td>  
+                    <td>{{c}}</td>  
+                    <td>{{d}}</td> 
+                    <td>{{e}}</td>
+                    <td>{{f}}</td>
+
+                    <td>{{g}}</td>  
+                    <td>{{h}}</td>  
+                    <td>{{o}}</td>  
+                    <td>{{p}}</td> 
+                    <td>{{q}}</td>
+                    <td>{{r}}</td>
+
+                    <td>{{s}}</td>  
+                    <td>{{t}}</td>  
+                    <td>{{u}}</td>  
+                    <td>{{v}}</td> 
+                    <td>{{w}}</td>
+                    <td>{{x}}</td>
+
+                    <td>{{y}}</td>  
+                    <td>{{z}}</td>  
+                    <td>{{aa}}</td>  
+                    <td>{{bb}}</td> 
+                    <td>{{cc}}</td>
+                    <td>{{ee}}</td>
+                  </tr>  
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script>
+    $('.tablemanager').tablemanager({
+          pagination: true,
+          appendFilterby:true,
+          showrows: [5,10,20,50,100]
+        });
+  </script>
+
+{% endblock javascripts %}

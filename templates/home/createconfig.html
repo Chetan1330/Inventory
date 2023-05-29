@@ -1,0 +1,1315 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+    <!-- <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div> -->
+    
+
+    <div class="col-12">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div style="background-color: #f1f1f6; padding: 1em;">
+                <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">Create Config</div>
+                <div style="margin-top: 20px;" class="form-group">
+                    <label for="exampleInputEmail1">Config Name</label>
+                    <input name="configname" type="text" class="col-8 form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter config name">
+                </div>
+                <br/>
+                <!-- <form id="class1form" method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %} -->
+                    <div class="wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-responsive kie-tablelist">
+                        <thead>
+                            <tr class="kie-tablelist__row kie-tablelist__row--header">
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                <!--                       <label for="kieSettingsEqualsBehavior">Runtime Strategy</label> -->
+                                    <select id="selclass1" name="selclass1" class=" form-control" onchange="class1change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                        <!-- <option value="Cables">Cables</option>
+                                        <option value="Docking Add-on Board">Docking Add-on Board</option>
+                                        <option value="Power Supply">Power Supply</option>
+                                        <option value="Test Debug Card">Test Debug Card</option>
+                                        <option value="Memory">Memory</option> -->
+                                    </select>
+                                    <a style="color: blue;" href="/admin/DasboardApp/class1/add/">Add Class</a>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                <!--                       <label for="kieSettingsEqualsBehavior">Runtime Strategy</label> -->
+                                    <select id="selcat1" name="selcat1" class=" form-control" onchange="cat1change()">
+                                        <option selected>--- Select Category ---</option>
+                                        <!-- {% for i in cat_list1 %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %} -->
+                                        <!-- <option value="Cables">Cables</option>
+                                        <option value="Docking Add-on Board">Docking Add-on Board</option>
+                                        <option value="Power Supply">Power Supply</option>
+                                        <option value="Test Debug Card">Test Debug Card</option>
+                                        <option value="Memory">Memory</option> -->
+                                    </select>
+                                    <a style="color: blue;" href="/admin/DasboardApp/category/add/">Add Category</a>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                <!--                       <label for="kieSettingsEqualsBehavior">Runtime Strategy</label> -->
+                                    <select id="selmanu1" name="selmanu1" class=" form-control" onchange="manu1change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                        <!-- {% for i in cat_list1 %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %} -->
+                                        <!-- <option value="Cables">Cables</option>
+                                        <option value="Docking Add-on Board">Docking Add-on Board</option>
+                                        <option value="Power Supply">Power Supply</option>
+                                        <option value="Test Debug Card">Test Debug Card</option>
+                                        <option value="Memory">Memory</option> -->
+                                    </select>
+                                    <a style="color: blue;" href="/admin/DasboardApp/manufacturer/add/">Add Manufacturer</a>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                <!--                       <label for="kieSettingsEqualsBehavior">Runtime Strategy</label> -->
+                                    <select id="selmodel1" name="selmodel1" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                        <!-- {% for i in cat_list1 %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %} -->
+                                        <!-- <option value="Cables">Cables</option>
+                                        <option value="Docking Add-on Board">Docking Add-on Board</option>
+                                        <option value="Power Supply">Power Supply</option>
+                                        <option value="Test Debug Card">Test Debug Card</option>
+                                        <option value="Memory">Memory</option> -->
+                                    </select>
+                                    <a style="color: blue;" href="/admin/DasboardApp/model/add/">Add model</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="margin-bottom: 30px;" class="form-group">
+                                        <input class="form-control" name="qua1" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Second Dropdown -->
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selclass2" name="selclass2" class=" form-control" onchange="class2change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selcat2" name="selcat2" class=" form-control" onchange="cat2change()">
+                                        <option selected>--- Select Category ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmanu2" name="selmanu2" class=" form-control" onchange="manu2change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmodel2" name="selmodel2" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                    </select>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="qua2" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 3 Dropdown -->
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selclass3" name="selclass3" class=" form-control" onchange="class3change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selcat3" name="selcat3" class=" form-control" onchange="cat3change()">
+                                        <option selected>--- Select Category ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmanu3" name="selmanu3" class=" form-control" onchange="manu3change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmodel3" name="selmodel3" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                    </select>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="qua3" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 4 Dropdown -->
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selclass4" name="selclass4" class=" form-control" onchange="class4change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selcat4" name="selcat4" class=" form-control" onchange="cat4change()">
+                                        <option selected>--- Select Category ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmanu4" name="selmanu4" class=" form-control" onchange="manu4change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmodel4" name="selmodel4" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                    </select>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="qua4" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 5 Dropdown -->
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selclass5" name="selclass5" class=" form-control" onchange="class5change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selcat5" name="selcat5" class=" form-control" onchange="cat5change()">
+                                        <option selected>--- Select Category ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmanu5" name="selmanu5" class=" form-control" onchange="manu5change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmodel5" name="selmodel5" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                    </select>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="qua5" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 6 Dropdown -->
+                            <tr>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selclass6" name="selclass6" class=" form-control" onchange="class6change()">
+                                        <option selected>--- Select Class ---</option>
+                                        {% for i in allclassnames %}
+                                        <option value="{{i.id}}">{{i}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selcat6" name="selcat6" class=" form-control" onchange="cat6change()">
+                                        <option selected>--- Select Category ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmanu6" name="selmanu6" class=" form-control" onchange="manu6change()">
+                                        <option selected>--- Select Manufacturer ---</option>
+                                    </select>
+                                    </div>
+                                </td>
+
+                                <td class="kie-tablelist__cell ">
+                                    <div class="form-group">
+                                    <select id="selmodel6" name="selmodel6" class=" form-control">
+                                        <option selected>--- Select Model ---</option>
+                                    </select>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="qua6" style="margin-left: 7px;" type="number" placeholder="Quantity">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Repeat the above row 7 more times -->
+                        </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Create Config</button>
+                    </div>
+                    </div>
+
+                    
+                <!-- </form> -->
+            </div>
+            
+        </form>   
+
+        <div style="background-color: #f1f1f6; margin-top: -117px; padding: 1em;">
+            <!-- {% for i in all_configs %}
+                <a href="viewconfig/">{{i}}</a>
+            {% endfor %} -->
+            <h2>Select a Config to show details</h2>
+            <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                <option selected>--- Select Config ---</option>
+                {% for i in all_configs %}
+                    <option value="{{i.id}}">{{i}}</option>
+                {% endfor %}
+            </select>
+
+
+            
+                <div class="table-responsive">
+                    <table class="table table-hover table-responsive kie-tablelist">
+                    <thead>
+                        <tr class="kie-tablelist__row kie-tablelist__row--header">
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyclass">
+                        <tr id="trclass">
+                            <td id="tdclass" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdcategory" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmanu" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmodel" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdqua" class="kie-tablelist__cell">
+
+                            </td>
+                        </tr>
+
+                        
+                    </tbody>
+                    
+                    </table>
+                </div>
+                
+        </div>
+    </div>
+    
+
+    <script>
+        
+        // jQuery(document).ready(function($) {
+        //     $("#selclass1").on('change', function() {
+        //         var level = $(this).val();
+        //         if(level){
+        //             $.ajax ({
+        //                 type: 'POST',
+        //                 url: '',
+        //                 data: { class: '' + level + '' },
+        //                 success : function(htmlresponse) {
+                            
+        //                     console.log(htmlresponse);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+                }
+            }
+            return cookieValue;
+        }
+        
+        //  For row 1 Selects 
+        function class1change(){
+
+            // document.getElementById('class1form').submit()
+            selclass1 = document.getElementById('selclass1').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class1: selclass1}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat1 = $('#selcat1');
+                    selCat1.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat1.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat1.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        function cat1change(){
+
+            // document.getElementById('class1form').submit()
+            selcat1 = document.getElementById('selcat1').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category1: selcat1}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu1 = $('#selmanu1');
+                    selmanu1.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu1.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu1.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        function manu1change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu1 = document.getElementById('selmanu1').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu1: selmanu1}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel1 = $('#selmodel1');
+                    selmodel1.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel1.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel1.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+        // Row 1 end
+        // 2nd Row
+        function class2change(){
+
+            // document.getElementById('class1form').submit()
+            selclass2 = document.getElementById('selclass2').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class2: selclass2}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat2 = $('#selcat2');
+                    selCat2.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat2.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat2.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function cat2change(){
+
+            // document.getElementById('class1form').submit()
+            selcat2 = document.getElementById('selcat2').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category2: selcat2}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu2 = $('#selmanu2');
+                    selmanu2.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu2.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu2.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function manu2change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu2 = document.getElementById('selmanu2').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu2: selmanu2}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel2 = $('#selmodel2');
+                    selmodel2.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel2.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel2.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+        // 2nd end
+        // 3rd Row
+        function class3change(){
+
+            // document.getElementById('class1form').submit()
+            selclass3 = document.getElementById('selclass3').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class3: selclass3}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat3 = $('#selcat3');
+                    selCat3.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat3.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat3.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function cat3change(){
+
+            // document.getElementById('class1form').submit()
+            selcat3 = document.getElementById('selcat3').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category3: selcat3}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu3 = $('#selmanu3');
+                    selmanu3.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu3.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu3.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function manu3change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu3 = document.getElementById('selmanu3').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu3: selmanu3}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel3 = $('#selmodel3');
+                    selmodel3.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel3.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel3.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        // 4th Row
+        function class4change(){
+
+            // document.getElementById('class1form').submit()
+            selclass4 = document.getElementById('selclass4').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class4: selclass4}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat4 = $('#selcat4');
+                    selCat4.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat4.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat4.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function cat4change(){
+
+            // document.getElementById('class1form').submit()
+            selcat4 = document.getElementById('selcat4').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category4: selcat4}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu4 = $('#selmanu4');
+                    selmanu4.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu4.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu4.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function manu4change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu4 = document.getElementById('selmanu4').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu4: selmanu4}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel4 = $('#selmodel4');
+                    selmodel4.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel4.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel4.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        // 5th Row
+        function class5change(){
+
+            // document.getElementById('class1form').submit()
+            selclass5 = document.getElementById('selclass5').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class5: selclass5}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat5 = $('#selcat5');
+                    selCat5.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat5.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat5.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function cat5change(){
+
+            // document.getElementById('class1form').submit()
+            selcat5 = document.getElementById('selcat5').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category5: selcat5}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu5 = $('#selmanu5');
+                    selmanu5.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu5.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu5.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function manu5change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu5 = document.getElementById('selmanu5').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu5: selmanu5}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel5 = $('#selmodel5');
+                    selmodel5.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel5.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel5.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        // 6th Row
+        function class6change(){
+
+            // document.getElementById('class1form').submit()
+            selclass6 = document.getElementById('selclass6').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({class6: selclass6}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selCat6 = $('#selcat6');
+                    selCat6.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selCat6.append($('<option>', {
+                        
+                        text: "--- Select Category ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selCat6.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["category_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["category_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            }
+
+            function cat6change(){
+
+            // document.getElementById('class1form').submit()
+            selcat6 = document.getElementById('selcat6').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({category6: selcat6}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmanu6 = $('#selmanu6');
+                    selmanu6.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmanu6.append($('<option>', {
+                        
+                        text: "--- Select Manufacturer ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmanu6.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["manufacturer_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["manufacturer_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        function manu6change(){
+
+            // document.getElementById('class1form').submit()
+            selmanu6 = document.getElementById('selmanu6').value;
+
+            // window.location = "/createconfig/?class="+selclass1;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({manu6: selmanu6}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response.length)
+                    var selmodel6 = $('#selmodel6');
+                    selmodel6.empty();
+
+                    //loop thorugh json response //is its json object > json array use : response.instances
+                    // if (response.length = 1){
+                    //     console.log("Instances:", response["instances"][1]);
+                    // }
+                    selmodel6.append($('<option>', {
+                        
+                        text: "--- Select Model ---"
+                    }))
+                    for (var i = 0; i < response.length; i++) {
+                        selmodel6.append($('<option>', {
+                        value: response[i]["pk"], //get the sequence
+                        text: response[i]["fields"]["model_name"]
+                    }))
+                    console.log("Instances:", response[i]["fields"]["model_name"])
+                    console.log("Instances:", response[i]["pk"])
+                    };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+
+        // Config list change
+        function configchange(){
+            selconfig = document.getElementById('selconfig').value;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({selconfig: selconfig}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response['allcategory'].length)
+                    var tdclass = $('#tdclass');
+                    tdclass.empty();
+
+                    var tdcategory = $('#tdcategory');
+                    tdcategory.empty();
+
+                    var tdmanu = $('#tdmanu');
+                    tdmanu.empty();
+
+                    var tdmodel = $('#tdmodel');
+                    tdmodel.empty();
+
+                    var tdqua = $('#tdqua');
+                    tdqua.empty();
+
+                    for (var i = 0; i < response['allclass'].length; i++) {
+                        tdclass.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
+                        tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        tdmanu.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
+                        tdmodel.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
+                        tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                    };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        
+                    // };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     trclass.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                    // };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+        
+    </script>
+    
+
+
+{% endblock content %}

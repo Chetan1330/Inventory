@@ -1,0 +1,417 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="wholeblock">
+  <div id="dropdown" class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      Pay With
+    </button>
+    <div class="dropdown-menu">
+      <a style="margin-left: 12px;" id="droppaypal" class="col-md-10 btn btn-primary btn-simple"
+        href="{% url 'paypal' %}">Paypal</a>
+      <div class="dropdown-divider"></div>
+      <a style="margin-left: 12px;" id="dropstripe" class="col-md-10 btn btn-primary btn-simple"
+        href="{% url 'stripe' %}">Stripe</a>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <style>
+      .w3-container {
+        font-size: 14px;
+      }
+
+      .center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Inter&display=swap" rel="stylesheet">
+
+    <!-- Landing page styling -->
+    <style type="text/css">
+      body {
+        background-color: #F8F8F8;
+      }
+
+      h3,
+      h5 {
+        font-family: 'Fjalla One', sans-serif;
+        font-weight: 100;
+      }
+
+      h3 {
+        font-size: 36px;
+      }
+
+      h5 {
+        font-size: 24px;
+      }
+
+      p,
+      label {
+        font-family: 'Inter', sans-serif;
+      }
+
+      hr {
+        color: #fff;
+        background-color: #fff;
+        border-top: 1px solid #fff;
+        margin-top: 20px;
+        margin-bottom: 0px;
+      }
+
+      #container {
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 3%;
+      }
+
+      .column-6 {
+        width: 50%;
+        float: left;
+      }
+
+      #left-wrapper {
+        background-color: #72cca7;
+        box-shadow: 0 1px 3px 0 #dce0e6;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        padding: 30px;
+      }
+
+      #right-wrapper {
+        padding: 30px;
+      }
+
+
+      #left-wrapper-header {
+        min-width: 50%;
+        float: left;
+        padding-left: 0px;
+
+      }
+
+      #left-wrapper-header h3 {
+        color: #fff;
+
+      }
+
+      #right-wrapper h3 {
+        color: #10a195;
+      }
+
+      .coffee-cup {
+        margin-left: 20px;
+        width: 100px;
+      }
+
+      .coffee-cup2 {
+        margin-left: 20px;
+        width: 150px;
+      }
+
+      .coffee-cup3 {
+        margin-left: 20px;
+        width: 200px;
+      }
+
+      /* ------------------------ FORM FIELDS ------------------------ */
+
+      .form-field-12 {
+        width: 100%;
+        margin-bottom: 0px;
+        padding-top: 2px;
+      }
+
+      .form-field-6 {
+        width: 50%;
+        float: left;
+        margin-bottom: 10px;
+      }
+
+      select {
+        width: 100%;
+        height: 60px !important;
+        box-shadow: 0 1px 3px 0 #dce0e6;
+        padding: 10px 12px;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        font-size: 20px;
+        color: #44464a;
+      }
+
+      input {
+        box-shadow: 0 1px 3px 0 #dce0e6;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        color: #44464a;
+        width: 95%;
+        padding: 5px;
+        font-size: 16px;
+
+      }
+
+      input::placeholder {
+        color: #9fa1a6;
+      }
+
+      /* ------------------------ BUTTON STYLING ------------------------ */
+      .myButton {
+        background-color: #72cca7;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Verdana;
+        font-size: 17px;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        text-decoration: none;
+        text-align: center;
+        transition: .3s;
+      }
+
+      .myButton:hover {
+        opacity: .6;
+      }
+
+      @media screen and (max-width:1200px) {
+        #container {
+          width: 80%;
+        }
+
+        .column-6 {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width:800px) {
+        #container {
+          width: 100%;
+        }
+
+        .coffee-cup {
+          margin-left: 20px;
+          width: 50px;
+        }
+
+        .coffee-cup2 {
+          margin-left: 20px;
+          width: 75px;
+        }
+
+        .coffee-cup3 {
+          margin-left: 20px;
+          width: 100px;
+        }
+
+      }
+    </style>
+
+    <!-- Success page styling -->
+    <style type="text/css">
+      h4 {
+        font-family: 'Fjalla One', sans-serif;
+        font-weight: 100;
+        font-size: 24px;
+      }
+
+      #box {
+        max-width: 500px;
+        margin: 0 auto;
+        margin-top: 100px;
+        padding: 30px;
+        background-color: #fff;
+        text-align: center;
+        box-shadow: 0 1px 3px 0 #dce0e6;
+        border-radius: 4px;
+        border: 1px solid transparent;
+      }
+
+      .myButton {
+        background-color: #72cca7;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Verdana;
+        font-size: 17px;
+        padding: 10px;
+        width: 100%;
+        border-radius: 0;
+        text-decoration: none;
+        text-align: center;
+        transition: .3s;
+      }
+
+      .myButton:hover {
+        opacity: .6;
+      }
+
+      #succes-icon {
+        width: 100px;
+
+      }
+    </style>
+    <div id="paypaldiv" class="right col-md-5">
+      <h3 class="donate">
+        <div class="w3-card-4">
+
+          <header class="w3-container w3-blue">
+            <h1 class="text-center">Paypal Payment</h1>
+          </header>
+
+          <div class="w3-container">
+            <p>Refill Account</p>
+
+            <!-- PAYPAL BUTTONS HERE  -->
+            <input required type="text" name="paypalamount" id="paypalamount" placeholder="Enter Your Amount Here...">
+            <br>
+
+            <div id="paypal-button-container"></div>
+
+            <!-- Include the PayPal JavaScript SDK -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script
+              src="https://www.paypal.com/sdk/js?client-id=AdYHv0VFkQADLxi-IqhJwSDApHE-w_Yqo6RYXbcvdW_4C4KljsBLcnk8XFXGlSOqiQhIQ-PX6mjQmMZe&currency=USD"></script>
+
+            <script>
+              // Render the PayPal button into #paypal-button-container
+              paypal.Buttons({
+
+                // Set up the transaction
+                createOrder: function (data, actions) {
+                  return actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: document.getElementById("paypalamount").value
+                      }
+                    }]
+                  });
+                },
+
+                // Finalize the transaction
+                onApprove: function (data, actions) {
+                  return actions.order.capture().then(function (orderData) {
+                    // Successful capture! For demo purposes:
+                    //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction ' + transaction.status );
+
+                    const paypalid = document.getElementById('paypaldiv');
+                    const dropid = document.getElementById('dropdown');
+                    const url = "{% url 'paypalsucess' %}";
+                    dropid.innerHTML = '';
+                    paypalid.innerHTML = '';
+
+
+                    function getCookie(name) {
+                      let cookieValue = null;
+                      if (document.cookie && document.cookie !== "") {
+                        const cookies = document.cookie.split(";");
+                        for (let i = 0; i < cookies.length; i++) {
+                          const cookie = cookies[i].trim();
+                          // Does this cookie string begin with the name we want?
+                          if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                          }
+                        }
+                      }
+                      return cookieValue;
+                    }
+
+                    //   fetchData();
+                    function fetchData() {
+                      fetch(url, {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                          "X-Requested-With": "XMLHttpRequest",
+                          "X-CSRFToken": getCookie("csrftoken"),
+                        },
+                        body: JSON.stringify({ payload: "data to send" })
+                      })
+                        .then(response => response.json())
+                        .then(data => {
+                          console.log(data);
+                        });
+                    }
+                    sendData();
+                    function sendData() {
+                      $.ajax({
+                        url: url,
+                        type: "POST",
+                        dataType: "json",
+                        data: JSON.stringify({ transactionstatus: transaction.status, transactionid: transaction.id, transactionamount: parseInt(transaction.amount.value) }),
+                        headers: {
+                          "X-Requested-With": "XMLHttpRequest",
+                          "X-CSRFToken": getCookie("csrftoken"),
+                        },
+                        success: (data) => {
+                          $("#wholeblock").html(data);
+                          console.log(data);
+                        },
+                        error: (error) => {
+                          console.log(error);
+                        }
+                      });
+                    }
+                    //   const paypalid = document.getElementById('paypaldiv');
+                    //   const dropid = document.getElementById('dropdown');
+                    //   dropid.innerHTML = '{{transaction.id}}';
+                    //   paypalid.innerHTML = '';
+                    //   paypalid.innerHTML = '<h4>Thank you for your contribution of ${{transaction.id}}!</h4><p>Your support helps me fulfill my dream of teaching aspiring developers around the world! You should receive a receipt to the email you provided shortly :)</p><hr><a class="myButton" href="{% url "index" %}">&#x2190;Back to Dashboard</a>';
+
+                    //actions.redirect("/");
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                  });
+                }
+
+
+              }).render('#paypal-button-container');
+            </script>
+
+          </div>
+
+          <footer class="w3-container w3-blue">
+            <h5>&copy Apac</h5>
+          </footer>
+
+        </div>
+      </h3>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

@@ -1,0 +1,536 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+    <!-- <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div> -->
+
+    <div  class="col-12">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div style="background-color: #f1f1f6; padding: 2em;">
+                <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">Build Config</div>
+
+                <!-- {% for i in all_configs %}
+                    <a href="viewconfig/">{{i}}</a>
+                {% endfor %} -->
+                <h2 style="margin-top: 20px;" >List of existing Configs</h2>
+                <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                    <option selected>--- Select Config ---</option>
+                    {% for i in all_configs %}
+                        <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                </select>
+
+
+                <div class="wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-responsive kie-tablelist">
+                        <thead>
+                            <tr class="kie-tablelist__row kie-tablelist__row--header">
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                            <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyclass">
+                            <tr id="trclass">
+                                <td id="tdclass" class="kie-tablelist__cell">
+
+                                </td>
+
+                                <td id="tdcategory" class="kie-tablelist__cell">
+
+                                </td>
+
+                                <td id="tdmanu" class="kie-tablelist__cell">
+
+                                </td>
+
+                                <td id="tdmodel" class="kie-tablelist__cell">
+
+                                </td>
+
+                                <td id="tdqua" class="kie-tablelist__cell">
+
+                                </td>
+                            </tr>
+
+                            
+                        </tbody>
+                        
+                        </table>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <span class="col-2"></span>
+                            <div class="col-10 row">
+                                <input id="buildno" name="buildno" type="number" class="col-3 form-control" aria-describedby="emailHelp" placeholder="How many to Build">
+                                <span class="col-1"></span>
+                                <button id="buildbtn" type="button" onclick="buildchange()" class="col-3 btn btn-primary">Build Config</button>
+                                
+                                <!-- <div class="col-12" id="reservetxt">
+                                    <span id="stockspan" class="my-4 col-12"> </span>
+                                    <div class="my-3 col-10">
+                                        <button onclick="reserve()" type="button" class="btn btn-primary">Reserve</button>
+                                        <button onclick="Cancel()" type="button" class="btn btn-danger">Cancel</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-12" id="reservestock">
+                                    <span id="stockspan" class="my-4 col-12"> </span>
+                                    <h4>Stocks are Reserved</h4>
+                                </div> -->
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                        <br>
+                        <hr>
+                        <div id="table2" class="table-responsive">
+                            <table class="table table-hover table-responsive kie-tablelist">
+                            <thead>
+                                <tr class="kie-tablelist__row kie-tablelist__row--header">
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Asked</th>
+                                <th class="kie-tablelist__cell kie-tablelist__cell--header">Available</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyclass2">
+                                <tr id="trclass2">
+                                    <td id="tdclass2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdcategory2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdmanu2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdmodel2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdqua2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdask2" class="kie-tablelist__cell">
+
+                                    </td>
+
+                                    <td id="tdavail2" class="kie-tablelist__cell">
+
+                                    </td>
+                                </tr>
+
+                                
+                            </tbody>
+                            
+                            </table>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <span class="col-2"></span>
+                                <div class="col-10 row">
+                                    <!-- <input id="buildno" name="buildno" type="number" class="col-3 form-control" aria-describedby="emailHelp" placeholder="How many to Build">
+                                    <span class="col-1"></span>
+                                    <button type="button" onclick="buildchange()" class="col-3 btn btn-primary">Build Config</button> -->
+                                    
+                                    <div class="col-12" id="reservetxt">
+                                        <span id="stockspan" class="my-4 col-12"> </span>
+                                        <div class="my-3 col-10">
+                                            <button onclick="reserve()" type="button" class="btn btn-primary">Reserve</button>
+                                            <button onclick="Cancel()" type="button" class="btn btn-danger">Cancel</button>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-12" id="reservestock">
+                                        <span id="stockspan" class="my-4 col-12"> </span>
+                                        <h4>Stocks are Reserved</h4>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+
+                        <div id="green" class="alert alert-success" role="alert">
+                            successfully build the config. Above stocks are reserved.
+                        </div>
+            
+                        <div id="red" class="alert alert-danger" role="alert">
+                            Unable to build the config. Out of stocks!
+                        </div>
+                    </div>
+
+                    <!-- <div id="table2" class="wrapper">
+                        
+                    </div> -->
+                    
+                    
+                
+            </div>
+
+        </form> 
+        
+        
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        jQuery(document).ready(function($) {
+            // $('.alert').alert()
+            // $('.alert').alert('close')
+            document.getElementById("green").style.display = "none";
+            document.getElementById("red").style.display = "none";
+            document.getElementById("table2").style.display = "none";
+            document.getElementById("reservestock").style.display = "none";
+            document.getElementById("reservetxt").style.display = "none";
+
+            document.getElementById("buildno").style.display = "none";
+            document.getElementById("buildbtn").style.display = "none";
+            
+        });
+        
+        
+
+        var aclass;
+        var acat;
+        var amanu;
+        var amodel;
+        var aqua;
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+                }
+            }
+            return cookieValue;
+        }
+        
+        
+
+
+        // Config list change
+        function configchange(){
+
+            selconfig = document.getElementById('selconfig').value;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({selconfig: selconfig}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response['allcategory'].length)
+
+                    document.getElementById("buildno").style.display = "block";
+                    document.getElementById("buildbtn").style.display = "block";
+
+                    document.getElementById("table2").style.display = "block";
+                    var tdclass = $('#tdclass');
+                    tdclass.empty();
+
+                    var tdcategory = $('#tdcategory');
+                    tdcategory.empty();
+
+                    var tdmanu = $('#tdmanu');
+                    tdmanu.empty();
+
+                    var tdmodel = $('#tdmodel');
+                    tdmodel.empty();
+
+                    var tdqua = $('#tdqua');
+                    tdqua.empty();
+
+                    if (response['allclass'].length == response['allcategory'].length){
+                        console.log("Same length")
+                        aclass = response['allclass'];
+                        acat = response['allcategory'];
+                        amanu = response['allmanu']
+                        amodel = response['allmodel']
+                        aqua = response['allquantity']
+                    }
+                    for (var i = 0; i < response['allclass'].length; i++) {
+                        tdclass.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
+                        
+                        tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        tdmanu.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
+                        tdmodel.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
+                        tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                    };
+
+                    var tdclass2 = $('#tdclass2');
+                    tdclass2.empty();
+
+                    var tdcategory2 = $('#tdcategory2');
+                    tdcategory2.empty();
+
+                    var tdmanu2 = $('#tdmanu2');
+                    tdmanu2.empty();
+
+                    var tdmodel2 = $('#tdmodel2');
+                    tdmodel2.empty();
+
+                    var tdqua2 = $('#tdqua2');
+                    tdqua2.empty();
+
+                    for (var i = 0; i < response['allclass'].length; i++) {
+                        tdclass2.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
+                            
+                        tdcategory2.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        tdmanu2.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
+                        tdmodel2.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
+                        tdqua2.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                    };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        
+                    // };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     trclass.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                    // };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+
+        // Build config change
+        // function buildchange(){
+        //     selconfig = document.getElementById('selconfig').value;
+        //     buildno = document.getElementById('buildno').value;
+            
+        //     console.log("All data:", aclass,acat,amanu,amodel,aqua)
+        //     $.ajax({
+        //         url: '',
+        //         type: "POST",
+        //         dataType: "json",
+        //         data: JSON.stringify({buildno:buildno, aclass: aclass, acat: acat, amanu: amanu, amodel: amodel, aqua: aqua}),
+        //         headers: {
+        //             "X-Requested-With": "XMLHttpRequest",
+        //             "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+        //         },
+        //         success: function (response) {
+        //             console.log("html:", response);
+        //             console.log("Aclass:", "aclass");
+        //             // var tdcategory = $('#tdcategory');
+
+        //             var tdclass2 = $('#tdclass2');
+        //             tdclass2.empty();
+
+        //             var tdcategory2 = $('#tdcategory2');
+        //             tdcategory2.empty();
+
+        //             var tdmanu2 = $('#tdmanu2');
+        //             tdmanu2.empty();
+
+        //             var tdmodel2 = $('#tdmodel2');
+        //             tdmodel2.empty();
+
+        //             var tdqua2 = $('#tdqua2');
+        //             tdqua2.empty();
+
+        //             for (var i = 0; i < aclass.length; i++) {
+        //                 tdclass2.append("<tr><td>"+aclass[i]+"</td></tr>")
+                            
+        //                 tdcategory2.append("<tr><td>"+acat[i]+"</td></tr>")
+        //                 tdmanu2.append("<tr><td>"+amanu[i]+"</td></tr>")
+        //                 tdmodel2.append("<tr><td>"+amodel[i]+"</td></tr>")
+        //                 tdqua2.append("<tr><td>"+aqua[i]+"</td></tr>")
+        //             };
+
+
+        //             if (response['build_status'] == "Red"){
+        //                 console.log("It's red");
+        //                 document.getElementById("red").style.display = "block";
+        //             };
+        //             if (response['build_status'] == "Green"){
+        //                 console.log("It's Green");
+        //                 document.getElementById("green").style.display = "block";
+                        
+        //             };
+                    
+        //         },
+        //         error: (error) => {
+        //             console.log(error);
+        //         }
+        //     });
+        // }
+
+        // Reserve build config
+        function buildchange(){
+            selconfig = document.getElementById('selconfig').value;
+            buildno = document.getElementById('buildno').value;
+
+            var tdask2 = $('#tdask2');
+            tdask2.empty();
+
+            var tdavail2 = $('#tdavail2');
+            tdavail2.empty();
+            
+            console.log("All data:", aclass,acat,amanu,amodel,aqua)
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({buildno:buildno, aclass: aclass, acat: acat, amanu: amanu, amodel: amodel, aqua: aqua}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    // var tdcategory = $('#tdcategory');
+                    $('#stockspan').empty();
+                    $('#stockspan').append("Can build" + " " + response['no_build'] + " Systems of above config with available stocks. Do you want to reserve stocks?");
+                    var tdask2 = $('#tdask2');
+                    tdask2.empty();
+
+                    var tdavail2 = $('#tdavail2');
+                    tdavail2.empty();
+
+                    for (var i = 0; i < aclass.length; i++) {
+                        tdask2.append("<tr><td>"+response['ask_val']+"</td></tr>")
+                        tdavail2.append("<tr><td>"+response['rowval'][i]+"</td></tr>")
+                        
+                        // tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        // tdmanu.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
+                        // tdmodel.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
+                        // tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                    };
+
+                    if (response['build_status'] == "Red"){
+                        console.log("It's red");
+                        document.getElementById("red").style.display = "block";
+                        document.getElementById("green").style.display = "None";
+                        document.getElementById("reservetxt").style.display = "None";
+                        document.getElementById("reservestock").style.display = "None";
+                        // document.getElementById("table2").style.display = "None";
+                    };
+                    if (response['build_status'] == "Green"){
+                        console.log("It's Green");
+                        document.getElementById("green").style.display = "block";
+                        document.getElementById("red").style.display = "None";
+                        document.getElementById("reservetxt").style.display = "block";
+                        document.getElementById("reservestock").style.display = "None";
+                        // document.getElementById("table2").style.display = "block";
+                        
+                    };
+
+                    if (response['build_status'] == "zero"){
+                        document.getElementById("green").style.display = "None";
+                        document.getElementById("red").style.display = "None";
+                        document.getElementById("reservetxt").style.display = "None";
+                        document.getElementById("table2").style.display = "None";
+                        document.getElementById("reservestock").style.display = "None";
+                        
+                    };
+                    
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+        
+
+        // Reserve stocks
+        function reserve(){
+            selconfig = document.getElementById('selconfig').value;
+            buildno = document.getElementById('buildno').value;
+            
+            console.log("All data:", aclass,acat,amanu,amodel,aqua)
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({reserve2: selconfig, bno:buildno, aclass: aclass, acat: acat, amanu: amanu, amodel: amodel, aqua: aqua}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    // var tdcategory = $('#tdcategory');
+                    // $('#stockspan').empty();
+                    // $('#stockspan').append("Can build" + " " + response['no_build'] + " Servers with above config. Do you want to reserve stocks?");
+                    var tdask2 = $('#tdask2');
+                    tdask2.empty();
+
+                    var tdavail2 = $('#tdavail2');
+                    tdavail2.empty();
+
+                    document.getElementById("reservestock").style.display = "block";
+                    document.getElementById("red").style.display = "None";
+                    document.getElementById("green").style.display = "None";
+                    document.getElementById("reservetxt").style.display = "None";
+
+                    
+
+                    if (response['build_status'] == "zero"){
+                        document.getElementById("green").style.display = "None";
+                        document.getElementById("red").style.display = "None";
+                        document.getElementById("reservetxt").style.display = "None";
+                        document.getElementById("table2").style.display = "None";
+                        
+                    };
+                    
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+
+        // Cancel Function
+        function Cancel(){
+            document.getElementById("reservestock").style.display = "None";
+            document.getElementById("red").style.display = "None";
+            document.getElementById("green").style.display = "None";
+            document.getElementById("reservetxt").style.display = "None";
+            
+        }
+
+    </script>
+    
+
+
+{% endblock content %}

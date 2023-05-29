@@ -1,0 +1,401 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style type="text/css">
+  /**
+   * The CSS shown here will not be introduced in the Quickstart guide, but shows
+   * how you can use CSS to style your Element's container.
+   */
+  .StripeElement {
+    box-sizing: border-box;
+
+    height: 40px;
+
+    padding: 10px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="row">
+
+  <style>
+    .w3-container {
+      font-size: 14px;
+    }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Inter&display=swap" rel="stylesheet">
+
+  <!-- Landing page styling -->
+  <style type="text/css">
+    body {
+      background-color: #F8F8F8;
+    }
+
+    h3,
+    h5 {
+      font-family: 'Fjalla One', sans-serif;
+      font-weight: 100;
+    }
+
+    h3 {
+      font-size: 36px;
+    }
+
+    h5 {
+      font-size: 24px;
+    }
+
+    p,
+    label {
+      font-family: 'Inter', sans-serif;
+    }
+
+    hr {
+      color: #fff;
+      background-color: #fff;
+      border-top: 1px solid #fff;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    #container {
+      width: 1200px;
+      margin: 0 auto;
+      padding-top: 3%;
+    }
+
+    .column-6 {
+      width: 50%;
+      float: left;
+    }
+
+    #left-wrapper {
+      background-color: #72cca7;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      padding: 30px;
+    }
+
+    #right-wrapper {
+      padding: 30px;
+    }
+
+
+    #left-wrapper-header {
+      min-width: 50%;
+      float: left;
+      padding-left: 0px;
+
+    }
+
+    #left-wrapper-header h3 {
+      color: #fff;
+
+    }
+
+    #right-wrapper h3 {
+      color: #10a195;
+    }
+
+    .coffee-cup {
+      margin-left: 20px;
+      width: 100px;
+    }
+
+    .coffee-cup2 {
+      margin-left: 20px;
+      width: 150px;
+    }
+
+    .coffee-cup3 {
+      margin-left: 20px;
+      width: 200px;
+    }
+
+    /* ------------------------ FORM FIELDS ------------------------ */
+
+    .form-field-12 {
+      width: 100%;
+      margin-bottom: 0px;
+      padding-top: 2px;
+    }
+
+    .form-field-6 {
+      width: 50%;
+      float: left;
+      margin-bottom: 10px;
+    }
+
+    select {
+      width: 100%;
+      height: 60px !important;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+      padding: 10px 12px;
+      border-radius: 4px;
+      background-color: #fff;
+      border: 1px solid transparent;
+      font-size: 20px;
+      color: #44464a;
+    }
+
+    input {
+      box-shadow: 0 1px 3px 0 #dce0e6;
+      height: 40px;
+      border-radius: 4px;
+      background-color: #fff;
+      border: 1px solid transparent;
+      color: #44464a;
+      width: 95%;
+      padding: 5px;
+      font-size: 16px;
+
+    }
+
+    input::placeholder {
+      color: #9fa1a6;
+    }
+
+    /* ------------------------ BUTTON STYLING ------------------------ */
+    .myButton {
+      background-color: #72cca7;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Verdana;
+      font-size: 17px;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      text-decoration: none;
+      text-align: center;
+      transition: .3s;
+    }
+
+    .myButton:hover {
+      opacity: .6;
+    }
+
+    @media screen and (max-width:1200px) {
+      #container {
+        width: 80%;
+      }
+
+      .column-6 {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width:800px) {
+      #container {
+        width: 100%;
+      }
+
+      .coffee-cup {
+        margin-left: 20px;
+        width: 50px;
+      }
+
+      .coffee-cup2 {
+        margin-left: 20px;
+        width: 75px;
+      }
+
+      .coffee-cup3 {
+        margin-left: 20px;
+        width: 100px;
+      }
+
+    }
+  </style>
+
+  <!-- Success page styling -->
+  <style type="text/css">
+    h4 {
+      font-family: 'Fjalla One', sans-serif;
+      font-weight: 100;
+      font-size: 24px;
+    }
+
+    #box {
+      max-width: 500px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 30px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .myButton {
+      background-color: #72cca7;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Verdana;
+      font-size: 17px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 0;
+      text-decoration: none;
+      text-align: center;
+      transition: .3s;
+    }
+
+    .myButton:hover {
+      opacity: .6;
+    }
+
+    #succes-icon {
+      width: 100px;
+
+    }
+  </style>
+
+
+
+  <div id="stripediv" class="left col-md-5">
+    <h3 class="donate">
+      <div class="w3-card-4" style="width: 200px;">
+        <div id="dropdown" class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            Deposit Amount With
+          </button>
+          <div class="dropdown-menu">
+            <a style="margin-left: 12px;" id="droppaypal" class="col-md-10 btn btn-primary btn-simple"
+              href="{% url 'paypal' %}">Paypal</a>
+            <div class="dropdown-divider"></div>
+            <a style="margin-left: 12px;" id="dropstripe" class="col-md-10 btn btn-primary btn-simple"
+              href="{% url 'stripe' %}">Stripe</a>
+          </div>
+        </div>
+        <!-- <hr> -->
+        <!-- <div id="dropdownwithdraw" class="btn-group" style="margin-left: 50px;">
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            Withdraw With
+          </button>
+          <div class="dropdown-menu">
+            <a style="margin-left: 12px;" id="wdrawpaypal" class="col-md-10 btn btn-primary btn-simple"
+              href="{% url 'paypal' %}">Paypal</a>
+            <div class="dropdown-divider"></div>
+            <a style="margin-left: 12px;" id="wdrawstripe" class="col-md-10 btn btn-primary btn-simple"
+              href="{% url 'stripe' %}">Stripe</a>
+          </div>
+        </div> -->
+      </div>
+    </h3>
+  </div>
+
+  <br>
+
+  <div id="" class="column-8">
+    <div id="left-wrapper">
+      <div id="left-wrapper-header">
+        <h4 class="text-center">Withdraw Amount With</h4>
+      </div>
+      <div style="clear:left"></div>
+      <hr>
+      <!-- Add form here -->
+      <form action="{% url 'withdraw' %}" method="post" id="payment-form">
+        {% csrf_token %}
+        <div class="form-field-12">
+          <label for="card-element">
+            Enter Amount
+          </label>
+          <input required type="text" name="amount" id="amount" placeholder="Enter Your Amount Here...">
+          <!-- <select required name="amount" id="amount">
+            <option selected value="5">$5 --- Here's a coffee, on me :)</option>
+            <option value="10">$10 --- You helped me, so I am going to help you</option>
+            <option value="25">$25 --- I love your channel!</option>
+          </select> -->
+        </div>
+        <br>
+        <div class="form-field-6">
+          <input required type="text" name="email" placeholder="email...">
+        </div>
+
+        <div class="form-field-6">
+          <input required type="text" name="nickname" placeholder="Nickname...">
+        </div>
+        <div style="clear:left"></div>
+        <hr>
+
+        <div id="dropdownwithdraw" class="btn-group" style="margin-left: 50px;">
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"
+            style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            Withdraw with 
+          </button>
+          <div class="dropdown-menu">
+            <button style="margin-left: 12px;" type="submit" name="paypal"  id="wdrawpaypal" class="col-md-10 btn btn-primary btn-simple"
+              >Paypal</button>
+            <div class="dropdown-divider"></div>
+            <button style="margin-left: 12px;" type="submit" name="stripe" id="wdrawstripe" class="col-md-10 btn btn-primary btn-simple"
+              >Stripe</button>
+          </div>
+        </div>
+
+        <!-- <input class="myButton" style="background-color:#10a195" type="submit" value="Submit Payment" name=""> -->
+
+      </form>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

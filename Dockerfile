@@ -22,4 +22,4 @@ RUN python manage.py collectstatic --noinput
 RUN adduser --disabled-password djangouser
 USER djangouser
 
-CMD ["gunicorn", "core.wsgi", "-b", ":8000", "--reload", "--workers", "3", "--timeout", "120"]
+CMD ["gunicorn", "newproject.wsgi", "-b", ":8000", "--reload", "--workers", "3", "--timeout", "120"]

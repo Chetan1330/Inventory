@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="box">
+	<img id="succes-icon" src="">
+	<h4>Withdraw Successful of amount ${{amount}}</h4>
+	<p>Have a nice day... :)</p>
+	<hr>
+	<a class="myButton" href="{% url 'index' %}">&#x2190;Back to Dashboard</a>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
