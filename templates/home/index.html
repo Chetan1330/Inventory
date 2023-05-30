@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 
-{% block title %} Dashboard {% endblock %}
+{% block title %} Home {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 
@@ -19,6 +19,29 @@
 			display: block;
 			text-align: center;
 		}
+
+    /* #filter_input {
+			padding: 0px;
+			float: right;
+		} */
+
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    h3 span {
+            font-size: 22px;
+        }
+        h3 input.search-input {
+            width: 300px;
+            margin-left: auto;
+            float: right
+        }
+        .mt32 {
+            margin-top: 32px;
+        }
 	</style>
 {% endblock stylesheets %}
 
@@ -30,102 +53,90 @@
         <div class="card ">
           <div class="card-header">
             <h4 class="card-title text-left"> Stocks Listing</h4>
+
+            <!-- <h3> -->
+              <input id="searchbar" type="text" placeholder="Search stock..." class="col-9 form-control search-input" data-table="customers-list"/>
+            <!-- </h3> -->
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="tablemanager table" id="">
-                <thead class=" text-primary">
-                  <!-- <tr>
-                    <th class="disableFilterBy">#</th>
-                    <th>
-                      tx_hash
-                    </th>
-                    <th>
-                      tx_index
-                    </th>
-                    <th>
-                      value
-                    </th>
-                    <th class="disableFilterBy">
-                      value_hex
-                    </th>
-                  </tr> -->
+            <table class="table tablemanager table-striped mt32 customers-list">
+              <thead>
+                <tr>  
+                  <!-- <th class="disableFilterBy">SrNo</th> -->
+                  <th>Name</th>
+                  <th>Serial number</th>  
+                  <th>DNUSAN</th>  
+                  <th>Class</th>
+                  <th>Category</th>
+                  <th>Manufacturer</th>
+                  <th>Model</th>
+                  <th>Status(hardware_status)</th>
+                  <th>Substatus</th>
+                  <th>Program</th>
+                  <th>Project</th>
+                  <th>PO number</th>
+                  <th>PO line number</th>
+                  <th>Assigned to</th>
+                  <th>Owned by</th>
+                  <th>Managed by</th>
+                  <th>Home Location</th>
+                  <th>Location</th>
+                  <th>Location Details</th>
+                  <th>Created</th>
+                  <th>Created by</th>
+                  <th>Updated</th>
+                  <th>Updated by</th>
+                  <th>Cost center</th>
+                  <th>Comments</th>
+                  <th>Finance Type</th>
+                  <th>Hardware Support Group</th>
+                  <th>Hardware Support Service</th>
+                  <th>Etag</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in my_data %}
+                <tr>  
+                  <td>{{i.Name}}</td>  
+                  <td>{{i.SSN}}</td>  
+                  <td>{{i.DNUSAN}}</td>  
+                  <td>{{i.Class}}</td> 
+                  <td>{{i.Category}}</td>
+                  <td>{{i.Manufacturer}}</td>
 
-                  <tr>  
-                    <th class="disableFilterBy">SrNo</th>
-                    <th>Name</th>
-                    <th>Serial number</th>  
-                    <th>DNUSAN</th>  
-                    <th>Class</th>
-                    <th>Category</th>
-                    <th>Manufacturer</th>
-                    <th>Model</th>
-                    <th>Status(hardware_status)</th>
-                    <th>Substatus</th>
-                    <th>Program</th>
-                    <th>Project</th>
-                    <th>PO number</th>
-                    <th>PO line number</th>
-                    <th>Assigned to</th>
-                    <th>Owned by</th>
-                    <th>Managed by</th>
-                    <th>Home Location</th>
-                    <th>Location</th>
-                    <th>Location Details</th>
-                    <th>Created</th>
-                    <th>Created by</th>
-                    <th>Updated</th>
-                    <th>Updated by</th>
-                    <th>Cost center</th>
-                    <th>Comments</th>
-                    <th>Finance Type</th>
-                    <th>Hardware Support Group</th>
-                    <th>Hardware Support Service</th>
-                    <th>Etag</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for i,j,k,l,m,n,a,b,c,d,e,f,g,h,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,ee in alldata %}
-                  <tr>  
-                    <td>{{i}}</td>  
-                    <td>{{j}}</td>  
-                    <td>{{k}}</td>  
-                    <td>{{l}}</td> 
-                    <td>{{m}}</td>
-                    <td>{{n}}</td>
+                  <td>{{i.Model}}</td>  
+                  <td>{{i.Status}}</td>  
+                  <td>{{i.Substatus}}</td>  
+                  <td>{{i.Program}}</td> 
+                  <td>{{i.Project}}</td>
+                  <td>{{i.PONo}}</td>
 
-                    <td>{{a}}</td>  
-                    <td>{{b}}</td>  
-                    <td>{{c}}</td>  
-                    <td>{{d}}</td> 
-                    <td>{{e}}</td>
-                    <td>{{f}}</td>
+                  <td>{{i.POlineNo}}</td>  
+                  <td>{{i.Assignto}}</td>  
+                  <td>{{i.Ownedby}}</td>  
+                  <td>{{i.Managedby}}</td> 
+                  <td>{{i.HomeLoc}}</td>
+                  <td>{{i.Location}}</td>
 
-                    <td>{{g}}</td>  
-                    <td>{{h}}</td>  
-                    <td>{{o}}</td>  
-                    <td>{{p}}</td> 
-                    <td>{{q}}</td>
-                    <td>{{r}}</td>
+                  <td>{{i.LocDetails}}</td>  
+                  <td>{{i.Created}}</td>  
+                  <td>{{i.Createdby}}</td>  
+                  <td>{{i.Updated}}</td> 
+                  <td>{{i.Updatedby}}</td>
+                  <td>{{i.Costcent}}</td>
 
-                    <td>{{s}}</td>  
-                    <td>{{t}}</td>  
-                    <td>{{u}}</td>  
-                    <td>{{v}}</td> 
-                    <td>{{w}}</td>
-                    <td>{{x}}</td>
-
-                    <td>{{y}}</td>  
-                    <td>{{z}}</td>  
-                    <td>{{aa}}</td>  
-                    <td>{{bb}}</td> 
-                    <td>{{cc}}</td>
-                    <td>{{ee}}</td>
-                  </tr>  
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+                  <td>{{i.Comments}}</td>  
+                  <td>{{i.FinaType}}</td>  
+                  <td>{{i.HardSuppG}}</td>  
+                  <td>{{i.HardSuppSer}}</td> 
+                  <td>{{i.Etag}}</td>
+                  <!-- <td>{{i.Name}}</td> -->
+                </tr>  
+                {% endfor %}
+              </tbody>
+          </table>
+        </div>
           </div>
         </div>
       </div>
@@ -135,12 +146,150 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+  <!-- <script>
+    $(document).ready(function () {
+      document.getElementById('filter_input').classList.add("col-8");
+    });
 
+  </script> -->
   <script>
+
+    (function(document) {
+                'use strict';
+
+                var TableFilter = (function(myArray) {
+                    var search_input;
+
+                    function _onInputSearch(e) {
+                        search_input = e.target;
+                        var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                        myArray.forEach.call(tables, function(table) {
+                            myArray.forEach.call(table.tBodies, function(tbody) {
+                                myArray.forEach.call(tbody.rows, function(row) {
+                                    var text_content = row.textContent.toLowerCase();
+                                    var search_val = search_input.value.toLowerCase();
+                                    row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                                });
+                            });
+                        });
+                    }
+
+                    return {
+                        init: function() {
+                            var inputs = document.getElementsByClassName('search-input');
+                            myArray.forEach.call(inputs, function(input) {
+                                input.oninput = _onInputSearch;
+                            });
+                        }
+                    };
+                })(Array.prototype);
+
+                document.addEventListener('readystatechange', function() {
+                    if (document.readyState === 'complete') {
+                        TableFilter.init();
+                    }
+                });
+
+            })(document);
+    
+            // if ()
+    // function searchTable() {
+    //     var input, filter, found, table, tr, td, i, j;
+    //     input = document.getElementById("myInput");
+    //     filter = input.value.toUpperCase();
+    //     table = document.getElementById("myTable");
+    //     tr = table.getElementsByTagName("tr");
+    //     for (i = 0; i < tr.length; i++) {
+    //         td = tr[i].getElementsByTagName("td");
+    //         for (j = 0; j < td.length; j++) {
+    //             if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+    //                 found = true;
+    //             }
+    //         }
+    //         if (found) {
+    //             tr[i].style.display = "";
+    //             found = false;
+    //         } else {
+    //             tr[i].style.display = "none";
+    //         }
+    //     }
+    // }
+
+
+    // var $rows = $('#table tbody tr');
+    // $('#filter_input').keyup(function() {
+    //   $(document).ready(function() {
+    //     var value = $(this).val().toLowerCase();
+    //       $("#hometbody tr").filter(function() {
+    //         $(this).toggle($(this).text()
+    //             .toLowerCase().indexOf(value) > -1)
+    //       });
+    //     });
+    // document.getElementById("numrows").value = 5;   
+    $('.search-input').keyup(function(){
+      var x = document.getElementById("searchbar").value.length
+      if (x == 0){
+        document.getElementById("for_numrows").remove();
+        document.getElementById("pagesControllers").remove();
+        $('.tablemanager').tablemanager({
+          pagination: true,
+          appendFilterby:false,
+          // showrows: [5],
+          showrows: [5,10,20,50,100],
+          bFilter: false,
+        });
+        // document.getElementById("numrows").value = 10;
+      }
+      // console.log("value:", x);
+      
+    });
+    // const input = document.querySelector("input");
+    // input.addEventListener("input", updateValue);
+
+    // function updateValue(e) {
+    //   console.log("value:", document.getElementsByClassName("search-input").value);
+    // }
+
+    
+    // $('#filter_input').keydown(function(){
+    //   console.log("Key Down...")
+    // });
+
+    //   // var input, found, table, tr, td, i, j;
+    //   //   input = document.getElementById("filter_input");
+    //   //   table = document.getElementById("hometable");
+    //   //   tr = table.getElementsByTagName("tr");
+    //   //   for (i = 0; i < tr.length; i++) {
+    //   //       td = tr[i].getElementsByTagName("td");
+    //   //       for (j = 0; j < td.length; j++) {
+    //   //           if (td[j].innerHTML.toUpperCase() > -1) {
+    //   //               found = true;
+    //   //           }
+    //   //       }
+    //   //       if (found) {
+    //   //           tr[i].style.display = "";
+    //   //           found = false;
+    //   //       } else {
+    //   //           tr[i].style.display = "none";
+    //   //       }
+    //   //   }
+
+    //     // var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+    //     //     reg = RegExp(val, 'i'),
+    //     //     text;
+    //     // console.log("Search:", val)
+    //     // $rows.show().filter(function() {
+    //     //     text = $(this).text().replace(/\s+/g, ' ');
+    //     //     return !reg.test(text);
+    //     // }).hide();
+    // });
+
     $('.tablemanager').tablemanager({
           pagination: true,
-          appendFilterby:true,
-          showrows: [5,10,20,50,100]
+          appendFilterby:false,
+          // showrows: [5],
+          showrows: [5,10,20,50,100],
+          bFilter: false,
         });
   </script>
 

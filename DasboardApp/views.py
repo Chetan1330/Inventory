@@ -26,55 +26,71 @@ from django.core import serializers
 from csv import DictReader
 import csv
 
-with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
-    # csv_reader = csv.DictReader(csv_file)
-    for row in csv.DictReader(csv_file):
-        if Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).exists():
-            # print("count", Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).count())
-            pass
-        else:
-            stock=Stock(name=row['Name'], Name=row['Name'], SSN=row['Serial number'], Class=row['Class'],
-                        DNUSAN=row['DNUSAN'], Shortdesc=row['Short description'],Category=row['Category'],Subcategory=row['Subcategory'],Manufacturer=row['Manufacturer'],
-                        Model=row['Model'],Status=row['Status(hardware_status)'],Substatus=row['Substatus'],Program=row['Program'],Project=row['Project'],
-                        PONo=row['PO number'],POlineNo=row['PO line number'],Assignto=row['Assigned to'],Ownedby=row['Owned by'],Managedby=row['Managed by'],
-                        HomeLoc=row['Home Location'],Location=row['Location'],LocDetails=row['Location Details'],Created=row['Created'],Createdby=row['Created by'],
-                        Updated=row['Updated'],Updatedby=row['Updgted by'],Costcent=row['Cost center'],Comments=row['Comments'],
-                        FinaType=row['Finance Type'],HardSuppG=row['Hardware Support Group'],HardSuppSer=row['Hardware Support Service'],LotNo=row['Lot Number'],
-                        Etag=row['Etag'])
-            stock.save()
+from django.core.paginator import Paginator
+# from bootstrap_pagination.templatetags.bootstrap_pagination import bootstrap_pagination
 
-with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
-    # csv_reader = csv.DictReader(csv_file)
-    for row in csv.DictReader(csv_file):
-        if Class1.objects.filter(class_name = row['Class']).exists():
-            # print("Yes")
-            pass
-        elif Manufacturer.objects.filter(manufacturer_name = row['Manufacturer'] ).exists():
-            # print("Cat exist")
-            pass
-        else:
-            if row['Class']:
-                stock_class=Class1.objects.create(class_name = row['Class'])
-                print('Stock class:', stock_class.class_name)
-                stock_class.save()
-            if row['Category']:
-                category = Category.objects.create(category_name = row['Category'], class_name = stock_class )
-                category.save()
-            if row['Subcategory']:
-                subcategory = Category.objects.create(subcategory_name = row['Subcategory'], category_name = category )
-                subcategory.save()
-            if row['Manufacturer']:
-                manufacturer = Manufacturer.objects.create(manufacturer_name = row['Manufacturer'], class_name=stock_class, subcat_name = category )
-                manufacturer.save()
-            if row['Model']:
-                model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
-                model.save()
+# with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
+#     # csv_reader = csv.DictReader(csv_file)
+#     for row in csv.DictReader(csv_file):
+#         if Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).exists():
+#             # print("count", Stock.objects.filter(SSN=row['Serial number'], name=row['Name'], Name=row['Name']).count())
+#             pass
+#         else:
+#             stock=Stock(name=row['Name'], Name=row['Name'], SSN=row['Serial number'], Class=row['Class'],
+#                         DNUSAN=row['DNUSAN'], Shortdesc=row['Short description'],Category=row['Category'],Subcategory=row['Subcategory'],Manufacturer=row['Manufacturer'],
+#                         Model=row['Model'],Status=row['Status(hardware_status)'],Substatus=row['Substatus'],Program=row['Program'],Project=row['Project'],
+#                         PONo=row['PO number'],POlineNo=row['PO line number'],Assignto=row['Assigned to'],Ownedby=row['Owned by'],Managedby=row['Managed by'],
+#                         HomeLoc=row['Home Location'],Location=row['Location'],LocDetails=row['Location Details'],Created=row['Created'],Createdby=row['Created by'],
+#                         Updated=row['Updated'],Updatedby=row['Updgted by'],Costcent=row['Cost center'],Comments=row['Comments'],
+#                         FinaType=row['Finance Type'],HardSuppG=row['Hardware Support Group'],HardSuppSer=row['Hardware Support Service'],LotNo=row['Lot Number'],
+#                         Etag=row['Etag'])
+#             stock.save()
 
+# with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
+#     # csv_reader = csv.DictReader(csv_file)
+#     for row in csv.DictReader(csv_file):
+#         if Class1.objects.filter(class_name = row['Class']).exists():
+#             # print("Yes")
+#             pass
+#         elif Manufacturer.objects.filter(manufacturer_name = row['Manufacturer'] ).exists():
+#             # print("Cat exist")
+#             pass
+#         else:
+#             if row['Class']:
+#                 stock_class=Class1.objects.create(class_name = row['Class'])
+#                 print('Stock class:', stock_class.class_name)
+#                 stock_class.save()
+#             if row['Category']:
+#                 category = Category.objects.create(category_name = row['Category'], class_name = stock_class )
+#                 category.save()
+#             if row['Subcategory']:
+#                 subcategory = Category.objects.create(subcategory_name = row['Subcategory'], category_name = category )
+#                 subcategory.save()
+#             if row['Manufacturer']:
+#                 manufacturer = Manufacturer.objects.create(manufacturer_name = row['Manufacturer'], class_name=stock_class, subcat_name = category )
+#                 manufacturer.save()
+#             if row['Model']:
+#                 model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
+#                 model.save()
+
+# print("Stocks count is:", Stock.objects.all().count())
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
 
+    # if request.GET.get('page'):
+    #     my_data = Stock.objects.all()
+    #     paginator = Paginator(my_data, int(Stock.objects.all().count()))
+    #     page_number = request.GET.get('page')
+    #     page_obj = paginator.get_page(page_number)
+    #     return render(request, 'home/index.html', {'page_obj': page_obj})
+
     if request.method =='GET':
+
+        my_data = Stock.objects.all()
+        # paginator = Paginator(my_data, 10)
+        # page_number = request.GET.get('page')
+        # page_obj = paginator.get_page(page_number)
 
         # labels = ['Silicon', 'Mass Storage Device', 'Docking Add-on Board', 'Power Supply', 'Test Debug Card', 'Memory', 'Network Gear', 'Cables', 'Net Adapter-Lab']
         data = ['10','4','67','399','49','500','10','61','690']
@@ -113,52 +129,54 @@ def index(request):
         HardSupp = []
         HardSuppService = []
         Etag = []
-        for i in Stock.objects.all():
-            # print("Class is:", i.Class)
-            if i.Class == "False":
-                pass
-            else:
-                classes.append(i.Class)
-                Name.append(i.Name)
-                SNo.append(i.SSN)
-                Dnusan.append(i.DNUSAN)
-                category.append(i.Category)
+        # for i in Stock.objects.all():
+        #     # print("Class is:", i.Class)
+        #     if i.Class == "False":
+        #         pass
+        #     else:
+        #         classes.append(i.Class)
+        #         Name.append(i.Name)
+        #         SNo.append(i.SSN)
+        #         Dnusan.append(i.DNUSAN)
+        #         category.append(i.Category)
 
-                manufacturer.append(i.Manufacturer)
-                model.append(i.Model)
-                hardware_status.append(i.Status)
-                Substatus.append(i.Substatus)
-                Program.append(i.Program)
-                Project.append(i.Project)
-                PO_No.append(i.PONo)
-                PO_lineNo.append(i.POlineNo)
-                Assignto.append(i.Assignto)
-                Ownedby.append(i.Ownedby)
+        #         manufacturer.append(i.Manufacturer)
+        #         model.append(i.Model)
+        #         hardware_status.append(i.Status)
+        #         Substatus.append(i.Substatus)
+        #         Program.append(i.Program)
+        #         Project.append(i.Project)
+        #         PO_No.append(i.PONo)
+        #         PO_lineNo.append(i.POlineNo)
+        #         Assignto.append(i.Assignto)
+        #         Ownedby.append(i.Ownedby)
 
-                Managedby.append(i.Managedby)
-                HomeLoc.append(i.HomeLoc)
-                Location.append(i.Location)
-                LocDetail.append(i.LocDetails)
-                Created.append(i.Created)
-                Createdby.append(i.Createdby)
+        #         Managedby.append(i.Managedby)
+        #         HomeLoc.append(i.HomeLoc)
+        #         Location.append(i.Location)
+        #         LocDetail.append(i.LocDetails)
+        #         Created.append(i.Created)
+        #         Createdby.append(i.Createdby)
 
-                Updated.append(i.Updated)
-                Updatedby.append(i.Updatedby)
-                Costcenter.append(i.Costcent)
-                Comments.append(i.Comments)
-                FinType.append(i.FinaType)
-                HardSupp.append(i.HardSuppG)
-                HardSuppService.append(i.HardSuppSer)
-                Etag.append(i.Etag)
+        #         Updated.append(i.Updated)
+        #         Updatedby.append(i.Updatedby)
+        #         Costcenter.append(i.Costcent)
+        #         Comments.append(i.Comments)
+        #         FinType.append(i.FinaType)
+        #         HardSupp.append(i.HardSuppG)
+        #         HardSuppService.append(i.HardSuppSer)
+        #         Etag.append(i.Etag)
         
-        alldata = []
-        for i in range(len(classes)):
-            alldata.append([i+1, Name[i], SNo[i], Dnusan[i], classes[i], category[i],
-                            manufacturer[i], model[i], hardware_status[i], Substatus[i], Program[i],
-                            Project[i], PO_No[i], PO_lineNo[i], Assignto[i], Ownedby[i],
-                            Managedby[i], HomeLoc[i], Location[i], LocDetail[i], Created[i],
-                            Createdby[i], Updated[i], Updatedby[i], Costcenter[i], Comments[i],
-                            FinType[i], HardSupp[i], HardSuppService[i], Etag[i]])
+        # alldata = []
+        # for i in range(len(classes)):
+        #     alldata.append([i+1, Name[i], SNo[i], Dnusan[i], classes[i], category[i],
+        #                     manufacturer[i], model[i], hardware_status[i], Substatus[i], Program[i],
+        #                     Project[i], PO_No[i], PO_lineNo[i], Assignto[i], Ownedby[i],
+        #                     Managedby[i], HomeLoc[i], Location[i], LocDetail[i], Created[i],
+        #                     Createdby[i], Updated[i], Updatedby[i], Costcenter[i], Comments[i],
+        #                     FinType[i], HardSupp[i], HardSuppService[i], Etag[i]])
+
+
                 
         # stockqueryset = Stock.objects.filter(is_deleted=False).order_by('-quantity')
         # for item in stockqueryset:
@@ -215,12 +233,14 @@ def index(request):
             'assignlab' : assignlab,
             'assigndata' : assigndata,
 
-            'alldata' : alldata,
+            # 'alldata' : alldata,
 
             'segment': 'home',
 
             'model1': model1,
-            'manufacturer1': manufacturer1
+            'manufacturer1': manufacturer1,
+            # 'page_obj': page_obj,
+            'my_data': my_data
             # 'purchases' : purchases
         }
         return render(request, 'home/index.html', context)
@@ -809,19 +829,24 @@ def BuildConfig(request):
                 if int(json.loads(request.body)['buildno']) == 0:
                     buildcontext['build_status'] = "zero"
 
-                if len(no_of_builds) == 0:
-                    buildcontext['build_status'] = "Red"
-                
-                # if no_of_builds != None:
-                #     if len(no_of_builds) > 0:
-                #         for i in no_of_builds:
-                #             if int(i) == 0:
-                #                 buildcontext['build_status'] = "Red"
+                if len(json.loads(request.body)['aqua']) > 1:
+                    if len(no_of_builds) == 0:
+                        buildcontext['build_status'] = "Red"
+                    
+                    if no_of_builds != None:
+                        if len(no_of_builds) > 0:
+                            for i in no_of_builds:
+                                if i == 0:
+                                    buildcontext['build_status'] = "Red"
                 
                 buildcontext['rowval'] = rowsval
                 print("nobuild", nobuild)
                 # print("Min val:", int(min(no_of_builds)[0]))
                 print("build val:", int(json.loads(request.body)['buildno']))
+
+                if int(json.loads(request.body)['buildno']) > 0:
+                    if int(nobuild) > int(json.loads(request.body)['buildno']):
+                        buildcontext['no_build'] = int(int(nobuild) / int(json.loads(request.body)['buildno']))
                 print("Rows val:", buildcontext['rows_val'], rowsval)
                 buildcontext['ask_val'] = int(json.loads(request.body)['buildno'])
                 print("Context", buildcontext['build_status'], "No of builds:", type(no_of_builds))

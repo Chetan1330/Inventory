@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %} Home {% endblock title %}
+{% block title %} CreateConfig {% endblock title %}
 
 
 {% block content %}
@@ -338,16 +338,64 @@
                     </div>
                     </div>
 
-                    
+                
                 <!-- </form> -->
+
+                <h2>Select a Config to show details</h2>
+            <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                <option selected>--- Select Config ---</option>
+                {% for i in all_configs %}
+                    <option value="{{i.id}}">{{i}}</option>
+                {% endfor %}
+            </select>
+
+
+            
+                <div class="table-responsive">
+                    <table class="table table-hover table-responsive kie-tablelist">
+                    <thead>
+                        <tr class="kie-tablelist__row kie-tablelist__row--header">
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyclass">
+                        <tr id="trclass">
+                            <td id="tdclass" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdcategory" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmanu" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmodel" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdqua" class="kie-tablelist__cell">
+
+                            </td>
+                        </tr>
+
+                        
+                    </tbody>
+                    
+                    </table>
+                </div>
             </div>
             
         </form>   
 
-        <div style="background-color: #f1f1f6; margin-top: -117px; padding: 1em;">
-            <!-- {% for i in all_configs %}
-                <a href="viewconfig/">{{i}}</a>
-            {% endfor %} -->
+        <!-- <div style="background-color: #f1f1f6; margin-top: -117px; padding: 1em;">
+            
             <h2>Select a Config to show details</h2>
             <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
                 <option selected>--- Select Config ---</option>
@@ -398,7 +446,7 @@
                     </table>
                 </div>
                 
-        </div>
+        </div> -->
     </div>
     
 

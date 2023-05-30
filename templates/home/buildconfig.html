@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %} Home {% endblock title %}
+{% block title %} BuildConfig {% endblock title %}
 
 
 {% block content %}
@@ -399,7 +399,7 @@
         function buildchange(){
             selconfig = document.getElementById('selconfig').value;
             buildno = document.getElementById('buildno').value;
-
+            document.getElementById("table2").style.display = "block";
             var tdask2 = $('#tdask2');
             tdask2.empty();
 
