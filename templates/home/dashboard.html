@@ -27,7 +27,7 @@
                     </label>
                     <label class="btn btn-sm btn-primary btn-simple" id="1">
                       <input type="radio" class="d-none d-sm-none" name="options">
-                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pending</span>
+                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pending Retirement</span>
                       <span class="d-block d-sm-none">
                         <i class="tim-icons icon-gift-2"></i>
                       </span>
@@ -420,7 +420,7 @@
         $("#1").click(function() {
           console.log("1",myChartData.config)
           var data = myChartData.config.data;
-          data.datasets[0].label = "Pending";
+          data.datasets[0].label = "Pending Retirement";
           data.datasets[0].data = stockpending;
           data.labels = labels;
           myChartData.update();

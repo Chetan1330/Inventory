@@ -29,6 +29,20 @@ import csv
 from django.core.paginator import Paginator
 # from bootstrap_pagination.templatetags.bootstrap_pagination import bootstrap_pagination
 
+import random
+import string
+
+
+print("Net Adapt Reserved stocks", Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved", Reservedby = "admin", Configname = "18").count())
+
+# for i in Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved"):
+#     print("i class:", i.Class)
+#     print("i Reserved by", i.Reservedby)
+#     print("i Config name", i.Configname)
+# Reservedby = "admin", Configname = "Netadapter"
+
+# marks = [82,31,31,78,90,31,120]
+# print("Min Index:", marks.index(min(marks)))
 # with open('Inventory.csv', mode="r", encoding='latin1') as csv_file:
 #     # csv_reader = csv.DictReader(csv_file)
 #     for row in csv.DictReader(csv_file):
@@ -72,6 +86,63 @@ from django.core.paginator import Paginator
 #             if row['Model']:
 #                 model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
 #                 model.save()
+
+# def get_random_string(length):
+#     # choose from all lowercase letter
+#     letters = string.ascii_lowercase
+#     result_str = ''.join(random.choice(letters) for i in range(length))
+#     print("Random string of length", length, "is:", result_str)
+
+# get_random_string(8)
+# get_random_string(6)
+# get_random_string(4)
+
+# for i in range(0,999):
+    # stock=Stock.objects.create(name=get_random_string(6), Name =get_random_string(6),  SSN=get_random_string(6), Class='Net Adapter-Lab',
+    #                 DNUSAN=get_random_string(6), Shortdesc=get_random_string(6),Category='Net Adapter-Lab - vfg', Subcategory='Net Adapte', Manufacturer='Mellanox Technologies',
+    #                 Model='ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP', Status='In Stock', Substatus='Available', Program='EGS-R',Project='JKL_RASP',
+    #                 PONo=get_random_string(6),POlineNo=get_random_string(6),Assignto=get_random_string(6),Ownedby=get_random_string(6),Managedby=get_random_string(6),
+    #                 HomeLoc=get_random_string(6),Location=get_random_string(6),LocDetails=get_random_string(6),Created=get_random_string(6),Createdby=get_random_string(6),
+    #                 Updated=get_random_string(6),Updatedby=get_random_string(6),Costcent=get_random_string(6),Comments=get_random_string(6),
+    #                 FinaType=get_random_string(6),HardSuppG=get_random_string(6),HardSuppSer=get_random_string(6),LotNo=get_random_string(6),
+    #                 Etag=get_random_string(6))
+    # stock=Stock.objects.create(name=str(i) + "Netadapter", Name =str(i)+"name" + "Netadapter", SSN = str(i) + "Netadapter", Class= "Net Adapter-Lab",
+    #                 Category='Net Adapter-Lab - vfg', Manufacturer='Mellanox Technologies',
+    #                 Model='ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP', Status='In Stock', Substatus='Available',
+    #                 )
+    
+    # stock=Stock.objects.create(name=str(i) + "Power Supply", Name =str(i)+"name" + "Power Supply", SSN = str(i) + "Power Supply", Class= "Power Supply",
+    #                 Category='Power - vfg', Manufacturer='DONGGUAN GUANGSHU ELECTRICAL TECHNOLOGY CO.,LTD',
+    #                 Model='SERVER SMPS;SERVER,I1600W,1600W,2CH,90Vac~264Vac,+12 - G36234-019', Status='In Stock', Substatus='Available',
+    #                 )
+    
+    # stock.save()
+    # if Class1.objects.filter(class_name = str(i) + "Power Supply").exists():
+    #     # print("Yes")
+    #     continue
+    # if Class1.objects.filter(class_name = str(int(i-1)) + "Power Supply").exists():
+    #     # print("Yes")
+    #     continue
+    # stock_class=Class1.objects.create(class_name = str(i) + "Power Supply")
+    # print('Stock class:', stock_class.class_name)
+    # stock_class.save()
+            
+    # category = Category.objects.create(category_name = 'Power - vfg', class_name = stock_class )
+    # category.save()
+            
+    # subcategory = Category.objects.create(subcategory_name = 'Power SubCat - vfg', category_name = category )
+    # subcategory.save()
+            
+    # manufacturer = Manufacturer.objects.create(manufacturer_name = 'DONGGUAN GUANGSHU ELECTRICAL TECHNOLOGY CO.,LTD', class_name=stock_class, subcat_name = category )
+    # manufacturer.save()
+            
+    # model = Model.objects.create(model_name = 'SERVER SMPS;SERVER,I1600W,1600W,2CH,90Vac~264Vac,+12 - G36234-019', class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
+    # model.save()
+    
+    # stock=Stock(name=get_random_string(6), Name =get_random_string(6),  SSN=get_random_string(6), Class='Net Adapter-Lab',
+    #                 Category='Net Adapter-Lab - vfg', Manufacturer='Mellanox Technologies',
+    #                 Model='ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP', Substatus='Available')
+    # stock.save()
 
 # print("Stocks count is:", Stock.objects.all().count())
 @login_required(login_url="/login/")
@@ -276,6 +347,7 @@ def CreateConfig(request):
         # return HttpResponse(html_template.render(context, request))
     
     if request.method =='POST':
+        # print("Request user name:", request.user)
         classnames_all = Class1.objects.all()
 
         all_configs = ConfigName.objects.all()
@@ -285,51 +357,54 @@ def CreateConfig(request):
             'all_configs': all_configs
         }
 
+        # print("Conf name:", request.POST.get('configname'))
         if request.POST.get('configname'):
             if ConfigName.objects.filter(name = request.POST.get('configname')):
                 print("Config with same name exist")
                 exit
             else:
-                config_name = ConfigName.objects.create(name = request.POST.get('configname'))
                 # config_name.save()
-                print("Request post class:", Class1.objects.get(id = request.POST['selclass1']).class_name)
-                print("Request post Category:", Category.objects.get(id = request.POST['selcat1']).category_name)
-                print("Request post Manufacturer:", Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name)
-                print("Request post Model:", Model.objects.get(id = request.POST['selmodel1']).model_name)
-                
-                if request.POST.get('selclass1') and request.POST.get('selcat1') and request.POST.get('selmanu1') and request.POST.get('selmodel1') and request.POST.get('qua1'):
-                    print("Yes1")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass1']).class_name, Category=Category.objects.get(id = request.POST['selcat1']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel1']).model_name, quantity=request.POST.get('qua1') )
-                    config1.save()
-                if request.POST.get('selclass2') and request.POST.get('selcat2') and request.POST.get('selmanu2') and request.POST.get('selmodel2') and request.POST.get('qua2'):
-                    print("Yes2")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass2']).class_name, Category=Category.objects.get(id = request.POST['selcat2']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu2']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel2']).model_name, quantity=request.POST.get('qua2') )
-                    config1.save()
-                if request.POST.get('selclass3') and request.POST.get('selcat3') and request.POST.get('selmanu3') and request.POST.get('selmodel3') and request.POST.get('qua3'):
-                    print("Yes3")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass3']).class_name, Category=Category.objects.get(id = request.POST['selcat3']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu3']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel3']).model_name, quantity=request.POST.get('qua3') )
-                    config1.save()
-                if request.POST.get('selclass4') and request.POST.get('selcat4') and request.POST.get('selmanu4') and request.POST.get('selmodel4') and request.POST.get('qua4'):
-                    print("Yes4")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass4']).class_name, Category=Category.objects.get(id = request.POST['selcat4']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu4']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel4']).model_name, quantity=request.POST.get('qua4') )
-                    config1.save()
-                if request.POST.get('selclass5') and request.POST.get('selcat5') and request.POST.get('selmanu5') and request.POST.get('selmodel5') and request.POST.get('qua5'):
-                    print("Yes5")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass5']).class_name, Category=Category.objects.get(id = request.POST['selcat5']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu5']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel5']).model_name, quantity=request.POST.get('qua5') )
-                    config1.save()
-                if request.POST.get('selclass6') and request.POST.get('selcat6') and request.POST.get('selmanu6') and request.POST.get('selmodel6') and request.POST.get('qua6'):
-                    print("Yes6")
-                    config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass6']).class_name, Category=Category.objects.get(id = request.POST['selcat6']).category_name,
-                                                    Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu6']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel6']).model_name, quantity=request.POST.get('qua6') )
-                    config1.save()
+                print("Qua1 is:", request.POST.get('qua1'))
+                if request.POST['selclass1'] != '--- Select Class ---' and request.POST['selcat1'] != '--- Select Category ---' and request.POST['selmanu1'] != '--- Select Manufacturer ---' and request.POST['selmodel1'] != '--- Select Model ---' and request.POST.get('qua1'):
+                    config_name = ConfigName.objects.create(name = request.POST.get('configname'))
+                    print("Request post class:", Class1.objects.get(id = request.POST['selclass1']).class_name)
+                    print("Request post Category:", Category.objects.get(id = request.POST['selcat1']).category_name)
+                    print("Request post Manufacturer:", Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name)
+                    print("Request post Model:", Model.objects.get(id = request.POST['selmodel1']).model_name)
+                    
+                    if request.POST.get('selclass1') and request.POST.get('selcat1') and request.POST.get('selmanu1') and request.POST.get('selmodel1') and request.POST.get('qua1'):
+                        print("Yes1")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass1']).class_name, Category=Category.objects.get(id = request.POST['selcat1']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel1']).model_name, quantity=request.POST.get('qua1') )
+                        config1.save()
+                    if request.POST.get('selclass2') and request.POST.get('selcat2') and request.POST.get('selmanu2') and request.POST.get('selmodel2') and request.POST.get('qua2'):
+                        print("Yes2")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass2']).class_name, Category=Category.objects.get(id = request.POST['selcat2']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu2']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel2']).model_name, quantity=request.POST.get('qua2') )
+                        config1.save()
+                    if request.POST.get('selclass3') and request.POST.get('selcat3') and request.POST.get('selmanu3') and request.POST.get('selmodel3') and request.POST.get('qua3'):
+                        print("Yes3")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass3']).class_name, Category=Category.objects.get(id = request.POST['selcat3']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu3']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel3']).model_name, quantity=request.POST.get('qua3') )
+                        config1.save()
+                    if request.POST.get('selclass4') and request.POST.get('selcat4') and request.POST.get('selmanu4') and request.POST.get('selmodel4') and request.POST.get('qua4'):
+                        print("Yes4")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass4']).class_name, Category=Category.objects.get(id = request.POST['selcat4']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu4']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel4']).model_name, quantity=request.POST.get('qua4') )
+                        config1.save()
+                    if request.POST.get('selclass5') and request.POST.get('selcat5') and request.POST.get('selmanu5') and request.POST.get('selmodel5') and request.POST.get('qua5'):
+                        print("Yes5")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass5']).class_name, Category=Category.objects.get(id = request.POST['selcat5']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu5']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel5']).model_name, quantity=request.POST.get('qua5') )
+                        config1.save()
+                    if request.POST.get('selclass6') and request.POST.get('selcat6') and request.POST.get('selmanu6') and request.POST.get('selmodel6') and request.POST.get('qua6'):
+                        print("Yes6")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass6']).class_name, Category=Category.objects.get(id = request.POST['selcat6']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu6']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel6']).model_name, quantity=request.POST.get('qua6') )
+                        config1.save()
         else:
             # for row 1
-            print("Request:", json.loads(request.body))
+            # print("Request:", json.loads(request.body))
             if 'class1' in json.loads(request.body):
                 print("Class value from select:", json.loads(request.body)['class1'])
 
@@ -544,7 +619,7 @@ def CreateConfig(request):
                 allmanu = []
                 allmodel = []
                 allquantity = []
-
+                reservedby = []
                 
                 conname = ConfigName.objects.get(id = json.loads(request.body)['selconfig'])
                 config3 = Config.objects.filter(name = conname)
@@ -554,13 +629,377 @@ def CreateConfig(request):
                     allmanu.append(j.Manufacturer)
                     allmodel.append(j.Model)
                     allquantity.append(j.quantity)
-            
+                    if Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model, Reservedby = request.user, Configname = json.loads(request.body)['selconfig']).count() > 0:
+                        reservedby.append(str(request.user))
+
+
+                # Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved", Reservedby = request.user, Configname = json.loads(request.body)['selconfig'])
                 print(allclass,allcategory,allmanu,allmodel,allquantity)
                 return JsonResponse({"allclass":allclass, 'allcategory':allcategory, 'allmanu':allmanu, 'allmodel':allmodel,
-                                     'allquantity':allquantity})
+                                     'allquantity':allquantity, "reservedby":reservedby})
 
         
         return render(request, 'home/createconfig.html', context)
+        # html_template = loader.get_template('home/index.html')
+        # return HttpResponse(html_template.render(context, request))
+
+# ConfigScan
+@login_required(login_url="/login/")
+def ConfigScan(request):
+    context = {'segment': 'index'}
+    
+    if request.method =='GET':
+        classnames_all = Class1.objects.all()
+        all_configs = ConfigName.objects.all()
+        print("Class value from select:", request.GET.get('class', None))
+        context = {
+            'segment': 'configscan',
+            'allclassnames': classnames_all,
+            'all_configs': all_configs
+
+        }
+        # return render(request, self.template_name, context)
+        return render(request, 'home/configscan.html', context)
+    
+
+        # html_template = loader.get_template('home/home.html')
+        # return HttpResponse(html_template.render(context, request))
+    
+    if request.method =='POST':
+        # print("Request user name:", request.user)
+        classnames_all = Class1.objects.all()
+
+        all_configs = ConfigName.objects.all()
+        context = {
+            'segment': 'configscan',
+            'allclassnames': classnames_all,
+            'all_configs': all_configs
+        }
+
+        # print("Conf name:", request.POST.get('configname'))
+        if request.POST.get('configname'):
+            if ConfigName.objects.filter(name = request.POST.get('configname')):
+                print("Config with same name exist")
+                exit
+            else:
+                # config_name.save()
+                print("Qua1 is:", request.POST.get('qua1'))
+                if request.POST['selclass1'] != '--- Select Class ---' and request.POST['selcat1'] != '--- Select Category ---' and request.POST['selmanu1'] != '--- Select Manufacturer ---' and request.POST['selmodel1'] != '--- Select Model ---' and request.POST.get('qua1'):
+                    config_name = ConfigName.objects.create(name = request.POST.get('configname'))
+                    print("Request post class:", Class1.objects.get(id = request.POST['selclass1']).class_name)
+                    print("Request post Category:", Category.objects.get(id = request.POST['selcat1']).category_name)
+                    print("Request post Manufacturer:", Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name)
+                    print("Request post Model:", Model.objects.get(id = request.POST['selmodel1']).model_name)
+                    
+                    if request.POST.get('selclass1') and request.POST.get('selcat1') and request.POST.get('selmanu1') and request.POST.get('selmodel1') and request.POST.get('qua1'):
+                        print("Yes1")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass1']).class_name, Category=Category.objects.get(id = request.POST['selcat1']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu1']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel1']).model_name, quantity=request.POST.get('qua1') )
+                        config1.save()
+                    if request.POST.get('selclass2') and request.POST.get('selcat2') and request.POST.get('selmanu2') and request.POST.get('selmodel2') and request.POST.get('qua2'):
+                        print("Yes2")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass2']).class_name, Category=Category.objects.get(id = request.POST['selcat2']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu2']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel2']).model_name, quantity=request.POST.get('qua2') )
+                        config1.save()
+                    if request.POST.get('selclass3') and request.POST.get('selcat3') and request.POST.get('selmanu3') and request.POST.get('selmodel3') and request.POST.get('qua3'):
+                        print("Yes3")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass3']).class_name, Category=Category.objects.get(id = request.POST['selcat3']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu3']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel3']).model_name, quantity=request.POST.get('qua3') )
+                        config1.save()
+                    if request.POST.get('selclass4') and request.POST.get('selcat4') and request.POST.get('selmanu4') and request.POST.get('selmodel4') and request.POST.get('qua4'):
+                        print("Yes4")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass4']).class_name, Category=Category.objects.get(id = request.POST['selcat4']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu4']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel4']).model_name, quantity=request.POST.get('qua4') )
+                        config1.save()
+                    if request.POST.get('selclass5') and request.POST.get('selcat5') and request.POST.get('selmanu5') and request.POST.get('selmodel5') and request.POST.get('qua5'):
+                        print("Yes5")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass5']).class_name, Category=Category.objects.get(id = request.POST['selcat5']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu5']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel5']).model_name, quantity=request.POST.get('qua5') )
+                        config1.save()
+                    if request.POST.get('selclass6') and request.POST.get('selcat6') and request.POST.get('selmanu6') and request.POST.get('selmodel6') and request.POST.get('qua6'):
+                        print("Yes6")
+                        config1 = Config.objects.create(name=config_name, Class=Class1.objects.get(id = request.POST['selclass6']).class_name, Category=Category.objects.get(id = request.POST['selcat6']).category_name,
+                                                        Manufacturer=Manufacturer.objects.get(id = request.POST['selmanu6']).manufacturer_name, Model=Model.objects.get(id = request.POST['selmodel6']).model_name, quantity=request.POST.get('qua6') )
+                        config1.save()
+        else:
+            # for row 1
+            # print("Request:", json.loads(request.body))
+            if 'class1' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['class1'])
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class1'])
+                cat_list1 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list1)
+                print(conname, cat_list1)
+                context['cat_list1'] = cat_list1
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category1' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category1'])
+
+                conname = Category.objects.get(id = json.loads(request.body)['category1'])
+                manu_list1 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list1)
+                print(conname, manu_list1)
+                context['manu_list1'] = manu_list1
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu1' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu1'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu1'])
+                model_list1 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list1)
+                print(conname, model_list1)
+                context['model_list1'] = model_list1
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            # 2nd row
+            if 'class2' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['class2'])
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class2'])
+                cat_list2 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list2)
+                print(conname, cat_list2)
+                context['cat_list2'] = cat_list2
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category2' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category2'])
+
+                conname = Category.objects.get(id = json.loads(request.body)['category2'])
+                manu_list2 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list2)
+                print(conname, manu_list2)
+                context['manu_list2'] = manu_list2
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu2' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu2'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu2'])
+                model_list2 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list2)
+                print(conname, model_list2)
+                context['model_list2'] = model_list2
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            # 3rd row
+            if 'class3' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['class3'])
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class3'])
+                cat_list3 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list3)
+                print(conname, cat_list3)
+                context['cat_list3'] = cat_list3
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category3' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category3'])
+
+                conname = Category.objects.get(id= json.loads(request.body)['category3'])
+                manu_list3 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list3)
+                print(conname, manu_list3)
+                context['manu_list3'] = manu_list3
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu3' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu3'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu3'])
+                model_list3 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list3)
+                print(conname, model_list3)
+                context['model_list3'] = model_list3
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            # 4th row
+            if 'class4' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['class4'])
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class4'])
+                cat_list4 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list4)
+                print(conname, cat_list4)
+                context['cat_list4'] = cat_list4
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category4' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category4'])
+
+                conname = Category.objects.get(id= json.loads(request.body)['category4'])
+                manu_list4 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list4)
+                print(conname, manu_list4)
+                context['manu_list4'] = manu_list4
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu4' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu4'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu4'])
+                model_list4 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list4)
+                print(conname, model_list4)
+                context['model_list4'] = model_list4
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            # 5th row
+            if 'class5' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body))
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class5'])
+                cat_list5 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list5)
+                print(conname, cat_list5)
+                context['cat_list5'] = cat_list5
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category5' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category5'])
+
+                conname = Category.objects.get(id= json.loads(request.body)['category5'])
+                manu_list5 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list5)
+                print(conname, manu_list5)
+                context['manu_list5'] = manu_list5
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu5' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu5'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu5'])
+                model_list5 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list5)
+                print(conname, model_list5)
+                context['model_list5'] = model_list5
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            # 6th row
+            if 'class6' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body))
+
+                conname = Class1.objects.get(id = json.loads(request.body)['class6'])
+                cat_list6 = Category.objects.filter(class_name = conname)
+                instances = serializers.serialize('json', cat_list6)
+                print(conname, cat_list6)
+                context['cat_list6'] = cat_list6
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'category6' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['category6'])
+
+                conname = Category.objects.get(id= json.loads(request.body)['category6'])
+                manu_list6 = Manufacturer.objects.filter(subcat_name = conname)
+                instances = serializers.serialize('json', manu_list6)
+                print(conname, manu_list6)
+                context['manu_list6'] = manu_list6
+                # return JsonResponse({"cat_list1":instances})
+                return HttpResponse(instances, content_type='application/json')
+            
+            if 'manu6' in json.loads(request.body):
+                print("Class value from select:", json.loads(request.body)['manu6'])
+
+                conname = Manufacturer.objects.get(id = json.loads(request.body)['manu6'])
+                model_list6 = Model.objects.filter(manufacturer_name = conname)
+                instances = serializers.serialize('json', model_list6)
+                print(conname, model_list6)
+                context['model_list6'] = model_list6
+                return HttpResponse(instances, content_type='application/json')
+            
+            # For Config list select
+            if 'selconfig' in json.loads(request.body):
+                print("selconfig value from select:", json.loads(request.body)['selconfig'])
+
+                configs = []
+                concontxt = {}
+
+                allclass = []
+                allcategory = []
+                allmanu = []
+                allmodel = []
+                allquantity = []
+                reservedby = []
+                ssn = []
+                
+                cout = 0
+                conname = ConfigName.objects.get(id = json.loads(request.body)['selconfig'])
+                config3 = Config.objects.filter(name = conname)
+                for j in config3:
+                    allclass.append(j.Class)
+                    allcategory.append(j.Category)
+                    allmanu.append(j.Manufacturer)
+                    allmodel.append(j.Model)
+                    allquantity.append(j.quantity)
+                    if cout == 0:
+                        if Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model, Reservedby = request.user, Configname = ConfigName.objects.get(id = json.loads(request.body)['selconfig']).name).count() > 0:
+                            reservedby.append(str(request.user))
+                            cout+=1
+                    
+                sss = []
+                if len(allquantity) > 0:
+                    if len(allquantity) == 1:
+                        print("One")
+                        for i in Stock.objects.filter(Class = allclass[0], Category = allcategory[0], Manufacturer = allmanu[0], Model = allmodel[0], Reservedby = request.user, Configname = ConfigName.objects.get(id = json.loads(request.body)['selconfig']).name)[:int(allquantity[0])]:
+                            ssn.append(i.SSN)
+                    if len(allquantity) == 2:
+                        print("Two")
+                        for i in Stock.objects.filter(Class = allclass[0], Category = allcategory[0], Manufacturer = allmanu[0], Model = allmodel[0], Reservedby = request.user, Configname = ConfigName.objects.get(id = json.loads(request.body)['selconfig']).name)[:int(allquantity[0])]:
+                            sss.append(i.SSN)
+                        print(sss)
+                        ssn.append(sss)
+                        sss = []
+                        for i in Stock.objects.filter(Class = allclass[1], Category = allcategory[1], Manufacturer = allmanu[1], Model = allmodel[1], Reservedby = request.user, Configname = ConfigName.objects.get(id = json.loads(request.body)['selconfig']).name)[:int(allquantity[1])]:
+                            sss.append(i.SSN)
+                        print(sss)
+                        ssn.append(sss)
+                    # for i in range(len(allquantity)):
+                    #     # for o in range(0,int(allquantity[i])):
+                    #     #     print("i,j",i,o)
+                    #     for s in Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model, Reservedby = request.user, Configname = ConfigName.objects.get(id = json.loads(request.body)['selconfig']).name)[:int(allquantity[i])]:
+                    #         sss.append(s.SSN)
+                    #     ssn.append(sss)
+
+                #         for i in Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model, Reservedby = request.user, Configname = json.loads(request.body)['selconfig']):
+                #             ssn.append(i.SSN)
+                print("SSN:", ssn)
+
+                # for i in range(0,len(allquantity)):
+                #     for j in range(0,int(allquantity[i])):
+                #         print("i,j",i,j)
+                #         for s in Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model, Reservedby = request.user, Configname = json.loads(request.body)['selconfig']):
+                #            ssn.append([s.SSN])
+                    # if Stock.objects.filter(Class = j.Class, Category = j.Category, Manufacturer = j.Manufacturer, Model = j.Model).count() > 0:
+                    #     reservedby.append(str(request.user))
+
+                    
+
+                # Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved", Reservedby = request.user, Configname = json.loads(request.body)['selconfig'])
+                print(allclass,allcategory,allmanu,allmodel,allquantity)
+                return JsonResponse({"allclass":allclass, 'allcategory':allcategory, 'allmanu':allmanu, 'allmodel':allmodel,
+                                     'allquantity':allquantity, "reservedby":reservedby, 'ssn':ssn})
+
+        
+        return render(request, 'home/configscan.html', context)
         # html_template = loader.get_template('home/index.html')
         # return HttpResponse(html_template.render(context, request))
 
@@ -653,43 +1092,43 @@ def BuildConfig(request):
                         # for i in 
                         # print("Stock count", Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
                         # row1.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row1 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row1 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         count+=1
                         continue
 
                     if count == 1:
                         # row2.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row2 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row2 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         count+=1
                         continue
 
                     if count == 2:
                         # row3.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row3 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row3 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         count+=1
                         continue
 
                     if count == 3:
                         # row4.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row4 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row4 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         count+=1
                         continue
 
                     if count == 4:
                         # row5.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row5 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row5 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         count+=1
                         continue
 
                     if count == 5:
                         # row6.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row6 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count()
-                        rowsval.append(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        row6 = int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count())
+                        rowsval.append(int(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l,Substatus__icontains = "Available").count()))
                         continue
 
                 count = 0      
@@ -697,39 +1136,44 @@ def BuildConfig(request):
                 print("Rows", int(row1), int(row2),int(row3),int(row4),int(row5),int(row6))
                 
 
-                nobuild = ''
+                nobuild = 0
                 if row1:
                     if int(row1) == 0:
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1)]
                 if row1 and row2:
                     if int(row1) == 0 or int(row2) == 0:
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1),int(row2)]
                 if row1 and row2 and row3:
                     if int(row1) == 0 or int(row2) == 0 or int(row3) == 0:
                         print("3rd class:", row1,row2,row3)
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1),int(row2),int(row3)]
                 if row1 and row2 and row3 and row4:
                     if int(row1) == 0 or int(row2) == 0 or int(row3) == 0 or int(row4) == 0:
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1),int(row2),int(row3),int(row4)]
                 if row1 and row2 and row3 and row4 and row5:
                     if int(row1) == 0 or int(row2) == 0 or int(row3) == 0 or int(row4) == 0 or int(row5) == 0:
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1),int(row2),int(row3),int(row4),int(row5)]
                 if row1 and row2 and row4 and row5 and row6:
                     if int(row1) == 0 or int(row2) == 0 or int(row3) == 0 or int(row4) == 0 or int(row5) == 0 or int(row6) == 0:
-                        nobuild = '0'
+                        nobuild = 0
                         buildcontext['rows_val'] = [int(row1),int(row2),int(row3),int(row4),int(row5),int(row6)]
 
+                rowsbuilds = []
                 print("No of nobuild form zero", nobuild)
                 if nobuild != None:
                     if row1:
+                        # nobuild = int(row1)/int(json.loads(request.body)['aqua'][0])
                         nobuild = int(row1)
+                        # print("Minimum... index", min(int(row1)))
                         buildcontext['rows_val'] = [int(row1)]
                     if row1 and row2:
+                        # minindex = min(int(row1),int(row2)).__index__
+                        # print("Minimum... index", min(int(row1),int(row2)).__index__())
                         nobuild = min(int(row1),int(row2))
                         buildcontext['rows_val'] = [int(row1),int(row2)]
                     if row1 and row2 and row3:
@@ -756,7 +1200,7 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]):
                                 print("Green1")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = int(row1)/int(json.loads(request.body)['buildno'])
+                                no_of_builds = [[int(int(row1)/int(json.loads(request.body)['buildno']))]]
 
                         # if int(row1) >= json.loads(request.body)['aqua'][i]
                         
@@ -766,7 +1210,7 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]) and int(row2) >= int(json.loads(request.body)['aqua'][1]):
                                 print("Green2")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno'])
+                                no_of_builds = [[int(int(row1)/int(json.loads(request.body)['buildno']))],  [int(row2)/int(json.loads(request.body)['buildno'])]]
                         # if int(row1) >= json.loads(request.body)['aqua'][i]
                     elif len(json.loads(request.body)['aqua']) == 3:
                         print("3")
@@ -774,7 +1218,7 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]) and int(row2) >= int(json.loads(request.body)['aqua'][1]) and int(row3) >= int(json.loads(request.body)['aqua'][2]):
                                 print("Green3")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = [[int(row1)/int(json.loads(request.body)['buildno'])],  [int(row2)/int(json.loads(request.body)['buildno'])],  [int(row3)/int(json.loads(request.body)['buildno'])]]
+                                no_of_builds = [[int(int(row1)/int(json.loads(request.body)['buildno']))],  [int(row2)/int(json.loads(request.body)['buildno'])],  [int(row3)/int(json.loads(request.body)['buildno'])]]
                         # if int(row1) >= json.loads(request.body)['aqua'][i]
                     elif len(json.loads(request.body)['aqua']) == 4:
                         print("4")
@@ -782,7 +1226,7 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]) and int(row2) >= int(json.loads(request.body)['aqua'][1]) and int(row3) >= int(json.loads(request.body)['aqua'][2]) and int(row4) >= int(json.loads(request.body)['aqua'][3]):
                                 print("Green4")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno'])
+                                no_of_builds = int(int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno']))
                         # if int(row1) >= json.loads(request.body)['aqua'][i]
                     elif len(json.loads(request.body)['aqua']) == 5:
                         print("5")
@@ -790,7 +1234,7 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]) and int(row2) >= int(json.loads(request.body)['aqua'][1]) and int(row3) >= int(json.loads(request.body)['aqua'][2]) and int(row4) >= int(json.loads(request.body)['aqua'][3]) and int(row5) >= int(json.loads(request.body)['aqua'][4]):
                                 print("Green5")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno']) + int(row5)/int(json.loads(request.body)['buildno'])
+                                no_of_builds = int(int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno']) + int(row5)/int(json.loads(request.body)['buildno']))
                         # if int(row1) >= json.loads(request.body)['aqua'][i]
                     elif len(json.loads(request.body)['aqua']) == 6:
                         print("6")
@@ -798,37 +1242,38 @@ def BuildConfig(request):
                             if int(row1) >= int(json.loads(request.body)['aqua'][0]) and int(row2) >= int(json.loads(request.body)['aqua'][1]) and int(row3) >= int(json.loads(request.body)['aqua'][2]) and int(row4) >= int(json.loads(request.body)['aqua'][3]) and int(row5) >= int(json.loads(request.body)['aqua'][4]) and int(row6) >= int(json.loads(request.body)['aqua'][5]):
                                 print("Green6")
                                 buildcontext['build_status'] = "Green"
-                                no_of_builds = int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno']) + int(row5)/int(json.loads(request.body)['buildno']) + int(row6)/int(json.loads(request.body)['buildno'])
+                                no_of_builds = int(int(row1)/int(json.loads(request.body)['buildno']) + int(row2)/int(json.loads(request.body)['buildno']) + int(row3)/int(json.loads(request.body)['buildno']) + int(row4)/int(json.loads(request.body)['buildno']) + int(row5)/int(json.loads(request.body)['buildno']) + int(row6)/int(json.loads(request.body)['buildno']))
                 
                 
                 if int(json.loads(request.body)['buildno']) > 0:
                     if int(nobuild):
-                        if int(nobuild) == int(json.loads(request.body)['buildno']):
-                            buildcontext['no_build'] = int(nobuild)
-                            buildcontext['build_status'] = "Green"
-                        if int(json.loads(request.body)['buildno']) > int(nobuild):
-                            print("No.of.build", int(json.loads(request.body)['buildno'])/int(int(nobuild)))
-                            if int(json.loads(request.body)['buildno']) > int(json.loads(request.body)['buildno'])/int(int(nobuild)):
+                        # if int(nobuild) == int(json.loads(request.body)['buildno']):
+                        #     buildcontext['min_build'] = int(nobuild)
+                        #     buildcontext['build_status'] = "Green"
+                        if int(json.loads(request.body)['buildno']) >= int(nobuild):
+                            print("No.of.build", int(int(json.loads(request.body)['buildno'])/int(int(nobuild))))
+                            if int(json.loads(request.body)['buildno']) > int(int(json.loads(request.body)['buildno'])/int(int(nobuild))):
                                 buildcontext['no_build'] = int(nobuild)
                                 buildcontext['build_status'] = "Red"
                             else:
                                 buildcontext['no_build'] = int(nobuild)
                                 buildcontext['build_status'] = "Green"
                         
-                        if int(json.loads(request.body)['buildno']) < int(nobuild):
-                            print("No.of.build < than", int(int(int(nobuild)))/int(json.loads(request.body)['buildno']))
-                            if int(json.loads(request.body)['buildno']) > int(int(int(nobuild)))/int(json.loads(request.body)['buildno']):
-                                buildcontext['no_build'] = int(nobuild)
-                                buildcontext['build_status'] = "Red"
-                            else:
-                                buildcontext['no_build'] = int(nobuild)
-                                buildcontext['build_status'] = "Green"
+                        # elif int(json.loads(request.body)['buildno']) < int(nobuild):
+                        #     print("No.of.build < than", int(int(int(nobuild)))/int(json.loads(request.body)['buildno']))
+                        #     if int(json.loads(request.body)['buildno']) > int(int(int(nobuild)))/int(json.loads(request.body)['buildno']):
+                        #         buildcontext['no_build'] = int(nobuild)
+                        #         buildcontext['build_status'] = "Red"
+                        #     else:
+                        #         buildcontext['no_build'] = int(nobuild)
+                        #         buildcontext['build_status'] = "Green"
+                        # else:
+                        #     buildcontext['build_status'] = "Red"
 
                     else:
                         buildcontext['build_status'] = "Red"
-                if int(json.loads(request.body)['buildno']) == 0:
-                    buildcontext['build_status'] = "zero"
-
+                
+                
                 if len(json.loads(request.body)['aqua']) > 1:
                     if len(no_of_builds) == 0:
                         buildcontext['build_status'] = "Red"
@@ -840,23 +1285,62 @@ def BuildConfig(request):
                                     buildcontext['build_status'] = "Red"
                 
                 buildcontext['rowval'] = rowsval
-                print("nobuild", nobuild)
+                print("nobuild", int(nobuild))
+                
                 # print("Min val:", int(min(no_of_builds)[0]))
                 print("build val:", int(json.loads(request.body)['buildno']))
-
+                buildcontext['userbldval'] = int(json.loads(request.body)['buildno'])
+                
+                min_build = []
                 if int(json.loads(request.body)['buildno']) > 0:
                     if int(nobuild) > int(json.loads(request.body)['buildno']):
-                        buildcontext['no_build'] = int(int(nobuild) / int(json.loads(request.body)['buildno']))
-                print("Rows val:", buildcontext['rows_val'], rowsval)
-                buildcontext['ask_val'] = int(json.loads(request.body)['buildno'])
+                        if len(json.loads(request.body)['aqua']) >= 0:
+                            for i in json.loads(request.body)['aqua']:
+                                # print("i",int(i))
+                                # print("buildno", int(json.loads(request.body)['buildno']))
+                                d = int(i)*int(json.loads(request.body)['buildno'])
+                                # print("d",d)
+                                # print("nobuild",int(nobuild/d))
+                                # print("no build", int(nobuild)/int(d))
+                                min_build.append(int(int(nobuild)/d))
+                                # print("Minval",int(nobuild) / int(i)*int(json.loads(request.body)['buildno']))
+                                # buildcontext['no_build'] = int(int(nobuild) / int(i)*int(json.loads(request.body)['buildno']))
+                        # buildcontext['no_build'] = int(int(nobuild) / int(json.loads(request.body)['buildno']))
+                # print("Min_build", min(min_build))
+
+                
+                if min_build:
+                    buildcontext['min_build'] = min(min_build)
+                    if min(min_build) == 0:
+                        buildcontext['build_status'] = "Red"
+                else:
+                    buildcontext['min_build'] = 0
+                    print("nobuild", nobuild)
+                # print("Rows val:", buildcontext['rows_val'], rowsval)
+                print("Rows val:", rowsval)
+                ask_val = []
+                if len(json.loads(request.body)['aqua']) >= 0:
+                    for i in json.loads(request.body)['aqua']:
+                        ask_val.append(int(i)*int(json.loads(request.body)['buildno']))
+                
+                if int(json.loads(request.body)['buildno']) == 0:
+                    buildcontext['build_status'] = "zero"
+
+                buildcontext['ask_val'] = ask_val
                 print("Context", buildcontext['build_status'], "No of builds:", type(no_of_builds))
+
+                # print("Min Min", min(eval(i) for i in json.loads(request.body)['aqua']))
+                buildcontext['can_build'] = int(int(nobuild)/int(min(eval(i) for i in json.loads(request.body)['aqua'])))
+
+                print("Context", buildcontext)
                 return JsonResponse(buildcontext)
                 
         
         if 'reserve2' in json.loads(request.body):
             buildcontext = {"reserve":"reserve"}
             print("buildno reserve value from select:", json.loads(request.body)['bno'])
-
+            print("aqua reserve value from select:", json.loads(request.body)['aqua'])
+            
             configs = []
             concontxt = {}
 
@@ -878,57 +1362,96 @@ def BuildConfig(request):
                 for (i,j,k,l) in zip(json.loads(request.body)['aclass'],json.loads(request.body)['acat'],json.loads(request.body)['amanu'],json.loads(request.body)['amodel']):
                     if count == 0:
                         # for i in 
-                        # print("Stock count", Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        row1=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
+                        print("Stock count", Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l , Substatus__icontains = "Available").count())
+                        # print("Countloop", int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][0]))
+                        row1=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available").count())
                         # row1 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][0]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            # i.Configname = json.loads(request.body)['reserve2']
+                            i.save()
+                            
+                        
                         count+=1
                         continue
 
                     if count == 1:
                         row2=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
                         # row2 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][1]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            i.save()
                         count+=1
                         continue
 
                     if count == 2:
                         row3=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
-                        # row3 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][2]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            i.save()
                         count+=1
                         continue
 
                     if count == 3:
                         row4=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
                         # row4 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][3]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            i.save()
                         count+=1
                         continue
 
                     if count == 4:
                         row5=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
                         # row5 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][4]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            i.save()
                         count+=1
                         continue
 
                     if count == 5:
                         row6=(Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l).count())
                         # row6 = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])].update(Substatus = "Reserved")
-                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l)[:int(json.loads(request.body)['bno'])]
-                        for i in range(int(json.loads(request.body)['bno'])):
-                            stoks[i].Substatus = "Reserved"
+                        stoks = Stock.objects.filter(Class = i, Category = j, Manufacturer = k, Model = l, Substatus__icontains = "Available")[:int(int(json.loads(request.body)['bno'])*int(json.loads(request.body)['aqua'][5]))]
+                        # for i in range(int(json.loads(request.body)['bno'])):
+                        #     # stoks[i].Substatus = "Reserved"
+                        #     stoks[i].update(Substatus = "Reserved")
+                        for i in stoks:
+                            i.Substatus = "Reserved"
+                            i.Reservedby = str(request.user)
+                            i.Configname = ConfigName.objects.get(id = json.loads(request.body)['reserve2']).name
+                            i.save()
                         continue
 
                 count = 0      
@@ -1047,6 +1570,7 @@ def BuildConfig(request):
                 #         if int(i) == 0:
                 #             buildcontext['build_status'] = "Red"
                 print("nobuild", nobuild)
+
                 # print("Min val:", int(min(no_of_builds)[0]))
                 print("build val:", int(json.loads(request.body)['bno']))
                 buildcontext['ask_val'] = int(json.loads(request.body)['bno'])

@@ -1,0 +1,269 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} CreateConfig {% endblock title %}
+
+
+{% block content %}
+
+    <!-- <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div> -->
+    
+
+    <div class="col-12">
+        <form id="createform" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div style="background-color: #f1f1f6; padding: 1em;">
+                
+
+                
+                <!-- </form> -->
+
+                <h2 class="my-3">Select a Config to show details</h2>
+            <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                <option selected>--- Select Config ---</option>
+                {% for i in all_configs %}
+                    <option value="{{i.id}}">{{i}}</option>
+                {% endfor %}
+            </select>
+
+
+            
+                <div class="table-responsive">
+                    <table class="table tablemanager table-striped mt32 customers-list">
+                    <thead>
+                        <tr class="kie-tablelist__row kie-tablelist__row--header">
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">SSN</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Reservedby</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyclass">
+                        <tr id="trclass">
+                            <td id="tdssn" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdclass" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdcategory" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmanu" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmodel" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdqua" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdreserve" class="kie-tablelist__cell">
+
+                            </td>
+                        </tr>
+
+                        
+                    </tbody>
+                    
+                    </table>
+                </div>
+                <div style="margin-top: 20px;" class="form-group">
+                    <input id="scanstock" name="scanstock" type="text" class="col-4 form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keep cursor on text box to scan the stock">
+                </div>
+
+                <div class="col-12">
+                    
+                    <button style="align-content: end;" type="button" onclick="submitform()" class="btn btn-primary">Scan Assign/Update</button>
+                    
+                    
+                </div>
+
+
+            </div>
+            
+        </form>   
+
+        <!-- <div style="background-color: #f1f1f6; margin-top: -117px; padding: 1em;">
+            
+            <h2>Select a Config to show details</h2>
+            <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                <option selected>--- Select Config ---</option>
+                {% for i in all_configs %}
+                    <option value="{{i.id}}">{{i}}</option>
+                {% endfor %}
+            </select>
+
+
+            
+                <div class="table-responsive">
+                    <table class="table table-hover table-responsive kie-tablelist">
+                    <thead>
+                        <tr class="kie-tablelist__row kie-tablelist__row--header">
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyclass">
+                        <tr id="trclass">
+                            <td id="tdclass" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdcategory" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmanu" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdmodel" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdqua" class="kie-tablelist__cell">
+
+                            </td>
+                        </tr>
+
+                        
+                    </tbody>
+                    
+                    </table>
+                </div>
+                
+        </div> -->
+    </div>
+    
+
+    <script>
+        document.getElementById("green1").style.display = "none";
+        document.getElementById("red1").style.display = "none";
+        // jQuery(document).ready(function($) {
+        //     $("#selclass1").on('change', function() {
+        //         var level = $(this).val();
+        //         if(level){
+        //             $.ajax ({
+        //                 type: 'POST',
+        //                 url: '',
+        //                 data: { class: '' + level + '' },
+        //                 success : function(htmlresponse) {
+                            
+        //                     console.log(htmlresponse);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
+        function submitform() {
+            console.log("input val", document.getElementById("configname").value.length)
+            if (document.getElementById("configname").value.length == 0) {
+                document.getElementById("red1").style.display = "block";
+            }
+            if (document.getElementById("configname").value.length > 0) {
+                document.getElementById("createform").submit();
+            }
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Config list change
+        function configchange(){
+            selconfig = document.getElementById('selconfig').value;
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({selconfig: selconfig}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    console.log("length:", response['allcategory'].length)
+                    var tdssn = $('#tdssn');
+                    tdssn.empty();
+
+                    var tdclass = $('#tdclass');
+                    tdclass.empty();
+
+                    var tdcategory = $('#tdcategory');
+                    tdcategory.empty();
+
+                    var tdmanu = $('#tdmanu');
+                    tdmanu.empty();
+
+                    var tdmodel = $('#tdmodel');
+                    tdmodel.empty();
+
+                    var tdqua = $('#tdqua');
+                    tdqua.empty();
+
+                    var tdreserve = $('#tdreserve');
+                    tdreserve.empty();
+
+                    for (var i = 0; i < response['ssn'].length; i++) {
+                        tdssn.append("<tr><td>"+response['ssn'][i]+"</td></tr>")
+                        
+                    };
+
+                    for (var i = 0; i < response['allclass'].length; i++) {
+                        tdclass.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
+                        tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        tdmanu.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
+                        tdmodel.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
+                        tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                        tdreserve.append("<tr><td>"+response['reservedby']+"</td></tr>")
+                    };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                        
+                    // };
+
+                    // for (var i = 0; i < response['allcategory'].length; i++) {
+                    //     trclass.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
+                    // };
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
+        
+    </script>
+    
+
+
+{% endblock content %}

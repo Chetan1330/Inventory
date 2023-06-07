@@ -22,7 +22,16 @@
   <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
 
   <!-- Specific Page CSS goes HERE  -->
-  {% block stylesheets %}{% endblock stylesheets %}
+  {% block stylesheets %}
+  <style>
+    /* .nav-link[data-toggle].collapsed:after {
+        content: " ▾";
+    }
+    .nav-link[data-toggle]:not(.collapsed):after {
+        content: " ▴";
+    } */
+  </style>
+  {% endblock stylesheets %}
 
 </head>
 
@@ -49,10 +58,39 @@
 
   {% include 'includes/scripts.html' %}
 
-  {% include 'includes/scripts-sidebar.html' %}
+  <!-- {% include 'includes/scripts-sidebar.html' %} -->
 
   <!-- Specific Page JS goes HERE  -->
   {% block javascripts %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+      
+      element.addEventListener('click', function (e) {
+
+        let nextEl = element.nextElementSibling;
+        let parentEl  = element.parentElement;	
+
+          if(nextEl) {
+              e.preventDefault();	
+              let mycollapse = new bootstrap.Collapse(nextEl);
+              
+              if(nextEl.classList.contains('hide')){
+                mycollapse.show();
+              } else {
+                  mycollapse.hide();
+                  // find other submenus with class=show
+                  var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                  // if it exists, then close all of them
+                  if(opened_submenu){
+                    new bootstrap.Collapse(opened_submenu);
+                  }
+              }
+          }
+      }); // addEventListener
+    }) // forEach
+  }); 
+  </script>
   {% endblock javascripts %}
 
 </body>

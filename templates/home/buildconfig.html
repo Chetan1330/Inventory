@@ -146,9 +146,10 @@
                             </table>
                         </div>
 
+                        <hr>
                         <div class="col-12">
                             <div class="row">
-                                <span class="col-2"></span>
+                                <!-- <span class="col-2"></span> -->
                                 <div class="col-10 row">
                                     <!-- <input id="buildno" name="buildno" type="number" class="col-3 form-control" aria-describedby="emailHelp" placeholder="How many to Build">
                                     <span class="col-1"></span>
@@ -174,7 +175,7 @@
                         </div>
 
                         <div id="green" class="alert alert-success" role="alert">
-                            successfully build the config. Above stocks are reserved.
+                            successfully build the config.
                         </div>
             
                         <div id="red" class="alert alert-danger" role="alert">
@@ -185,6 +186,9 @@
                     <!-- <div id="table2" class="wrapper">
                         
                     </div> -->
+                    <!-- Based on available stocks, you can build <available_stocks/quantity> no of builds.
+                    You have asked for <3> builds. Do you want to reserve hardware for these <3 > builds. -->
+
                     
                     
                 
@@ -420,7 +424,7 @@
                     console.log("html:", response);
                     // var tdcategory = $('#tdcategory');
                     $('#stockspan').empty();
-                    $('#stockspan').append("Can build" + " " + response['no_build'] + " Systems of above config with available stocks. Do you want to reserve stocks?");
+                    $('#stockspan').append("<label>"+"Based on available stocks, you can build " + "<b>" + response['can_build'] + "</b>" + " no of builds. You have asked for " + response['userbldval'] + " builds. Do you want to reserve hardware for these " + response['userbldval'] + " builds." + "</label>");
                     var tdask2 = $('#tdask2');
                     tdask2.empty();
 
@@ -428,7 +432,7 @@
                     tdavail2.empty();
 
                     for (var i = 0; i < aclass.length; i++) {
-                        tdask2.append("<tr><td>"+response['ask_val']+"</td></tr>")
+                        tdask2.append("<tr><td>"+response['ask_val'][i]+"</td></tr>")
                         tdavail2.append("<tr><td>"+response['rowval'][i]+"</td></tr>")
                         
                         // tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")

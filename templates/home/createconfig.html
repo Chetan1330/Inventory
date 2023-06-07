@@ -11,14 +11,14 @@
     
 
     <div class="col-12">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form id="createform" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div style="background-color: #f1f1f6; padding: 1em;">
                 <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">Create Config</div>
                 <div style="margin-top: 20px;" class="form-group">
                     <label for="exampleInputEmail1">Config Name</label>
-                    <input name="configname" type="text" class="col-8 form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter config name">
+                    <input id="configname" name="configname" type="text" class="col-8 form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter config name">
                 </div>
                 <br/>
                 <!-- <form id="class1form" method="POST" action="" enctype="multipart/form-data">
@@ -334,14 +334,22 @@
                     </div>
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Create Config</button>
+                        <button type="button" onclick="submitform()" class="btn btn-primary">Create Config</button>
                     </div>
+
+                    <div id="green1" class="my-3 alert alert-success" role="alert">
+                        successfully build the config. Above stocks are reserved.
                     </div>
+        
+                    <div id="red1" class="alert alert-danger" role="alert">
+                        Make sure form is filled before submitting.
+                    </div>
+                </div>
 
                 
                 <!-- </form> -->
 
-                <h2>Select a Config to show details</h2>
+                <h2 class="my-3">Select a Config to show details</h2>
             <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
                 <option selected>--- Select Config ---</option>
                 {% for i in all_configs %}
@@ -360,6 +368,7 @@
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Reservedby</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyclass">
@@ -381,6 +390,10 @@
                             </td>
 
                             <td id="tdqua" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdreserve" class="kie-tablelist__cell">
 
                             </td>
                         </tr>
@@ -451,7 +464,8 @@
     
 
     <script>
-        
+        document.getElementById("green1").style.display = "none";
+        document.getElementById("red1").style.display = "none";
         // jQuery(document).ready(function($) {
         //     $("#selclass1").on('change', function() {
         //         var level = $(this).val();
@@ -468,6 +482,15 @@
         //         }
         //     });
         // });
+        function submitform() {
+            console.log("input val", document.getElementById("configname").value.length)
+            if (document.getElementById("configname").value.length == 0) {
+                document.getElementById("red1").style.display = "block";
+            }
+            if (document.getElementById("configname").value.length > 0) {
+                document.getElementById("createform").submit();
+            }
+        }
 
         function getCookie(name) {
             let cookieValue = null;
@@ -1333,12 +1356,17 @@
                     var tdqua = $('#tdqua');
                     tdqua.empty();
 
+                    var tdreserve = $('#tdreserve');
+                    tdreserve.empty();
+
+                    
                     for (var i = 0; i < response['allclass'].length; i++) {
                         tdclass.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
                         tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
                         tdmanu.append("<tr><td>"+response['allmanu'][i]+"</td></tr>")
                         tdmodel.append("<tr><td>"+response['allmodel'][i]+"</td></tr>")
                         tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
+                        tdreserve.append("<tr><td>"+response['reservedby']+"</td></tr>")
                     };
 
                     // for (var i = 0; i < response['allcategory'].length; i++) {
