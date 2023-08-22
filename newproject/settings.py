@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'newproject.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     # 'NAME': 'invdatabase',
@@ -97,16 +97,16 @@ DATABASES = {
     #     'PORT': '5432',
     # }
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'invdatabase',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'oAYKZC14QSeL',
-        # 'HOST': 'db',
-        'HOST': 'ep-lucky-rice-80054881-pooler.us-east-1.postgres.vercel-storage.com',
-        'PORT': '5432',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     # 'NAME': 'invdatabase',
+    #     'NAME': 'verceldb',
+    #     'USER': 'default',
+    #     'PASSWORD': 'oAYKZC14QSeL',
+    #     # 'HOST': 'db',
+    #     'HOST': 'ep-lucky-rice-80054881-pooler.us-east-1.postgres.vercel-storage.com',
+    #     'PORT': '5432',
+    # }
 }
 
 
