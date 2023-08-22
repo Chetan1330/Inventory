@@ -33,7 +33,7 @@ import random
 import string
 
 
-print("Net Adapt Reserved stocks", Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved", Reservedby = "admin", Configname = "18").count())
+# print("Net Adapt Reserved stocks", Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved", Reservedby = "admin", Configname = "18").count())
 
 # for i in Stock.objects.filter(Class = "Net Adapter-Lab", Category = "Net Adapter-Lab - vfg", Manufacturer = "Mellanox Technologies", Model = "ConnectX-6 VPI Adapter Card - MCX653106A-ECAT-SP", Substatus__icontains = "Reserved"):
 #     print("i class:", i.Class)
