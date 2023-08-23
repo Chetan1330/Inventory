@@ -119,25 +119,38 @@
 
         //console.log(Relevance)
         var headerDropdown = $("#headerDropdown");
-    $("thead th").each(function(index) {
-        var headerText = $(this).text();
-        headerDropdown.append(`<option value="${index}">${headerText}</option>`);
+    Heads.each(function(index) {
+        headerDropdown.append(`<option value="${index}">${$(this).text()}</option>`);
     });
 
-    // Show/hide columns based on selected options
+    // Submit selected headers and add them to the table
     $("#submitHeaders").click(function() {
-        var selectedColumns = $("#headerDropdown").val();
+        var selectedHeaderIndexes = headerDropdown.val();
+        if (selectedHeaderIndexes && selectedHeaderIndexes.length > 0) {
+            // Clone the selected headers and append them to the table
+            selectedHeaderIndexes.forEach(function(index) {
+                var selectedHeader = Heads.eq(index).clone();
+                Table.find("thead tr").append(selectedHeader);
+            });
 
-        // Show selected columns and hide others
-        $("th, td").hide();
-        selectedColumns.forEach(function(columnIndex) {
-            $("th:nth-child(" + (parseInt(columnIndex) + 1) + "), td:nth-child(" + (parseInt(columnIndex) + 1) + ")").show();
-        });
+            // Show the corresponding data cells
+            Table.find("tbody tr").each(function() {
+                selectedHeaderIndexes.forEach(function(index) {
+                    var selectedCell = $(this).find("td").eq(index).clone();
+                    $(this).append(selectedCell);
+                });
+            });
+        }
+
+        // Clear selection and hide the dropdown
+        headerDropdown.val([]);
+        $("#headerDropdownContainer").hide();
     });
 
+    // Cancel and hide the dropdown
     $("#cancelHeaders").click(function() {
-        // Show all columns
-        $("th, td").show();
+        headerDropdown.val([]);
+        $("#headerDropdownContainer").hide();
     });
         $('.tablemanager').tablemanager({
           dynamicDropdown: true,
