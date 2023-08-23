@@ -8,11 +8,7 @@
 {% block content %}
 
     <div class="table-responsive">
-      <div id="for_numrows" class="for_numrows" style="display: inline;">
-        <label style="font-size: 14px;" for="numrows">Show Rows: </label>
-        <select id="numrows"></select>
-    </div>
-    <table id="myTable" class="display table table-bordered table-striped" width="100%">
+    <table id="myTable" class="display table" width="100%">
         <thead>  
           <tr>  
             <th>SrNo</th>
@@ -88,21 +84,12 @@
           {% endfor %}
         </tbody>  
       </table>
-      <div id="headerDropdownContainer">
-        <select id="headerDropdown" multiple class="header-dropdown">
-            <!-- Dropdown options will be populated using JavaScript -->
-        </select>
-        <button id="submitHeaders">Submit</button>
-        <button id="cancelHeaders">Cancel</button>
     </div>
-    </div>
-     
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
 
     <!-- <script src="{% static 'assets/js/Chart.min.js' %}"></script> -->
     <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
-    <script src="{% static 'path-to-tablemanager-js-file' %}"></script>
-
+    
 
     <script>
         $(document).ready(function() {
@@ -124,45 +111,11 @@
         //console.log(Year)
 
         //console.log(Relevance)
-        var headerDropdown = $("#headerDropdown");
-Heads.each(function(index) {
-    headerDropdown.append(`<option value="${index}">${$(this).text()}</option>`);
-});
 
-    // Submit selected headers and add them to the table
-    $("#submitHeaders").click(function() {
-        var selectedHeaderIndexes = headerDropdown.val();
-        if (selectedHeaderIndexes && selectedHeaderIndexes.length > 0) {
-            // Clone the selected headers and append them to the table
-            selectedHeaderIndexes.forEach(function(index) {
-                var selectedHeader = Heads.eq(index).clone();
-                Table.find("thead tr").append(selectedHeader);
-            });
-
-            // Show the corresponding data cells
-            Table.find("tbody tr").each(function() {
-                selectedHeaderIndexes.forEach(function(index) {
-                    var selectedCell = $(this).find("td").eq(index).clone();
-                    $(this).append(selectedCell);
-                });
-            });
-        }
-
-        // Clear selection and hide the dropdown
-        headerDropdown.val([]);
-        $("#headerDropdownContainer").hide();
-    });
-
-    // Cancel and hide the dropdown
-    $("#cancelHeaders").click(function() {
-        headerDropdown.val([]);
-        $("#headerDropdownContainer").hide();
-    });
         $('.tablemanager').tablemanager({
-          dynamicDropdown: true,
-        pagination: true,
-        appendFilterby: true,
-        showrows: [5, 10, 20, 50, 100]
+          pagination: true,
+          appendFilterby:true,
+          showrows: [5,10,20,50,100]
         });
         gradientChartOptionsConfigurationWithTooltipBlue = {
           maintainAspectRatio: false,
