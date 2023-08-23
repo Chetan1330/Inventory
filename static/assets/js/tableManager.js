@@ -94,7 +94,7 @@
         /**
         Get options if set
         **/
-        if (options !== null && options.dynamicDropdown === true) {
+        if (options !== null) {
 
             /**
             Check options vocabulary
