@@ -123,6 +123,7 @@
                     options.vocabulary.voc_show_rows !== undefined
                         ? options.vocabulary.voc_show_rows
                         : voc_show_rows;
+                        generateAddColumnsSection();
             }
 
             /**
@@ -221,6 +222,7 @@
                 }
 
                 generatePaginationValues();
+                generateAddColumnsSection();
             }
 
             /**
@@ -421,6 +423,7 @@
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
             addColumn();
+            generateAddColumnsSection();
         });
         /**
         Main function: sort table
@@ -795,6 +798,6 @@
             // Append the section to the container
             $(this).before(addColumnsSection);
         }
-        generateAddColumnsSection();
+        
     };
 })(jQuery);

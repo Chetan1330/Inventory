@@ -8,6 +8,13 @@
 {% block content %}
 
     <div class="table-responsive">
+      <div>
+        <label for="column-select">Select Columns:</label>
+        <select id="column-select" multiple>
+          <!-- Populate dropdown options using JavaScript -->
+      </select>
+      <button id="add-columns-btn">Add Columns</button>
+    </div>
     <table id="myTable" class="display table table-bordered table-striped" width="100%">
         <thead>  
           <tr>  
@@ -117,6 +124,23 @@
           pagination: true,
           appendFilterby:true,
           showrows: [5,10,20,50,100]
+        });
+        var columns = []; // Add your column names here
+        var columnSelect = $('#column-select');
+
+        for (var i = 0; i < columns.length; i++) {
+            columnSelect.append($('<option>', {
+                value: i,
+                text: columns[i],
+            }));
+        }
+
+        $('#add-columns-btn').on('click', function() {
+            var selectedColumns = columnSelect.val();
+            if (selectedColumns) {
+                // Show selected columns
+                // You need to implement the logic to show the selected columns here
+            }
         });
         gradientChartOptionsConfigurationWithTooltipBlue = {
           maintainAspectRatio: false,
