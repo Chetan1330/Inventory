@@ -84,12 +84,13 @@
           {% endfor %}
         </tbody>  
       </table>
-      <!-- <div id="headerDropdownContainer" style="display: none;">
+      <div id="headerDropdownContainer">
         <select id="headerDropdown" multiple class="header-dropdown">
+            <!-- Dropdown options will be populated using JavaScript -->
         </select>
         <button id="submitHeaders">Submit</button>
         <button id="cancelHeaders">Cancel</button>
-    </div> -->
+    </div>
     </div>
     
 
@@ -117,7 +118,27 @@
         //console.log(Year)
 
         //console.log(Relevance)
+        var headerDropdown = $("#headerDropdown");
+    $("thead th").each(function(index) {
+        var headerText = $(this).text();
+        headerDropdown.append(`<option value="${index}">${headerText}</option>`);
+    });
 
+    // Show/hide columns based on selected options
+    $("#submitHeaders").click(function() {
+        var selectedColumns = $("#headerDropdown").val();
+
+        // Show selected columns and hide others
+        $("th, td").hide();
+        selectedColumns.forEach(function(columnIndex) {
+            $("th:nth-child(" + (parseInt(columnIndex) + 1) + "), td:nth-child(" + (parseInt(columnIndex) + 1) + ")").show();
+        });
+    });
+
+    $("#cancelHeaders").click(function() {
+        // Show all columns
+        $("th, td").show();
+    });
         $('.tablemanager').tablemanager({
           dynamicDropdown: true,
           pagination: true,
