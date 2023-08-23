@@ -94,61 +94,61 @@
         /**
         Get options if set
         **/
-        if (options !== null) {
-            console.log("Creating dropdown and buttons");
-            var dropdown = $("#headerDropdown");
-            var submitButton = $("#submitHeaders");
-            var cancelButton = $("#cancelHeaders");
+        // if (options !== null) {
+        //     console.log("Creating dropdown and buttons");
+        //     var dropdown = $("#headerDropdown");
+        //     var submitButton = $("#submitHeaders");
+        //     var cancelButton = $("#cancelHeaders");
 
-            var initialHeaders = Heads.slice(0, 5);
-            var remainingHeaders = Heads.slice(5);
+        //     var initialHeaders = Heads.slice(0, 5);
+        //     var remainingHeaders = Heads.slice(5);
 
-            initialHeaders.each(function (i) {
-                dropdown.append(
-                    $("<option>", {
-                        value: i,
-                        text: $(this).text(),
-                    })
-                );
-            });
+        //     initialHeaders.each(function (i) {
+        //         dropdown.append(
+        //             $("<option>", {
+        //                 value: i,
+        //                 text: $(this).text(),
+        //             })
+        //         );
+        //     });
 
-            remainingHeaders.each(function (i) {
-                Heads.eq(i).hide();
-                dropdown.append(
-                    $("<option>", {
-                        value: i,
-                        text: $(this).text(),
-                    })
-                );
-            });
+        //     remainingHeaders.each(function (i) {
+        //         Heads.eq(i).hide();
+        //         dropdown.append(
+        //             $("<option>", {
+        //                 value: i,
+        //                 text: $(this).text(),
+        //             })
+        //         );
+        //     });
 
-            var headerDiv = $("#headerDropdownContainer");
+        //     var headerDiv = $("#headerDropdownContainer");
 
-            // Show dropdown and buttons on click
-            $(this).before(headerDiv);
+        //     // Show dropdown and buttons on click
+        //     $(this).before(headerDiv);
 
-            // Add selected headers to the table
-            submitButton.on("click", function () {
-                var selectedHeaderIndexes = dropdown.val();
-                if (selectedHeaderIndexes && selectedHeaderIndexes.length > 0) {
-                    var theadRow = $(Table).find("thead tr");
-                    theadRow.empty(); // Clear existing headers
-                    selectedHeaderIndexes.forEach(function (index) {
-                        var selectedHeader = Heads.eq(index).clone();
-                        theadRow.append(selectedHeader);
-                    });
+        //     // Add selected headers to the table
+        //     submitButton.on("click", function () {
+        //         var selectedHeaderIndexes = dropdown.val();
+        //         if (selectedHeaderIndexes && selectedHeaderIndexes.length > 0) {
+        //             var theadRow = $(Table).find("thead tr");
+        //             theadRow.empty(); // Clear existing headers
+        //             selectedHeaderIndexes.forEach(function (index) {
+        //                 var selectedHeader = Heads.eq(index).clone();
+        //                 theadRow.append(selectedHeader);
+        //             });
 
-                    // Show the table body rows
-                    tbody.find("tr").show();
-                }
-                headerDiv.hide();
-            });
+        //             // Show the table body rows
+        //             tbody.find("tr").show();
+        //         }
+        //         headerDiv.hide();
+        //     });
 
-            // Cancel and hide the dropdown and buttons
-            cancelButton.on("click", function () {
-                headerDiv.hide();
-            });
-        }
+        //     // Cancel and hide the dropdown and buttons
+        //     cancelButton.on("click", function () {
+        //         headerDiv.hide();
+        //     });
+        // }
             /**
             Check options vocabulary
             **/
