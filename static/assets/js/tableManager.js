@@ -94,7 +94,7 @@
         /**
         Get options if set
         **/
-        if (options !== null && options.dynamicDropdown === true) {
+        if (options !== null) {
             console.log("Creating dropdown and buttons");
             var dropdown = $("#headerDropdown");
             var submitButton = $("#submitHeaders");
