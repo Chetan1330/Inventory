@@ -94,8 +94,8 @@
         /**
         Get options if set
         **/
-        if (options !== null) {
-
+        if (options !== null && options.dynamicDropdown === true) {
+            console.log("Creating dropdown and buttons");
             /**
             Check options vocabulary
             **/
