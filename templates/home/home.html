@@ -8,7 +8,7 @@
 {% block content %}
 
     <div class="table-responsive">
-    <table id="myTable" class="display table" width="100%">
+    <table id="myTable" class="display table table-bordered table-striped" width="100%">
         <thead>  
           <tr>  
             <th>SrNo</th>
@@ -92,7 +92,8 @@
         <button id="cancelHeaders">Cancel</button>
     </div>
     </div>
-    
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- <script src="{% static 'assets/js/Chart.min.js' %}"></script> -->
     <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
@@ -119,9 +120,9 @@
 
         //console.log(Relevance)
         var headerDropdown = $("#headerDropdown");
-    Heads.each(function(index) {
-        headerDropdown.append(`<option value="${index}">${$(this).text()}</option>`);
-    });
+Heads.each(function(index) {
+    headerDropdown.append(`<option value="${index}">${$(this).text()}</option>`);
+});
 
     // Submit selected headers and add them to the table
     $("#submitHeaders").click(function() {
