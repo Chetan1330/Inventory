@@ -388,7 +388,40 @@
                 $(this).addClass("sorterHeader");
             }
         });
-
+        function addColumn() {
+            // Get the list of columns to be added from checkboxes
+            var selectedColumns = [];
+            $("input[name='dynamic-columns']:checked").each(function () {
+                selectedColumns.push($(this).val());
+            });
+        
+            // Step 1: Update the table structure
+            // Iterate through selectedColumns and add new <th> and <td> elements
+            selectedColumns.forEach(function (column) {
+                // Add new <th> element to the table header
+                $("thead tr").append("<th>" + column + "</th>");
+        
+                // Add new <td> element to each row in the table body
+                $("tbody tr").each(function () {
+                    $(this).append("<td>New Value</td>"); // You can set the value for the new cell
+                });
+            });
+        
+            // Step 2: Update the 'Heads', 'tbody', 'rows' variables
+            // Update 'Heads' by selecting all <th> elements again
+            Heads = Table.find("thead th");
+            // Update 'tbody' by selecting the <tbody> element again
+            tbody = Table.find("tbody");
+            // Update 'rows' by selecting all <tr> elements in the <tbody>
+            rows = tbody.find("tr");
+        
+            // Step 3: Reinitialize the plugin
+            $.fn.tablemanager(options);
+        }
+        $("#add-columns-form").on("submit", function (event) {
+            event.preventDefault();
+            addColumn();
+        });
         /**
         Main function: sort table
         rules = array of column, order
@@ -739,5 +772,29 @@
                 console.log(JSON.parse(JSON.stringify(string)));
             }
         }
+        function generateAddColumnsSection() {
+            var addColumnsSection =
+                '<div id="add-columns-section" class="add-columns-section">' +
+                '<form id="add-columns-form">' +
+                '<label for="dynamic-columns">Select Columns to Add:</label><br>';
+
+            // Add checkboxes for each available column
+            for (var i = 0; i < availableColumns.length; i++) {
+                addColumnsSection +=
+                    '<input type="checkbox" name="dynamic-columns" value="' +
+                    availableColumns[i] +
+                    '">' +
+                    availableColumns[i] +
+                    '<br>';
+            }
+
+            addColumnsSection +=
+                '<button type="submit">Add Columns</button>' +
+                '</form></div>';
+
+            // Append the section to the container
+            $(this).before(addColumnsSection);
+        }
+        generateAddColumnsSection();
     };
 })(jQuery);
