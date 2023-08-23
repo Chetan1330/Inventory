@@ -84,6 +84,13 @@
           {% endfor %}
         </tbody>  
       </table>
+      <div id="headerDropdownContainer" style="display: none;">
+        <select id="headerDropdown" multiple class="header-dropdown">
+            <!-- Dynamic options will be added here -->
+        </select>
+        <button id="submitHeaders">Submit</button>
+        <button id="cancelHeaders">Cancel</button>
+    </div>
     </div>
     
 
@@ -113,6 +120,7 @@
         //console.log(Relevance)
 
         $('.tablemanager').tablemanager({
+          dynamicDropdown: true,
           pagination: true,
           appendFilterby:true,
           showrows: [5,10,20,50,100]
