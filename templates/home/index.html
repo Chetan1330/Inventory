@@ -60,6 +60,13 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
+              <div>
+                <label for="column-select">Select Columns:</label>
+                <select id="column-select" multiple>
+                  <!-- Populate dropdown options using JavaScript -->
+              </select>
+              <button id="add-columns-btn">Add Columns</button>
+            </div>
             <table class="table tablemanager table-striped mt32 customers-list">
               <thead>
                 <tr>  
@@ -229,7 +236,8 @@
     //             .toLowerCase().indexOf(value) > -1)
     //       });
     //     });
-    // document.getElementById("numrows").value = 5;   
+    // document.getElementById("numrows").value = 5; 
+      
     $('.search-input').keyup(function(){
       var x = document.getElementById("searchbar").value.length
       if (x == 0){
@@ -287,13 +295,30 @@
     //     //     return !reg.test(text);
     //     // }).hide();
     // });
+    var columns = []; // Add your column names here
+        var columnSelect = $('#column-select');
 
+        for (var i = 0; i < columns.length; i++) {
+            columnSelect.append($('<option>', {
+                value: i,
+                text: columns[i],
+            }));
+        }
+
+        $('#add-columns-btn').on('click', function() {
+            var selectedColumns = columnSelect.val();
+            if (selectedColumns) {
+                // Show selected columns
+                // You need to implement the logic to show the selected columns here
+            }
+        });
     $('.tablemanager').tablemanager({
           pagination: true,
           appendFilterby:false,
           // showrows: [5],
           showrows: [5,10,20,50,100],
           bFilter: false,
+          
         });
   </script>
 
