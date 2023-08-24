@@ -75,6 +75,12 @@
             "numOfPages"
         ];
 
+        var availableColumns = [];
+        Heads.each(function (i) {
+            if (!$(this).hasClass("disableFilterBy")) {
+                availableColumns.push($(this).text());
+            }
+        });
         // debug
         // make array form options object
         arrayOptions = $.map(options, function (value, index) {
@@ -388,40 +394,7 @@
                 $(this).addClass("sorterHeader");
             }
         });
-        function addColumn() {
-            // Get the list of columns to be added from checkboxes
-            var selectedColumns = [];
-            $("input[name='dynamic-columns']:checked").each(function () {
-                selectedColumns.push($(this).val());
-            });
         
-            // Step 1: Update the table structure
-            // Iterate through selectedColumns and add new <th> and <td> elements
-            selectedColumns.forEach(function (column) {
-                // Add new <th> element to the table header
-                $("thead tr").append("<th>" + column + "</th>");
-        
-                // Add new <td> element to each row in the table body
-                $("tbody tr").each(function () {
-                    $(this).append("<td>New Value</td>"); // You can set the value for the new cell
-                });
-            });
-        
-            // Step 2: Update the 'Heads', 'tbody', 'rows' variables
-            // Update 'Heads' by selecting all <th> elements again
-            Heads = Table.find("thead th");
-            // Update 'tbody' by selecting the <tbody> element again
-            tbody = Table.find("tbody");
-            // Update 'rows' by selecting all <tr> elements in the <tbody>
-            rows = tbody.find("tr");
-        
-            // Step 3: Reinitialize the plugin
-            $.fn.tablemanager(options);
-        }
-        $("#add-columns-form").on("submit", function (event) {
-            event.preventDefault();
-            addColumn();
-        });
         /**
         Main function: sort table
         rules = array of column, order
@@ -782,18 +755,40 @@
                 '</form></div>';
 
             // Append the section to the container
-            $(this).before(addColumnsSection);
-
+            Table.before(addColumnsSection);
             // Populate the dropdown with availableColumns
             var columnDropdown = $("#column-dropdown");
             for (var i = 0; i < availableColumns.length; i++) {
-                columnDropdown.append(
-                    $("<option>", {
-                        value: availableColumns[i],
-                        text: availableColumns[i],
-                    })
-                );
+                if (i < 6) {
+                    // Display the first 6 columns directly in the table
+                    $("thead tr").append("<th>" + availableColumns[i] + "</th>");
+                } else {
+                    columnDropdown.append(
+                        $("<option>", {
+                            value: availableColumns[i],
+                            text: availableColumns[i],
+                        })
+                    );
+                }
             }
+        }
+        generateAddColumnsSection();
+
+        function addColumnsToTable(columns) {
+            // Add new <th> elements to the table header
+            columns.forEach(function (column) {
+                $("thead tr").append("<th>" + column + "</th>");
+
+                // Add new <td> elements to each row in the table body
+                $("tbody tr").each(function () {
+                    $(this).append("<td>New Value</td>"); // You can set the value for the new cell
+                });
+            });
+
+            // Update 'Heads', 'tbody', 'rows' variables
+            Heads = Table.find("thead th");
+            tbody = Table.find("tbody");
+            rows = tbody.find("tr");
         }
         
         $("#add-columns-form").on("submit", function (event) {
@@ -802,10 +797,11 @@
             // Get selected columns from the dropdown
             var selectedColumns = $("#column-dropdown").val();
 
-            // Call the updated addColumn function with selected columns
-            addColumn(selectedColumns);
+            // Call the addColumnsToTable function with selected columns
+            addColumnsToTable(selectedColumns);
 
-            generateAddColumnsSection();
+            // Reset the dropdown
+            $("#column-dropdown").val([]);
         });
         
     };
