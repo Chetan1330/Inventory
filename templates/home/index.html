@@ -1,334 +1,380 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
-{% block title %} Home {% endblock %}
+{% extends "layouts/base.html" %} {% load static %} {% block title %} Home {%
+endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 
 {% block stylesheets %}
-  <style type="text/css">
-		#for_numrows {
-			padding: 10px;
-			float: left;
-		}
-		#for_filter_by {
-			padding: 0px;
-			float: right;
-		}
-		#pagesControllers {
-			display: block;
-			text-align: center;
-		}
+<style type="text/css">
+  #for_numrows {
+    padding: 10px;
+    float: left;
+  }
+  #for_filter_by {
+    padding: 0px;
+    float: right;
+  }
+  #pagesControllers {
+    display: block;
+    text-align: center;
+  }
 
-    /* #filter_input {
+  /* #filter_input {
 			padding: 0px;
 			float: right;
 		} */
 
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 
-    h3 span {
-            font-size: 22px;
-        }
-        h3 input.search-input {
-            width: 300px;
-            margin-left: auto;
-            float: right
-        }
-        .mt32 {
-            margin-top: 32px;
-        }
-	</style>
-{% endblock stylesheets %}
+  h3 span {
+    font-size: 22px;
+  }
+  h3 input.search-input {
+    width: 300px;
+    margin-left: auto;
+    float: right;
+  }
+  .mt32 {
+    margin-top: 32px;
+  }
+</style>
+{% endblock stylesheets %} {% block content %}
 
-{% block content %}
-
-
-    <div class="row">
-      <div class="col-12">
-        <div class="card ">
-          <div class="card-header">
-            <h4 class="card-title text-left"> Stocks Listing</h4>
-
-            <!-- <h3> -->
-              <input id="searchbar" type="text" placeholder="Search stock..." class="col-9 form-control search-input" data-table="customers-list"/>
-            <!-- </h3> -->
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <div>
-                <label for="column-select">Select Columns:</label>
-                <select id="column-select" multiple>
-                  <!-- Populate dropdown options using JavaScript -->
-              </select>
-              <button id="add-columns-btn">Add Columns</button>
-            </div>
-            <table class="table tablemanager table-striped mt32 customers-list">
-              <thead>
-                <tr>  
-                  <!-- <th class="disableFilterBy">SrNo</th> -->
-                  <th>Name</th>
-                  <th>Serial number</th>  
-                  <th>DNUSAN</th>  
-                  <th>Class</th>
-                  <th>Category</th>
-                  <th>Manufacturer</th>
-                  <th>Model</th>
-                  <th>Status(hardware_status)</th>
-                  <th>Substatus</th>
-                  <th>Reserved by</th>
-                  <th>Config name</th>
-                  <th>Program</th>
-                  <th>Project</th>
-                  <th>PO number</th>
-                  <th>PO line number</th>
-                  <th>Assigned to</th>
-                  <th>Owned by</th>
-                  <th>Managed by</th>
-                  <th>Home Location</th>
-                  <th>Location</th>
-                  <th>Location Details</th>
-                  <th>Created</th>
-                  <th>Created by</th>
-                  <th>Updated</th>
-                  <th>Updated by</th>
-                  <th>Cost center</th>
-                  <th>Comments</th>
-                  <th>Finance Type</th>
-                  <th>Hardware Support Group</th>
-                  <th>Hardware Support Service</th>
-                  <th>Etag</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for i in my_data %}
-                <tr>  
-                  <td>{{i.Name}}</td>  
-                  <td>{{i.SSN}}</td>  
-                  <td>{{i.DNUSAN}}</td>  
-                  <td>{{i.Class}}</td> 
-                  <td>{{i.Category}}</td>
-                  <td>{{i.Manufacturer}}</td>
-
-                  <td>{{i.Model}}</td>  
-                  <td>{{i.Status}}</td>  
-                  <td>{{i.Substatus}}</td>  
-                  <td>{{i.Reservedby}}</td>  
-                  <td>{{i.Configname}}</td>  
-                  <td>{{i.Program}}</td> 
-                  <td>{{i.Project}}</td>
-                  <td>{{i.PONo}}</td>
-
-                  <td>{{i.POlineNo}}</td>  
-                  <td>{{i.Assignto}}</td>  
-                  <td>{{i.Ownedby}}</td>  
-                  <td>{{i.Managedby}}</td> 
-                  <td>{{i.HomeLoc}}</td>
-                  <td>{{i.Location}}</td>
-
-                  <td>{{i.LocDetails}}</td>  
-                  <td>{{i.Created}}</td>  
-                  <td>{{i.Createdby}}</td>  
-                  <td>{{i.Updated}}</td> 
-                  <td>{{i.Updatedby}}</td>
-                  <td>{{i.Costcent}}</td>
-
-                  <td>{{i.Comments}}</td>  
-                  <td>{{i.FinaType}}</td>  
-                  <td>{{i.HardSuppG}}</td>  
-                  <td>{{i.HardSuppSer}}</td> 
-                  <td>{{i.Etag}}</td>
-                  <!-- <td>{{i.Name}}</td> -->
-                </tr>  
-                {% endfor %}
-              </tbody>
-          </table>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-left">Stocks Listing</h4>
+        <div class="input-group col-9">
+          <input
+            id="searchbar"
+            type="text"
+            placeholder="Search stock..."
+            class="form-control search-input"
+            data-table="customers-list"
+          />
         </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="column-select">Select Columns:</label>
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Select Columns
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span>Column Name</span>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="check-all"
+                    />
+                  </div>
+                  <!-- Populate dropdown options using JavaScript -->
+                </div>
+              </div>
+            </div>
           </div>
+          <table class="table tablemanager table-striped mt-3 customers-list">
+            <thead>
+              <tr>
+                <!-- <th class="disableFilterBy">SrNo</th> -->
+                <th>Name</th>
+                <th>Serial number</th>
+                <th>DNUSAN</th>
+                <th>Class</th>
+                <th>Category</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Status(hardware_status)</th>
+                <th>Substatus</th>
+                <th>Reserved by</th>
+                <th>Config name</th>
+                <th>Program</th>
+                <th>Project</th>
+                <th>PO number</th>
+                <th>PO line number</th>
+                <th>Assigned to</th>
+                <th>Owned by</th>
+                <th>Managed by</th>
+                <th>Home Location</th>
+                <th>Location</th>
+                <th>Location Details</th>
+                <th>Created</th>
+                <th>Created by</th>
+                <th>Updated</th>
+                <th>Updated by</th>
+                <th>Cost center</th>
+                <th>Comments</th>
+                <th>Finance Type</th>
+                <th>Hardware Support Group</th>
+                <th>Hardware Support Service</th>
+                <th>Etag</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in my_data %}
+              <tr>
+                <td>{{i.Name}}</td>
+                <td>{{i.SSN}}</td>
+                <td>{{i.DNUSAN}}</td>
+                <td>{{i.Class}}</td>
+                <td>{{i.Category}}</td>
+                <td>{{i.Manufacturer}}</td>
+
+                <td>{{i.Model}}</td>
+                <td>{{i.Status}}</td>
+                <td>{{i.Substatus}}</td>
+                <td>{{i.Reservedby}}</td>
+                <td>{{i.Configname}}</td>
+                <td>{{i.Program}}</td>
+                <td>{{i.Project}}</td>
+                <td>{{i.PONo}}</td>
+
+                <td>{{i.POlineNo}}</td>
+                <td>{{i.Assignto}}</td>
+                <td>{{i.Ownedby}}</td>
+                <td>{{i.Managedby}}</td>
+                <td>{{i.HomeLoc}}</td>
+                <td>{{i.Location}}</td>
+
+                <td>{{i.LocDetails}}</td>
+                <td>{{i.Created}}</td>
+                <td>{{i.Createdby}}</td>
+                <td>{{i.Updated}}</td>
+                <td>{{i.Updatedby}}</td>
+                <td>{{i.Costcent}}</td>
+
+                <td>{{i.Comments}}</td>
+                <td>{{i.FinaType}}</td>
+                <td>{{i.HardSuppG}}</td>
+                <td>{{i.HardSuppSer}}</td>
+                <td>{{i.Etag}}</td>
+                <!-- <td>{{i.Name}}</td> -->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-  <!-- <script>
+<!-- <script>
     $(document).ready(function () {
       document.getElementById('filter_input').classList.add("col-8");
     });
 
   </script> -->
-  <script>
+<script>
+  (function (document) {
+    "use strict";
 
-    (function(document) {
-                'use strict';
+    var TableFilter = (function (myArray) {
+      var search_input;
 
-                var TableFilter = (function(myArray) {
-                    var search_input;
-
-                    function _onInputSearch(e) {
-                        search_input = e.target;
-                        var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
-                        myArray.forEach.call(tables, function(table) {
-                            myArray.forEach.call(table.tBodies, function(tbody) {
-                                myArray.forEach.call(tbody.rows, function(row) {
-                                    var text_content = row.textContent.toLowerCase();
-                                    var search_val = search_input.value.toLowerCase();
-                                    row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
-                                });
-                            });
-                        });
-                    }
-
-                    return {
-                        init: function() {
-                            var inputs = document.getElementsByClassName('search-input');
-                            myArray.forEach.call(inputs, function(input) {
-                                input.oninput = _onInputSearch;
-                            });
-                        }
-                    };
-                })(Array.prototype);
-
-                document.addEventListener('readystatechange', function() {
-                    if (document.readyState === 'complete') {
-                        TableFilter.init();
-                    }
-                });
-
-            })(document);
-    
-            // if ()
-    // function searchTable() {
-    //     var input, filter, found, table, tr, td, i, j;
-    //     input = document.getElementById("myInput");
-    //     filter = input.value.toUpperCase();
-    //     table = document.getElementById("myTable");
-    //     tr = table.getElementsByTagName("tr");
-    //     for (i = 0; i < tr.length; i++) {
-    //         td = tr[i].getElementsByTagName("td");
-    //         for (j = 0; j < td.length; j++) {
-    //             if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-    //                 found = true;
-    //             }
-    //         }
-    //         if (found) {
-    //             tr[i].style.display = "";
-    //             found = false;
-    //         } else {
-    //             tr[i].style.display = "none";
-    //         }
-    //     }
-    // }
-
-
-    // var $rows = $('#table tbody tr');
-    // $('#filter_input').keyup(function() {
-    //   $(document).ready(function() {
-    //     var value = $(this).val().toLowerCase();
-    //       $("#hometbody tr").filter(function() {
-    //         $(this).toggle($(this).text()
-    //             .toLowerCase().indexOf(value) > -1)
-    //       });
-    //     });
-    // document.getElementById("numrows").value = 5; 
-      
-    $('.search-input').keyup(function(){
-      var x = document.getElementById("searchbar").value.length
-      if (x == 0){
-        document.getElementById("for_numrows").remove();
-        document.getElementById("pagesControllers").remove();
-        $('.tablemanager').tablemanager({
-          pagination: true,
-          appendFilterby:false,
-          // showrows: [5],
-          showrows: [5,10,20,50,100],
-          bFilter: false,
+      function _onInputSearch(e) {
+        search_input = e.target;
+        var tables = document.getElementsByClassName(
+          search_input.getAttribute("data-table")
+        );
+        myArray.forEach.call(tables, function (table) {
+          myArray.forEach.call(table.tBodies, function (tbody) {
+            myArray.forEach.call(tbody.rows, function (row) {
+              var text_content = row.textContent.toLowerCase();
+              var search_val = search_input.value.toLowerCase();
+              row.style.display =
+                text_content.indexOf(search_val) > -1 ? "" : "none";
+            });
+          });
         });
-        // document.getElementById("numrows").value = 10;
       }
-      // console.log("value:", x);
-      
+
+      return {
+        init: function () {
+          var inputs = document.getElementsByClassName("search-input");
+          myArray.forEach.call(inputs, function (input) {
+            input.oninput = _onInputSearch;
+          });
+        },
+      };
+    })(Array.prototype);
+
+    document.addEventListener("readystatechange", function () {
+      if (document.readyState === "complete") {
+        TableFilter.init();
+      }
     });
-    // const input = document.querySelector("input");
-    // input.addEventListener("input", updateValue);
+  })(document);
 
-    // function updateValue(e) {
-    //   console.log("value:", document.getElementsByClassName("search-input").value);
-    // }
+  // if ()
+  // function searchTable() {
+  //     var input, filter, found, table, tr, td, i, j;
+  //     input = document.getElementById("myInput");
+  //     filter = input.value.toUpperCase();
+  //     table = document.getElementById("myTable");
+  //     tr = table.getElementsByTagName("tr");
+  //     for (i = 0; i < tr.length; i++) {
+  //         td = tr[i].getElementsByTagName("td");
+  //         for (j = 0; j < td.length; j++) {
+  //             if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+  //                 found = true;
+  //             }
+  //         }
+  //         if (found) {
+  //             tr[i].style.display = "";
+  //             found = false;
+  //         } else {
+  //             tr[i].style.display = "none";
+  //         }
+  //     }
+  // }
 
-    
-    // $('#filter_input').keydown(function(){
-    //   console.log("Key Down...")
-    // });
+  // var $rows = $('#table tbody tr');
+  // $('#filter_input').keyup(function() {
+  //   $(document).ready(function() {
+  //     var value = $(this).val().toLowerCase();
+  //       $("#hometbody tr").filter(function() {
+  //         $(this).toggle($(this).text()
+  //             .toLowerCase().indexOf(value) > -1)
+  //       });
+  //     });
+  // document.getElementById("numrows").value = 5;
 
-    //   // var input, found, table, tr, td, i, j;
-    //   //   input = document.getElementById("filter_input");
-    //   //   table = document.getElementById("hometable");
-    //   //   tr = table.getElementsByTagName("tr");
-    //   //   for (i = 0; i < tr.length; i++) {
-    //   //       td = tr[i].getElementsByTagName("td");
-    //   //       for (j = 0; j < td.length; j++) {
-    //   //           if (td[j].innerHTML.toUpperCase() > -1) {
-    //   //               found = true;
-    //   //           }
-    //   //       }
-    //   //       if (found) {
-    //   //           tr[i].style.display = "";
-    //   //           found = false;
-    //   //       } else {
-    //   //           tr[i].style.display = "none";
-    //   //       }
-    //   //   }
+  $(".search-input").keyup(function () {
+    var x = document.getElementById("searchbar").value.length;
+    if (x == 0) {
+      document.getElementById("for_numrows").remove();
+      document.getElementById("pagesControllers").remove();
+      $(".tablemanager").tablemanager({
+        pagination: true,
+        appendFilterby: false,
+        // showrows: [5],
+        showrows: [5, 10, 20, 50, 100],
+        bFilter: false,
+      });
+      // document.getElementById("numrows").value = 10;
+    }
+    // console.log("value:", x);
+  });
+  // const input = document.querySelector("input");
+  // input.addEventListener("input", updateValue);
 
-    //     // var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
-    //     //     reg = RegExp(val, 'i'),
-    //     //     text;
-    //     // console.log("Search:", val)
-    //     // $rows.show().filter(function() {
-    //     //     text = $(this).text().replace(/\s+/g, ' ');
-    //     //     return !reg.test(text);
-    //     // }).hide();
-    // });
-    var table = $('.tablemanager'); // Get the table element
+  // function updateValue(e) {
+  //   console.log("value:", document.getElementsByClassName("search-input").value);
+  // }
 
-        // Populate dropdown with column names
-        var columns = table.find('th').toArray().map(th => $(th).text());
-        var columnSelect = $('#column-select');
+  // $('#filter_input').keydown(function(){
+  //   console.log("Key Down...")
+  // });
 
-        for (var i = 0; i < columns.length && i < 6; i++) {
-            columnSelect.append($('<option>', {
-                value: i,
-                text: columns[i],
-            }));
-        }
+  //   // var input, found, table, tr, td, i, j;
+  //   //   input = document.getElementById("filter_input");
+  //   //   table = document.getElementById("hometable");
+  //   //   tr = table.getElementsByTagName("tr");
+  //   //   for (i = 0; i < tr.length; i++) {
+  //   //       td = tr[i].getElementsByTagName("td");
+  //   //       for (j = 0; j < td.length; j++) {
+  //   //           if (td[j].innerHTML.toUpperCase() > -1) {
+  //   //               found = true;
+  //   //           }
+  //   //       }
+  //   //       if (found) {
+  //   //           tr[i].style.display = "";
+  //   //           found = false;
+  //   //       } else {
+  //   //           tr[i].style.display = "none";
+  //   //       }
+  //   //   }
 
-        $('#add-columns-btn').on('click', function() {
-            var selectedColumns = columnSelect.val();
-            if (selectedColumns) {
-                // Show selected columns
-                table.find('th, td').hide(); // Hide all columns first
+  //     // var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+  //     //     reg = RegExp(val, 'i'),
+  //     //     text;
+  //     // console.log("Search:", val)
+  //     // $rows.show().filter(function() {
+  //     //     text = $(this).text().replace(/\s+/g, ' ');
+  //     //     return !reg.test(text);
+  //     // }).hide();
+  // });
+  var table = $(".table-manager"); // Use the appropriate class
+  var dropdownMenu = $(".dropdown-menu");
 
-                for (var i = 0; i < selectedColumns.length; i++) {
-                    var columnIndex = parseInt(selectedColumns[i]);
-                    table.find('th:eq(' + columnIndex + '), td:nth-child(' + (columnIndex + 1) + ')').show();
-                }
-            }
-        });
+  // Populate dropdown with column names
+  var columns = table
+    .find("th")
+    .toArray()
+    .map((th) => $(th).text());
 
-    $('.tablemanager').tablemanager({
-          pagination: true,
-          appendFilterby:false,
-          // showrows: [5],
-          showrows: [5,10,20,50,100],
-          bFilter: false,
-          
-        });
-  </script>
+  for (var i = 0; i < columns.length; i++) {
+    var columnRow = $(
+      '<div class="d-flex justify-content-between align-items-center mb-2"></div>'
+    );
+    var columnName = $("<span>" + columns[i] + "</span>");
+    var checkbox = $(
+      '<input type="checkbox" class="form-check-input" data-column-index="' +
+        i +
+        '"/>'
+    );
+
+    columnRow.append(columnName);
+    columnRow.append(checkbox);
+
+    dropdownMenu.append(columnRow);
+  }
+
+  $("#check-all").on("change", function () {
+    var checkboxes = dropdownMenu.find(".form-check-input");
+    checkboxes.prop("checked", $(this).prop("checked"));
+  });
+
+  $('.dropdown-menu input[type="checkbox"]').on("change", function () {
+    var selectedColumns = [];
+    var checkboxes = dropdownMenu.find(".form-check-input:checked");
+
+    checkboxes.each(function () {
+      selectedColumns.push(parseInt($(this).data("column-index")));
+    });
+
+    // Show selected columns
+    table.find("th, td").hide(); // Hide all columns first
+
+    for (var i = 0; i < selectedColumns.length; i++) {
+      var columnIndex = selectedColumns[i];
+      table
+        .find(
+          "th:eq(" + columnIndex + "), td:nth-child(" + (columnIndex + 1) + ")"
+        )
+        .show();
+    }
+  });
+
+  $(".tablemanager").tablemanager({
+    pagination: true,
+    appendFilterby: false,
+    // showrows: [5],
+    showrows: [5, 10, 20, 50, 100],
+    bFilter: false,
+  });
+</script>
 
 {% endblock javascripts %}
