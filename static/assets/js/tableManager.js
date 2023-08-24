@@ -123,7 +123,6 @@
                     options.vocabulary.voc_show_rows !== undefined
                         ? options.vocabulary.voc_show_rows
                         : voc_show_rows;
-                        generateAddColumnsSection();
             }
 
             /**
@@ -222,7 +221,6 @@
                 }
 
                 generatePaginationValues();
-                generateAddColumnsSection();
             }
 
             /**
@@ -423,7 +421,6 @@
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
             addColumn();
-            generateAddColumnsSection();
         });
         /**
         Main function: sort table
@@ -779,25 +776,37 @@
             var addColumnsSection =
                 '<div id="add-columns-section" class="add-columns-section">' +
                 '<form id="add-columns-form">' +
-                '<label for="dynamic-columns">Select Columns to Add:</label><br>';
-
-            // Add checkboxes for each available column
-            for (var i = 0; i < availableColumns.length; i++) {
-                addColumnsSection +=
-                    '<input type="checkbox" name="dynamic-columns" value="' +
-                    availableColumns[i] +
-                    '">' +
-                    availableColumns[i] +
-                    '<br>';
-            }
-
-            addColumnsSection +=
+                '<label for="dynamic-columns">Select Columns to Add:</label><br>' +
+                '<select id="column-dropdown" multiple></select><br>' +
                 '<button type="submit">Add Columns</button>' +
                 '</form></div>';
 
             // Append the section to the container
             $(this).before(addColumnsSection);
+
+            // Populate the dropdown with availableColumns
+            var columnDropdown = $("#column-dropdown");
+            for (var i = 0; i < availableColumns.length; i++) {
+                columnDropdown.append(
+                    $("<option>", {
+                        value: availableColumns[i],
+                        text: availableColumns[i],
+                    })
+                );
+            }
         }
+        
+        $("#add-columns-form").on("submit", function (event) {
+            event.preventDefault();
+
+            // Get selected columns from the dropdown
+            var selectedColumns = $("#column-dropdown").val();
+
+            // Call the updated addColumn function with selected columns
+            addColumn(selectedColumns);
+
+            generateAddColumnsSection();
+        });
         
     };
 })(jQuery);
