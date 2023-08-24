@@ -789,7 +789,9 @@
 
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
-                $("thead tr").append("<th>" + column + "</th>");
+                $("thead tr").append(
+                    '<th>' + column + ' <span class="remove-column" data-column="' + column + '">x</span></th>'
+                );
             });
 
             // Update 'Heads', 'tbody', 'rows' variables
@@ -797,6 +799,8 @@
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
         }
+
+        $("select#filter_by, select#numrows").wrap('<div class="select-container"></div>');
 
         // Handle form submission to add columns
         $("#add-columns-form").on("submit", function (event) {
@@ -811,6 +815,17 @@
             // Call the addColumnsToTable function with selected columns
             addColumnsToTable(selectedColumns);
         });
-        
+
+        $(document).on("click", ".remove-column", function () {
+            var columnToRemove = $(this).data("column");
+            $("thead th").each(function () {
+                if ($(this).text() === columnToRemove) {
+                    $(this).remove();
+                    $("tbody tr").each(function () {
+                        $(this).find("td").eq($(this).find("th").index()).remove();
+                    });
+                }
+            });
+        });
     };
 })(jQuery);
