@@ -781,6 +781,9 @@
 
         // Function to add selected columns
         function addColumnsToTable(columns) {
+            // Remove existing additional headers
+            $("thead tr th:gt(5)").remove();
+
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append("<th>" + column + "</th>");
