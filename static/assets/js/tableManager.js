@@ -791,16 +791,16 @@
             columns.forEach(function (column) {
                 $("thead tr").append(
                     '<th>' +
-                        column +
-                        ' <span class="remove-column" data-column="' +
-                        column +
-                        '">x</span></th>'
+                    column +
+                    ' <span class="remove-column" data-column="' +
+                    column +
+                    '">x</span></th>'
                 );
             });
 
             // Remove selected columns from dropdown
-            columns.forEach(function (column) {
-                $('select[name="selected-columns"] option[value="' + column + '"]').remove();
+            $('select[name="selected-columns"] option:selected').each(function () {
+                $(this).remove();
             });
 
             // Reset checkbox selection
@@ -829,26 +829,23 @@
         });
 
         $(document).on("click", ".remove-column", function () {
-            var columnToRemove = $(this).data("column");
-            var columnIndex = -1;
-
-            // Find the index of the column to remove
-            $("thead th").each(function (index) {
-                if ($(this).text() === columnToRemove) {
-                    columnIndex = index;
-                    return false;
-                }
-            });
-
-            if (columnIndex !== -1) {
-                // Remove the column from the header
-                $("thead th").eq(columnIndex).remove();
-
-                // Remove the column from each row
-                $("tbody tr").each(function () {
-                    $(this).find("td").eq(columnIndex).remove();
-                });
-            }
+            var column = $(this).data("column");
+            // Remove the column header
+            $(this).closest("th").remove();
+            // Add the column back to the dropdown
+            $('select[name="selected-columns"]').append('<option value="' + column + '">' + column + '</option>');
+            // Re-initialize the dropdown
+            $('select[name="selected-columns"]').selectpicker('refresh');
+            // Rebind the click event to the new "x" icons
+            bindRemoveColumnEvent();
         });
+
+        function bindRemoveColumnEvent() {
+            $(".remove-column").off("click");
+            $(".remove-column").on("click", function () {
+                var column = $(this).data("column");
+                // ... (Rest of the code remains the same)
+            });
+        }
     };
 })(jQuery);
