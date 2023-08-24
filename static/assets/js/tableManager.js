@@ -790,9 +790,21 @@
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append(
-                    '<th>' + column + ' <span class="remove-column" data-column="' + column + '">x</span></th>'
+                    '<th>' +
+                        column +
+                        ' <span class="remove-column" data-column="' +
+                        column +
+                        '">x</span></th>'
                 );
             });
+
+            // Remove selected columns from dropdown
+            columns.forEach(function (column) {
+                $('select[name="selected-columns"] option[value="' + column + '"]').remove();
+            });
+
+            // Reset checkbox selection
+            $('select[name="selected-columns"]').val([]);
 
             // Update 'Heads', 'tbody', 'rows' variables
             Heads = Table.find("thead th");
@@ -818,14 +830,25 @@
 
         $(document).on("click", ".remove-column", function () {
             var columnToRemove = $(this).data("column");
-            $("thead th").each(function () {
+            var columnIndex = -1;
+
+            // Find the index of the column to remove
+            $("thead th").each(function (index) {
                 if ($(this).text() === columnToRemove) {
-                    $(this).remove();
-                    $("tbody tr").each(function () {
-                        $(this).find("td").eq($(this).find("th").index()).remove();
-                    });
+                    columnIndex = index;
+                    return false;
                 }
             });
+
+            if (columnIndex !== -1) {
+                // Remove the column from the header
+                $("thead th").eq(columnIndex).remove();
+
+                // Remove the column from each row
+                $("tbody tr").each(function () {
+                    $(this).find("td").eq(columnIndex).remove();
+                });
+            }
         });
     };
 })(jQuery);
