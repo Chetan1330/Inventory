@@ -81,6 +81,7 @@
                 availableColumns.push($(this).text());
             }
         });
+        
         // debug
         // make array form options object
         arrayOptions = $.map(options, function (value, index) {
@@ -749,32 +750,35 @@
             var addColumnsSection =
                 '<div id="add-columns-section" class="add-columns-section">' +
                 '<form id="add-columns-form">' +
-                '<label for="dynamic-columns">Select Columns to Add:</label><br>' +
-                '<select id="column-dropdown" multiple></select><br>' +
-                '<button type="submit">Add Columns</button>' +
+                '<label for="column-dropdown">Select Columns to Add:</label><br>' +
+                '<select id="column-dropdown" class="form-control" multiple></select><br>' +
+                '<button type="submit" class="btn btn-primary">Add Columns</button>' +
                 '</form></div>';
 
             // Append the section to the container
             Table.before(addColumnsSection);
+
             // Populate the dropdown with availableColumns
             var columnDropdown = $("#column-dropdown");
             for (var i = 0; i < availableColumns.length; i++) {
                 if (i < 6) {
                     // Display the first 6 columns directly in the table
                     $("thead tr").append("<th>" + availableColumns[i] + "</th>");
-                } else {
-                    columnDropdown.append(
-                        $("<option>", {
-                            value: availableColumns[i],
-                            text: availableColumns[i],
-                        })
-                    );
                 }
+                columnDropdown.append(
+                    $("<option>", {
+                        value: availableColumns[i],
+                        text: availableColumns[i],
+                    })
+                );
             }
         }
+
         generateAddColumnsSection();
 
-        function addColumnsToTable(columns) {
+
+        // Function to add selected columns
+         function addColumnsToTable(columns) {
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append("<th>" + column + "</th>");
@@ -790,7 +794,8 @@
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
         }
-        
+
+        // Handle form submission to add columns
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
 
