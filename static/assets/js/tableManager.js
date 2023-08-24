@@ -823,9 +823,10 @@
             $("input[name='selected-columns']:checked").each(function () {
                 selectedColumns.push($(this).val());
             });
-
+            
             // Call the addColumnsToTable function with selected columns
             addColumnsToTable(selectedColumns);
+            $('select[name="selected-columns"]').selectpicker('refresh');
         });
 
         $(document).on("click", ".remove-column", function () {
