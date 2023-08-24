@@ -750,35 +750,37 @@
             var addColumnsSection =
                 '<div id="add-columns-section" class="add-columns-section">' +
                 '<form id="add-columns-form">' +
-                '<label for="column-dropdown">Select Columns to Add:</label><br>' +
-                '<select id="column-dropdown" class="form-control" multiple></select><br>' +
-                '<button type="submit" class="btn btn-primary">Add Columns</button>' +
-                '</form></div>';
+                '<label>Select Columns to Add:</label><br>';
 
-            // Append the section to the container
-            Table.before(addColumnsSection);
-
-            // Populate the dropdown with availableColumns
-            var columnDropdown = $("#column-dropdown");
+            // Add checkboxes for each available column
             for (var i = 0; i < availableColumns.length; i++) {
                 if (i < 6) {
                     // Display the first 6 columns directly in the table
                     $("thead tr").append("<th>" + availableColumns[i] + "</th>");
                 }
-                columnDropdown.append(
-                    $("<option>", {
-                        value: availableColumns[i],
-                        text: availableColumns[i],
-                    })
-                );
+
+                addColumnsSection +=
+                    '<label class="checkbox-inline">' +
+                    '<input type="checkbox" name="selected-columns" value="' +
+                    availableColumns[i] +
+                    '"> ' +
+                    availableColumns[i] +
+                    '</label><br>';
             }
+
+            addColumnsSection +=
+                '<button type="submit" class="btn btn-primary">Add Columns</button>' +
+                '</form></div>';
+
+            // Append the section to the container
+            Table.before(addColumnsSection);
         }
 
         generateAddColumnsSection();
 
 
         // Function to add selected columns
-         function addColumnsToTable(columns) {
+        function addColumnsToTable(columns) {
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append("<th>" + column + "</th>");
@@ -799,14 +801,14 @@
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
 
-            // Get selected columns from the dropdown
-            var selectedColumns = $("#column-dropdown").val();
+            // Get selected columns from the checkboxes
+            var selectedColumns = [];
+            $("input[name='selected-columns']:checked").each(function () {
+                selectedColumns.push($(this).val());
+            });
 
             // Call the addColumnsToTable function with selected columns
             addColumnsToTable(selectedColumns);
-
-            // Reset the dropdown
-            $("#column-dropdown").val([]);
         });
         
     };
