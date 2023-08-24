@@ -61,36 +61,6 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <label for="column-select">Select Columns:</label>
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Select Columns
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <div
-                    class="d-flex justify-content-between align-items-center mb-2"
-                  >
-                    <span>Column Name</span>
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="check-all"
-                    />
-                  </div>
-                  <!-- Populate dropdown options using JavaScript -->
-                </div>
-              </div>
-            </div>
-          </div>
           <table class="table tablemanager table-striped mt-3 customers-list">
             <thead>
               <tr>
@@ -101,7 +71,7 @@
                 <th>Class</th>
                 <th>Category</th>
                 <th>Manufacturer</th>
-                <th>Model</th>
+                <!-- <th>Model</th>
                 <th>Status(hardware_status)</th>
                 <th>Substatus</th>
                 <th>Reserved by</th>
@@ -125,7 +95,7 @@
                 <th>Finance Type</th>
                 <th>Hardware Support Group</th>
                 <th>Hardware Support Service</th>
-                <th>Etag</th>
+                <th>Etag</th> -->
               </tr>
             </thead>
             <tbody>
@@ -138,7 +108,7 @@
                 <td>{{i.Category}}</td>
                 <td>{{i.Manufacturer}}</td>
 
-                <td>{{i.Model}}</td>
+                <!-- <td>{{i.Model}}</td>
                 <td>{{i.Status}}</td>
                 <td>{{i.Substatus}}</td>
                 <td>{{i.Reservedby}}</td>
@@ -165,7 +135,7 @@
                 <td>{{i.FinaType}}</td>
                 <td>{{i.HardSuppG}}</td>
                 <td>{{i.HardSuppSer}}</td>
-                <td>{{i.Etag}}</td>
+                <td>{{i.Etag}}</td> -->
                 <!-- <td>{{i.Name}}</td> -->
               </tr>
               {% endfor %}
