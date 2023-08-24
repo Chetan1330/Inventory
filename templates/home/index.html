@@ -1,5 +1,6 @@
-{% extends "layouts/base.html" %} {% load static %} {% block title %} Home {%
-endblock %}
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 
@@ -41,9 +42,9 @@ endblock %}
     margin-top: 32px;
   }
 </style>
-{% endblock stylesheets %} {% block content %}
-
-<div class="row">
+{% endblock stylesheets %} 
+{% block content %}
+<div class="row">   
   <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -175,9 +176,7 @@ endblock %}
     </div>
   </div>
 </div>
-
 {% endblock content %}
-
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <!-- <script>
