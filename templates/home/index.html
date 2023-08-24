@@ -295,10 +295,13 @@
     //     //     return !reg.test(text);
     //     // }).hide();
     // });
-    var columns = []; // Add your column names here
+    var table = $('.tablemanager'); // Get the table element
+
+        // Populate dropdown with column names
+        var columns = table.find('th').toArray().map(th => $(th).text());
         var columnSelect = $('#column-select');
 
-        for (var i = 0; i < columns.length; i++) {
+        for (var i = 0; i < columns.length && i < 6; i++) {
             columnSelect.append($('<option>', {
                 value: i,
                 text: columns[i],
@@ -309,9 +312,15 @@
             var selectedColumns = columnSelect.val();
             if (selectedColumns) {
                 // Show selected columns
-                // You need to implement the logic to show the selected columns here
+                table.find('th, td').hide(); // Hide all columns first
+
+                for (var i = 0; i < selectedColumns.length; i++) {
+                    var columnIndex = parseInt(selectedColumns[i]);
+                    table.find('th:eq(' + columnIndex + '), td:nth-child(' + (columnIndex + 1) + ')').show();
+                }
             }
         });
+
     $('.tablemanager').tablemanager({
           pagination: true,
           appendFilterby:false,
