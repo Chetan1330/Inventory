@@ -757,15 +757,15 @@
                 if (i < 6) {
                     // Display the first 6 columns directly in the table
                     $("thead tr").append("<th>" + availableColumns[i] + "</th>");
+                } else {
+                    addColumnsSection +=
+                        '<label class="checkbox-inline">' +
+                        '<input type="checkbox" name="selected-columns" value="' +
+                        availableColumns[i] +
+                        '"> ' +
+                        availableColumns[i] +
+                        '</label><br>';
                 }
-
-                addColumnsSection +=
-                    '<label class="checkbox-inline">' +
-                    '<input type="checkbox" name="selected-columns" value="' +
-                    availableColumns[i] +
-                    '"> ' +
-                    availableColumns[i] +
-                    '</label><br>';
             }
 
             addColumnsSection +=
@@ -774,6 +774,9 @@
 
             // Append the section to the container
             Table.before(addColumnsSection);
+
+            // Remove additional columns initially
+            $("thead tr th:gt(5)").remove();
         }
 
         generateAddColumnsSection();
@@ -787,11 +790,6 @@
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append("<th>" + column + "</th>");
-
-                // Add new <td> elements to each row in the table body
-                $("tbody tr").each(function () {
-                    $(this).append("<td>New Value</td>"); // You can set the value for the new cell
-                });
             });
 
             // Update 'Heads', 'tbody', 'rows' variables
