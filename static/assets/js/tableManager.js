@@ -514,34 +514,30 @@
         arr = array with table html
         **/
         function appendSortedTable(arr) {
-            // create rows and cells by sorted array
-            // for(i = 0; i < rlen; i++){
-            //     arr[i] = "<td>"+arr[i].join("</td><td>")+"</td>";
-            // };
-            // reset tbody
+            // Reset tbody
             tbody.html("");
-        
-        // Loop through the rows and append data to the tbody
-        for (var i = 0; i < arr.length; i++) {
-            var rowData = arr[i];
-            var newRow = "<tr>";
-            
-            // Loop through the available columns and add data if available
-            for (var j = 0; j < availableColumns.length; j++) {
-                var colIndex = availableColumns.indexOf(Heads.eq(j).text());
-                if (colIndex !== -1) {
-                    newRow += rowData[colIndex];
-                } else {
-                    newRow += "<td></td>"; // Placeholder for non-existing columns
+    
+            // Loop through the rows and append data to the tbody
+            for (var i = 0; i < arr.length; i++) {
+                var rowData = arr[i];
+                var newRow = "<tr>";
+    
+                // Loop through the available columns and add data if available
+                for (var j = 0; j < Heads.length; j++) {
+                    var columnName = Heads.eq(j).text();
+                    if (rowData.hasOwnProperty(columnName)) {
+                        newRow += "<td>" + rowData[columnName] + "</td>";
+                    } else {
+                        newRow += "<td></td>"; // Placeholder for non-existing columns
+                    }
                 }
+    
+                newRow += "</tr>";
+                tbody.append(newRow);
             }
-            
-            newRow += "</tr>";
-            tbody.append(newRow);
-        }
-
-        // Then launch paginate function (if options.paginate = false it will not do anything)
-        paginate();
+    
+            // Then launch paginate function (if options.paginate = false it will not do anything)
+            paginate();
         }
 
         /**
@@ -829,7 +825,7 @@
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
             availableColumns = getAvailableColumns();
-            
+    
             // Regenerate pagination controls
             generatePaginationValues();
     
