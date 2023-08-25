@@ -1,3 +1,4 @@
+$(document).ready(function () {
 (function ($) {
     /* Initialize function */
     $.fn.tablemanager = function (options = null) {
@@ -286,6 +287,15 @@
                     }
                 });
 
+                $('select#filter_by').on('change', function () {
+                    var selectedColumnIndex = $(this).val();
+                    if (selectedColumnIndex === '') {
+                        rows.hide();
+                    } else {
+                        rows.hide().find('td:eq(' + selectedColumnIndex + ')').parent().show();
+                    }
+                    paginate();
+                });
                 // Filter on typing selecting column by select #filter_by
                 $("input#filter_input").on("keyup", function () {
                     var val = $.trim($(this).val())
@@ -448,6 +458,7 @@
             multipleSortCol(cellsArray, firstSortData);
 
             appendSortedTable(cellsArray);
+            rows.hide().slice(0, numPerPage).show();
         }
 
         /** 
@@ -612,7 +623,7 @@
             appendPageControllers(numPages);
             // Give currentPage class to first page number
             $(".pagecontroller-num").eq(0).addClass("currentPage");
-            paginate(currentPage, numPerPage);
+            paginate(0, numPerPage);
             pagecontrollersClick();
             filterPages();
         }
@@ -878,3 +889,4 @@
         }
     };
 })(jQuery);
+});
