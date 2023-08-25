@@ -75,7 +75,7 @@
             "numOfPages"
         ];
 
-        var availableColumns = [];
+        var availableColumns = getAvailableColumns();
         Heads.each(function (i) {
             if (!$(this).hasClass("disableFilterBy")) {
                 availableColumns.push($(this).text());
@@ -520,10 +520,28 @@
             // };
             // reset tbody
             tbody.html("");
-            // append new sorted rows
-            tbody.html("<tr>" + arr.join("</tr><tr>") + "</tr>");
-            // then launch paginate function (if options.paginate = false it will not do anything)
-            paginate();
+        
+        // Loop through the rows and append data to the tbody
+        for (var i = 0; i < arr.length; i++) {
+            var rowData = arr[i];
+            var newRow = "<tr>";
+            
+            // Loop through the available columns and add data if available
+            for (var j = 0; j < availableColumns.length; j++) {
+                var colIndex = availableColumns.indexOf(Heads.eq(j).text());
+                if (colIndex !== -1) {
+                    newRow += rowData[colIndex];
+                } else {
+                    newRow += "<td></td>"; // Placeholder for non-existing columns
+                }
+            }
+            
+            newRow += "</tr>";
+            tbody.append(newRow);
+        }
+
+        // Then launch paginate function (if options.paginate = false it will not do anything)
+        paginate();
         }
 
         /**
@@ -786,7 +804,7 @@
         function addColumnsToTable(columns) {
             // Remove existing additional headers
             $("thead tr th:gt(5)").remove();
-
+    
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append(
@@ -797,21 +815,35 @@
                     '">x</span></th>'
                 );
             });
-
+    
             // Remove selected columns from dropdown
             $('select[name="selected-columns"] option:selected').each(function () {
                 $(this).remove();
             });
-
+    
             // Reset checkbox selection
             $('select[name="selected-columns"]').val([]);
-
-            // Update 'Heads', 'tbody', 'rows' variables
+    
+            // Update 'Heads', 'tbody', 'rows', and 'availableColumns' variables
             Heads = Table.find("thead th");
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
+            availableColumns = getAvailableColumns();
+            
+            // Regenerate pagination controls
+            generatePaginationValues();
+    
+            // Regenerate event bindings for removing columns
+            bindRemoveColumnEvent();
         }
 
+        function getAvailableColumns() {
+            var columns = [];
+            Heads.each(function () {
+                columns.push($(this).text());
+            });
+            return columns;
+        }
         $("select#filter_by, select#numrows").wrap('<div class="select-container"></div>');
 
         // Handle form submission to add columns
