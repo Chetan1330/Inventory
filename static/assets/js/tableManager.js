@@ -1,6 +1,6 @@
-$(document).ready(function () {
 (function ($) {
     /* Initialize function */
+    
     $.fn.tablemanager = function (options = null) {
         /**
         Get common variables, parts of tables and others utilities
@@ -75,6 +75,10 @@ $(document).ready(function () {
             "disableFilterBy",
             "numOfPages"
         ];
+        var numInitialHeaders = 6;
+
+        // Hide all rows initially except the ones corresponding to the first header
+        rows.hide().slice(0, numInitialHeaders * numPerPage).show();
 
         var availableColumns = getAvailableColumns();
         Heads.each(function (i) {
@@ -289,11 +293,15 @@ $(document).ready(function () {
 
                 $('select#filter_by').on('change', function () {
                     var selectedColumnIndex = $(this).val();
+        
                     if (selectedColumnIndex === '') {
-                        rows.hide();
+                        // Show the first page of rows for the initial headers
+                        rows.hide().slice(0, numInitialHeaders * numPerPage).show();
                     } else {
+                        // Hide all rows and show only the ones with the selected header's data
                         rows.hide().find('td:eq(' + selectedColumnIndex + ')').parent().show();
                     }
+        
                     paginate();
                 });
                 // Filter on typing selecting column by select #filter_by
@@ -889,4 +897,3 @@ $(document).ready(function () {
         }
     };
 })(jQuery);
-});
