@@ -2,6 +2,7 @@
     /* Initialize function */
     
     $.fn.tablemanager = function (options = null) {
+        
         /**
         Get common variables, parts of tables and others utilities
         **/
@@ -58,7 +59,17 @@
         var voc_filter_by = "Filter by",
             voc_type_here_filter = "Type here to filter...",
             voc_show_rows = "Show Rows";
+            var numInitialHeaders = 6;
 
+            // Hide all rows initially except the ones corresponding to the first header
+            rows.hide().slice(0, numInitialHeaders * numPerPage).show();
+    
+            var availableColumns = getAvailableColumns();
+            Heads.each(function (i) {
+                if (!$(this).hasClass("disableFilterBy")) {
+                    availableColumns.push($(this).text());
+                }
+            });
         /**
         Available options:
         **/
@@ -75,17 +86,7 @@
             "disableFilterBy",
             "numOfPages"
         ];
-        var numInitialHeaders = 6;
-
-        // Hide all rows initially except the ones corresponding to the first header
-        rows.hide().slice(0, numInitialHeaders * numPerPage).show();
-
-        var availableColumns = getAvailableColumns();
-        Heads.each(function (i) {
-            if (!$(this).hasClass("disableFilterBy")) {
-                availableColumns.push($(this).text());
-            }
-        });
+        
         
         // debug
         // make array form options object
@@ -308,6 +309,7 @@
                     }
         
                     paginate();
+                    filterPages();
                 });
                 // Filter on typing selecting column by select #filter_by
                 $("input#filter_input").on("keyup", function () {
