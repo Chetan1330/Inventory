@@ -294,12 +294,17 @@
                 $('select#filter_by').on('change', function () {
                     var selectedColumnIndex = $(this).val();
         
+                    // Hide all rows
+                    rows.hide();
+        
                     if (selectedColumnIndex === '') {
-                        // Show the first page of rows for the initial headers
-                        rows.hide().slice(0, numInitialHeaders * numPerPage).show();
+                        // Show the rows corresponding to the initial headers
+                        rows.slice(0, numInitialHeaders * numPerPage).show();
                     } else {
-                        // Hide all rows and show only the ones with the selected header's data
-                        rows.hide().find('td:eq(' + selectedColumnIndex + ')').parent().show();
+                        // Show the rows corresponding to the selected header
+                        var startIndex = selectedColumnIndex * numPerPage;
+                        var endIndex = startIndex + numPerPage;
+                        rows.slice(startIndex, endIndex).show();
                     }
         
                     paginate();
