@@ -10,11 +10,21 @@
             Heads   = $(this).find("thead th"),
             tbody   = $(this).find("tbody"),
             rows    = $(this).find("tbody tr"),
+            numPerPage = 5; 
             rlen    = rows.length,
             arr     = [],
             cells,
             clen;
+            rows.hide().slice(0, numPerPage).show();
 
+            // Append filter option
+            var filterBySelect = $("<select>", { id: "filter_by" });
+            $(this).before(filterBySelect);
+    
+            // Populate select with every th text and as value use column number
+            Table.find("thead th").each(function (i) {
+                filterBySelect.append($("<option>", { value: i, text: $(this).text() }));
+            });
         /**
         Options default values
         **/
@@ -87,7 +97,22 @@
             "numOfPages"
         ];
         
-        
+        filterBySelect.on("change", function () {
+            var selectedColumnIndex = $(this).val();
+
+            // Hide all rows
+            rows.hide();
+
+            if (selectedColumnIndex === '') {
+                // Show the rows corresponding to the initial headers
+                rows.slice(0, numPerPage).show();
+            } else {
+                // Show the rows corresponding to the selected header
+                var startIndex = selectedColumnIndex * numPerPage;
+                var endIndex = startIndex + numPerPage;
+                rows.slice(startIndex, endIndex).show();
+            }
+        });
         // debug
         // make array form options object
         arrayOptions = $.map(options, function (value, index) {
