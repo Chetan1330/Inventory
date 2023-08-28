@@ -12,8 +12,6 @@
             arr     = [],
             cells,
             clen;
-            numPerPage = 5,
-            currentPage = 0;
 
         /**
         Options default values
@@ -77,7 +75,7 @@
             "numOfPages"
         ];
 
-        var availableColumns = getAvailableColumns();
+        var availableColumns = [];
         Heads.each(function (i) {
             if (!$(this).hasClass("disableFilterBy")) {
                 availableColumns.push($(this).text());
@@ -99,29 +97,7 @@
                 }
             }
         }
-        
-        var columnSelect = $('<select id="column_select"></select>');
-        $("body").prepend(columnSelect);
 
-        // Populate the select with headers beyond the initial ones
-        Table.find("thead th:gt(5)").each(function () {
-            columnSelect.append($("<option>", { text: $(this).text() }));
-        });
-        columnSelect.on("change", function () {
-            var selectedColumn = $(this).val();
-            var columnIndex = Table.find("thead th:contains(" + selectedColumn + ")").index();
-
-            if (columnIndex !== -1) {
-                // Hide all rows and show the selected column's data
-                rows.hide().each(function () {
-                    var cells = $(this).find("td");
-                    $(cells[columnIndex]).show();
-                });
-
-                // Paginate the displayed data
-                paginate(currentPage);
-            }
-        });
         /**
         Get options if set
         **/
@@ -544,28 +520,10 @@
             // };
             // reset tbody
             tbody.html("");
-        
-        // Loop through the rows and append data to the tbody
-        for (var i = 0; i < arr.length; i++) {
-            var rowData = arr[i];
-            var newRow = "<tr>";
-            
-            // Loop through the available columns and add data if available
-            for (var j = 0; j < availableColumns.length; j++) {
-                var colIndex = availableColumns.indexOf(Heads.eq(j).text());
-                if (colIndex !== -1) {
-                    newRow += rowData[colIndex];
-                } else {
-                    newRow += "<td></td>"; // Placeholder for non-existing columns
-                }
-            }
-            
-            newRow += "</tr>";
-            tbody.append(newRow);
-        }
-
-        // Then launch paginate function (if options.paginate = false it will not do anything)
-        paginate();
+            // append new sorted rows
+            tbody.html("<tr>" + arr.join("</tr><tr>") + "</tr>");
+            // then launch paginate function (if options.paginate = false it will not do anything)
+            paginate();
         }
 
         /**
@@ -651,7 +609,6 @@
         perPage = (can be null) number of rows per page
         **/
         function paginate(curPage = null, perPage = null) {
-            tbody.find("tr").hide().slice(curPage * numPerPage, (curPage + 1) * numPerPage).show();
             var curPage = curPage === null ? currentPage : curPage;
             var perPage = perPage === null ? numPerPage : perPage;
             Table.on("paginating", function () {
@@ -829,7 +786,7 @@
         function addColumnsToTable(columns) {
             // Remove existing additional headers
             $("thead tr th:gt(5)").remove();
-    
+
             // Add new <th> elements to the table header
             columns.forEach(function (column) {
                 $("thead tr").append(
@@ -840,35 +797,21 @@
                     '">x</span></th>'
                 );
             });
-    
+
             // Remove selected columns from dropdown
             $('select[name="selected-columns"] option:selected').each(function () {
                 $(this).remove();
             });
-    
+
             // Reset checkbox selection
             $('select[name="selected-columns"]').val([]);
-    
-            // Update 'Heads', 'tbody', 'rows', and 'availableColumns' variables
+
+            // Update 'Heads', 'tbody', 'rows' variables
             Heads = Table.find("thead th");
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
-            availableColumns = getAvailableColumns();
-            
-            // Regenerate pagination controls
-            generatePaginationValues();
-    
-            // Regenerate event bindings for removing columns
-            bindRemoveColumnEvent();
         }
 
-        function getAvailableColumns() {
-            var columns = [];
-            Heads.each(function () {
-                columns.push($(this).text());
-            });
-            return columns;
-        }
         $("select#filter_by, select#numrows").wrap('<div class="select-container"></div>');
 
         // Handle form submission to add columns
