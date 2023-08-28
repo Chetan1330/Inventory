@@ -751,26 +751,39 @@
 
         var availableColumns = getAvailableColumns();
 
-        var columnSelect = $('<select id="column_select" multiple></select>');
-        var columnOptions = '';
-        availableColumns.forEach(function (column) {
-            columnOptions += '<option value="' + column + '">' + column + '</option>';
-        });
-        columnSelect.html(columnOptions);
-        $("body").prepend(columnSelect);
+        var filterIcon = $('<i class="fa fa-filter"></i>');
+        var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul></ul></div>');
 
-        columnSelect.multiselect({
-            nonSelectedText: 'Select Columns',
-            buttonClass: 'btn btn-default',
-            onChange: function (element, checked) {
-                updateTableColumns();
+        filterIcon.on("click", function () {
+            var ul = filterDropdown.find("ul");
+            ul.empty();
+
+            availableColumns.forEach(function (column) {
+                ul.append('<li><label><input type="checkbox" value="' + column + '"> ' + column + '</label></li>');
+            });
+
+            filterDropdown.toggle();
+        });
+
+        $("body").prepend(filterIcon);
+        $("body").prepend(filterDropdown);
+
+        filterDropdown.find("input[type='checkbox']").on("change", function () {
+            updateTableColumns();
+        });
+
+        $(document).on("click", function (event) {
+            if (!$(event.target).closest(filterIcon).length && !$(event.target).closest(filterDropdown).length) {
+                filterDropdown.hide();
             }
         });
 
         updateTableColumns();
 
         function updateTableColumns() {
-            var selectedColumns = columnSelect.val();
+            var selectedColumns = filterDropdown.find("input:checked").map(function () {
+                return $(this).val();
+            }).get();
 
             $("thead tr th:gt(5)").remove();
 
