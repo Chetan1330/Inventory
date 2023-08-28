@@ -12,7 +12,6 @@
             arr     = [],
             cells,
             clen;
-            
 
         /**
         Options default values
@@ -119,7 +118,7 @@
                 paginate(currentPage);
             }
         });
-        paginate(currentPage);
+        
         /**
         Get options if set
         **/
@@ -869,20 +868,67 @@
         $("select#filter_by, select#numrows").wrap('<div class="select-container"></div>');
 
         // Handle form submission to add columns
+        function generateAddColumnsDropdown() {
+            var dropdown =
+                '<div class="add-columns-dropdown">' +
+                '<label for="add-columns-select">Select Columns to Add:</label>' +
+                '<select id="add-columns-select" multiple="multiple"></select>' +
+                '</div>';
+
+            // Append the dropdown before the table
+            Table.before(dropdown);
+
+            // Add options to the dropdown
+            availableColumns.forEach(function (column) {
+                $('#add-columns-select').append('<option value="' + column + '">' + column + '</option>');
+            });
+
+            // Initialize the Bootstrap multiselect plugin
+            $('#add-columns-select').multiselect({
+                buttonWidth: '200px',
+                enableFiltering: true,
+                nonSelectedText: 'Select columns',
+                allSelectedText: 'All columns selected'
+            });
+        }
+
+        // Handle adding selected columns
+        function addSelectedColumnsToTable(selectedColumns) {
+            // Remove existing additional headers
+            $("thead tr th:gt(5)").remove();
+
+            // Add selected columns to the table header
+            selectedColumns.forEach(function (column) {
+                $("thead tr").append('<th>' + column + '</th>');
+            });
+
+            // Update availableColumns and regenerate pagination controls
+            availableColumns = getAvailableColumns();
+            generatePaginationValues();
+        }
+
+        // Existing code...
+
+        generateAddColumnsDropdown();
+
+        // Handle form submission to add columns
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
-        
-            // Get selected columns from the checkboxes
-            var selectedColumns = [];
-            $("input[name='selected-columns']:checked").each(function () {
-                selectedColumns.push($(this).val());
-            });
-            
-            // Call the addColumnsToTable function with selected columns
-            addColumnsToTable(selectedColumns);
-            $('select[name="selected-columns"]').selectpicker('refresh');
+
+            // Get selected columns from the dropdown
+            var selectedColumns = $('#add-columns-select').val();
+
+            // Call the addSelectedColumnsToTable function with selected columns
+            addSelectedColumnsToTable(selectedColumns);
+
+            // Reset the dropdown selection
+            $('#add-columns-select').multiselect('deselectAll', false);
+            $('#add-columns-select').multiselect('updateButtonText');
+
+            // Refresh the multiselect
+            $('#add-columns-select').multiselect('refresh');
         });
-        
+
         $(document).on("click", ".remove-column", function () {
             var column = $(this).data("column");
             // Remove the column header
@@ -894,19 +940,12 @@
             // Rebind the click event to the new "x" icons
             bindRemoveColumnEvent();
         });
-        
+
         function bindRemoveColumnEvent() {
             $(".remove-column").off("click");
             $(".remove-column").on("click", function () {
                 var column = $(this).data("column");
-                // Remove the column header
-                $(this).closest("th").remove();
-                // Add the column back to the dropdown
-                $('select[name="selected-columns"]').append('<option value="' + column + '">' + column + '</option>');
-                // Re-initialize the dropdown
-                $('select[name="selected-columns"]').selectpicker('refresh');
-                // Rebind the click event to the new "x" icons
-                bindRemoveColumnEvent();
+                // ... (Rest of the code remains the same)
             });
         }
     };
