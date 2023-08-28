@@ -1,8 +1,6 @@
 (function ($) {
     /* Initialize function */
-    
     $.fn.tablemanager = function (options = null) {
-        
         /**
         Get common variables, parts of tables and others utilities
         **/
@@ -10,21 +8,11 @@
             Heads   = $(this).find("thead th"),
             tbody   = $(this).find("tbody"),
             rows    = $(this).find("tbody tr"),
-            numPerPage = 5; 
             rlen    = rows.length,
             arr     = [],
             cells,
             clen;
-            rows.hide().slice(0, numPerPage).show();
 
-            // Append filter option
-            var filterBySelect = $("<select>", { id: "filter_by" });
-            $(this).before(filterBySelect);
-    
-            // Populate select with every th text and as value use column number
-            Table.find("thead th").each(function (i) {
-                filterBySelect.append($("<option>", { value: i, text: $(this).text() }));
-            });
         /**
         Options default values
         **/
@@ -69,17 +57,7 @@
         var voc_filter_by = "Filter by",
             voc_type_here_filter = "Type here to filter...",
             voc_show_rows = "Show Rows";
-            var numInitialHeaders = 6;
 
-            // Hide all rows initially except the ones corresponding to the first header
-            rows.hide().slice(0, numInitialHeaders * numPerPage).show();
-    
-            var availableColumns = getAvailableColumns();
-            Heads.each(function (i) {
-                if (!$(this).hasClass("disableFilterBy")) {
-                    availableColumns.push($(this).text());
-                }
-            });
         /**
         Available options:
         **/
@@ -96,23 +74,14 @@
             "disableFilterBy",
             "numOfPages"
         ];
-        
-        filterBySelect.on("change", function () {
-            var selectedColumnIndex = $(this).val();
 
-            // Hide all rows
-            rows.hide();
-
-            if (selectedColumnIndex === '') {
-                // Show the rows corresponding to the initial headers
-                rows.slice(0, numPerPage).show();
-            } else {
-                // Show the rows corresponding to the selected header
-                var startIndex = selectedColumnIndex * numPerPage;
-                var endIndex = startIndex + numPerPage;
-                rows.slice(startIndex, endIndex).show();
+        var availableColumns = getAvailableColumns();
+        Heads.each(function (i) {
+            if (!$(this).hasClass("disableFilterBy")) {
+                availableColumns.push($(this).text());
             }
         });
+        
         // debug
         // make array form options object
         arrayOptions = $.map(options, function (value, index) {
@@ -317,25 +286,6 @@
                     }
                 });
 
-                $('select#filter_by').on('change', function () {
-                    var selectedColumnIndex = $(this).val();
-        
-                    // Hide all rows
-                    rows.hide();
-        
-                    if (selectedColumnIndex === '') {
-                        // Show the rows corresponding to the initial headers
-                        rows.slice(0, numInitialHeaders * numPerPage).show();
-                    } else {
-                        // Show the rows corresponding to the selected header
-                        var startIndex = selectedColumnIndex * numPerPage;
-                        var endIndex = startIndex + numPerPage;
-                        rows.slice(startIndex, endIndex).show();
-                    }
-        
-                    paginate();
-                    filterPages();
-                });
                 // Filter on typing selecting column by select #filter_by
                 $("input#filter_input").on("keyup", function () {
                     var val = $.trim($(this).val())
@@ -498,7 +448,6 @@
             multipleSortCol(cellsArray, firstSortData);
 
             appendSortedTable(cellsArray);
-            rows.hide().slice(0, numPerPage).show();
         }
 
         /** 
@@ -565,30 +514,34 @@
         arr = array with table html
         **/
         function appendSortedTable(arr) {
-            // Reset tbody
+            // create rows and cells by sorted array
+            // for(i = 0; i < rlen; i++){
+            //     arr[i] = "<td>"+arr[i].join("</td><td>")+"</td>";
+            // };
+            // reset tbody
             tbody.html("");
-    
-            // Loop through the rows and append data to the tbody
-            for (var i = 0; i < arr.length; i++) {
-                var rowData = arr[i];
-                var newRow = "<tr>";
-    
-                // Loop through the available columns and add data if available
-                for (var j = 0; j < Heads.length; j++) {
-                    var columnName = Heads.eq(j).text();
-                    if (rowData.hasOwnProperty(columnName)) {
-                        newRow += "<td>" + rowData[columnName] + "</td>";
-                    } else {
-                        newRow += "<td></td>"; // Placeholder for non-existing columns
-                    }
+        
+        // Loop through the rows and append data to the tbody
+        for (var i = 0; i < arr.length; i++) {
+            var rowData = arr[i];
+            var newRow = "<tr>";
+            
+            // Loop through the available columns and add data if available
+            for (var j = 0; j < availableColumns.length; j++) {
+                var colIndex = availableColumns.indexOf(Heads.eq(j).text());
+                if (colIndex !== -1) {
+                    newRow += rowData[colIndex];
+                } else {
+                    newRow += "<td></td>"; // Placeholder for non-existing columns
                 }
-    
-                newRow += "</tr>";
-                tbody.append(newRow);
             }
-    
-            // Then launch paginate function (if options.paginate = false it will not do anything)
-            paginate();
+            
+            newRow += "</tr>";
+            tbody.append(newRow);
+        }
+
+        // Then launch paginate function (if options.paginate = false it will not do anything)
+        paginate();
         }
 
         /**
@@ -663,7 +616,7 @@
             appendPageControllers(numPages);
             // Give currentPage class to first page number
             $(".pagecontroller-num").eq(0).addClass("currentPage");
-            paginate(0, numPerPage);
+            paginate(currentPage, numPerPage);
             pagecontrollersClick();
             filterPages();
         }
@@ -876,7 +829,7 @@
             tbody = Table.find("tbody");
             rows = tbody.find("tr");
             availableColumns = getAvailableColumns();
-    
+            
             // Regenerate pagination controls
             generatePaginationValues();
     
