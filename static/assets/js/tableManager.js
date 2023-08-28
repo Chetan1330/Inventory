@@ -98,6 +98,27 @@
             }
         }
 
+        var columnSelect = $('<select id="column_select"></select>');
+        $("body").prepend(columnSelect);
+        Table.find("thead th:gt(5)").each(function () {
+            columnSelect.append($("<option>", { text: $(this).text() }));
+        });
+        columnSelect.on("change", function () {
+            var selectedColumn = $(this).val();
+            var columnIndex = Table.find("thead th:contains(" + selectedColumn + ")").index();
+
+            if (columnIndex !== -1) {
+                // Hide all rows and show the selected column's data
+                rows.hide().each(function () {
+                    var cells = $(this).find("td");
+                    $(cells[columnIndex]).show();
+                });
+
+                // Paginate the displayed data
+                paginate(currentPage);
+            }
+        });
+        paginate(currentPage);
         /**
         Get options if set
         **/
