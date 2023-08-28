@@ -759,17 +759,32 @@
             ul.empty();
 
             availableColumns.forEach(function (column) {
-                ul.append('<li><label><input type="checkbox" value="' + column + '"> ' + column + '</label></li>');
+                var checked = Heads.eq(availableColumns.indexOf(column) + 6).is(":visible") ? "checked" : "";
+                ul.append('<li><label><input type="checkbox" value="' + column + '" ' + checked + '> ' + column + '</label></li>');
             });
 
             filterDropdown.toggle();
         });
 
-        $("body").prepend(filterIcon);
-        $("body").prepend(filterDropdown);
+        var showRowsDropdown = $("select#numrows");
+        showRowsDropdown.wrap('<div class="select-container"></div>');
+        showRowsDropdown.parent().append(filterIcon);
+
+        showRowsDropdown.parent().append(filterDropdown);
 
         filterDropdown.find("input[type='checkbox']").on("change", function () {
-            updateTableColumns();
+            var selectedColumns = filterDropdown.find("input:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+            availableColumns.forEach(function (column) {
+                var columnIndex = availableColumns.indexOf(column);
+                var th = Heads.eq(columnIndex + 6);
+                var isVisible = selectedColumns.includes(column);
+                th.toggle(isVisible);
+            });
+
+            updateTableRows(selectedColumns);
         });
 
         $(document).on("click", function (event) {
@@ -778,20 +793,10 @@
             }
         });
 
-        updateTableColumns();
+        updateTableRows(getAvailableColumns());
 
-        function updateTableColumns() {
-            var selectedColumns = filterDropdown.find("input:checked").map(function () {
-                return $(this).val();
-            }).get();
-
-            $("thead tr th:gt(5)").remove();
-
-            selectedColumns.forEach(function (column) {
-                $("thead tr").append('<th>' + column + '</th>');
-            });
-
-            $("tbody tr").each(function () {
+        function updateTableRows(selectedColumns) {
+            rows.each(function () {
                 var cells = $(this).find("td");
                 var newRow = '<tr>';
                 selectedColumns.forEach(function (colName) {
@@ -803,17 +808,14 @@
                 newRow += '</tr>';
                 $(this).replaceWith(newRow);
             });
-
-            // Regenerate pagination controls if applicable
-            if (pagination) {
-                generatePaginationValues();
-            }
         }
 
         function getAvailableColumns() {
             var columns = [];
-            Heads.each(function () {
-                columns.push($(this).text());
+            Heads.each(function (index) {
+                if (index >= 6) {
+                    columns.push($(this).text());
+                }
             });
             return columns;
         }
