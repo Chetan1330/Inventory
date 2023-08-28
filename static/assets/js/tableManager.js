@@ -746,107 +746,63 @@
                 console.log(JSON.parse(JSON.stringify(string)));
             }
         }
-        function generateAddColumnsSection() {
-            var addColumnsSection =
-                '<div id="add-columns-section" class="add-columns-section">' +
-                '<form id="add-columns-form">' +
-                '<label>Select Columns to Add:</label><br>';
-
-            // Add checkboxes for each available column
-            for (var i = 0; i < availableColumns.length; i++) {
-                if (i < 6) {
-                    // Display the first 6 columns directly in the table
-                    $("thead tr").append("<th>" + availableColumns[i] + "</th>");
-                } else {
-                    addColumnsSection +=
-                        '<label class="checkbox-inline">' +
-                        '<input type="checkbox" name="selected-columns" value="' +
-                        availableColumns[i] +
-                        '"> ' +
-                        availableColumns[i] +
-                        '</label><br>';
-                }
-            }
-
-            addColumnsSection +=
-                '<button type="submit" class="btn btn-primary">Add Columns</button>' +
-                '</form></div>';
-
-            // Append the section to the container
-            Table.before(addColumnsSection);
-
-            // Remove additional columns initially
-            $("thead tr th:gt(5)").remove();
-        }
-
-        generateAddColumnsSection();
-
-
-        // Function to add selected columns
-        function addColumnsToTable(columns) {
-            // Remove existing additional headers
-            $("thead tr th:gt(5)").remove();
-
-            // Add new <th> elements to the table header
-            columns.forEach(function (column) {
-                $("thead tr").append(
-                    '<th>' +
-                    column +
-                    ' <span class="remove-column" data-column="' +
-                    column +
-                    '">x</span></th>'
-                );
-            });
-
-            // Remove selected columns from dropdown
-            $('select[name="selected-columns"] option:selected').each(function () {
-                $(this).remove();
-            });
-
-            // Reset checkbox selection
-            $('select[name="selected-columns"]').val([]);
-
-            // Update 'Heads', 'tbody', 'rows' variables
-            Heads = Table.find("thead th");
-            tbody = Table.find("tbody");
-            rows = tbody.find("tr");
-        }
-
+        
         $("select#filter_by, select#numrows").wrap('<div class="select-container"></div>');
 
-        // Handle form submission to add columns
-        $("#add-columns-form").on("submit", function (event) {
-            event.preventDefault();
+        var availableColumns = getAvailableColumns();
 
-            // Get selected columns from the checkboxes
-            var selectedColumns = [];
-            $("input[name='selected-columns']:checked").each(function () {
-                selectedColumns.push($(this).val());
-            });
-            
-            // Call the addColumnsToTable function with selected columns
-            addColumnsToTable(selectedColumns);
-            $('select[name="selected-columns"]').selectpicker('refresh');
+        var columnSelect = $('<select id="column_select" multiple></select>');
+        var columnOptions = '';
+        availableColumns.forEach(function (column) {
+            columnOptions += '<option value="' + column + '">' + column + '</option>';
+        });
+        columnSelect.html(columnOptions);
+        $("body").prepend(columnSelect);
+
+        columnSelect.multiselect({
+            nonSelectedText: 'Select Columns',
+            buttonClass: 'btn btn-default',
+            onChange: function (element, checked) {
+                updateTableColumns();
+            }
         });
 
-        $(document).on("click", ".remove-column", function () {
-            var column = $(this).data("column");
-            // Remove the column header
-            $(this).closest("th").remove();
-            // Add the column back to the dropdown
-            $('select[name="selected-columns"]').append('<option value="' + column + '">' + column + '</option>');
-            // Re-initialize the dropdown
-            $('select[name="selected-columns"]').selectpicker('refresh');
-            // Rebind the click event to the new "x" icons
-            bindRemoveColumnEvent();
-        });
+        updateTableColumns();
 
-        function bindRemoveColumnEvent() {
-            $(".remove-column").off("click");
-            $(".remove-column").on("click", function () {
-                var column = $(this).data("column");
-                // ... (Rest of the code remains the same)
+        function updateTableColumns() {
+            var selectedColumns = columnSelect.val();
+
+            $("thead tr th:gt(5)").remove();
+
+            selectedColumns.forEach(function (column) {
+                $("thead tr").append('<th>' + column + '</th>');
             });
+
+            $("tbody tr").each(function () {
+                var cells = $(this).find("td");
+                var newRow = '<tr>';
+                selectedColumns.forEach(function (colName) {
+                    var colIndex = availableColumns.indexOf(colName);
+                    if (colIndex !== -1) {
+                        newRow += '<td>' + cells.eq(colIndex).html() + '</td>';
+                    }
+                });
+                newRow += '</tr>';
+                $(this).replaceWith(newRow);
+            });
+
+            // Regenerate pagination controls if applicable
+            if (pagination) {
+                generatePaginationValues();
+            }
+        }
+
+        function getAvailableColumns() {
+            var columns = [];
+            Heads.each(function () {
+                columns.push($(this).text());
+            });
+            return columns;
         }
     };
 })(jQuery);
