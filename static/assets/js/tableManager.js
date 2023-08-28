@@ -12,6 +12,7 @@
             arr     = [],
             cells,
             clen;
+            
 
         /**
         Options default values
@@ -870,7 +871,7 @@
         // Handle form submission to add columns
         $("#add-columns-form").on("submit", function (event) {
             event.preventDefault();
-
+        
             // Get selected columns from the checkboxes
             var selectedColumns = [];
             $("input[name='selected-columns']:checked").each(function () {
@@ -881,7 +882,7 @@
             addColumnsToTable(selectedColumns);
             $('select[name="selected-columns"]').selectpicker('refresh');
         });
-
+        
         $(document).on("click", ".remove-column", function () {
             var column = $(this).data("column");
             // Remove the column header
@@ -893,12 +894,19 @@
             // Rebind the click event to the new "x" icons
             bindRemoveColumnEvent();
         });
-
+        
         function bindRemoveColumnEvent() {
             $(".remove-column").off("click");
             $(".remove-column").on("click", function () {
                 var column = $(this).data("column");
-                // ... (Rest of the code remains the same)
+                // Remove the column header
+                $(this).closest("th").remove();
+                // Add the column back to the dropdown
+                $('select[name="selected-columns"]').append('<option value="' + column + '">' + column + '</option>');
+                // Re-initialize the dropdown
+                $('select[name="selected-columns"]').selectpicker('refresh');
+                // Rebind the click event to the new "x" icons
+                bindRemoveColumnEvent();
             });
         }
     };
