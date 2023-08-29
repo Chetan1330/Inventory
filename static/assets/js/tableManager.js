@@ -718,6 +718,8 @@
         console.log(JSON.parse(JSON.stringify(string)));
       }
     }
+    var numPerPage = parseInt($("select#numrows").val());
+
     var filterIcon = $('<i class="fa fa-filter"></i>');
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
 
@@ -750,8 +752,6 @@
             return $(this).val();
         }).get();
 
-        rows.hide(); // Hide all rows initially
-
         rows.each(function () {
             var cells = $(this).find("td");
             var showRow = false; // Flag to check if row should be displayed
@@ -765,6 +765,8 @@
 
             if (showRow) {
                 $(this).show(); // Show the row
+            } else {
+                $(this).hide(); // Hide the row
             }
         });
 
