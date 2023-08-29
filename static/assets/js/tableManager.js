@@ -749,8 +749,8 @@
 
     var showRowsDropdown = $("select#numrows");
     showRowsDropdown.wrap('<div class="select-container"></div>');
-    showRowsDropdown.before(filterIcon);
-    showRowsDropdown.before(filterDropdown);
+    showRowsDropdown.after(filterIcon);
+    showRowsDropdown.after(filterDropdown);
 
     Heads.each(function (index) {
         if (index >= 6) {
