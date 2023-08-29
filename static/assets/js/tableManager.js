@@ -721,7 +721,7 @@
     var numPerPage = parseInt($("select#numrows").val());
     var selectedColumns = [];
 
-    var filterIcon = $('<i class="fa fa-filter"></i>');
+    var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
 
     filterIcon.on("click", function () {
@@ -734,7 +734,7 @@
     // showRowsDropdown.after(filterDropdown);
 
     Heads.each(function (index) {
-            
+
             filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
         
     });
@@ -753,7 +753,6 @@
 
     function updateDisplayedData() {
         rows.hide();
-
         rows.each(function () {
             var cells = $(this).find("td");
             var showRow = false;
