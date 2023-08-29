@@ -734,6 +734,7 @@
     showRowsDropdown.after(filterDropdown);
 
     Heads.each(function (index) {
+        
             filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
         
     });
@@ -772,7 +773,7 @@
         var visibleRows = rows.filter(":visible");
         visibleRows.slice(0, numPerPage).show();
     }
-
-    updateDisplayedData();
+    // Initial call to set the data based on default selections
   };
+  updateDisplayedData();
 })(jQuery);
