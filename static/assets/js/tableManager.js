@@ -719,13 +719,13 @@
       }
     }
     var numPerPage = parseInt($("select#numrows").val());
+    var selectedColumns = [];
 
     var filterIcon = $('<i class="fa fa-filter"></i>');
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
 
     filterIcon.on("click", function () {
         filterDropdown.toggle();
-        updateDisplayedData();
     });
 
     var showRowsDropdown = $("select#numrows");
@@ -739,6 +739,9 @@
     });
 
     filterDropdown.find("input[type='checkbox']").on("change", function () {
+        selectedColumns = filterDropdown.find("input:checked").map(function () {
+            return $(this).val();
+        }).get();
         updateDisplayedData();
     });
 
@@ -748,31 +751,28 @@
     });
 
     function updateDisplayedData() {
-        var selectedColumns = filterDropdown.find("input:checked").map(function () {
-            return $(this).val();
-        }).get();
+        rows.hide();
 
         rows.each(function () {
             var cells = $(this).find("td");
-            var showRow = false; // Flag to check if row should be displayed
+            var showRow = false;
 
             cells.each(function (index) {
-                if ( selectedColumns.includes(Heads.eq(index).text())) {
-                    showRow = true; // Mark the row as to be displayed
-                    return false; // Exit the loop early
+                if (selectedColumns.includes(Heads.eq(index).text())) {
+                    showRow = true;
+                    return false;
                 }
             });
 
             if (showRow) {
-                $(this).show(); // Show the row
-            } else {
-                $(this).hide(); // Hide the row
+                $(this).show();
             }
         });
 
-        // Get the currently visible rows and hide any excess rows
         var visibleRows = rows.filter(":visible");
-        visibleRows.slice(numPerPage).hide();
+        visibleRows.slice(0, numPerPage).show();
     }
+
+    updateDisplayedData();
   };
 })(jQuery);
