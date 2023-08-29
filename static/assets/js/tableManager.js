@@ -745,7 +745,6 @@
 
     filterIcon.on("click", function () {
         filterDropdown.toggle();
-        updateDisplayedData();
     });
 
     var showRowsDropdown = $("select#numrows");
@@ -755,7 +754,7 @@
 
     Heads.each(function (index) {
         if (index >= 6) {
-            filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '" checked> ' + $(this).text() + '</label></li>');
+            filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
         }
     });
 
