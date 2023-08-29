@@ -748,7 +748,9 @@
             var cells = $(this).find("td");
             var newRow = $('<tr></tr>');
             cells.each(function (index) {
+                console.log(index,'index')
                 if (selectedColumns.includes(Heads.eq(index).text())) {
+                    console.log(selectedColumns,'selectedColumns', newRow,'newRow',index,'index')
                     newRow.append($('<td>' + $(this).html() + '</td>'));
                 }
             });
@@ -757,6 +759,11 @@
             } else {
                 $(this).hide();
             }
+        });
+
+        // Rebind event handlers for checkboxes after updating table
+        filterDropdown.find("input[type='checkbox']").off("change").on("change", function () {
+            updateDisplayedData();
         });
     }
   };
