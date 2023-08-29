@@ -728,13 +728,13 @@
         filterDropdown.toggle();
     });
 
-    var showRowsDropdown = $("select#numrows");
-    showRowsDropdown.wrap('<div class="select-container"></div>');
-    showRowsDropdown.after(filterIcon);
-    showRowsDropdown.after(filterDropdown);
+    // var showRowsDropdown = $("select#numrows");
+    // showRowsDropdown.wrap('<div class="select-container"></div>');
+    // showRowsDropdown.after(filterIcon);
+    // showRowsDropdown.after(filterDropdown);
 
     Heads.each(function (index) {
-        
+            
             filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
         
     });
