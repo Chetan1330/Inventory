@@ -740,57 +740,45 @@
                 console.log(JSON.parse(JSON.stringify(string)));
             }
         }
-        var availableColumns = getAvailableColumns();
-
         var filterIcon = $('<i class="fa fa-filter"></i>');
-        var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul></ul></div>');
+    var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
 
-        filterIcon.on("click", function () {
-            filterDropdown.toggle();
-            updateDisplayedData();
-        });
+    filterIcon.on("click", function () {
+        filterDropdown.toggle();
+        updateDisplayedData();
+    });
 
-        var showRowsDropdown = $("select#numrows");
-        showRowsDropdown.wrap('<div class="select-container"></div>');
-        showRowsDropdown.before(filterIcon);
-        showRowsDropdown.before(filterDropdown);
+    var showRowsDropdown = $("select#numrows");
+    showRowsDropdown.wrap('<div class="select-container"></div>');
+    showRowsDropdown.before(filterIcon);
+    showRowsDropdown.before(filterDropdown);
 
-        Heads.each(function (index) {
-            if (index >= 6) {
-                filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '" checked> ' + $(this).text() + '</label></li>');
-            }
-        });
-
-        filterDropdown.find("input[type='checkbox']").on("change", function () {
-            updateDisplayedData();
-        });
-
-        function updateDisplayedData() {
-            var selectedColumns = filterDropdown.find("input:checked").map(function () {
-                return $(this).val();
-            }).get();
-
-            rows.each(function () {
-                var cells = $(this).find("td");
-                var newRow = '<tr>';
-                Heads.each(function (index) {
-                    if (index < 6 || selectedColumns.includes($(this).text())) {
-                        newRow += '<td>' + cells.eq(index).html() + '</td>';
-                    }
-                });
-                newRow += '</tr>';
-                $(this).replaceWith(newRow);
-            });
+    Heads.each(function (index) {
+        if (index >= 6) {
+            filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '" checked> ' + $(this).text() + '</label></li>');
         }
+    });
 
-        function getAvailableColumns() {
-            var columns = [];
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+        updateDisplayedData();
+    });
+
+    function updateDisplayedData() {
+        var selectedColumns = filterDropdown.find("input:checked").map(function () {
+            return $(this).val();
+        }).get();
+
+        rows.each(function () {
+            var cells = $(this).find("td");
+            var newRow = '<tr>';
             Heads.each(function (index) {
-                if (index >= 6) {
-                    columns.push($(this).text());
+                if (index < 6 || selectedColumns.includes($(this).text())) {
+                    newRow += '<td>' + cells.eq(index).html() + '</td>';
                 }
             });
-            return columns;
-        }
+            newRow += '</tr>';
+            $(this).replaceWith(newRow);
+        });
+    }
     };
 })(jQuery);
