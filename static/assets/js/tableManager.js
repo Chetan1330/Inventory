@@ -752,7 +752,6 @@
     });
 
     function updateDisplayedData() {
-        rows.hide();
         rows.each(function () {
             var cells = $(this).find("td");
             var showRow = false;
