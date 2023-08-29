@@ -766,31 +766,25 @@
                 return $(this).val();
             }).get();
 
-            availableColumns.forEach(function (column) {
-                var columnIndex = availableColumns.indexOf(column);
-                var th = Heads.eq(columnIndex + 6);
-                var isVisible = selectedColumns.includes(column);
-                th.toggle(isVisible);
+            updateTableColumns(selectedColumns);
+        });
+
+        updateTableColumns(getAvailableColumns());
+
+        function updateTableColumns(selectedColumns) {
+            Heads.each(function (index) {
+                if (index >= 6) {
+                    var isVisible = selectedColumns.includes($(this).text());
+                    $(this).toggle(isVisible);
+                }
             });
 
-            updateTableRows(selectedColumns);
-        });
-
-        $(document).on("click", function (event) {
-            if (!$(event.target).closest(filterIcon).length && !$(event.target).closest(filterDropdown).length) {
-                filterDropdown.hide();
-            }
-        });
-
-        updateTableRows(getAvailableColumns());
-
-        function updateTableRows(selectedColumns) {
             rows.each(function () {
                 var cells = $(this).find("td");
                 var newRow = '<tr>';
-                selectedColumns.forEach(function (colName) {
-                    var colIndex = availableColumns.indexOf(colName);
-                    if (colIndex !== -1) {
+                Heads.each(function (index) {
+                    if (index >= 6 && selectedColumns.includes($(this).text())) {
+                        var colIndex = availableColumns.indexOf($(this).text());
                         newRow += '<td>' + cells.eq(colIndex).html() + '</td>';
                     }
                 });
