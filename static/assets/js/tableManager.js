@@ -727,11 +727,12 @@
 
     var showRowsDropdown = $("select#numrows");
     showRowsDropdown.wrap('<div class="select-container"></div>');
-    showRowsDropdown.before(filterIcon);
-    showRowsDropdown.before(filterDropdown);
+    showRowsDropdown.after(filterIcon);
+    showRowsDropdown.after(filterDropdown);
 
-    Heads.each(function () {
+    Heads.each(function (index) {
             filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
+        
     });
 
     filterDropdown.find("input[type='checkbox']").on("change", function () {
@@ -745,14 +746,17 @@
 
         rows.each(function () {
             var cells = $(this).find("td");
-            var newRow = '<tr>';
+            var newRow = $('<tr></tr>');
             cells.each(function (index) {
-                if ( selectedColumns.includes(Heads.eq(index).text())) {
-                    newRow += '<td>' + $(this).html() + '</td>';
+                if (selectedColumns.includes(Heads.eq(index).text())) {
+                    newRow.append($('<td>' + $(this).html() + '</td>'));
                 }
             });
-            newRow += '</tr>';
-            $(this).replaceWith(newRow);
+            if (newRow.find("td").length > 0) {
+                $(this).replaceWith(newRow);
+            } else {
+                $(this).hide();
+            }
         });
     }
   };
