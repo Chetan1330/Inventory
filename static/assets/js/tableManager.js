@@ -75,7 +75,53 @@
       "vocabulary",
       "disableFilterBy",
       "numOfPages",
-    ];
+    ]; 
+    var selectedColumns = [];
+
+    var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
+    var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
+
+    filterIcon.on("click", function () {
+      filterDropdown.toggle();
+    });
+
+    Heads.each(function (index) {
+      filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
+    });
+
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      selectedColumns = filterDropdown.find("input:checked").map(function () {
+        return $(this).val();
+      }).get();
+      updateDisplayedData();
+    });
+
+    $("select#numrows").on("change", function () {
+      numPerPage = parseInt($(this).val());
+      updateDisplayedData();
+    });
+
+    function updateDisplayedData() {
+      rows.each(function () {
+        var cells = $(this).find("td");
+        var showRow = false;
+
+        cells.each(function (index) {
+          if (selectedColumns.includes(Heads.eq(index).text())) {
+            showRow = true;
+            return false;
+          }
+        });
+
+        if (showRow) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+
+      paginate(currentPage, numPerPage);
+    }
 
     // debug
     // make array form options object
@@ -718,60 +764,12 @@
         console.log(JSON.parse(JSON.stringify(string)));
       }
     }
-    var numPerPage = parseInt($("select#numrows").val());
-    var selectedColumns = [];
-
-    var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
-    var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
-
-    filterIcon.on("click", function () {
-        filterDropdown.toggle();
-    });
-
-    // var showRowsDropdown = $("select#numrows");
-    // showRowsDropdown.wrap('<div class="select-container"></div>');
-    // showRowsDropdown.after(filterIcon);
-    // showRowsDropdown.after(filterDropdown);
-
-    Heads.each(function (index) {
-
-            filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
-        
-    });
-
-    filterDropdown.find("input[type='checkbox']").on("change", function () {
-        selectedColumns = filterDropdown.find("input:checked").map(function () {
-            return $(this).val();
-        }).get();
-        updateDisplayedData();
-    });
-
-    $("select#numrows").on("change", function () {
-        numPerPage = parseInt($(this).val());
-        updateDisplayedData();
-    });
-
-    function updateDisplayedData() {
-        rows.each(function () {
-            var cells = $(this).find("td");
-            var showRow = false;
-
-            cells.each(function (index) {
-                if (selectedColumns.includes(Heads.eq(index).text())) {
-                    showRow = true;
-                    return false;
-                }
-            });
-
-            if (showRow) {
-                $(this).show();
-            }
-        });
-
-        var visibleRows = rows.filter(":visible");
-        visibleRows.slice(0, numPerPage).show();
-    }
+    
     // Initial call to set the data based on default selections
+    updateDisplayedData();
   };
   updateDisplayedData();
 })(jQuery);
+(document).ready(function () {
+    $("table").tablemanager();
+  });
