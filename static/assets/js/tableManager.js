@@ -747,7 +747,7 @@
             var cells = $(this).find("td");
             var newRow = '<tr>';
             cells.each(function (index) {
-                if (index < 6 || selectedColumns.includes(Heads.eq(index).text())) {
+                if ( selectedColumns.includes(Heads.eq(index).text())) {
                     newRow += '<td>' + $(this).html() + '</td>';
                 }
             });
