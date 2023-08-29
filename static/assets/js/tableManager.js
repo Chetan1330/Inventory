@@ -769,14 +769,13 @@
 
         rows.each(function () {
             var cells = $(this).find("td");
-            var newRow = '<tr>';
             Heads.each(function (index) {
                 if (index < 6 || selectedColumns.includes($(this).text())) {
-                    newRow += '<td>' + cells.eq(index).html() + '</td>';
+                    cells.eq(index).show();
+                } else {
+                    cells.eq(index).hide();
                 }
             });
-            newRow += '</tr>';
-            $(this).replaceWith(newRow);
         });
     }
     };
