@@ -90,6 +90,77 @@
                 }
             }
         }
+        
+        var availableColumns = getAvailableColumns();
+
+        var filterIcon = $('<i class="fa fa-filter"></i>');
+        var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul></ul></div>');
+
+        filterIcon.on("click", function () {
+            var ul = filterDropdown.find("ul");
+            ul.empty();
+
+            availableColumns.forEach(function (column) {
+                var checked = Heads.eq(availableColumns.indexOf(column) + 6).is(":visible") ? "checked" : "";
+                ul.append('<li><label><input type="checkbox" value="' + column + '" ' + checked + '> ' + column + '</label></li>');
+            });
+
+            filterDropdown.toggle();
+        });
+
+        var showRowsDropdown = $("select#numrows");
+        showRowsDropdown.wrap('<div class="select-container"></div>');
+        showRowsDropdown.parent().append(filterIcon);
+
+        showRowsDropdown.parent().append(filterDropdown);
+
+        filterDropdown.find("input[type='checkbox']").on("change", function () {
+            var selectedColumns = filterDropdown.find("input:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+            availableColumns.forEach(function (column) {
+                var columnIndex = availableColumns.indexOf(column);
+                var th = Heads.eq(columnIndex + 6);
+                var isVisible = selectedColumns.includes(column);
+                th.toggle(isVisible);
+            });
+
+            updateTableRows(selectedColumns);
+        });
+
+        $(document).on("click", function (event) {
+            if (!$(event.target).closest(filterIcon).length && !$(event.target).closest(filterDropdown).length) {
+                filterDropdown.hide();
+            }
+        });
+
+        updateTableRows(getAvailableColumns());
+
+        function updateTableRows(selectedColumns) {
+            rows.each(function () {
+                var cells = $(this).find("td");
+                var newRow = '<tr>';
+                selectedColumns.forEach(function (colName) {
+                    var colIndex = availableColumns.indexOf(colName);
+                    if (colIndex !== -1) {
+                        newRow += '<td>' + cells.eq(colIndex).html() + '</td>';
+                    }
+                });
+                newRow += '</tr>';
+                $(this).replaceWith(newRow);
+            });
+        }
+
+        function getAvailableColumns() {
+            var columns = [];
+            Heads.each(function (index) {
+                if (index >= 6) {
+                    columns.push($(this).text());
+                }
+            });
+            return columns;
+        }
 
         /**
         Get options if set
