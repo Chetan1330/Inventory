@@ -424,7 +424,7 @@
                     console.log("html:", response);
                     // var tdcategory = $('#tdcategory');
                     $('#stockspan').empty();
-                    $('#stockspan').append("<label>"+"Based on available stocks, you can build " + "<b>" + response['can_build'] + "</b>" + " no of builds. You have asked for " + response['userbldval'] + " builds. Do you want to reserve hardware for these " + response['userbldval'] + " builds." + "</label>");
+                    $('#stockspan').append("<label>"+"Based on available stocks, you can build " + "<b>" + response['nobuild'] + "</b>" + " no of builds. You have asked for " + response['userbldval'] + " builds. Do you want to reserve hardware for these " + response['userbldval'] + " builds." + "</label>");
                     var tdask2 = $('#tdask2');
                     tdask2.empty();
 

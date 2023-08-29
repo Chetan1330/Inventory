@@ -7,6 +7,7 @@ urlpatterns = [
     path('createconfig/', views.CreateConfig, name='createconfig'),
     path('buildconfig/', views.BuildConfig, name='buildconfig'),
     path('configscan/', views.ConfigScan, name='configscan'),
+    path('upload/', views.UploadFile, name='upload'),
 
     re_path(r'^.*\.*', views.pages, name='pages'),
     

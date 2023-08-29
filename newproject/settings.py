@@ -13,8 +13,7 @@ SECRET_KEY = 'mg_w_i-p&ploiq#um#h_7-ki0*n8+j6t^z6w4n5e9!+c31ly&$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['127.0.0.1','192.241.133.172',]
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','192.241.133.172','46.101.170.185','localhost']
 
 
 # Application definition
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
     'widget_tweaks',                            # uses 'django-widget-tweaks' app
     'crispy_forms',                             # uses 'django-crispy-forms' app
     'login_required',                           # uses 'django-login-required-middleware' app
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -96,17 +96,6 @@ DATABASES = {
         # 'HOST': '127.0.0.1',
         'PORT': '5432',
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     # 'NAME': 'invdatabase',
-    #     'NAME': 'verceldb',
-    #     'USER': 'default',
-    #     'PASSWORD': 'oAYKZC14QSeL',
-    #     # 'HOST': 'db',
-    #     'HOST': 'ep-lucky-rice-80054881-pooler.us-east-1.postgres.vercel-storage.com',
-    #     'PORT': '5432',
-    # }
 }
 
 

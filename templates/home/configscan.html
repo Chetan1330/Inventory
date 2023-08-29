@@ -4,7 +4,19 @@
 
 {% block title %} CreateConfig {% endblock title %}
 
-
+{% block stylesheets %}
+  <style type="text/css">
+    #tdid {
+        max-width: 300px;
+        overflow-wrap: break-word;
+        
+    }
+    
+    .mt32 {
+        margin-top: 32px;
+    }
+	</style>
+{% endblock stylesheets %}
 {% block content %}
 
     <!-- <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">{{ request.user.username }} Panel</div> -->
@@ -31,21 +43,22 @@
 
             
                 <div class="table-responsive">
-                    <table class="table tablemanager table-striped mt32 customers-list">
+                    <table style="width: 100%;" class="table tablemanager table-striped mt32 customers-list">
                     <thead>
                         <tr class="kie-tablelist__row kie-tablelist__row--header">
-                        <th class="kie-tablelist__cell kie-tablelist__cell--header">SSN</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Serial number</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Category</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Manufacturer</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Model</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Quantity</th>
                         <th class="kie-tablelist__cell kie-tablelist__cell--header">Reservedby</th>
+                        <th class="kie-tablelist__cell kie-tablelist__cell--header">Build Quantity</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyclass">
                         <tr id="trclass">
-                            <td id="tdssn" class="kie-tablelist__cell">
+                            <td id="tdssn" class="kie-tablelist__cell" style="display: table-cell;">
 
                             </td>
 
@@ -70,6 +83,10 @@
                             </td>
 
                             <td id="tdreserve" class="kie-tablelist__cell">
+
+                            </td>
+
+                            <td id="tdbqua" class="kie-tablelist__cell">
 
                             </td>
                         </tr>
@@ -170,15 +187,13 @@
         //         }
         //     });
         // });
-        function submitform() {
-            console.log("input val", document.getElementById("configname").value.length)
-            if (document.getElementById("configname").value.length == 0) {
-                document.getElementById("red1").style.display = "block";
-            }
-            if (document.getElementById("configname").value.length > 0) {
-                document.getElementById("createform").submit();
-            }
-        }
+        
+        var aclass;
+        var acat;
+        var amanu;
+        var amodel;
+        var aqua;
+        var reserveby;
 
         function getCookie(name) {
             let cookieValue = null;
@@ -233,11 +248,27 @@
                     var tdreserve = $('#tdreserve');
                     tdreserve.empty();
 
+                    var tdbqua = $('#tdbqua');
+                    tdbqua.empty();
+
+                    
+
                     for (var i = 0; i < response['ssn'].length; i++) {
-                        tdssn.append("<tr><td>"+response['ssn'][i]+"</td></tr>")
+                        tdssn.append("<tr><td id=" + "tdid"+">"+response['ssn'][i]+"</td></tr>")
                         
                     };
 
+                    if (response['allclass'].length == response['allcategory'].length){
+                        console.log("Same length")
+                        aclass = response['allclass'];
+                        acat = response['allcategory'];
+                        amanu = response['allmanu'];
+                        amodel = response['allmodel'];
+                        aqua = response['allquantity'];
+                        reserveby = response['reservedby'];
+                    }
+
+                    // style=" + "width:20px;" + "word-break:break-all;" + "
                     for (var i = 0; i < response['allclass'].length; i++) {
                         tdclass.append("<tr><td>"+response['allclass'][i]+"</td></tr>")
                         tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
@@ -246,7 +277,8 @@
                         tdqua.append("<tr><td>"+response['allquantity'][i]+"</td></tr>")
                         tdreserve.append("<tr><td>"+response['reservedby']+"</td></tr>")
                     };
-
+                    
+                    tdbqua.append("<tr><td>"+response['buildno']+"</td></tr>")
                     // for (var i = 0; i < response['allcategory'].length; i++) {
                     //     tdcategory.append("<tr><td>"+response['allcategory'][i]+"</td></tr>")
                         
@@ -260,6 +292,60 @@
                     console.log(error);
                 }
             });
+        }
+
+
+        function submitform() {
+            console.log("input val", document.getElementById("scanstock").value)
+            var scanstock = document.getElementById("scanstock").value
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({scanstock: scanstock, aclass: aclass, acat: acat, amanu: amanu, amodel: amodel, aqua: aqua, reserveby: reserveby}),
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+                },
+                success: function (response) {
+                    console.log("html:", response);
+                    // var tdcategory = $('#tdcategory');
+                    // $('#stockspan').empty();
+                    // $('#stockspan').append("Can build" + " " + response['no_build'] + " Servers with above config. Do you want to reserve stocks?");
+                    var tdask2 = $('#tdask2');
+                    tdask2.empty();
+
+                    var tdavail2 = $('#tdavail2');
+                    tdavail2.empty();
+
+                    document.getElementById("reservestock").style.display = "block";
+                    document.getElementById("red").style.display = "None";
+                    document.getElementById("green").style.display = "None";
+                    document.getElementById("reservetxt").style.display = "None";
+
+                    
+
+                    if (response['build_status'] == "zero"){
+                        document.getElementById("green").style.display = "None";
+                        document.getElementById("red").style.display = "None";
+                        document.getElementById("reservetxt").style.display = "None";
+                        document.getElementById("table2").style.display = "None";
+                        
+                    };
+                    
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+
+            //if (document.getElementById("configname").value.length == 0) {
+            //    document.getElementById("red1").style.display = "block";
+            //}
+            //if (document.getElementById("configname").value.length > 0) {
+            //    document.getElementById("createform").submit();
+            //}
         }
         
     </script>

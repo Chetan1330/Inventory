@@ -22,6 +22,25 @@
             </a>
           </li>
 
+          <li class="{% if 'tracking' in segment %} active {% endif %}">
+            <a href="/tracking.html">
+              <i class="tim-icons icon-app"></i>
+              <p>Item Wise Tracking</p>
+            </a>
+          </li>
+          <li class="{% if 'history' in segment %} active {% endif %}">
+            <a href="/history.html">
+              <i class="tim-icons icon-basket-simple"></i>
+              <p>Item History</p>
+            </a>
+          </li>
+          <li class="{% if 'vendordetail' in segment %} active {% endif %}">
+            <a href="/vendordetail.html">
+              <i class="tim-icons icon-planet"></i>
+              <p>Vendor details</p>
+            </a>
+          </li>
+
           <li class="{% if 'dashboard' in segment %} active {% endif %}">
             <a href="/dashboard.html">
               <i class="tim-icons icon-chart-pie-36"></i>
@@ -70,8 +89,11 @@
             </a>
             <ul class="mx-3 pcoded-submenu">
               <li class=""><a href="/configscan/" class="">Config Scan</a></li>
+              <li class=""><a href="/upload/" class="">Upload File</a></li>
+              <li class=""><a href="#" class="">Purchase Link</a></li>
               <li class=""><a href="#" class="">Planning</a></li>
-              
+              <li class=""><a href="#" class="">Recommendation</a></li>
+              <li class=""><a href="#" class="">E-waste management</a></li>
           </ul>
           </li>
 

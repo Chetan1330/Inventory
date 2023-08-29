@@ -1,5 +1,6 @@
 from django.db import models
-    
+from datetime import datetime
+
 class Stock(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=700, unique=False)
@@ -18,12 +19,19 @@ class Stock(models.Model):
     Status = models.CharField(max_length=700, default=False, null=True, blank=True)
     Substatus = models.CharField(max_length=700, default=False, null=True, blank=True)
     Reservedby = models.CharField(max_length=700, null=True, blank=True)
+    Reserved_at = models.DateTimeField(default=datetime.now)
     Configname = models.CharField(max_length=700, null=True, blank=True)
     Program = models.CharField(max_length=700, default=False, null=True, blank=True)
     Project = models.CharField(max_length=700, default=False, null=True, blank=True)
     PONo = models.CharField(max_length=700, default=False, null=True, blank=True)
     POlineNo = models.CharField(max_length=700, default=False, null=True, blank=True)
     Assignto = models.CharField(max_length=700, default=False, null=True, blank=True)
+    Assigned_at = models.DateTimeField(default=datetime.now, blank=True)
+    warranty_date = models.CharField(max_length=700, default='20/12/24', null=True, blank=True)
+    Type = models.CharField(max_length=700, default=False, null=True, blank=True)
+    Count = models.CharField(max_length=700, default=1, null=True, blank=True)
+    item_img = models.CharField(max_length=700, default=False, null=True, blank=True)
+    vendor_id = models.CharField(max_length=700, default=False, null=True, blank=True)
     Ownedby = models.CharField(max_length=700, default=False, null=True, blank=True)
     Managedby = models.CharField(max_length=700, default=False, null=True, blank=True)
     HomeLoc = models.CharField(max_length=700, default=False, null=True, blank=True)

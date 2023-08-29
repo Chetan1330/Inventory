@@ -1,0 +1,251 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Tracking {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+
+{% block stylesheets %}
+  <style type="text/css">
+		#for_numrows {
+			padding: 10px;
+			float: left;
+		}
+		#for_filter_by {
+			padding: 0px;
+			float: right;
+		}
+		#pagesControllers {
+			display: block;
+			text-align: center;
+		}
+
+    /* #filter_input {
+			padding: 0px;
+			float: right;
+		} */
+
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    h3 span {
+            font-size: 22px;
+        }
+        h3 input.search-input {
+            width: 300px;
+            margin-left: auto;
+            float: right
+        }
+        .mt32 {
+            margin-top: 32px;
+        }
+	</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title text-left"> Item Demand History</h4>
+
+            <!-- <h3> -->
+                <input id="searchbar" type="text" placeholder="Search by Item Name/Serial number..." class="col-9 form-control search-input" data-table="customers-list"/>
+            <!-- </h3> -->
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+            <table id="tableinfo" class="table tablemanager table-striped mt32 customers-list">
+              <thead>
+                <tr>  
+                  <!-- <th class="disableFilterBy">SrNo</th> -->
+                  <th>Name</th>
+                  <th>Serial number</th>
+                  <th>assigned_count</th>
+                  <th>created_at</th>
+                  <th>reserved_count</th>
+                  
+                </tr>
+              </thead>
+              
+          </table>
+        </div>
+          </div>
+        </div>
+
+
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title text-left"> Item Details</h4>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+            <table id="tableinfo" class="table tablemanager table-striped mt32 customers-list">
+              <thead>
+                <tr>  
+                  <!-- <th class="disableFilterBy">SrNo</th> -->
+                  <th>Name</th>
+                  <th>Serial number</th>  
+                  <th>DNUSAN</th>  
+                  <th>Class</th>
+                  <th>Category</th>
+                  <th>Manufacturer</th>
+                  <th>Model</th>
+                  <th>Status(hardware_status)</th>
+                  <th>Substatus</th>
+                  <th>Reserved by</th>
+                  <th>Config name</th>
+                  <th>Program</th>
+                  <th>Project</th>
+                  <th>PO number</th>
+                  <th>PO line number</th>
+                  <th>Assigned to</th>
+                  <th>Assigned at</th>
+                  <th>assigned_count</th>
+                  <th>created_at</th>
+                  <th>reserved_count</th>
+                  <th>Warranty Date</th>
+                  <th>Type</th>
+                  <th>Count</th>
+                  <th>Item image link</th>
+                  <th>Vendor id</th>
+                  <th>Owned by</th>
+                  <th>Managed by</th>
+                  <th>Home Location</th>
+                  <th>Location</th>
+                  <th>Location Details</th>
+                  <th>Created</th>
+                  <th>Created by</th>
+                  <th>Updated</th>
+                  <th>Updated by</th>
+                  <th>Cost center</th>
+                  <th>Comments</th>
+                  <th>Finance Type</th>
+                  <th>Hardware Support Group</th>
+                  <th>Hardware Support Service</th>
+                  <th>Etag</th>
+                </tr>
+              </thead>
+              
+          </table>
+        </div>
+          </div>
+        </div>
+
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title text-left">Item Cycle History</h4>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+            <table id="historytable" class="table tablemanager table-striped mt32 customers-list">
+              <thead>
+                <tr>  
+                  <!-- <th class="disableFilterBy">SrNo</th> -->
+                  <th>Event_id</th>
+                  <th>Serial number</th>  
+                  <th>Assigned_to</th>  
+                  <th>Assigned_at</th>
+                  <th>released_by</th>
+                  <th>reserved_at</th>
+                  
+                </tr>
+              </thead>
+              
+          </table>
+        </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+  
+  <script>
+    var currstock = 5;
+    var prev = 5;
+
+    (function(document) {
+                'use strict';
+
+                var TableFilter = (function(myArray) {
+                    var search_input;
+
+                    function _onInputSearch(e) {
+                        search_input = e.target;
+                        var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                        myArray.forEach.call(tables, function(table) {
+                            myArray.forEach.call(table.tBodies, function(tbody) {
+                                myArray.forEach.call(tbody.rows, function(row) {
+                                    var text_content = row.textContent.toLowerCase();
+                                    var search_val = search_input.value.toLowerCase();
+                                    row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                                });
+                            });
+                        });
+                    }
+
+                    return {
+                        init: function() {
+                            var inputs = document.getElementsByClassName('search-input');
+                            myArray.forEach.call(inputs, function(input) {
+                                input.oninput = _onInputSearch;
+                            });
+                        }
+                    };
+                })(Array.prototype);
+
+                document.addEventListener('readystatechange', function() {
+                    if (document.readyState === 'complete') {
+                        TableFilter.init();
+                    }
+                });
+
+            })(document);
+    
+    $('.search-input').keyup(function(){
+      var x = document.getElementById("searchbar").value.length
+      if (x == 0){
+        document.getElementById("for_numrows").remove();
+        document.getElementById("pagesControllers").remove();
+        $('.tablemanager').tablemanager({
+          pagination: true,
+          appendFilterby:false,
+          // showrows: [5],
+          showrows: [5,10,20,50,100],
+          bFilter: false,
+        });
+        // document.getElementById("numrows").value = 10;
+      }
+      // console.log("value:", x);
+      
+    });
+    
+
+    $('#hometable').tablemanager({
+          pagination: true,
+          appendFilterby:false,
+          // showrows: [5],
+          showrows: [5,10,20,50,100],
+          bFilter: false,
+    });
+    
+    
+      
+    
+</script>
+
+{% endblock javascripts %}
