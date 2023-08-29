@@ -747,23 +747,21 @@
         rows.each(function () {
             var cells = $(this).find("td");
             var newRow = $('<tr></tr>');
+            var showRow = false; // Flag to check if row should be displayed
+
             cells.each(function (index) {
-                console.log(index,'index')
-                if (selectedColumns.includes(Heads.eq(index).text())) {
-                    console.log(selectedColumns,'selectedColumns', newRow,'newRow',index,'index')
+                if ( selectedColumns.includes(Heads.eq(index).text())) {
                     newRow.append($('<td>' + $(this).html() + '</td>'));
+                    showRow = true; // Mark the row as to be displayed
                 }
             });
-            if (newRow.find("td").length > 0) {
-                $(this).replaceWith(newRow);
-            } else {
-                $(this).hide();
-            }
-        });
 
-        // Rebind event handlers for checkboxes after updating table
-        filterDropdown.find("input[type='checkbox']").off("change").on("change", function () {
-            updateDisplayedData();
+            if (showRow) {
+                $(this).html(newRow.html()); // Replace the content of the row
+                $(this).show(); // Show the row
+            } else {
+                $(this).hide(); // Hide the row
+            }
         });
     }
   };
