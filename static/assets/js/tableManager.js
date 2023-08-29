@@ -749,8 +749,8 @@
 
     var showRowsDropdown = $("select#numrows");
     showRowsDropdown.wrap('<div class="select-container"></div>');
-    showRowsDropdown.after(filterIcon);
-    showRowsDropdown.after(filterDropdown);
+    showRowsDropdown.before(filterIcon);
+    showRowsDropdown.before(filterDropdown);
 
     Heads.each(function (index) {
         if (index >= 6) {
@@ -767,15 +767,12 @@
             return $(this).val();
         }).get();
 
-        rows.each(function () {
-            var cells = $(this).find("td");
-            Heads.each(function (index) {
-                if (index < 6 || selectedColumns.includes($(this).text())) {
-                    cells.eq(index).show();
-                } else {
-                    cells.eq(index).hide();
-                }
-            });
+        Heads.each(function (index) {
+            if (index < 6 || selectedColumns.includes($(this).text())) {
+                Table.find("colgroup col").eq(index).show();
+            } else {
+                Table.find("colgroup col").eq(index).hide();
+            }
         });
     }
     };
