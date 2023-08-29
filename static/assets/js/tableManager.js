@@ -723,6 +723,7 @@
 
     filterIcon.on("click", function () {
         filterDropdown.toggle();
+        updateDisplayedData();
     });
 
     var showRowsDropdown = $("select#numrows");
@@ -739,30 +740,37 @@
         updateDisplayedData();
     });
 
+    $("select#numrows").on("change", function () {
+        numPerPage = parseInt($(this).val());
+        updateDisplayedData();
+    });
+
     function updateDisplayedData() {
         var selectedColumns = filterDropdown.find("input:checked").map(function () {
             return $(this).val();
         }).get();
 
+        rows.hide(); // Hide all rows initially
+
         rows.each(function () {
             var cells = $(this).find("td");
-            var newRow = $('<tr></tr>');
             var showRow = false; // Flag to check if row should be displayed
 
             cells.each(function (index) {
                 if ( selectedColumns.includes(Heads.eq(index).text())) {
-                    newRow.append($('<td>' + $(this).html() + '</td>'));
                     showRow = true; // Mark the row as to be displayed
+                    return false; // Exit the loop early
                 }
             });
 
             if (showRow) {
-                $(this).html(newRow.html()); // Replace the content of the row
                 $(this).show(); // Show the row
-            } else {
-                $(this).hide(); // Hide the row
             }
         });
+
+        // Get the currently visible rows and hide any excess rows
+        var visibleRows = rows.filter(":visible");
+        visibleRows.slice(numPerPage).hide();
     }
   };
 })(jQuery);
