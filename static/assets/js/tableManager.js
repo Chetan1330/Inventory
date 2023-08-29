@@ -747,13 +747,13 @@
 
         filterIcon.on("click", function () {
             filterDropdown.toggle();
+            updateDisplayedData();
         });
 
         var showRowsDropdown = $("select#numrows");
         showRowsDropdown.wrap('<div class="select-container"></div>');
-        showRowsDropdown.parent().append(filterIcon);
-
-        showRowsDropdown.parent().append(filterDropdown);
+        showRowsDropdown.before(filterIcon);
+        showRowsDropdown.before(filterDropdown);
 
         Heads.each(function (index) {
             if (index >= 6) {
@@ -762,30 +762,20 @@
         });
 
         filterDropdown.find("input[type='checkbox']").on("change", function () {
+            updateDisplayedData();
+        });
+
+        function updateDisplayedData() {
             var selectedColumns = filterDropdown.find("input:checked").map(function () {
                 return $(this).val();
             }).get();
-
-            updateTableColumns(selectedColumns);
-        });
-
-        updateTableColumns(getAvailableColumns());
-
-        function updateTableColumns(selectedColumns) {
-            Heads.each(function (index) {
-                if (index >= 6) {
-                    var isVisible = selectedColumns.includes($(this).text());
-                    $(this).toggle(isVisible);
-                }
-            });
 
             rows.each(function () {
                 var cells = $(this).find("td");
                 var newRow = '<tr>';
                 Heads.each(function (index) {
-                    if (index >= 6 && selectedColumns.includes($(this).text())) {
-                        var colIndex = availableColumns.indexOf($(this).text());
-                        newRow += '<td>' + cells.eq(colIndex).html() + '</td>';
+                    if (index < 6 || selectedColumns.includes($(this).text())) {
+                        newRow += '<td>' + cells.eq(index).html() + '</td>';
                     }
                 });
                 newRow += '</tr>';
