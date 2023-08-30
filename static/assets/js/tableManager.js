@@ -740,7 +740,15 @@ $(".filter-dropdown").hide();
 $("#numrows").after(filterDropdown);
 
 filterDropdown.addClass("custom-dropdown");
-
+// Add smooth transition to the filter dropdown
+$(".custom-dropdown").on("click", function () {
+    $(this).toggleClass("active");
+  });
+  
+  $(".filter-dropdown input[type='checkbox']").on("change", function () {
+    $(".custom-dropdown").removeClass("active");
+  });
+  
 var filterButton = $('<button>Select Columns</button>');
 filterButton.on("click", function () {
     console.log('clicked');
