@@ -75,24 +75,37 @@
       "vocabulary",
       "disableFilterBy",
       "numOfPages",
-    ]; 
+    ];
     var selectedColumns = [];
 
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
-    var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
+    var filterDropdown = $(
+      '<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>'
+    );
 
     filterIcon.on("click", function () {
       filterDropdown.toggle();
     });
 
     Heads.each(function (index) {
-      filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            $(this).text() +
+            '"> ' +
+            $(this).text() +
+            "</label></li>"
+        );
     });
 
     filterDropdown.find("input[type='checkbox']").on("change", function () {
-      selectedColumns = filterDropdown.find("input:checked").map(function () {
-        return $(this).val();
-      }).get();
+      selectedColumns = filterDropdown
+        .find("input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
       updateDisplayedData();
     });
 
@@ -767,23 +780,44 @@
     var selectedColumns = [];
 
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
-    var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
+    var filterDropdown = $(
+      '<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>'
+    );
+
     $("#numrows").after(filterIcon);
     $("#numrows").after(filterDropdown);
+
     filterDropdown.addClass("custom-dropdown");
+
     filterIcon.on("click", function () {
       filterDropdown.toggle();
+      if (filterDropdown.is(":visible")) {
+        var iconPosition = filterIcon.position();
+        var dropdownWidth = filterDropdown.outerWidth();
+        filterDropdown.css({
+          top: iconPosition.top + filterIcon.outerHeight(),
+          left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
+          opacity: 1,
+          transform: "translateY(0)",
+        });
+      } else {
+        filterDropdown.css({
+          opacity: 0,
+          transform: "translateY(-10px)",
+        });
+      }
     });
 
     Heads.each(function (index) {
-      filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + $(this).text() + '"> ' + $(this).text() + '</label></li>');
-    });
-
-    filterDropdown.find("input[type='checkbox']").on("change", function () {
-      selectedColumns = filterDropdown.find("input:checked").map(function () {
-        return $(this).val();
-      }).get();
-      updateDisplayedData();
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            $(this).text() +
+            '"> ' +
+            $(this).text() +
+            "</label></li>"
+        );
     });
 
     $("select#numrows").on("change", function () {
@@ -792,30 +826,40 @@
     });
 
     function updateDisplayedData() {
-        rows.each(function () {
-          var cells = $(this).find("td");
-          var showRow = false;
-      
-          cells.each(function (index) {
-            if (selectedColumns.includes(Heads.eq(index).text())) {
-              showRow = true;
-              return false; // Exit the loop once a match is found
-            }
-          });
-      
-          if (showRow) {
-            $(this).show();
-          } else {
-            $(this).hide();
+      rows.each(function () {
+        var cells = $(this).find("td");
+        var showRow = false;
+
+        cells.each(function (index) {
+          if (selectedColumns.includes(Heads.eq(index).text())) {
+            showRow = true;
+            return false;
           }
         });
-      
-        paginate(currentPage, numPerPage);
-      }
+
+        if (showRow) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+
+      paginate(currentPage, numPerPage);
+    }
+
+    // Bind the "change" event for the filter dropdown checkboxes
+    $("#filter-dropdown input[type='checkbox']").on("change", function () {
+      selectedColumns = $("#filter-dropdown input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
+      updateDisplayedData();
+    });
     // Initial call to set the data based on default selections
     updateDisplayedData();
   };
 })(jQuery);
-(document).ready(function () {
-    $("table").tablemanager();
-  });
+document.ready(function () {
+  $("table").tablemanager();
+});
