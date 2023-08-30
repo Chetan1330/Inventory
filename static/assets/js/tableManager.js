@@ -735,7 +735,6 @@
   updateDisplayedData();
   $(".filter-dropdown").hide();
     
-    
     $("#numrows").after(filterDropdown);
     
     filterDropdown.addClass("custom-dropdown");
@@ -843,8 +842,6 @@
         updateDisplayedData(); // Call the function to update table display
       });
     // Initial call to set the data based on default selections
-    updateDisplayedData();
   };
-  $(".filter-dropdown").hide();
 })(jQuery);
 
