@@ -770,7 +770,7 @@
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
     $("#numrows").after(filterIcon);
     $("#numrows").after(filterDropdown);
-    
+    filterDropdown.addClass("custom-dropdown");
     filterIcon.on("click", function () {
       filterDropdown.toggle();
     });
