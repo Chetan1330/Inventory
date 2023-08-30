@@ -768,7 +768,9 @@
 
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
-    $("#numrows").before(filterIcon);
+    $("#numrows").after(filterIcon);
+    $("#numrows").after(filterDropdown);
+    
     filterIcon.on("click", function () {
       filterDropdown.toggle();
     });
