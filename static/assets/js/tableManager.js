@@ -723,7 +723,6 @@
       return $(this).text();
     }).get();
     var filterDropdown = $("#filter-dropdown");
-
     headerTexts.forEach(function (text) {
       filterDropdown
         .find("ul")
@@ -735,7 +734,6 @@
             "</label></li>"
         );
     });
-
     updateDisplayedData();
     $(".filter-dropdown").hide();
 
@@ -747,7 +745,7 @@
       '<span>Select Columns :</span><i class="fa fa-filter"></i>'
     );
     filterIcon.on("click", function () {
-      filterDropdown.toggle();
+      filterDropdown.slideToggle();
       if (filterDropdown.is(":visible")) {
         var iconPosition = filterIcon.position();
         var dropdownWidth = filterDropdown.outerWidth();
@@ -759,16 +757,22 @@
     });
     $("#numrows").after(filterIcon);
 
-    // Bind the "change" event for the filter dropdown checkboxes
-    filterDropdown.find("input[type='checkbox']").on("change", function () {
-      selectedColumns = filterDropdown
-        .find("input:checked")
-        .map(function () {
-          return $(this).val();
-        })
-        .get();
+    // Populate the filter dropdown
+    Heads.each(function (index) {
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            $(this).text() +
+            '"> ' +
+            $(this).text() +
+            "</label></li>"
+        );
+    });
 
-      updateDisplayedData(); // Call the function to update table display
+    $("select#numrows").on("change", function () {
+      numPerPage = parseInt($(this).val());
+      updateDisplayedData();
     });
 
     function updateDisplayedData() {
@@ -798,6 +802,17 @@
       paginate(currentPage, numPerPage);
       filterPages(); // Update page controllers based on filtering
     }
-    // Initial call to set the data based on default selections
+
+    // Bind the "change" event for the filter dropdown checkboxes
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      selectedColumns = filterDropdown
+        .find("input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
+
+      updateDisplayedData(); // Call the function to update table display
+    });
   };
 })(jQuery);
