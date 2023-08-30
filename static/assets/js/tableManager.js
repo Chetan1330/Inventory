@@ -724,17 +724,17 @@
       }
     }
     var selectedColumns = [];
-
+    
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
     var filterDropdown = $(
       '<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>'
     );
-
+    
     $("#numrows").after(filterIcon);
     $("#numrows").after(filterDropdown);
-
+    
     filterDropdown.addClass("custom-dropdown");
-
+    
     filterIcon.on("click", function () {
       filterDropdown.toggle();
       if (filterDropdown.is(":visible")) {
@@ -753,7 +753,8 @@
         });
       }
     });
-
+    
+    // Populate the filter dropdown
     Heads.each(function (index) {
       filterDropdown
         .find("ul")
@@ -777,11 +778,15 @@
           var row = $(this);
           var cells = row.find("td");
           var showRow = false;
-          console.log(cells,'cells')
+      
           cells.each(function (index) {
+            
+            var cellText = $(this).text().trim();
+            console.log(cells,'celss',cellText,selectedColumns,Heads.eq(index).text())
             if (
               selectedColumns.length === 0 ||
-              selectedColumns.includes(Heads.eq(index).text())
+              selectedColumns.includes(Heads.eq(index).text()) ||
+              selectedColumns.includes(cellText)
             ) {
               showRow = true;
               return false; // Exit the loop since we already found a match
@@ -815,4 +820,9 @@
     updateDisplayedData();
   };
 })(jQuery);
-
+$(document).ready(function () {
+    $("table").tablemanager();
+  
+    // Initial call to set the data based on default selections
+    updateDisplayedData();
+  });
