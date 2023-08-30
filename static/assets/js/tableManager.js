@@ -13,7 +13,6 @@
       cells,
       clen;
 
-      
     /**
         Options default values
         **/
@@ -77,11 +76,6 @@
       "disableFilterBy",
       "numOfPages",
     ];
-    
-
-    
-
-    
 
     // debug
     // make array form options object
@@ -726,122 +720,84 @@
     }
     var selectedColumns = [];
     var headerTexts = Heads.map(function () {
-        return $(this).text();
-      }).get();
+      return $(this).text();
+    }).get();
     var filterDropdown = $("#filter-dropdown");
-  headerTexts.forEach(function (text) {
-    filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>');
-  });
-  updateDisplayedData();
-  $(".filter-dropdown").hide();
-    
-    $("#numrows").after(filterDropdown);
-    
-    filterDropdown.addClass("custom-dropdown");
-    
-    var filterIcon = $('<span>Select Columns :</span><i class="fa fa-filter"></i>');
-   filterIcon.on("click", function () {
-    filterDropdown.toggle();
-    if (filterDropdown.is(":visible")) {
-      var iconPosition = filterIcon.position();
-      var dropdownWidth = filterDropdown.outerWidth();
-      filterDropdown.css({
-        top: iconPosition.top + filterIcon.outerHeight(),
-        left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
-      });
-    }
-  });
-  $("#numrows").after(filterIcon);
-    // Populate the filter dropdown
-    Heads.each(function (index) {
+
+    headerTexts.forEach(function (text) {
       filterDropdown
         .find("ul")
         .append(
           '<li><label><input type="checkbox" value="' +
-            $(this).text() +
+            text +
             '"> ' +
-            $(this).text() +
+            text +
             "</label></li>"
         );
     });
 
-    $("select#numrows").on("change", function () {
-      numPerPage = parseInt($(this).val());
-      console.log(numPerPage,'n')
-      updateDisplayedData();
-    });
-    
+    updateDisplayedData();
+    $(".filter-dropdown").hide();
 
-    // function updateDisplayedData() {
-    //     rows.each(function () {
-    //       var row = $(this);
-    //       var cells = row.find("td");
-    //       var showRow = false;
-      
-    //       cells.each(function (index) {
-            
-    //         var cellText = $(this).text().trim();
-    //         if (
-    //           selectedColumns.length === 0 ||
-    //           selectedColumns.includes(Heads.eq(index).text()) ||
-    //           selectedColumns.includes(cellText)
-    //         ) {
-    //           showRow = true;
-    //           return false; // Exit the loop since we already found a match
-    //         }
-    //       });
-      
-    //       if (showRow) {
-    //         row.show();
-    //       } else {
-    //         row.hide();
-    //       }
-    //     });
-      
-    //     currentPage = 0; // Reset to the first page when filtering
-    //     paginate(currentPage, numPerPage);
-    //     filterPages(); // Update page controllers based on filtering
-    //   }
+    $("#numrows").after(filterDropdown);
+
+    filterDropdown.addClass("custom-dropdown");
+
+    var filterIcon = $(
+      '<span>Select Columns :</span><i class="fa fa-filter"></i>'
+    );
+    filterIcon.on("click", function () {
+      filterDropdown.toggle();
+      if (filterDropdown.is(":visible")) {
+        var iconPosition = filterIcon.position();
+        var dropdownWidth = filterDropdown.outerWidth();
+        filterDropdown.css({
+          top: iconPosition.top + filterIcon.outerHeight(),
+          left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
+        });
+      }
+    });
+    $("#numrows").after(filterIcon);
 
     // Bind the "change" event for the filter dropdown checkboxes
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      selectedColumns = filterDropdown
+        .find("input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
+
+      updateDisplayedData(); // Call the function to update table display
+    });
+
     function updateDisplayedData() {
-        rows.each(function () {
-          var row = $(this);
-          var cells = row.find("td");
-          var showRow = false;
-          cells.each(function (index) {
-            if (
-              selectedColumns.length === 0 ||
-              selectedColumns.includes(Heads.eq(index).text())
-            ) {
-            console.log(cells,'celss',selectedColumns,Heads.eq(index).text(),index)
-              showRow = true;
-              return false; // Exit the loop since we already found a match
-            }
-          });
-  
-          if (showRow) {
-            row.show();
-          } else {
-            row.hide();
+      rows.each(function () {
+        var row = $(this);
+        var cells = row.find("td");
+        var showRow = false;
+
+        cells.each(function (index) {
+          if (
+            selectedColumns.length === 0 ||
+            selectedColumns.includes(Heads.eq(index).text())
+          ) {
+            showRow = true;
+            return false; // Exit the loop since we already found a match
           }
         });
-  
-        currentPage = 0; // Reset to the first page when filtering
-        paginate(currentPage, numPerPage);
-        filterPages(); // Update page controllers based on filtering
-      }
-      filterDropdown.find("input[type='checkbox']").on("change", function () {
-        selectedColumns = filterDropdown
-          .find("input:checked")
-          .map(function () {
-            return $(this).val();
-          })
-          .get();
-    
-        updateDisplayedData(); // Call the function to update table display
+
+        if (showRow) {
+          row.show();
+        } else {
+          row.hide();
+        }
       });
+
+      currentPage = 0; // Reset to the first page when filtering
+      paginate(currentPage, numPerPage);
+      filterPages(); // Update page controllers based on filtering
+    }
     // Initial call to set the data based on default selections
   };
 })(jQuery);
-
