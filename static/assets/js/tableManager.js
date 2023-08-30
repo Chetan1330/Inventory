@@ -772,40 +772,67 @@
       console.log(numPerPage,'n')
       updateDisplayedData();
     });
+    
 
+    // function updateDisplayedData() {
+    //     rows.each(function () {
+    //       var row = $(this);
+    //       var cells = row.find("td");
+    //       var showRow = false;
+      
+    //       cells.each(function (index) {
+            
+    //         var cellText = $(this).text().trim();
+    //         if (
+    //           selectedColumns.length === 0 ||
+    //           selectedColumns.includes(Heads.eq(index).text()) ||
+    //           selectedColumns.includes(cellText)
+    //         ) {
+    //           showRow = true;
+    //           return false; // Exit the loop since we already found a match
+    //         }
+    //       });
+      
+    //       if (showRow) {
+    //         row.show();
+    //       } else {
+    //         row.hide();
+    //       }
+    //     });
+      
+    //     currentPage = 0; // Reset to the first page when filtering
+    //     paginate(currentPage, numPerPage);
+    //     filterPages(); // Update page controllers based on filtering
+    //   }
+
+    // Bind the "change" event for the filter dropdown checkboxes
     function updateDisplayedData() {
         rows.each(function () {
           var row = $(this);
           var cells = row.find("td");
           var showRow = false;
-      
+          console.log(cells,'celss',selectedColumns,Heads.eq(index).text(),index)
           cells.each(function (index) {
-            
-            var cellText = $(this).text().trim();
-            console.log(cells,'celss',cellText,selectedColumns,Heads.eq(index).text())
             if (
               selectedColumns.length === 0 ||
-              selectedColumns.includes(Heads.eq(index).text()) ||
-              selectedColumns.includes(cellText)
+              selectedColumns.includes(Heads.eq(index).text())
             ) {
               showRow = true;
               return false; // Exit the loop since we already found a match
             }
           });
-      
+  
           if (showRow) {
             row.show();
           } else {
             row.hide();
           }
         });
-      
+  
         currentPage = 0; // Reset to the first page when filtering
         paginate(currentPage, numPerPage);
         filterPages(); // Update page controllers based on filtering
       }
-
-    // Bind the "change" event for the filter dropdown checkboxes
     filterDropdown.find("input[type='checkbox']").on("change", function () {
         selectedColumns = filterDropdown
           .find("input:checked")
@@ -825,4 +852,5 @@ $(document).ready(function () {
   
     // Initial call to set the data based on default selections
     updateDisplayedData();
+    $(".filter-dropdown").hide();
   });
