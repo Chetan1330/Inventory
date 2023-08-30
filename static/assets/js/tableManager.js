@@ -745,16 +745,16 @@
       '<span>Select Columns :</span><i class="fa fa-filter"></i>'
     );
     filterIcon.on("click", function () {
-      filterDropdown.slideToggle();
-      if (filterDropdown.is(":visible")) {
-        var iconPosition = filterIcon.position();
-        var dropdownWidth = filterDropdown.outerWidth();
-        filterDropdown.css({
-          top: iconPosition.top + filterIcon.outerHeight(),
-          left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
-        });
-      }
-    });
+        filterDropdown.toggleClass("show");
+        if (filterDropdown.hasClass("show")) {
+          var iconPosition = filterIcon.position();
+          var dropdownWidth = filterDropdown.outerWidth();
+          filterDropdown.css({
+            top: iconPosition.top + filterIcon.outerHeight(),
+            left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
+          });
+        }
+      });
     $("#numrows").after(filterIcon);
 
     // Populate the filter dropdown

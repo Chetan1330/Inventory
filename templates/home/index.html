@@ -61,16 +61,14 @@
   }
 
   .filter-dropdown {
-    position: absolute;
-    z-index: 999;
-    display: none;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 4px;
-    transition: opacity 0.2s, transform 0.2s;
-  }
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.filter-dropdown.show {
+  max-height: 200px; /* adjust the height as needed */
+}
 
   .custom-dropdown {
     display: inline-block;
