@@ -1,124 +1,241 @@
+<style>
+  .sidebar {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 20px;
+  }
 
+  .sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    <div class="sidebar" data="blue">
-      <div class="sidebar-wrapper ps ps--active-y" >
-        <div class="logo">
-          <a target="_blank" rel="sponsored noopener noreferrer"
-             href="#" class="simple-text logo-mini" style="width: 168px;">
-            Inventory_Next
-          </a>
-          <a style="margin-top: 25px;"
-             href="#" class="simple-text logo-normal">
-            
-          </a>
-        </div>
-        <!--  -->
-        <ul class="nav" >
-        {% if request.user.is_authenticated %}
-          <li class="{% if 'home' in segment %} active {% endif %}">
-            <a href="/">
-              <i class="tim-icons icon-tv-2"></i>
-              <p>Home</p>
-            </a>
-          </li>
+  .sidebar li {
+    margin-bottom: 10px;
+  }
 
-          <li class="{% if 'tracking' in segment %} active {% endif %}">
-            <a href="/tracking.html">
-              <i class="tim-icons icon-app"></i>
-              <p>Item Wise Tracking</p>
-            </a>
-          </li>
-          <li class="{% if 'history' in segment %} active {% endif %}">
-            <a href="/history.html">
-              <i class="tim-icons icon-basket-simple"></i>
-              <p>Item History</p>
-            </a>
-          </li>
-          <li class="{% if 'vendordetail' in segment %} active {% endif %}">
-            <a href="/vendordetail.html">
-              <i class="tim-icons icon-planet"></i>
-              <p>Vendor details</p>
-            </a>
-          </li>
+  .sidebar a {
+    color: #333;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+  }
 
-          <li class="{% if 'dashboard' in segment %} active {% endif %}">
-            <a href="/dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
+  .sidebar a:hover {
+    background-color: #f1f1f1;
+  }
 
-          <li class="{% if 'myinv' in segment %} active {% endif %}">
-            <a href="#">
-              <i class="tim-icons icon-atom"></i>
-              <p>My Inventory</p>
-            </a>
-          </li>
+  .sidebar .active a {
+    background-color: #007bff;
+    color: #fff;
+  }
 
-          <li class="{% if 'createconfig' in segment %} active {% endif %}">
-            <a href="/createconfig/">
-              <i class="tim-icons icon-single-02"></i>
-              <p>Create Config</p>
-            </a>
-          </li>
-          <li class="{% if 'buildconfig' in segment %} active {% endif %}">
-            <a href="/buildconfig/">
-              <i class="tim-icons icon-bank"></i>
-              <p>Build Config</p>
-            </a>
-          </li>
-          
-          <!-- <li class="{% if 'reports' in segment %} active {% endif %}">
+  .sidebar .logo {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .sidebar .logo a {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .sidebar .logo a:hover {
+    color: #007bff;
+  }
+
+  .sidebar .nav-item {
+    position: relative;
+  }
+
+  .sidebar .nav-item .pcoded-submenu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    left: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 200px;
+  }
+
+  .sidebar .nav-item:hover .pcoded-submenu {
+    display: block;
+  }
+
+  .sidebar .nav-item .pcoded-submenu li {
+    margin-bottom: 5px;
+  }
+
+  .sidebar .nav-item .pcoded-submenu a {
+    color: #333;
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+  }
+
+  .sidebar .nav-item .pcoded-submenu a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .sidebar[data="blue"] {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .sidebar[data="blue"] a {
+    color: #fff;
+  }
+
+  .sidebar[data="blue"] a:hover {
+    background-color: #0062cc;
+  }
+
+  .sidebar[data="blue"] .active a {
+    background-color: #fff;
+    color: #007bff;
+  }
+
+  .sidebar[data="blue"] .logo a {
+    color: #fff;
+  }
+
+  .sidebar[data="blue"] .logo a:hover {
+    color: #fff;
+  }
+</style>
+<div class="sidebar" data="blue">
+  <div class="sidebar-wrapper ps ps--active-y">
+    <div class="logo">
+      <a
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        href="#"
+        class="simple-text logo-mini"
+        style="width: 168px"
+      >
+        Inventory_Next
+      </a>
+      <a style="margin-top: 25px" href="#" class="simple-text logo-normal"> </a>
+    </div>
+    <!--  -->
+    <ul class="nav">
+      {% if request.user.is_authenticated %}
+      <li class="{% if 'home' in segment %} active {% endif %}">
+        <a href="/">
+          <i class="tim-icons icon-tv-2"></i>
+          <p>Home</p>
+        </a>
+      </li>
+
+      <li class="{% if 'tracking' in segment %} active {% endif %}">
+        <a href="/tracking.html">
+          <i class="tim-icons icon-app"></i>
+          <p>Item Wise Tracking</p>
+        </a>
+      </li>
+      <li class="{% if 'history' in segment %} active {% endif %}">
+        <a href="/history.html">
+          <i class="tim-icons icon-basket-simple"></i>
+          <p>Item History</p>
+        </a>
+      </li>
+      <li class="{% if 'vendordetail' in segment %} active {% endif %}">
+        <a href="/vendordetail.html">
+          <i class="tim-icons icon-planet"></i>
+          <p>Vendor details</p>
+        </a>
+      </li>
+
+      <li class="{% if 'dashboard' in segment %} active {% endif %}">
+        <a href="/dashboard.html">
+          <i class="tim-icons icon-chart-pie-36"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+
+      <li class="{% if 'myinv' in segment %} active {% endif %}">
+        <a href="#">
+          <i class="tim-icons icon-atom"></i>
+          <p>My Inventory</p>
+        </a>
+      </li>
+
+      <li class="{% if 'createconfig' in segment %} active {% endif %}">
+        <a href="/createconfig/">
+          <i class="tim-icons icon-single-02"></i>
+          <p>Create Config</p>
+        </a>
+      </li>
+      <li class="{% if 'buildconfig' in segment %} active {% endif %}">
+        <a href="/buildconfig/">
+          <i class="tim-icons icon-bank"></i>
+          <p>Build Config</p>
+        </a>
+      </li>
+
+      <!-- <li class="{% if 'reports' in segment %} active {% endif %}">
             <a href="#">
               <i class="tim-icons icon-credit-card"></i>
               <p>Reports</p>
             </a>
           </li> -->
+      <li class="{% if 'integrations' in segment %} active {% endif %}">
+        <a href="#">
+          <i class="tim-icons icon-link-72"></i>
+          <p>Integrations</p>
+        </a>
+      </li>
+
+      <li
+        data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+        class="nav-item pcoded-hasmenu {% if 'configscan' in segment %} active {% endif %}"
+      >
+        <a href="javascript:" class="nav-link">
+          <i class="tim-icons icon-settings"></i>
+          <p>Tools</p>
+        </a>
+        <ul class="mx-3 pcoded-submenu">
+          <li class=""><a href="/configscan/" class="">Config Scan</a></li>
+          <li class=""><a href="/upload/" class="">Upload File</a></li>
+          <li class=""><a href="#" class="">Purchase Link</a></li>
+          <li class=""><a href="#" class="">Planning</a></li>
+          <li class=""><a href="#" class="">Recommendation</a></li>
+          <li class=""><a href="#" class="">E-waste management</a></li>
+        </ul>
+      </li>
+
+      <li
+        data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+        class="nav-item pcoded-hasmenu {% if 'integrations' in segment %} active {% endif %}"
+      >
+        <a href="javascript:" class="nav-link">
+          <i class="tim-icons icon-settings"></i>
+          <p>Saved Reports</p>
+        </a>
+        <ul class="mx-3 pcoded-submenu">
+          <li class="{% if 'reports' in segment %} active {% endif %}">
+            <a href="#">
+              <i class="tim-icons icon-single-copy-04"></i>
+              <p>Current Month</p>
+            </a>
+          </li>
           <li class="{% if 'integrations' in segment %} active {% endif %}">
             <a href="#">
-              <i class="tim-icons icon-link-72"></i>
-              <p>Integrations</p>
+              <i class="tim-icons icon-components"></i>
+              <p>Last quarter</p>
             </a>
           </li>
-        
+        </ul>
+      </li>
 
-          <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu {% if 'configscan' in segment %} active {% endif %}">
-            <a href="javascript:" class="nav-link ">
-              <i class="tim-icons icon-settings"></i>
-              <p>Tools</p>
-            </a>
-            <ul class="mx-3 pcoded-submenu">
-              <li class=""><a href="/configscan/" class="">Config Scan</a></li>
-              <li class=""><a href="/upload/" class="">Upload File</a></li>
-              <li class=""><a href="#" class="">Purchase Link</a></li>
-              <li class=""><a href="#" class="">Planning</a></li>
-              <li class=""><a href="#" class="">Recommendation</a></li>
-              <li class=""><a href="#" class="">E-waste management</a></li>
-          </ul>
-          </li>
-
-          <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu {% if 'integrations' in segment %} active {% endif %}">
-            <a href="javascript:" class="nav-link ">
-              <i class="tim-icons icon-settings"></i>
-              <p>Saved Reports</p>
-            </a>
-            <ul class="mx-3 pcoded-submenu">
-              <li class="{% if 'reports' in segment %} active {% endif %}">
-                <a href="#">
-                  <i class="tim-icons icon-single-copy-04"></i>
-                  <p>Current Month</p>
-                </a>
-              </li>
-              <li class="{% if 'integrations' in segment %} active {% endif %}">
-                <a href="#">
-                  <i class="tim-icons icon-components"></i>
-                  <p>Last quarter</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- <h4 style="margin-left: 25px;">Saved reports</h4>
+      <!-- <h4 style="margin-left: 25px;">Saved reports</h4>
           <li class="{% if 'reports' in segment %} active {% endif %}">
             <a href="#">
               <i class="tim-icons icon-single-copy-04"></i>
@@ -131,20 +248,16 @@
               <p>Last quarter</p>
             </a>
           </li> -->
-        </ul>
-        {% else %}
-        <ul>
-          <li class="active">
-            <a target="_blank" 
-               >
-              <i class="tim-icons icon-spaceship"></i>
-              <p>Login/Register</p>
-            </a>
-          </li>   
-          
-                    
-        </ul>
-        {% endif %}
-        
-      </div>
-    </div>
+    </ul>
+    {% else %}
+    <ul>
+      <li class="active">
+        <a target="_blank">
+          <i class="tim-icons icon-spaceship"></i>
+          <p>Login/Register</p>
+        </a>
+      </li>
+    </ul>
+    {% endif %}
+  </div>
+</div>
