@@ -768,6 +768,7 @@
 
     $("select#numrows").on("change", function () {
       numPerPage = parseInt($(this).val());
+      console.log(numPerPage,'n')
       updateDisplayedData();
     });
 
@@ -776,7 +777,7 @@
           var row = $(this);
           var cells = row.find("td");
           var showRow = false;
-      
+          console.log(cells,'cells')
           cells.each(function (index) {
             if (
               selectedColumns.length === 0 ||
@@ -807,19 +808,11 @@
             return $(this).val();
           })
           .get();
-        
+        console.log(selectedColumns,'sele')
         updateDisplayedData(); // Call the function to update table display
       });
-
-    $("select#numrows").on("change", function () {
-      numPerPage = parseInt($(this).val());
-      updateDisplayedData();
-    });
-    
     // Initial call to set the data based on default selections
     updateDisplayedData();
   };
 })(jQuery);
-document.ready(function () {
-  $("table").tablemanager();
-});
+
