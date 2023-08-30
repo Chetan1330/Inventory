@@ -728,36 +728,31 @@
     var headerTexts = Heads.map(function () {
         return $(this).text();
       }).get();
-    var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
     var filterDropdown = $("#filter-dropdown");
-    headerTexts.forEach(function (text) {
+  headerTexts.forEach(function (text) {
     filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>');
   });
+  updateDisplayedData();
+  $(".filter-dropdown").hide();
     
-    $("#numrows").after(filterIcon);
+    
     $("#numrows").after(filterDropdown);
     
     filterDropdown.addClass("custom-dropdown");
     
-    filterIcon.on("click", function () {
-      filterDropdown.toggle();
-      if (filterDropdown.is(":visible")) {
-        var iconPosition = filterIcon.position();
-        var dropdownWidth = filterDropdown.outerWidth();
-        filterDropdown.css({
-          top: iconPosition.top + filterIcon.outerHeight(),
-          left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
-          opacity: 1,
-          transform: "translateY(0)",
-        });
-      } else {
-        filterDropdown.css({
-          opacity: 0,
-          transform: "translateY(-10px)",
-        });
-      }
-    });
-    
+    var filterIcon = $('<span>Select Columns :</span><i class="fa fa-filter"></i>');
+   filterIcon.on("click", function () {
+    filterDropdown.toggle();
+    if (filterDropdown.is(":visible")) {
+      var iconPosition = filterIcon.position();
+      var dropdownWidth = filterDropdown.outerWidth();
+      filterDropdown.css({
+        top: iconPosition.top + filterIcon.outerHeight(),
+        left: iconPosition.left - dropdownWidth + filterIcon.outerWidth(),
+      });
+    }
+  });
+  $("#numrows").after(filterIcon);
     // Populate the filter dropdown
     Heads.each(function (index) {
       filterDropdown
@@ -837,20 +832,19 @@
         paginate(currentPage, numPerPage);
         filterPages(); // Update page controllers based on filtering
       }
-    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      filterDropdown.find("input[type='checkbox']").on("change", function () {
         selectedColumns = filterDropdown
           .find("input:checked")
           .map(function () {
             return $(this).val();
           })
           .get();
-        console.log(selectedColumns,'sele')
+    
         updateDisplayedData(); // Call the function to update table display
       });
     // Initial call to set the data based on default selections
     updateDisplayedData();
   };
   $(".filter-dropdown").hide();
-  updateDisplayedData();
 })(jQuery);
 
