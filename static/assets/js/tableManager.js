@@ -768,7 +768,7 @@
 
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
     var filterDropdown = $('<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>');
-
+    $("#numrows").before(filterIcon);
     filterIcon.on("click", function () {
       filterDropdown.toggle();
     });
@@ -790,26 +790,26 @@
     });
 
     function updateDisplayedData() {
-      rows.each(function () {
-        var cells = $(this).find("td");
-        var showRow = false;
-
-        cells.each(function (index) {
-          if (selectedColumns.includes(Heads.eq(index).text())) {
-            showRow = true;
-            return false;
+        rows.each(function () {
+          var cells = $(this).find("td");
+          var showRow = false;
+      
+          cells.each(function (index) {
+            if (selectedColumns.includes(Heads.eq(index).text())) {
+              showRow = true;
+              return false; // Exit the loop once a match is found
+            }
+          });
+      
+          if (showRow) {
+            $(this).show();
+          } else {
+            $(this).hide();
           }
         });
-
-        if (showRow) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-
-      paginate(currentPage, numPerPage);
-    }
+      
+        paginate(currentPage, numPerPage);
+      }
     // Initial call to set the data based on default selections
     updateDisplayedData();
   };
