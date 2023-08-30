@@ -811,12 +811,12 @@
           var row = $(this);
           var cells = row.find("td");
           var showRow = false;
-          console.log(cells,'celss',selectedColumns,Heads.eq(index).text(),index)
           cells.each(function (index) {
             if (
               selectedColumns.length === 0 ||
               selectedColumns.includes(Heads.eq(index).text())
             ) {
+            console.log(cells,'celss',selectedColumns,Heads.eq(index).text(),index)
               showRow = true;
               return false; // Exit the loop since we already found a match
             }
