@@ -7,6 +7,122 @@
 
 {% block stylesheets %}
 <style type="text/css">
+  table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+  /* Add styles to the table */
+.tablemanager {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Add styles to the table header */
+.tablemanager th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+}
+
+/* Add styles to the table rows */
+.tablemanager tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Add styles to the table cells */
+.tablemanager td {
+  padding: 8px;
+}
+
+/* Add styles to the search bar */
+.search-input {
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Add styles to the filter dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.custom-dropdown span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.custom-dropdown i {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-dropdown i:hover {
+  color: #555;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1;
+  display: none;
+}
+
+.filter-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.filter-dropdown li {
+  margin-bottom: 10px;
+}
+
+.filter-dropdown label {
+  display: block;
+  cursor: pointer;
+}
+
+.filter-dropdown input[type="checkbox"] {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Add gradient colors to the card header */
+.card-header {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Add styles to the card body */
+.card-body {
+  padding: 20px;
+}
   #for_numrows {
     padding: 10px;
     float: left;
