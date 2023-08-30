@@ -13,6 +13,7 @@
       cells,
       clen;
 
+      
     /**
         Options default values
         **/
@@ -724,11 +725,14 @@
       }
     }
     var selectedColumns = [];
-    
+    var headerTexts = Heads.map(function () {
+        return $(this).text();
+      }).get();
     var filterIcon = $('<i class="fa fa-filter"> Select Columns :</i>');
-    var filterDropdown = $(
-      '<div id="filter-dropdown" class="filter-dropdown"><ul class="filter-ul"></ul></div>'
-    );
+    var filterDropdown = $("#filter-dropdown");
+    headerTexts.forEach(function (text) {
+    filterDropdown.find("ul").append('<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>');
+  });
     
     $("#numrows").after(filterIcon);
     $("#numrows").after(filterDropdown);
@@ -846,11 +850,7 @@
     // Initial call to set the data based on default selections
     updateDisplayedData();
   };
+  $(".filter-dropdown").hide();
+  updateDisplayedData();
 })(jQuery);
-$(document).ready(function () {
-    $("table").tablemanager();
-  
-    // Initial call to set the data based on default selections
-    updateDisplayedData();
-    $(".filter-dropdown").hide();
-  });
+
