@@ -761,8 +761,8 @@
         });
       } else {
         filterDropdown.css({
-          opacity: 1,
-          visibility: "visible",
+          opacity: 0,
+          visibility: "hidden",
         });
       }
     });
