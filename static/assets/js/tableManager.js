@@ -719,105 +719,119 @@
       }
     }
     var selectedColumns = [];
-var headerTexts = Heads.map(function () {
-  return $(this).text();
-}).get();
-var filterDropdown = $("#filter-dropdown");
-headerTexts.forEach(function (text) {
-  filterDropdown
-    .find("ul")
-    .append(
-      '<li><label><input type="checkbox" value="' +
-        text +
-        '"> ' +
-        text +
-        "</label></li>"
-    );
-});
-updateDisplayedData();
+    var headerTexts = Heads.map(function () {
+      return $(this).text();
+    }).get();
+    var filterDropdown = $("#filter-dropdown");
+    headerTexts.forEach(function (text) {
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            text +
+            '"> ' +
+            text +
+            "</label></li>"
+        );
+    });
+    updateDisplayedData();
 
-$("#numrows").after(filterDropdown);
+    $("#numrows").after(filterDropdown);
 
-filterDropdown.addClass("custom-dropdown");
+    filterDropdown.addClass("custom-dropdown");
 
-var filterButton = $("<button class='selectCol'>Select Columns :</button>");
+    var filterButton = $("<button class='selectCol'>Select Columns :</button>");
 
-filterButton.on("click", function () {
-  console.log("clicked", filterDropdown);
-  filterDropdown.toggleClass("visible");
-  console.log("clicked", filterDropdown);
-});
-
-$("#numrows").after(filterButton);
-
-Heads.each(function (index) {
-  filterDropdown
-    .find("ul")
-    .append(
-      '<li><label><input type="checkbox" value="' +
-        $(this).text() +
-        '"> ' +
-        $(this).text() +
-        "</label></li>"
-    );
-});
-
-filterDropdown
-  .find("ul")
-  .prepend(
-    '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
-  );
-
-$("#select-all-checkbox").on("change", function () {
-  var isChecked = $(this).prop("checked");
-  filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
-  selectedColumns = isChecked ? headerTexts : [];
-  updateDisplayedData();
-});
-
-$("select#numrows").on("change", function () {
-  numPerPage = parseInt($(this).val());
-  updateDisplayedData();
-});
-
-function updateDisplayedData() {
-  rows.each(function () {
-    var row = $(this);
-    var cells = row.find("td");
-    var showRow = false;
-
-    cells.each(function (index) {
-      if (
-        selectedColumns.length === 0 ||
-        selectedColumns.includes(Heads.eq(index).text())
-      ) {
-        showRow = true;
-        return false; // Exit the loop since we already found a match
+    $(document).on("click", ".selectCol", function () {
+      console.log("clicked", filterDropdown);
+      filterDropdown.toggleClass("visible");
+      if (filterDropdown.hasClass("visible")) {
+        console.log("clicked", filterDropdown);
+        var iconPosition = filterButton.position();
+        var dropdownWidth = filterDropdown.outerWidth();
+        filterDropdown.css({
+          top: iconPosition.top + filterButton.outerHeight(),
+          left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
+          opacity: 1,
+          visibility: "visible",
+        });
+      } else {
+        filterDropdown.css({
+          opacity: 0,
+          visibility: "hidden",
+        });
       }
     });
 
-    if (showRow) {
-      row.show();
-    } else {
-      row.hide();
+    $("#numrows").after(filterButton);
+
+    Heads.each(function (index) {
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            $(this).text() +
+            '"> ' +
+            $(this).text() +
+            "</label></li>"
+        );
+    });
+
+    filterDropdown
+      .find("ul")
+      .prepend(
+        '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
+      );
+
+    $(document).on("change", "#select-all-checkbox", function () {
+      var isChecked = $(this).prop("checked");
+      filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
+      selectedColumns = isChecked ? headerTexts : [];
+      updateDisplayedData();
+    });
+
+    $("select#numrows").on("change", function () {
+      numPerPage = parseInt($(this).val());
+      updateDisplayedData();
+    });
+
+    function updateDisplayedData() {
+      rows.each(function () {
+        var row = $(this);
+        var cells = row.find("td");
+        var showRow = false;
+
+        cells.each(function (index) {
+          if (
+            selectedColumns.length === 0 ||
+            selectedColumns.includes(Heads.eq(index).text())
+          ) {
+            showRow = true;
+            return false; // Exit the loop since we already found a match
+          }
+        });
+
+        if (showRow) {
+          row.show();
+        } else {
+          row.hide();
+        }
+      });
+
+      currentPage = 0; // Reset to the first page when filtering
+      paginate(currentPage, numPerPage);
+      filterPages(); // Update page controllers based on filtering
     }
-  });
 
-  currentPage = 0; // Reset to the first page when filtering
-  paginate(currentPage, numPerPage);
-  filterPages(); // Update page controllers based on filtering
-}
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      selectedColumns = filterDropdown
+        .find("input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
 
-filterDropdown.find("input[type='checkbox']").on("change", function () {
-  selectedColumns = filterDropdown
-    .find("input:checked")
-    .map(function () {
-      return $(this).val();
-    })
-    .get();
-
-  updateDisplayedData(); // Call the function to update table display
-});
-
+      updateDisplayedData(); // Call the function to update table display
+    });
   };
 })(jQuery);
