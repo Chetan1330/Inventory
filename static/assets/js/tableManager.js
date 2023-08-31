@@ -742,18 +742,27 @@
     filterDropdown.addClass("custom-dropdown");
     // Add smooth transition to the filter dropdown
     $(".custom-dropdown").on("click", function () {
-      $(this).toggleClass("active");
+      if (filterDropdown.hasClass("active")) {
+        filterDropdown.removeClass("active");
+      } else {
+        filterDropdown.addClass("active");
+      }
     });
 
     $(".filter-dropdown input[type='checkbox']").on("change", function () {
-      $(".custom-dropdown").removeClass("active");
+      filterDropdown.removeClass("active");
     });
 
-    var filterButton = $("<button>Select Columns</button>");
+    var filterButton = $("<button class='selectCol'>Select Columns :</button>");
     filterButton.on("click", function () {
       console.log("clicked");
-      filterDropdown.toggleClass("show");
-      if (filterDropdown.hasClass("show")) {
+      if (filterDropdown.hasClass("active")) {
+        filterDropdown.removeClass("active");
+      } else {
+        filterDropdown.addClass("active");
+      }
+      if (filterDropdown.hasClass("active")) {
+        console.log(filterDropdown,'filterDropdown')
         var iconPosition = filterButton.position();
         var dropdownWidth = filterDropdown.outerWidth();
         filterDropdown.css({
