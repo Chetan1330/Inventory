@@ -19950,13 +19950,13 @@ th {
   white-space: nowrap;
 }
 
-.selectCol {
+#selectCol {
   margin-left: 20px;
   border: none;
   padding: 3px 9px 3px 5px;
   box-shadow: -12px 3px 5px rgba(0, 0, 0, 0.1);
 }
-.selectCol:focus {
+#selectCol:focus {
   outline: none!important;
   margin-left: 20px;
   border: none;
@@ -20057,11 +20057,6 @@ h3 input.search-input {
   margin-left: 49px;
 }
 
-.custom-dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .custom-dropdown i {
   font-size: 16px;
   color: #333;
@@ -20115,8 +20110,8 @@ h3 input.search-input {
   font-size: 14px;
   display: block;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
 }
+
 
 #filter-dropdown input[type='checkbox'] {
   opacity: 0;

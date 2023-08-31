@@ -718,11 +718,20 @@
         console.log(JSON.parse(JSON.stringify(string)));
       }
     }
+
+    // dropdown filter
+    
+
     var selectedColumns = [];
     var headerTexts = Heads.map(function () {
       return $(this).text();
     }).get();
+    
+    
+    updateDisplayedData();
     var filterDropdown = $("#filter-dropdown");
+    filterDropdown.addClass("custom-dropdown");
+    $("#numrows").after(filterDropdown);
     headerTexts.forEach(function (text) {
       filterDropdown
         .find("ul")
@@ -734,15 +743,10 @@
             "</label></li>"
         );
     });
-    updateDisplayedData();
 
-    $("#numrows").after(filterDropdown);
+    var filterButton = $("<button id='selectCol'>Select Columns :</button>");
 
-    filterDropdown.addClass("custom-dropdown");
-
-    var filterButton = $("<button class='selectCol'>Select Columns :</button>");
-
-    $(document).on("click", ".selectCol", function () {
+    $(document).on("click", "#selectCol", function () {
       console.log("clicked", filterDropdown);
       filterDropdown.toggleClass("visible");
       if (filterDropdown.hasClass("visible")) {
@@ -757,8 +761,8 @@
         });
       } else {
         filterDropdown.css({
-          opacity: 0,
-          visibility: "hidden",
+          opacity: 1,
+          visibility: "visible",
         });
       }
     });
