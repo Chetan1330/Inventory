@@ -81,7 +81,7 @@
         </a>
       </li>
 
-      <li
+      <!-- <li
         data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
         class="nav-item pcoded-hasmenu {% if 'configscan' in segment %} active {% endif %}"
       >
@@ -96,6 +96,35 @@
           <li class=""><a href="#" class="">Planning</a></li>
           <li class=""><a href="#" class="">Recommendation</a></li>
           <li class=""><a href="#" class="">E-waste management</a></li>
+        </ul>
+      </li> -->
+      <li
+        data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+        class="nav-item pcoded-hasmenu {% if 'configscan' in segment %} active {% endif %}"
+      >
+        <a href="javascript:" class="nav-link">
+          <i class="tim-icons icon-settings"></i>
+          <p>Tools</p>
+        </a>
+        <ul class="mx-3 pcoded-submenu">
+          <li class="{% if 'configscan' in segment %} active {% endif %}">
+            <a href="/configscan/" class="">Config Scan</a>
+          </li>
+          <li class="{% if 'upload' in segment %} active {% endif %}">
+            <a href="/upload/" class="">Upload File</a>
+          </li>
+          <li class="{% if 'purchase' in segment %} active {% endif %}">
+            <a href="#" class="">Purchase Link</a>
+          </li>
+          <li class="{% if 'planning' in segment %} active {% endif %}">
+            <a href="#" class="">Planning</a>
+          </li>
+          <li class="{% if 'recommendation' in segment %} active {% endif %}">
+            <a href="#" class="">Recommendation</a>
+          </li>
+          <li class="{% if 'ewaste' in segment %} active {% endif %}">
+            <a href="#" class="">E-waste management</a>
+          </li>
         </ul>
       </li>
 

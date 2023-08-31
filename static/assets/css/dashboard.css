@@ -621,6 +621,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  background: linear-gradient(to left, #66b8fe, #ffffff);
+  box-shadow: -6px 6px 12px 0 #66b8fe;
 }
 
 .row {
@@ -19085,7 +19087,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-brand {
-  color: #1d253b;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .white-content .navbar.navbar-transparent .navbar-toggler-bar {
@@ -20086,7 +20090,7 @@ h3 input.search-input {
   visibility: visible;
 }
 
-.custom-dropdown {
+.custom-dropdown.visible {
   display: inline-block;
   margin-left: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
