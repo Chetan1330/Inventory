@@ -20047,7 +20047,6 @@ h3 input.search-input {
   margin-left: 49px;
 }
 
-
 .custom-dropdown {
   position: relative;
   display: inline-block;
@@ -20107,7 +20106,6 @@ h3 input.search-input {
   display: block;
   cursor: pointer;
 }
-
 
 .sidebar {
   background-color: #fff;
@@ -20218,4 +20216,30 @@ h3 input.search-input {
 .sidebar[data="blue"] .logo a:hover {
   color: #fff;
 }
+.pagesControllers {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.pagecontroller {
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagecontroller-f, .pagecontroller-p, .pagecontroller-n, .pagecontroller-l {
+  background-color: #ccc;
+}
+
+.pagecontroller-num {
+  background-color: #fff;
+}
+
+.pagecontroller-num.currentPage {
+  background-color: #000;
+  color: #fff;
+}
+
 /*# sourceMappingURL=black-dashboard.css.map */

@@ -742,7 +742,7 @@
 
     var filterButton = $("<button class='selectCol'>Select Columns :</button>");
 
-    filterButton.on("click", function () {
+    $(document).on("click", ".selectCol", function () {
       console.log("clicked", filterDropdown);
       filterDropdown.toggleClass("visible");
       if (filterDropdown.hasClass("visible")) {
@@ -775,7 +775,7 @@
         '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
       );
 
-    $("#select-all-checkbox").on("change", function () {
+      $(document).on("change", "#select-all-checkbox", function () {
       var isChecked = $(this).prop("checked");
       filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
       selectedColumns = isChecked ? headerTexts : [];
