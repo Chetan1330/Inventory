@@ -19069,9 +19069,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-brand {
-  color: #ffffff;
+  color: #3090f7;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .white-content .navbar.navbar-transparent .navbar-toggler-bar {
@@ -19289,7 +19289,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: linear-gradient(to bottom, #66b8fe, #f0f0f0);;
+  background: linear-gradient(to bottom, #66b8fe, #66b8fe);;
   box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -20211,10 +20211,6 @@ h3 input.search-input {
   text-decoration: none;
 }
 
-.sidebar .nav-item .pcoded-submenu a:hover {
-  background-color: #f1f1f1;
-  color: #1473c4;
-}
 
 .sidebar[data="blue"] {
   background-color: #007bff;
