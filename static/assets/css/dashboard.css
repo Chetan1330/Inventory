@@ -19945,6 +19945,7 @@ th {
   border-collapse: collapse;
   width: 100%;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
 .selectCol {
@@ -19989,21 +19990,8 @@ th {
 }
 
 /* Add styles to the filter dropdown */
-.custom-dropdown {
-  position: relative;
-  display: inline-block;
-}
 
-.custom-dropdown i {
-  font-size: 16px;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
 
-.custom-dropdown i:hover {
-  color: #555;
-}
 
 /* Add gradient colors to the card header */
 .card-header {
@@ -20088,6 +20076,17 @@ h3 input.search-input {
   background-color: #ffffff;
   padding: 4px;
   margin-top: 10px;
+}
+
+.custom-dropdown i {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-dropdown i:hover {
+  color: #555;
 }
 
 .filter-dropdown ul {
