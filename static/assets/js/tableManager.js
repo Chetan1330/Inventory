@@ -735,7 +735,7 @@
         );
     });
     updateDisplayedData();
-    $(".filter-dropdown").hide();
+    // $(".filter-dropdown").hide();
 
     $("#numrows").after(filterDropdown);
 
@@ -755,22 +755,18 @@
 
     var filterButton = $("<button class='selectCol'>Select Columns :</button>");
     filterButton.on("click", function () {
-      console.log("clicked");
-      if (filterDropdown.hasClass("active")) {
-        filterDropdown.removeClass("active");
-      } else {
-        filterDropdown.addClass("active");
-      }
-      if (filterDropdown.hasClass("active")) {
-        console.log(filterDropdown,'filterDropdown')
-        var iconPosition = filterButton.position();
-        var dropdownWidth = filterDropdown.outerWidth();
-        filterDropdown.css({
-          top: iconPosition.top + filterButton.outerHeight(),
-          left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
-        });
-      }
-    });
+        console.log("clicked", filterDropdown);
+        filterDropdown.toggleClass("show");
+        if (filterDropdown.hasClass("show")) {
+          var iconPosition = filterButton.position();
+          var dropdownWidth = filterDropdown.outerWidth();
+          filterDropdown.css({
+            top: iconPosition.top + filterButton.outerHeight(),
+            left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
+          });
+        }
+      });
+      
 
     $("#numrows").after(filterButton);
 
