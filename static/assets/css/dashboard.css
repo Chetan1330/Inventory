@@ -17160,7 +17160,7 @@ table.tablesorter thead tr .headerSortDown {
 .off-canvas-sidebar .nav li>a {
   margin: 10px 15px 0;
   border-radius: 30px;
-  color: #ffffff;
+  color: #b1b1b1;
   display: block;
   text-decoration: none;
   position: relative;
@@ -17222,7 +17222,7 @@ table.tablesorter thead tr .headerSortDown {
 .off-canvas-sidebar .nav li.active>a[data-toggle="collapse"] {
   background: transparent;
   box-shadow: none;
-  color: #ffffff;
+  color: #5d5b5b;
 }
 
 .sidebar .nav li.active>a[data-toggle="collapse"] i,
@@ -17364,7 +17364,6 @@ table.tablesorter thead tr .headerSortDown {
   height: 60px;
 }
 
-.sidebar[data="blue"],
 .off-canvas-sidebar[data="blue"] {
   background: #3358f4;
   background: linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
@@ -17973,6 +17972,8 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .card form label+.form-control {
   margin-bottom: 20px;
+  background: white;
+  border: none;
 }
 
 .card .map-title {
@@ -19069,9 +19070,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-brand {
-  color: #3090f7;
+  color: #9b9b9b;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .white-content .navbar.navbar-transparent .navbar-toggler-bar {
@@ -19111,7 +19112,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .main-panel {
-  background: #f5f6fa;
+  background: #b8b8b8;
 }
 
 .white-content h1,
@@ -19289,8 +19290,8 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: linear-gradient(to bottom, #66b8fe, #66b8fe);;
-  box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05);
+  background: linear-gradient(to bottom, #fbfbfb, #ffffff);
+  box-shadow: 3px 6px 9px 5px rgb(25 22 22 / 74%);
 }
 
 .white-content .card:not(.card-white) .card-header {
@@ -19485,7 +19486,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card .card-header .card-category {
-  color: #9A9A9A;
+  color: #ffffff;
   margin-bottom: 5px;
   font-weight: 300;
 }
@@ -20162,10 +20163,6 @@ h3 input.search-input {
   text-decoration: none;
 }
 
-.sidebar a:hover {
-  background-color: #f1f1f1;
-}
-
 .sidebar .active a {
   background-color: #007bff;
   color: #fff;
@@ -20213,16 +20210,11 @@ h3 input.search-input {
 
 
 .sidebar[data="blue"] {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffffff;
 }
 
 .sidebar[data="blue"] a {
   color: #fff;
-}
-
-.sidebar[data="blue"] a:hover {
-  background-color: #0062cc;
 }
 
 .sidebar[data="blue"] .active a {
@@ -20231,12 +20223,9 @@ h3 input.search-input {
 }
 
 .sidebar[data="blue"] .logo a {
-  color: #fff;
+  color: #615e5e;
 }
 
-.sidebar[data="blue"] .logo a:hover {
-  color: #fff;
-}
 .pagesControllers {
   display: flex;
   justify-content: center;
@@ -20262,5 +20251,41 @@ h3 input.search-input {
   background-color: #000;
   color: #fff;
 }
-
+.google-btn {
+  width: 184px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.google-btn .google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.google-btn .google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+}
+.google-btn .btn-text {
+  float: right;
+  margin: 11px 11px 0 0;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-family: "Roboto";
+}
+.google-btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.google-btn:active {
+  background: #1669F2;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
