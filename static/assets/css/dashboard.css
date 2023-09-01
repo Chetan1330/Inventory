@@ -19258,8 +19258,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: #ededed;
-  box-shadow: 3px 6px 9px 5px #ededed;
+  background: #fffcf6;
 }
 
 .white-content .card:not(.card-white) .card-header {
@@ -19406,7 +19405,6 @@ Copyright (c) 2015 Daniel Eden
   position: relative;
   width: 100%;
   margin-bottom: 30px;
-  box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 .card label {
@@ -20156,7 +20154,7 @@ h3 input.search-input {
 
 
 .sidebar[data="blue"] {
-  background-color: #e7e7e7;
+  background-color: #fffcf6;
   border-right: 1px solid black;
   border-radius: 0;
 }
