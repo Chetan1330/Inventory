@@ -19067,7 +19067,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-brand {
-  color: #9c9c9c;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 500;
 }
@@ -19077,11 +19077,11 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-nav li a:not(.dropdown-item) {
-  color: #1d253b;
+  color: #ffffff;
 }
 
 .white-content .navbar.navbar-transparent .navbar-nav li a:not(.dropdown-item) i {
-  color: #1d253b;
+  color: #ffffff;
 }
 
 .white-content .navbar.navbar-transparent .navbar-minimize button i {
