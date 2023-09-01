@@ -21,8 +21,8 @@
           <p>Home</p>
         </a>
       </li>
-      <li class="{% if 'tracking' in segment %} active {% endif %}">
-        <a href="/tracking.html">
+      <li class="{% if 'purchase' in segment %} active {% endif %}">
+        <a href="/purchase.html">
           <i class="tim-icons icon-cart"></i>
           <p>Purchase</p>
         </a>
@@ -60,8 +60,8 @@
         </a>
       </li>
 
-      <li class="{% if 'createconfig' in segment %} active {% endif %}">
-        <a href="/createconfig/">
+      <li class="{% if 'config' in segment %} active {% endif %}">
+        <a href="/config.html/">
           <i class="tim-icons icon-single-02"></i>
           <p>Config</p>
         </a>
@@ -80,9 +80,9 @@
             </a>
           </li> -->
           <li
-          class="{% if 'configscan' in segment %} active {% endif %}"
+          class="{% if 'tools' in segment %} active {% endif %}"
         >
-          <a href="/configscan/" class="nav-link">
+          <a href="/tools.html/" class="nav-link">
             <i class="tim-icons icon-settings"></i>
             <p>Tools</p>
           </a>
@@ -135,10 +135,9 @@
       
 
       <li
-        data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
-        class="nav-item pcoded-hasmenu {% if 'integrations' in segment %} active {% endif %}"
+        class="{% if 'reports' in segment %} active {% endif %}"
       >
-        <a href="javascript:" class="nav-link">
+        <a href="/reports.html/" class="nav-link">
           <i class="tim-icons icon-settings"></i>
           <p>Saved Reports</p>
         </a>
