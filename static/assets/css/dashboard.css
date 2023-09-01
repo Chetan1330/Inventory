@@ -621,8 +621,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background: #ededed;
-  box-shadow: -4px 2px 7px 0px #ededed;
+  background: #190e4f;
+  box-shadow: -4px 2px 7px 0px #190e4f;
 }
 
 .row {
@@ -1627,7 +1627,7 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #525f7f;
-  background-color: transparent;
+  background-color: #ffffff;
 }
 
 .table th,
@@ -4768,7 +4768,6 @@ input[type="button"].btn-block {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.625rem 0.9375rem;
 }
 
 .navbar>.container,
@@ -15669,7 +15668,6 @@ img {
 }
 
 .navbar {
-  padding: 10px 30px 10px 15px;
   width: 100%;
   z-index: 1050;
   background: #1a1e34;
@@ -17202,7 +17200,7 @@ table.tablesorter thead tr .headerSortDown {
 .sidebar .nav li.active>a:not([data-toggle="collapse"]) p,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) i,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) p {
-  color: #8f8585;
+  color: #ffffff;
 }
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]):before,
@@ -17213,7 +17211,7 @@ table.tablesorter thead tr .headerSortDown {
   width: 6px;
   top: 22px;
   left: -4px;
-  background: #7d7575;
+  background: #ffffff;
   border-radius: 50%;
 }
 
@@ -17284,7 +17282,7 @@ table.tablesorter thead tr .headerSortDown {
   line-height: 30px;
   width: 34px;
   text-align: center;
-  color: rgb(92 85 85 / 80%);
+  color: #ffffff;
   position: relative;
 }
 
@@ -19107,7 +19105,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .sidebar p {
-  color: #8f8585;
+  color: #ffffff;
 }
 
 .white-content .main-panel {
@@ -19289,7 +19287,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: #ededed;
+  background: #ECE4B7;
   box-shadow: 3px 6px 9px 5px #ededed;
 }
 
@@ -19366,7 +19364,7 @@ Copyright (c) 2015 Daniel Eden
 
 .white-content .table>thead>tr>th,
 .white-content .table button.btn-neutral.btn-link {
-  color: rgba(34, 42, 66, 0.7);
+  color: #5F7367;
 }
 
 .white-content .footer ul li a {
@@ -19959,9 +19957,9 @@ th {
 }
 
 /* Add styles to the table rows */
-.tablemanager tr:nth-child(even) {
+/* .tablemanager tr:nth-child(even) {
   background-color: #f9f9f9;
-}
+} */
 
 /* Add styles to the table cells */
 .tablemanager td {
@@ -20202,7 +20200,7 @@ h3 input.search-input {
 }
 
 .sidebar[data="blue"] .logo a {
-  color: #615e5e;
+  color: #ffffff;
 }
 
 .pagesControllers {
@@ -20220,14 +20218,16 @@ h3 input.search-input {
 
 .pagecontroller-f, .pagecontroller-p, .pagecontroller-n, .pagecontroller-l {
   background-color: #ccc;
+  color: #5F7367;
 }
 
 .pagecontroller-num {
   background-color: #fff;
+  color: #5F7367;
 }
 
 .pagecontroller-num.currentPage {
-  background-color: #000;
+  background-color: #5F7367;
   color: #fff;
 }
 .google-btn {
