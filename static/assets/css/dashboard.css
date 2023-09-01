@@ -4818,7 +4818,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 0.75rem;
   font-size: 0.99925rem;
   line-height: 1;
-  background-color: transparent;
+  background-color: #ffffff;
   border: 0.0625rem solid transparent;
   border-radius: 0.25rem;
 }
@@ -15718,11 +15718,11 @@ img {
 }
 
 .navbar.bg-white .navbar-nav a.nav-link {
-  color: #222a42 !important;
+  color: #ffffff !important;
 }
 
 .navbar.bg-white .navbar-nav a.nav-link p {
-  color: #222a42;
+  color: #ffffff;
 }
 
 .navbar.bg-white .navbar-text,
