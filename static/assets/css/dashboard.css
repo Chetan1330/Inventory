@@ -20267,4 +20267,8 @@ h3 input.search-input {
 .google-btn:active {
   background: #1669F2;
 }
+.logo-img{
+  width: 22%!important;
+  border-radius: 0!important;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
