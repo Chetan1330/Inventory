@@ -621,8 +621,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background: linear-gradient(to left, #ffffff, #ffffff);
-  box-shadow: -6px 6px 12px 0 #454648;
+  background: #ededed;
+  box-shadow: -4px 2px 7px 0px #ededed;
 }
 
 .row {
@@ -19069,9 +19069,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .navbar.navbar-transparent .navbar-brand {
-  color: #9b9b9b;
+  color: #9c9c9c;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .white-content .navbar.navbar-transparent .navbar-toggler-bar {
@@ -19103,7 +19103,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .sidebar {
-  box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.1), 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px 0 #e7e7e7;
 }
 
 .white-content .sidebar p {
@@ -19289,8 +19289,8 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: linear-gradient(to bottom, #fbfbfb, #ffffff);
-  box-shadow: 3px 6px 9px 5px rgb(25 22 22 / 74%);
+  background: #ededed;
+  box-shadow: 3px 6px 9px 5px #ededed;
 }
 
 .white-content .card:not(.card-white) .card-header {
@@ -20189,7 +20189,7 @@ h3 input.search-input {
 
 
 .sidebar[data="blue"] {
-  background-color: #ffffff;
+  background-color: #ededed;
 }
 
 .sidebar[data="blue"] a {
