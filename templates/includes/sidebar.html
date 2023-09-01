@@ -21,19 +21,24 @@
           <p>Home</p>
         </a>
       </li>
-
+      <li class="{% if 'tracking' in segment %} active {% endif %}">
+        <a href="/tracking.html">
+          <i class="tim-icons icon-app"></i>
+          <p>Purchase</p>
+        </a>
+      </li>
       <li class="{% if 'tracking' in segment %} active {% endif %}">
         <a href="/tracking.html">
           <i class="tim-icons icon-app"></i>
           <p>Item Wise Tracking</p>
         </a>
       </li>
-      <li class="{% if 'history' in segment %} active {% endif %}">
+      <!-- <li class="{% if 'history' in segment %} active {% endif %}">
         <a href="/history.html">
           <i class="tim-icons icon-basket-simple"></i>
           <p>Item History</p>
         </a>
-      </li>
+      </li> -->
       <li class="{% if 'vendordetail' in segment %} active {% endif %}">
         <a href="/vendordetail.html">
           <i class="tim-icons icon-planet"></i>
@@ -58,15 +63,15 @@
       <li class="{% if 'createconfig' in segment %} active {% endif %}">
         <a href="/createconfig/">
           <i class="tim-icons icon-single-02"></i>
-          <p>Create Config</p>
+          <p>Config</p>
         </a>
       </li>
-      <li class="{% if 'buildconfig' in segment %} active {% endif %}">
+      <!-- <li class="{% if 'buildconfig' in segment %} active {% endif %}">
         <a href="/buildconfig/">
           <i class="tim-icons icon-bank"></i>
           <p>Build Config</p>
         </a>
-      </li>
+      </li> -->
 
       <!-- <li class="{% if 'reports' in segment %} active {% endif %}">
             <a href="#">
@@ -74,6 +79,14 @@
               <p>Reports</p>
             </a>
           </li> -->
+          <li
+          class="{% if 'configscan' in segment %} active {% endif %}"
+        >
+          <a href="/configscan/" class="nav-link">
+            <i class="tim-icons icon-settings"></i>
+            <p>Tools</p>
+          </a>
+        </li>
       <li class="{% if 'integrations' in segment %} active {% endif %}">
         <a href="#">
           <i class="tim-icons icon-link-72"></i>
@@ -98,14 +111,7 @@
           <li class=""><a href="#" class="">E-waste management</a></li>
         </ul>
       </li> -->
-      <li
-        data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
-        class="nav-item pcoded-hasmenu {% if 'configscan' in segment %} active {% endif %}"
-      >
-        <a href="/configscan/" class="nav-link">
-          <i class="tim-icons icon-settings"></i>
-          <p>Tools</p>
-        </a>
+      
         <!-- <ul class="mx-3 pcoded-submenu">
           <li class="{% if 'configscan' in segment %} active {% endif %}">
             <a href="/configscan/" class="">Config Scan</a>
@@ -126,7 +132,7 @@
             <a href="#" class="">E-waste management</a>
           </li>
         </ul> -->
-      </li>
+      
 
       <li
         data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
