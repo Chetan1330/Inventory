@@ -621,8 +621,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background: linear-gradient(to left, #66b8fe, #ffffff);
-  box-shadow: -6px 6px 12px 0 #66b8fe;
+  background: linear-gradient(to left, #ffffff, #ffffff);
+  box-shadow: -6px 6px 12px 0 #454648;
 }
 
 .row {
@@ -17005,7 +17005,6 @@ table.tablesorter thead tr .headerSortDown {
   margin-left: 25px;
 }
 
-.sidebar,
 .off-canvas-sidebar {
   background: #ba54f5;
   background: linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
@@ -17203,7 +17202,7 @@ table.tablesorter thead tr .headerSortDown {
 .sidebar .nav li.active>a:not([data-toggle="collapse"]) p,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) i,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) p {
-  color: white;
+  color: #8f8585;
 }
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]):before,
@@ -20187,27 +20186,6 @@ h3 input.search-input {
 .sidebar .nav-item {
   position: relative;
 }
-
-.sidebar .nav-item .pcoded-submenu {
-  background-color: #66b8fe;
-  border: none;
-  box-shadow: -3px -1px 5px 1px rgb(255 255 255);
-}
-
-.sidebar .nav-item:hover .pcoded-submenu {
-  display: block;
-}
-
-.sidebar .nav-item .pcoded-submenu li {
-  margin-bottom: 5px;
-}
-
-.sidebar .nav-item .pcoded-submenu a {
-  color: #fff;
-  display: block;
-  text-decoration: none;
-}
-
 
 .sidebar[data="blue"] {
   background-color: #ffffff;
