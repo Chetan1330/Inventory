@@ -6,13 +6,15 @@
 
 {% block stylesheets %}
   <style>
-    .file-upload {
-  background-color: #ffffff;
+  .file-upload {
+  background-color: #fffcf6;
   width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
-
+.upload-text{
+  text-align: center;
+}
 .file-upload-btn {
   width: 100%;
   margin: 0;
@@ -134,7 +136,7 @@
   </style>
 {% endblock stylesheets %}
 {% block content %}
-    <h1>Upload File</h1>
+    <h1 class="upload-text">Upload File</h1>
     <hr>
     <!-- <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

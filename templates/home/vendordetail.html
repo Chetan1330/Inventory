@@ -1,210 +1,209 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
-{% block title %} VendorDetail {% endblock %}
+{% extends "layouts/base.html" %} {% load static %} {% block title %}
+VendorDetail {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 
 {% block stylesheets %}
-  <style type="text/css">
-		#for_numrows {
-			padding: 10px;
-			float: left;
-		}
-		#for_filter_by {
-			padding: 0px;
-			float: right;
-		}
-		#pagesControllers {
-			display: block;
-			text-align: center;
-		}
+<style type="text/css">
+  #for_numrows {
+    padding: 10px;
+    float: left;
+  }
+  #for_filter_by {
+    padding: 0px;
+    float: right;
+  }
+  #pagesControllers {
+    display: block;
+    text-align: center;
+  }
 
-    /* #filter_input {
+  /* #filter_input {
 			padding: 0px;
 			float: right;
 		} */
 
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 
-    h3 span {
-            font-size: 22px;
-        }
-        h3 input.search-input {
-            width: 300px;
-            margin-left: auto;
-            float: right
-        }
-        .mt32 {
-            margin-top: 32px;
-        }
-	</style>
-{% endblock stylesheets %}
+  h3 span {
+    font-size: 22px;
+  }
+  h3 input.search-input {
+    width: 300px;
+    margin-left: auto;
+    float: right;
+  }
+  .mt32 {
+    margin-top: 32px;
+  }
+</style>
+{% endblock stylesheets %} {% block content %}
 
-{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-left">Vendor Details</h4>
 
-
-    <div class="row">
-      <div class="col-12">
-
-        <div class="card ">
-            <div class="card-header">
-              <h4 class="card-title text-left"> Vendor Details</h4>
-
-              <!-- <h3> -->
-                <input id="searchbar" type="text" placeholder="Search by Vendor id..." class="col-9 form-control search-input" data-table="customers-list"/>
-              <!-- </h3> -->
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-              <table id="vendortable" class="table tablemanager table-striped mt32 customers-list">
-                <thead>
-                  <tr>  
-                    <!-- <th class="disableFilterBy">SrNo</th> -->
-                    <th>Vendor_id</th>
-                    <th>Vendor Name</th>  
-                    <th>Address</th>  
-                    <th>Contact</th>
-		    <th>Email</th>
-                    <th>Web</th>
-                    <th>Joined at</th>
-                  </tr>
-                </thead>
-		<tbody>
-                  <tr>
-                    <td>1</td>  
-                    <td>James Venere</td>  
-                    <td>6649 N Blue Gum St</td>  
-                    <td>504-621-8927</td> 
-                    <td>jVenere@gmail.com</td>
-                    <td>http://www.bentonjohnbjr.com</td>
-                    <td>2021-07-01</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>  
-                    <td>Lenna Paprocki</td>  
-                    <td>639 Main St</td>  
-                    <td>907-385-4412</td> 
-                    <td>lpaprocki@hotmail.com</td>
-                    <td>http://www.feltzprintingservice.com</td>
-                    <td>2022-09-19</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>  
-                    <td>Donette Foller</td>  
-                    <td>34 Center St</td>  
-                    <td>513-570-1893</td> 
-                    <td>donette.foller@cox.net</td>
-                    <td>http://www.printingdimensions.com</td>
-                    <td>2021-08-03</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Sage Wieser</td>
-                    <td>5 Boston Ave #88</td>
-                    <td>605-414-2147</td>
-                    <td>sage_wieser@cox.net</td>
-                    <td>http://www.truhlarandtruhlarattys.com</td>
-                    <td>2022-12-23</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Graciela Ruta</td>
-                    <td>98 Connecticut Ave Nw</td>
-                    <td>440-780-8425</td>
-                    <td>gruta@cox.net</td>
-                    <td>http://www.buckleymillerwright.com</td>
-                    <td>2021-11-03</td>
-                  </tr>
-                </tbody>
-                
-            </table>
-          </div>
-            </div>
-          </div>
+        <!-- <h3> -->
+        <input
+          id="searchbar"
+          type="text"
+          placeholder="Search by Vendor id..."
+          class="col-9 form-control search-input"
+          data-table="customers-list"
+        />
+        <!-- </h3> -->
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            id="vendortable"
+            class="table tablemanager mt32 customers-list"
+          >
+            <thead>
+              <tr>
+                <!-- <th class="disableFilterBy">SrNo</th> -->
+                <th>Vendor_id</th>
+                <th>Vendor Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Web</th>
+                <th>Joined at</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>James Venere</td>
+                <td>6649 N Blue Gum St</td>
+                <td>504-621-8927</td>
+                <td>jVenere@gmail.com</td>
+                <td>http://www.bentonjohnbjr.com</td>
+                <td>2021-07-01</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Lenna Paprocki</td>
+                <td>639 Main St</td>
+                <td>907-385-4412</td>
+                <td>lpaprocki@hotmail.com</td>
+                <td>http://www.feltzprintingservice.com</td>
+                <td>2022-09-19</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Donette Foller</td>
+                <td>34 Center St</td>
+                <td>513-570-1893</td>
+                <td>donette.foller@cox.net</td>
+                <td>http://www.printingdimensions.com</td>
+                <td>2021-08-03</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Sage Wieser</td>
+                <td>5 Boston Ave #88</td>
+                <td>605-414-2147</td>
+                <td>sage_wieser@cox.net</td>
+                <td>http://www.truhlarandtruhlarattys.com</td>
+                <td>2022-12-23</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Graciela Ruta</td>
+                <td>98 Connecticut Ave Nw</td>
+                <td>440-780-8425</td>
+                <td>gruta@cox.net</td>
+                <td>http://www.buckleymillerwright.com</td>
+                <td>2021-11-03</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-  
-  <script>
-    var currstock = 5;
-    var prev = 5;
 
-    (function(document) {
-                'use strict';
+<script>
+  var currstock = 5;
+  var prev = 5;
 
-                var TableFilter = (function(myArray) {
-                    var search_input;
+  (function (document) {
+    "use strict";
 
-                    function _onInputSearch(e) {
-                        search_input = e.target;
-                        var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
-                        myArray.forEach.call(tables, function(table) {
-                            myArray.forEach.call(table.tBodies, function(tbody) {
-                                myArray.forEach.call(tbody.rows, function(row) {
-                                    var text_content = row.textContent.toLowerCase();
-                                    var search_val = search_input.value.toLowerCase();
-                                    row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
-                                });
-                            });
-                        });
-                    }
+    var TableFilter = (function (myArray) {
+      var search_input;
 
-                    return {
-                        init: function() {
-                            var inputs = document.getElementsByClassName('search-input');
-                            myArray.forEach.call(inputs, function(input) {
-                                input.oninput = _onInputSearch;
-                            });
-                        }
-                    };
-                })(Array.prototype);
-
-                document.addEventListener('readystatechange', function() {
-                    if (document.readyState === 'complete') {
-                        TableFilter.init();
-                    }
-                });
-
-            })(document);
-    
-    $('.search-input').keyup(function(){
-      var x = document.getElementById("searchbar").value.length
-      if (x == 0){
-        document.getElementById("for_numrows").remove();
-        document.getElementById("pagesControllers").remove();
-        $('.tablemanager').tablemanager({
-          pagination: true,
-          appendFilterby:false,
-          // showrows: [5],
-          showrows: [5,10,20,50,100],
-          bFilter: false,
+      function _onInputSearch(e) {
+        search_input = e.target;
+        var tables = document.getElementsByClassName(
+          search_input.getAttribute("data-table")
+        );
+        myArray.forEach.call(tables, function (table) {
+          myArray.forEach.call(table.tBodies, function (tbody) {
+            myArray.forEach.call(tbody.rows, function (row) {
+              var text_content = row.textContent.toLowerCase();
+              var search_val = search_input.value.toLowerCase();
+              row.style.display =
+                text_content.indexOf(search_val) > -1 ? "" : "none";
+            });
+          });
         });
-        // document.getElementById("numrows").value = 10;
       }
-      // console.log("value:", x);
-      
-    });
-    
 
-    $('#vendortable').tablemanager({
-          pagination: true,
-          appendFilterby:false,
-          // showrows: [5],
-          showrows: [5,10,20,50,100],
-          bFilter: false,
+      return {
+        init: function () {
+          var inputs = document.getElementsByClassName("search-input");
+          myArray.forEach.call(inputs, function (input) {
+            input.oninput = _onInputSearch;
+          });
+        },
+      };
+    })(Array.prototype);
+
+    document.addEventListener("readystatechange", function () {
+      if (document.readyState === "complete") {
+        TableFilter.init();
+      }
     });
-    
-      
-    
+  })(document);
+
+  $(".search-input").keyup(function () {
+    var x = document.getElementById("searchbar").value.length;
+    if (x == 0) {
+      document.getElementById("for_numrows").remove();
+      document.getElementById("pagesControllers").remove();
+      $(".tablemanager").tablemanager({
+        pagination: true,
+        appendFilterby: false,
+        // showrows: [5],
+        showrows: [5, 10, 20, 50, 100],
+        bFilter: false,
+      });
+      // document.getElementById("numrows").value = 10;
+    }
+    // console.log("value:", x);
+  });
+
+  $("#vendortable").tablemanager({
+    pagination: true,
+    appendFilterby: false,
+    // showrows: [5],
+    showrows: [5, 10, 20, 50, 100],
+    bFilter: false,
+  });
 </script>
 
 {% endblock javascripts %}
