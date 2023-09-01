@@ -17175,7 +17175,7 @@ table.tablesorter thead tr .headerSortDown {
   margin: 0 15px;
 }
 
-.sidebar .nav li:hover:not(.active)>a p,
+/* .sidebar .nav li:hover:not(.active)>a p,
 .sidebar .nav li:hover:not(.active)>a i,
 .sidebar .nav li:focus:not(.active)>a p,
 .sidebar .nav li:focus:not(.active)>a i,
@@ -17184,14 +17184,14 @@ table.tablesorter thead tr .headerSortDown {
 .off-canvas-sidebar .nav li:focus:not(.active)>a p,
 .off-canvas-sidebar .nav li:focus:not(.active)>a i {
   color: #ffffff;
-}
+} */
 
-.sidebar .nav li:hover:not(.active)>a i,
+/* .sidebar .nav li:hover:not(.active)>a i,
 .sidebar .nav li:focus:not(.active)>a i,
 .off-canvas-sidebar .nav li:hover:not(.active)>a i,
 .off-canvas-sidebar .nav li:focus:not(.active)>a i {
   color: #ffffff;
-}
+} */
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]),
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) {
@@ -17284,7 +17284,7 @@ table.tablesorter thead tr .headerSortDown {
   line-height: 30px;
   width: 34px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(92 85 85 / 80%);
   position: relative;
 }
 
@@ -19107,7 +19107,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .sidebar p {
-  color: rgba(255, 255, 255, 0.8);
+  color: #8f8585;
 }
 
 .white-content .main-panel {
