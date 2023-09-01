@@ -1,1 +1,35 @@
-<p>Tolls</p>
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button>
+                    <a href="/upload/">Upload file</a>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button>
+                    <a href="#">Planning</a>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button>
+                    <a href="#">Recommendation</a>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button>
+                    <a href="#">E-waste management</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

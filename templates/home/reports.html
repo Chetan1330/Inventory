@@ -1,1 +1,25 @@
-<p>reports</p>
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <button>
+                    <a href="#">Current Month</a>
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button>
+                    <a href="#">Last Month</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

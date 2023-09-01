@@ -1,1 +1,31 @@
-<p>config</p>
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button>
+                    <a href="/createconfig/">Create Config</a>
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button>
+                    <a href="/buildconfig/">Build Config</a>
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button>
+                    <a href="/configscan/">Config Scan</a>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    
+{% endblock content %}
