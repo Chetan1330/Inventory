@@ -608,7 +608,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
   background: #190e4f;
-  box-shadow: -4px 2px 7px 0px #190e4f;
 }
 
 .row {
@@ -16163,11 +16162,6 @@ h6 {
   color: rgba(255, 255, 255, 0.8);
 }
 
-a {
-  color: #ba54f5;
-  font-weight: 300;
-}
-
 
 h1,
 .h1 {
@@ -17176,7 +17170,7 @@ table.tablesorter thead tr .headerSortDown {
 .sidebar .nav li.active>a:not([data-toggle="collapse"]) p,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) i,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) p {
-  color: #ffffff;
+  color: #5F7367;
 }
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]):before,
@@ -17187,7 +17181,7 @@ table.tablesorter thead tr .headerSortDown {
   width: 6px;
   top: 22px;
   left: -4px;
-  background: #ffffff;
+  background: #9c9b9b;
   border-radius: 50%;
 }
 
@@ -17258,7 +17252,7 @@ table.tablesorter thead tr .headerSortDown {
   line-height: 30px;
   width: 34px;
   text-align: center;
-  color: #ffffff;
+  color: #5F7367;
   position: relative;
 }
 
@@ -19081,7 +19075,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .sidebar p {
-  color: #ffffff;
+  color: #5F7367;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .white-content .main-panel {
@@ -20154,9 +20150,6 @@ h3 input.search-input {
   text-decoration: none;
 }
 
-.sidebar .logo a:hover {
-  color: #007bff;
-}
 
 .sidebar .nav-item {
   position: relative;
@@ -20164,7 +20157,9 @@ h3 input.search-input {
 
 
 .sidebar[data="blue"] {
-  background-color: #5F7367;
+  background-color: #e7e7e7;
+  border-right: 1px solid black;
+  border-radius: 0;
 }
 
 .sidebar[data="blue"] a {
@@ -20177,7 +20172,7 @@ h3 input.search-input {
 }
 
 .sidebar[data="blue"] .logo a {
-  color: #ffffff;
+  color: #9c9b9b;
 }
 
 .pagesControllers {
