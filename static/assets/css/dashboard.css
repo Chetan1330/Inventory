@@ -20247,7 +20247,7 @@ h3 input.search-input {
   width: 100%;
   min-height: 150px;
   background: #ffffff;
-  border: none;
+  border: 0.1px solid #5F7367;
 }
 .larg-link{
   font-size: 16px!important;
@@ -20257,8 +20257,11 @@ h3 input.search-input {
 }
 .btn-content{
   width: 100%;
-  min-height: 150px;
-  background: #ffffff;
-  border: 0.1px solid #5F7367;
+  background: #fffcf6;
+  height: calc(100vh - 90px);
+  padding: 50px 20px;
+}
+.purchase-head{
+  display: flex;
 }
 /*# sourceMappingURL=black-dashboard.css.map */
