@@ -19311,7 +19311,7 @@ Copyright (c) 2015 Daniel Eden
 
 .white-content .table>thead>tr>th,
 .white-content .table button.btn-neutral.btn-link {
-  color: #5F7367;
+  color: #190e4f;
 }
 
 .white-content .footer ul li a {
@@ -20154,16 +20154,16 @@ h3 input.search-input {
 
 .pagecontroller-f, .pagecontroller-p, .pagecontroller-n, .pagecontroller-l {
   background-color: #ccc;
-  color: #5F7367;
+  color: #190e4f;
 }
 
 .pagecontroller-num {
   background-color: #fff;
-  color: #5F7367;
+  color: #190e4f;
 }
 
 .pagecontroller-num.currentPage {
-  background-color: #5F7367;
+  background-color: #190e4f;
   color: #fff;
 }
 .google-btn {
@@ -20215,7 +20215,7 @@ h3 input.search-input {
   width: 100%;
   min-height: 150px;
   background: #ffffff;
-  border: 0.1px solid #5F7367;
+  border: 0.1px solid #190e4f;
 }
 .larg-link{
   font-size: 16px!important;
@@ -20242,24 +20242,32 @@ button.global-btn {
   width: 100%;
   min-height: 150px;
   background: #ffffff;
-  border: 0.1px solid #5F7367;
+  border: 0.1px solid #190e4f;
   margin: 20px;
 }
 a.card-link.purchase-link {
-  border: 0.1px solid #5F7367;
+  border: 0.1px solid #190e4f;
   padding: 10px;
   text-decoration: none;
-  color: #5F7367;
+  color: #190e4f;
   display: block;
   text-align: center;
   margin: 10px 20px;
   background: #fff;
 }
 span.purchase.caret {
-  top: 77px;
+  top: 21px;
+  left: 51px;
 }
 ul.dropdown-menu.show.purchase {
   padding: 10px;
 }
-
+button.dropdown-toggle.purchase {
+  border: none;
+  background: #fff;
+  padding: 5px;
+  width: 15%;
+  border: 1px solid #190e4f;
+  color: #190e4f;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
