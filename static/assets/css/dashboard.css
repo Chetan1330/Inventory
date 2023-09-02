@@ -20270,4 +20270,7 @@ button.dropdown-toggle.purchase {
   border: 1px solid #190e4f;
   color: #190e4f;
 }
+ul.dropdown-menu.purchase {
+  padding: 10px;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
