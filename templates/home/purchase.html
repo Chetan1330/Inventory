@@ -10,48 +10,97 @@
 
 <div class="card">
   <div class="card-header purchase-head">
-    <button class="larg-btn">Create Purchase request</button>
-    <button class="larg-btn">View Active request</button>
+    <button class="larg-btn purchase">Create Purchase request</button>
+    <button class="larg-btn purchase">View Active request</button>
   </div>
   <div class="card-body">
-    <a href="#" class="card-link">View templates</a>
-    <h5 class="mt-4">History:</h5>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Search">
-      <div class="input-group-append">
-        <button class="global-btn" type="button">Search</button>
+    <a href="#" class="card-link purchase-link">View templates</a>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title text-left">History :</h4>
+            <!-- <h3> -->
+            <input
+              id="searchbar"
+              type="text"
+              placeholder="Search by id..."
+              class="col-9 form-control search-input"
+              data-table="customers-list"
+            />
+            <!-- </h3> -->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                id="vendortable"
+                class="table tablemanager mt32 customers-list"
+              >
+                <thead>
+                  <tr>
+                    <!-- <th class="disableFilterBy">SrNo</th> -->
+                    <th>Vendor_id</th>
+                    <th>Vendor Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Web</th>
+                    <th>Joined at</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>James Venere</td>
+                    <td>6649 N Blue Gum St</td>
+                    <td>504-621-8927</td>
+                    <td>jVenere@gmail.com</td>
+                    <td>http://www.bentonjohnbjr.com</td>
+                    <td>2021-07-01</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Lenna Paprocki</td>
+                    <td>639 Main St</td>
+                    <td>907-385-4412</td>
+                    <td>lpaprocki@hotmail.com</td>
+                    <td>http://www.feltzprintingservice.com</td>
+                    <td>2022-09-19</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Donette Foller</td>
+                    <td>34 Center St</td>
+                    <td>513-570-1893</td>
+                    <td>donette.foller@cox.net</td>
+                    <td>http://www.printingdimensions.com</td>
+                    <td>2021-08-03</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Sage Wieser</td>
+                    <td>5 Boston Ave #88</td>
+                    <td>605-414-2147</td>
+                    <td>sage_wieser@cox.net</td>
+                    <td>http://www.truhlarandtruhlarattys.com</td>
+                    <td>2022-12-23</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Graciela Ruta</td>
+                    <td>98 Connecticut Ave Nw</td>
+                    <td>440-780-8425</td>
+                    <td>gruta@cox.net</td>
+                    <td>http://www.buckleymillerwright.com</td>
+                    <td>2021-11-03</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 

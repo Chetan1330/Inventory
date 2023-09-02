@@ -16478,7 +16478,6 @@ hr {
 
 .table-responsive {
   overflow: scroll;
-  padding-bottom: 10px;
 }
 
 #tables .table-responsive {
@@ -18542,7 +18541,7 @@ code {
   width: 17px;
 }
 
-.input-group-append,
+/* .input-group-append,
 .input-group-prepend .input-group-text,
 .input-group-prepend .input-group-text {
   background-color: transparent;
@@ -18550,7 +18549,7 @@ code {
   border-radius: 0.4285rem;
   color: #ffffff;
   margin: 0;
-}
+} */
 
 .input-group-append .input-group-text {
   border-left: none;
@@ -20263,5 +20262,16 @@ h3 input.search-input {
 }
 .purchase-head{
   display: flex;
+}
+button.global-btn {
+  width: 100%;
+  border: none;
+}
+.larg-btn.purchase{
+  width: 100%;
+  min-height: 150px;
+  background: #ffffff;
+  border: 0.1px solid #5F7367;
+  margin: 20px;
 }
 /*# sourceMappingURL=black-dashboard.css.map */
