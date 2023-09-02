@@ -60,30 +60,60 @@
         </div>
       </div>
       <br>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Item 1</td>
-            <td>Type 1</td>
-            <td>1</td>
-            <td>Link 1</td>
-          </tr>
-          <tr>
-            <td>Item 2</td>
-            <td>Type 2</td>
-            <td>2</td>
-            <td>Link 2</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table
+          id="vendortable"
+          class="table tablemanager customers-list"
+        >
+          <thead>
+            <tr>
+              <!-- <th class="disableFilterBy">SrNo</th> -->
+              <th>NAME</th>
+              <th>TYPE</th>
+              <th>QUANTITY</th>
+              <th>LINK</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>James Venere</td>
+              <td>6649 N Blue Gum St</td>
+              <td>504-621-8927</td>
+              <td>jVenere@gmail.com</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Lenna Paprocki</td>
+              <td>639 Main St</td>
+              <td>907-385-4412</td>
+              <td>lpaprocki@hotmail.com</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Donette Foller</td>
+              <td>34 Center St</td>
+              <td>513-570-1893</td>
+              <td>donette.foller@cox.net</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Sage Wieser</td>
+              <td>5 Boston Ave #88</td>
+              <td>605-414-2147</td>
+              <td>sage_wieser@cox.net</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Graciela Ruta</td>
+              <td>98 Connecticut Ave Nw</td>
+              <td>440-780-8425</td>
+              <td>gruta@cox.net</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="form-group">
         <label for="approverDetails">Approver Details:</label>
         <textarea class="form-control" id="approverDetails" rows="3">Dummy data with some dummy details of user</textarea>
