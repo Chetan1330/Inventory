@@ -20274,4 +20274,14 @@ button.global-btn {
   border: 0.1px solid #5F7367;
   margin: 20px;
 }
+a.card-link.purchase-link {
+  border: 0.1px solid #5F7367;
+  padding: 10px;
+  text-decoration: none;
+  color: #5F7367;
+  display: block;
+  text-align: center;
+  margin: 10px 20px;
+  background: #fff;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
