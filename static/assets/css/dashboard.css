@@ -1619,7 +1619,6 @@ pre code {
 .table td {
   padding: 1rem;
   vertical-align: top;
-  border-top: 0.0625rem solid #e3e3e3;
 }
 
 .table thead th {
@@ -20265,7 +20264,9 @@ h3 input.search-input {
 }
 button.global-btn {
   width: 100%;
-  border: none;
+  border: 1px solid #fff;
+  padding: 10px;
+  border-radius: 50px;
 }
 .larg-btn.purchase{
   width: 100%;
