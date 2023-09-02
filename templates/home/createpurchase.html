@@ -1,0 +1,128 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-3">
+          <h5>ID</h5>
+        </div>
+        <div class="col-sm-3">
+          <h5>Date</h5>
+        </div>
+        <div class="col-sm-3">
+          <h5>Account</h5>
+        </div>
+        <div class="col-sm-3">
+          <h5>Requested By</h5>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="dropdown">
+            <button class="larg-btn dropdown-toggle" type="button" data-toggle="dropdown">Items
+            <span class="purchase caret"></span></button>
+            <ul class="dropdown-menu">
+              <li>
+                <form>
+                  <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="type">Type:</label>
+                    <input type="text" class="form-control" id="type">
+                  </div>
+                  <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="text" class="form-control" id="quantity">
+                  </div>
+                  <div class="form-group">
+                    <label for="link">Link:</label>
+                    <input type="text" class="form-control" id="link">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <button type="button" class="larg-btn" data-toggle="modal" data-target="#descriptionModal">Description</button>
+        </div>
+      </div>
+      <br>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Item 1</td>
+            <td>Type 1</td>
+            <td>1</td>
+            <td>Link 1</td>
+          </tr>
+          <tr>
+            <td>Item 2</td>
+            <td>Type 2</td>
+            <td>2</td>
+            <td>Link 2</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label for="approverDetails">Approver Details:</label>
+        <textarea class="form-control" id="approverDetails" rows="3">Dummy data with some dummy details of user</textarea>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <button type="button" class="global-btn">Submit</button>
+        </div>
+        <div class="col-sm-6 text-right">
+          <button type="button" class="global-btn">+Save Template</button>
+        </div>
+      </div>
+    </div>
+</div>
+  
+  <!-- Description Modal -->
+<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="descriptionModalLabel">Add Description</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+        </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+    </div>
+</div>
+</div>
+  
+{% endblock content %}

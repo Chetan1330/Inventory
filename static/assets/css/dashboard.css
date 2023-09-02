@@ -17937,7 +17937,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 .card form label+.form-control {
   margin-bottom: 20px;
   background: white;
-  border: none;
+  /* border: none; */
 }
 
 .card .map-title {
@@ -20284,4 +20284,11 @@ a.card-link.purchase-link {
   margin: 10px 20px;
   background: #fff;
 }
+.span.purchase.caret {
+  top: 77px;
+}
+ul.dropdown-menu.show.purchase {
+  padding: 10px;
+}
+
 /*# sourceMappingURL=black-dashboard.css.map */
