@@ -55,7 +55,7 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="quantity">Quantity:</label>
-                            <input type="text" class="form-control" id="quantity">
+                            <input type="number" class="form-control" id="quantity">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="link">Link:</label>
@@ -66,8 +66,14 @@
                           <label for="description">Description:</label>
                           <input type="text" class="form-control" id="description">
                         </div>
-                        <button type="submit" class="global-btn">Submit</button>
-                        <button type="button" class="global-btn add-new-btn">Add New</button>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="global-btn">Submit</button>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" class="global-btn add-new-btn">Add New+</button>
+                            </div>
+                        </div>
                       </form>
                   </li>
                 </ul>
@@ -77,13 +83,9 @@
       </div>
       <br>
       <div class="table-responsive">
-        <table
-          id="vendortable"
-          class="table tablemanager customers-list"
-        >
+        <table id="vendortable" class="table tablemanager customers-list table-bordered">
           <thead>
             <tr>
-              <!-- <th class="disableFilterBy">SrNo</th> -->
               <th>NAME</th>
               <th>TYPE</th>
               <th>QUANTITY</th>
@@ -92,57 +94,59 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="border">
               <td>Peter</td>
               <td>Net Adapter</td>
               <td>5</td>
               <td><a href="#">www.ust.com</a></td>
               <td>This is in need for outsourcing</td>
             </tr>
-            <tr>
-                <td>Paul</td>
-                <td>Net Adapter</td>
-                <td>5</td>
-                <td><a href="#">www.ust.com</a></td>
-                <td>This is in need for outsourcing</td>
+            <tr class="border">
+              <td>Paul</td>
+              <td>Net Adapter</td>
+              <td>5</td>
+              <td><a href="#">www.ust.com</a></td>
+              <td>This is in need for outsourcing</td>
             </tr>
-            <tr>
-                <td>Jack</td>
-                <td>Net Adapter</td>
-                <td>5</td>
-                <td><a href="#">www.ust.com</a></td>
-                <td>This is in need for outsourcing</td>
+            <tr class="border">
+              <td>Jack</td>
+              <td>Net Adapter</td>
+              <td>5</td>
+              <td><a href="#">www.ust.com</a></td>
+              <td>This is in need for outsourcing</td>
             </tr>
-            <tr>
-                <td>Julius</td>
-                <td>Net Adapter</td>
-                <td>5</td>
-                <td><a href="#">www.ust.com</a></td>
-                <td>This is in need for outsourcing</td>
+            <tr class="border">
+              <td>Julius</td>
+              <td>Net Adapter</td>
+              <td>5</td>
+              <td><a href="#">www.ust.com</a></td>
+              <td>This is in need for outsourcing</td>
             </tr>
-            <tr>
-                <td>Ceaser</td>
-                <td>Net Adapter</td>
-                <td>5</td>
-                <td><a href="#">www.ust.com</a></td>
-                <td>This is in need for outsourcing</td>
+            <tr class="border">
+              <td>Ceaser</td>
+              <td>Net Adapter</td>
+              <td>5</td>
+              <td><a href="#">www.ust.com</a></td>
+              <td>This is in need for outsourcing</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="form-group">
-        <label for="approverDetails">Approver Details:</label>
-        <textarea class="form-control" id="approverDetails" rows="3" disabled>
-                <span>Name: Aston Martin</span>
-                <span>Role: Manager</span>
-                <span>Location: New York,USA</span>
-        </textarea>
-      </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="approverDetails">Approver Details:</label>
+                <textarea class="form-control" id="approverDetails" rows="3" disabled>
+                        Name: Aston Martin <br>
+                        Role: Manager<br>
+                        Location: New York,USA
+                </textarea>
+              </div>
+        </div>
+        <div class="col-sm-4">
           <button type="button" class="global-btn">Submit</button>
         </div>
-        <div class="col-sm-6 text-right">
+        <div class="col-sm-4 text-right">
           <button type="button" class="global-btn">+Save Template</button>
         </div>
       </div>
