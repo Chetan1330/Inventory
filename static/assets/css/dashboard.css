@@ -20256,9 +20256,9 @@ h3 input.search-input {
   text-decoration: none;
 }
 .btn-content{
-  margin: 50px auto;
-  padding: 20px 50px;
-  background: #ECE4B7;
-  box-shadow: 3px 6px 9px 5px #ededed;
+  width: 100%;
+  min-height: 150px;
+  background: #ffffff;
+  border: 0.1px solid #5F7367;
 }
 /*# sourceMappingURL=black-dashboard.css.map */
