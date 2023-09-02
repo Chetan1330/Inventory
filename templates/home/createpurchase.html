@@ -14,13 +14,13 @@
           <h5>ID: <span>C515LM1W</span></h5>
         </div>
         <div class="col-sm-3">
-          <h5>Date <span>August'30 2023</span></h5>
+          <h5>Date: <span>August'30 2023</span></h5>
         </div>
         <div class="col-sm-3">
-          <h5>Account<span>Mercury</span></h5>
+          <h5>Account: <span>Mercury</span></h5>
         </div>
         <div class="col-sm-3">
-          <h5>Requested By<span>James Cameron</span></h5>
+          <h5>Requested By: <span>James Cameron</span></h5>
         </div>
       </div>
     </div>
@@ -34,25 +34,41 @@
                 <ul class="dropdown-menu purchase">
                   <li>
                     <form>
-                      <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name">
-                      </div>
-                      <div class="form-group">
-                        <label for="type">Type:</label>
-                        <input type="text" class="form-control" id="type">
-                      </div>
-                      <div class="form-group">
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" class="form-control" id="quantity">
-                      </div>
-                      <div class="form-group">
-                        <label for="link">Link:</label>
-                        <input type="text" class="form-control" id="link">
-                      </div>
-                      <button type="submit" class="global-btn">Submit</button>
-                      <button type="button" class="global-btn add-new-btn">Add New +</button>
-                    </form>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="name">Name:</label>
+                            <select class="form-control" id="name">
+                              <option value="item1">Item 1</option>
+                              <option value="item2">Item 2</option>
+                              <option value="item3">Item 3</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="type">Type:</label>
+                            <select class="form-control" id="type">
+                              <option value="type1">Type 1</option>
+                              <option value="type2">Type 2</option>
+                              <option value="type3">Type 3</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="quantity">Quantity:</label>
+                            <input type="text" class="form-control" id="quantity">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="link">Link:</label>
+                            <input type="text" class="form-control" id="link">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="description">Description:</label>
+                          <input type="text" class="form-control" id="description">
+                        </div>
+                        <button type="submit" class="global-btn">Submit</button>
+                        <button type="button" class="global-btn add-new-btn">Add New</button>
+                      </form>
                   </li>
                 </ul>
               </div>
@@ -117,11 +133,9 @@
       <div class="form-group">
         <label for="approverDetails">Approver Details:</label>
         <textarea class="form-control" id="approverDetails" rows="3" disabled>
-            <ul>
-                <li>Name: John Doe</li>
-                <li>Role: Manager</li>
-                <li>Location: New York,USA</li>
-              </ul>              
+                <span>Name: Aston Martin</span>
+                <span>Role: Manager</span>
+                <span>Location: New York,USA</span>
         </textarea>
       </div>
       <div class="row">
