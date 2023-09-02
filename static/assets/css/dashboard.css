@@ -20284,7 +20284,7 @@ a.card-link.purchase-link {
   margin: 10px 20px;
   background: #fff;
 }
-.span.purchase.caret {
+span.purchase.caret {
   top: 77px;
 }
 ul.dropdown-menu.show.purchase {
