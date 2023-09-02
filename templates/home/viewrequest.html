@@ -1,158 +1,72 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
-{% load widget_tweaks %}
-{% block title %} Home {% endblock title %}
-
-
-{% block content %}
+{% extends "layouts/base.html" %} {% load static %} {% load widget_tweaks %} {%
+block title %} Home {% endblock title %} {% block content %}
 
 <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-sm-3">
-          <h5>ID</h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Date</h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Account</h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Requested By</h5>
-        </div>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="larg-btn" style="font-size: 24px;">Active Request :</button>
       </div>
     </div>
     <div class="card-body">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="dropdown">
-            <button class="larg-btn dropdown-toggle" type="button" data-toggle="dropdown">Items
-            <span class="purchase caret"></span></button>
-            <ul class="dropdown-menu">
-              <li>
-                <form>
-                  <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="type">Type:</label>
-                    <input type="text" class="form-control" id="type">
-                  </div>
-                  <div class="form-group">
-                    <label for="quantity">Quantity:</label>
-                    <input type="text" class="form-control" id="quantity">
-                  </div>
-                  <div class="form-group">
-                    <label for="link">Link:</label>
-                    <input type="text" class="form-control" id="link">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <button type="button" class="larg-btn" data-toggle="modal" data-target="#descriptionModal">Description</button>
-        </div>
-      </div>
-      <br>
       <div class="table-responsive">
-        <table
-          id="vendortable"
-          class="table tablemanager customers-list"
-        >
+        <table id="vendortable" class="table tablemanager customers-list">
           <thead>
             <tr>
-              <!-- <th class="disableFilterBy">SrNo</th> -->
-              <th>NAME</th>
-              <th>TYPE</th>
-              <th>QUANTITY</th>
-              <th>LINK</th>
-              <th>Description</th>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Approver</th>
+              <th>Remarks</th>
+              <th>Link</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>1</td>
-              <td>James Venere</td>
-              <td>6649 N Blue Gum St</td>
-              <td>504-621-8927</td>
-              <td>jVenere@gmail.com</td>
+              <td>Approved</td>
+              <td>August,21,2023</td>
+              <td>Peter</td>
+              <td>Good</td>
+              <td><a href="#">www.template.com</a></td>
             </tr>
             <tr>
               <td>2</td>
-              <td>Lenna Paprocki</td>
-              <td>639 Main St</td>
-              <td>907-385-4412</td>
-              <td>lpaprocki@hotmail.com</td>
+              <td>Approved</td>
+              <td>August,21,2023</td>
+              <td>Peter</td>
+              <td>Good</td>
+              <td><a href="#">www.template.com</a></td>
             </tr>
             <tr>
               <td>3</td>
-              <td>Donette Foller</td>
-              <td>34 Center St</td>
-              <td>513-570-1893</td>
-              <td>donette.foller@cox.net</td>
+              <td>Approved</td>
+              <td>August,21,2023</td>
+              <td>Peter</td>
+              <td>Good</td>
+              <td><a href="#">www.template.com</a></td>
             </tr>
             <tr>
               <td>4</td>
-              <td>Sage Wieser</td>
-              <td>5 Boston Ave #88</td>
-              <td>605-414-2147</td>
-              <td>sage_wieser@cox.net</td>
+              <td>Approved</td>
+              <td>August,21,2023</td>
+              <td>Peter</td>
+              <td>Good</td>
+              <td><a href="#">www.template.com</a></td>
             </tr>
             <tr>
               <td>5</td>
-              <td>Graciela Ruta</td>
-              <td>98 Connecticut Ave Nw</td>
-              <td>440-780-8425</td>
-              <td>gruta@cox.net</td>
+              <td>Approved</td>
+              <td>August,21,2023</td>
+              <td>Peter</td>
+              <td>Good</td>
+              <td><a href="#">www.template.com</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="form-group">
-        <label for="approverDetails">Approver Details:</label>
-        <textarea class="form-control" id="approverDetails" rows="3">Dummy data with some dummy details of user</textarea>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <button type="button" class="global-btn">Submit</button>
-        </div>
-        <div class="col-sm-6 text-right">
-          <button type="button" class="global-btn">+Save Template</button>
-        </div>
-      </div>
     </div>
+  </div>
+
+  {% endblock content %}
 </div>
-  
-  <!-- Description Modal -->
-<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="descriptionModalLabel">Add Description</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
-        </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
-    </div>
-</div>
-</div>
-  
-{% endblock content %}
