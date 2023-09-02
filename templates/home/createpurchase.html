@@ -137,8 +137,8 @@
             <div class="form-group">
                 <label for="approverDetails">Approver Details:</label>
                 <textarea class="form-control" id="approverDetails" rows="3" disabled>
-                        Name: Aston Martin <br>
-                        Role: Manager<br>
+                        Name: Aston Martin,
+                        Role: Manager,
                         Location: New York,USA
                 </textarea>
               </div>
@@ -180,3 +180,20 @@
 </div>
   
 {% endblock content %}
+{% block javascript %}
+<script>
+$(document).on("click", ".add-new-btn", function() {
+    var newRow = $("<tr>");
+    var cols = "";
+  
+    cols += '<td><input type="text" class="form-control" name="name"></td>';
+    cols += '<td><input type="text" class="form-control" name="type"></td>';
+    cols += '<td><input type="text" class="form-control" name="quantity"></td>';
+    cols += '<td><input type="text" class="form-control" name="link"></td>';
+    cols += '<td><button type="button" class="btn btn-primary description-btn">Description</button></td>';
+  
+    newRow.append(cols);
+    $("table").append(newRow);
+  });
+</script>
+{% endblock javascript %}

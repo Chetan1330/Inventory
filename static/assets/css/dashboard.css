@@ -19312,6 +19312,7 @@ Copyright (c) 2015 Daniel Eden
 .white-content .table>thead>tr>th,
 .white-content .table button.btn-neutral.btn-link {
   color: #190e4f;
+  border: 1px solid #190e4f;
 }
 
 .white-content .footer ul li a {
