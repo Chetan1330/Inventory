@@ -231,8 +231,8 @@
         // Remove the submit and "Add New" buttons from the previous form
         var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
         var addNewBtn = clonedForm.querySelector(".add-new-btn");
-        submitBtn.remove();
-        addNewBtn.remove();
+        submitBtn ? submitBtn.remove() :'';
+        addNewBtn ? addNewBtn.remove() : '';
   
         // Append the cloned form to the list
         var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
@@ -256,6 +256,7 @@
       }
     })(document);
   </script>
+  
   
   
 {% endblock content %}
