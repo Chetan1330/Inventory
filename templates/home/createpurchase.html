@@ -169,7 +169,7 @@
     // Attach the addNewFields function to the "Add New+" button click event
     document.addEventListener("click", function (event) {
     if (event.target.classList.contains("add-new-btn")) {
-      addNewFields();
+      addNewFields(event);
     }
   });
 
