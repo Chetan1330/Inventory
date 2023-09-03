@@ -99,13 +99,30 @@
             },
             responsive: true,
             scales: {
-                x: {
-                    stacked: true // Enable stacking for the x-axis (vertical bars)
-                },
-                y: {
-                    beginAtZero: true,
-                    stacked: true // Enable stacking for the y-axis (vertical bars)
-                }
+                yAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        suggestedMin: 60,
+                        suggestedMax: 120,
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }]
             }
         };
 
@@ -119,15 +136,19 @@
                 labels: labels,
                 datasets: [{
                     label: "Total Available",
+                    fill: true,
                     backgroundColor: gradientStroke,
+                    hoverBackgroundColor: gradientStroke,
                     borderColor: '#1f8ef1',
                     borderWidth: 2,
                     borderDash: [],
                     borderDashOffset: 0.0,
                     data: Stockin,
                 }, {
-                    label: "Total Stock",
                     backgroundColor: gradientStroke1,
+                    label: 'Total Stock',
+                    fill: true,
+                    hoverBackgroundColor: gradientStroke,
                     borderColor: '#ffd103',
                     borderWidth: 2,
                     borderDash: [],
@@ -169,4 +190,9 @@
             data.datasets[0].label = "Not Available";
             data.datasets[0].data = stockout;
             data.labels = labels;
-            myChartData
+            myChartData.update();
+        });
+    });
+</script>
+
+{% endblock content %}
