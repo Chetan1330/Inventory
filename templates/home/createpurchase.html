@@ -68,10 +68,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn" onclick="populateTable()">Submit</button>
+                                <button type="submit" class="global-btn">Submit</button>
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn add-new-btn" onclick="addNewFields()">Add New+</button>
+                                <button type="submit" class="global-btn add-new-btn" >Add New+</button>
                             </div>
                         </div>
                       </form>
@@ -154,6 +154,9 @@
 {% endblock content %}
 {% block javascript %}
 <script>
+
+(function (document) {
+    'use strict '
 // Attach the populateTable function to the form submission event
 document.querySelector('#item-form').addEventListener('submit', function (event) {
     console.log(event,'event')
@@ -219,6 +222,6 @@ function addNewFields() {
     // Append the cloned form to the list
     document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
 }
-
+})(document);
 </script>
 {% endblock javascript %}
