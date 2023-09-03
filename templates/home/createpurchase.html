@@ -208,11 +208,17 @@
       document.getElementById("description").value = "";
     }
 
-    function addNewFields() {
+    function addNewFields(event) {
     // Find the form that corresponds to the clicked "Add New" button
     event.stopPropagation();
     var form = event.target.closest("form");
     if (form) {
+      // Remove the first submit button and the "Add New" button from the previous form
+      var submitBtn = form.querySelector('.global-btn[type="submit"]');
+      var addNewBtn = form.querySelector(".add-new-btn");
+      submitBtn.remove();
+      addNewBtn.remove();
+
       // Clone the form and clear the input fields in the cloned form
       var clonedForm = form.cloneNode(true);
       clonedForm.querySelectorAll("input").forEach(function (input) {
