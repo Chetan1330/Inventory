@@ -170,7 +170,6 @@
       .querySelector(".dropdown.purchase")
       .addEventListener("click", function (event) {
         if (event.target.classList.contains("add-new-btn")) {
-          event.preventDefault();
           addNewFields();
         }
       });
@@ -208,6 +207,7 @@
       document.getElementById("quantity").value = "";
       document.getElementById("link").value = "";
       document.getElementById("description").value = "";
+      event.preventDefault();
     }
 
     function addNewFields() {
@@ -235,9 +235,9 @@
           .appendChild(clonedForm);
 
         // Append the submit and add new buttons to the cloned form
-        var formGroup = clonedForm.querySelector(".form-group:last-of-type");
+        // var formGroup = clonedForm.querySelector(".form-group:last-of-type");
         var descriptionGroup = clonedForm.querySelector("#description").parentNode;
-        formGroup.innerHTML +=
+        form.innerHTML +=
           '<div class="form-row">' +
           '<div class="form-group col-md-6">' +
           '<button type="submit" class="global-btn">Submit</button>' +
@@ -248,6 +248,7 @@
           "</div>"
           ;
           descriptionGroup.after(formGroup);
+          event.preventDefault();
       }
     }
   })(document);
