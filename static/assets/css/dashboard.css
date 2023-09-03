@@ -1976,7 +1976,7 @@ pre code {
 
 @media (max-width: 575.98px) {
   .table-responsive-sm {
-    display: table;
+    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2002,7 +2002,7 @@ pre code {
 
 @media (max-width: 991.98px) {
   .table-responsive-lg {
-    display: table;
+    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2015,7 +2015,7 @@ pre code {
 
 @media (max-width: 1199.98px) {
   .table-responsive-xl {
-    display: table;
+    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
