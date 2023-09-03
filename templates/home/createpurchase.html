@@ -159,12 +159,12 @@
     "use strict ";
 
     // Attach the populateTable function to the form submission event
-    document
-      .querySelector(".item-form")
-      .addEventListener("submit", function (event) {
+    document.addEventListener("submit", function (event) {
+      if (event.target.classList.contains("item-form")) {
         event.preventDefault();
-        populateTable();
-      });
+        populateTable(event.target);
+      }
+    });
 
     // Attach the addNewFields function to the "Add New+" button click event
     document.addEventListener("click", function (event) {
@@ -210,7 +210,6 @@
 
     function addNewFields(event) {
     // Find the form that corresponds to the clicked "Add New" button
-    event.stopPropagation();
     var form = event.target.closest("form");
     if (form) {
       // Remove the first submit button and the "Add New" button from the previous form
