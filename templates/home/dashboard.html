@@ -4,450 +4,195 @@
 {% load widget_tweaks %}
 {% block title %} Dashboard {% endblock title %}
 
-
 {% block content %}
 
-    <div class="row">
-        <div class="col-12">
-          <div class="card card-chart">
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
             <div class="card-header">
-              <div class="row">
-                <div class="col-sm-6 text-left">
-                  <h5 class="card-category">Stocks</h5>
-                  <h2 class="card-title">Stocks Analysis</h2>
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Stocks</h5>
+                        <h2 class="card-title">Stocks Analysis</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                            <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                                <input type="radio" name="options" checked>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Total Available</span>
+                                <span class="d-block d-sm-none">
+                                    <i class="tim-icons icon-single-02"></i>
+                                </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="1">
+                                <input type="radio" class="d-none d-sm-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pending Retirement</span>
+                                <span class="d-block d-sm-none">
+                                    <i class="tim-icons icon-gift-2"></i>
+                                </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="2">
+                                <input type="radio" class="d-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Reserved</span>
+                                <span class="d-block d-sm-none">
+                                    <i class="tim-icons icon-tap-02"></i>
+                                </span>
+                            </label>
+                            <label class="btn btn-sm btn-primary btn-simple" id="3">
+                                <input type="radio" class="d-none" name="options">
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Not Available</span>
+                                <span class="d-block d-sm-none">
+                                    <i class="tim-icons icon-tap-02"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                    <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                      <input type="radio" name="options" checked>
-                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Total Available</span>
-                      <span class="d-block d-sm-none">
-                        <i class="tim-icons icon-single-02"></i>
-                      </span>
-                    </label>
-                    <label class="btn btn-sm btn-primary btn-simple" id="1">
-                      <input type="radio" class="d-none d-sm-none" name="options">
-                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pending Retirement</span>
-                      <span class="d-block d-sm-none">
-                        <i class="tim-icons icon-gift-2"></i>
-                      </span>
-                    </label>
-                    <label class="btn btn-sm btn-primary btn-simple" id="2">
-                      <input type="radio" class="d-none" name="options">
-                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Reserved</span>
-                      <span class="d-block d-sm-none">
-                        <i class="tim-icons icon-tap-02"></i>
-                      </span>
-                    </label>
-                    <label class="btn btn-sm btn-primary btn-simple" id="3">
-                      <input type="radio" class="d-none" name="options">
-                      <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Not Available</span>
-                      <span class="d-block d-sm-none">
-                        <i class="tim-icons icon-tap-02"></i>
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="card-body">
-              <div class="chart-area">
-                <canvas id="CountryChart"></canvas>
-              </div>
+                <div class="chart-area">
+                    <canvas id="CountryChart"></canvas>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
+<script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-    <!-- <script src="{% static 'assets/js/Chart.min.js' %}"></script> -->
-    <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
-    
-
-    
-    <script>
-        $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-        // var data = JSON.parse({{ Stockin|safe }});
+<script>
+    $(document).ready(function () {
         var labels = JSON.parse(JSON.stringify({{ labels|safe }}));
-
         var stockval = JSON.parse(JSON.stringify({{ stockval|safe }}));
         var Stockin = JSON.parse(JSON.stringify({{ Stockin|safe }}));
         var stockout = JSON.parse(JSON.stringify({{ stockout|safe }}));
         var stockpending = JSON.parse(JSON.stringify({{ stockpending|safe }}));
         var stockreserved = JSON.parse(JSON.stringify({{ stockreserved|safe }}));
 
-        // var data = [0, 9, 0, 4, 30, 0, 0, 0, 0];
-        // console.log("label data:", labels,data)
-        //var Year = JSON.parse("{{Year}}");
-        //var intensity = JSON.parse("{{intensity}}");
-        //var Relevance = JSON.parse("{{Relevance}}");
-        //var likehood = JSON.parse("{{likehood}}");
-		//var months = JSON.stringify({{months|safe}});
-		//var btc_val = JSON.stringify({{btc_val}});
-
-        //var allcountry = JSON.stringify("{{ allcountry|safe }}");
-
-        //console.log(months)
-		//console.log(btc_val)
-        //console.log(Year)
-
-        //console.log(Relevance)
-        gradientChartOptionsConfigurationWithTooltipBlue = {
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-
-          tooltips: {
-            backgroundColor: '#f5f5f5',
-            titleFontColor: '#333',
-            bodyFontColor: '#666',
-            bodySpacing: 4,
-            xPadding: 12,
-            mode: "nearest",
-            intersect: 0,
-            position: "nearest"
-          },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.0)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                suggestedMin: 60,
-                suggestedMax: 125,
-                padding: 20,
-                fontColor: "#2380f7"
-              }
-            }],
-
-            xAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                padding: 20,
-                fontColor: "#2380f7"
-              }
-            }]
-          }
-        };
-
-        gradientChartOptionsConfigurationWithTooltipPurple = {
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-
-          tooltips: {
-            backgroundColor: '#f5f5f5',
-            titleFontColor: '#333',
-            bodyFontColor: '#666',
-            bodySpacing: 4,
-            xPadding: 12,
-            mode: "nearest",
-            intersect: 0,
-            position: "nearest"
-          },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.0)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                suggestedMin: 60,
-                suggestedMax: 125,
-                padding: 20,
-                fontColor: "#9a9a9a"
-              }
-            }],
-
-            xAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(225,78,202,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                padding: 20,
-                fontColor: "#9a9a9a"
-              }
-            }]
-          }
-        };
-
-        gradientChartOptionsConfigurationWithTooltipOrange = {
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-
-          tooltips: {
-            backgroundColor: '#f5f5f5',
-            titleFontColor: '#333',
-            bodyFontColor: '#666',
-            bodySpacing: 4,
-            xPadding: 12,
-            mode: "nearest",
-            intersect: 0,
-            position: "nearest"
-          },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.0)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                suggestedMin: 50,
-                suggestedMax: 110,
-                padding: 20,
-                fontColor: "#ff8a76"
-              }
-            }],
-
-            xAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(220,53,69,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                padding: 20,
-                fontColor: "#ff8a76"
-              }
-            }]
-          }
-        };
-
-        gradientChartOptionsConfigurationWithTooltipGreen = {
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-
-          tooltips: {
-            backgroundColor: '#f5f5f5',
-            titleFontColor: '#333',
-            bodyFontColor: '#666',
-            bodySpacing: 4,
-            xPadding: 12,
-            mode: "nearest",
-            intersect: 0,
-            position: "nearest"
-          },
-          responsive: true,
-          scales: {
-            yAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.0)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                suggestedMin: 50,
-                suggestedMax: 125,
-                padding: 20,
-                fontColor: "#9e9e9e"
-              }
-            }],
-
-            xAxes: [{
-              barPercentage: 1.6,
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(0,242,195,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                padding: 20,
-                fontColor: "#9e9e9e"
-              }
-            }]
-          }
-        };
-
-
-        gradientBarChartConfiguration = {
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-
-          tooltips: {
-            backgroundColor: '#f5f5f5',
-            titleFontColor: '#333',
-            bodyFontColor: '#666',
-            bodySpacing: 4,
-            xPadding: 12,
-            mode: "nearest",
-            intersect: 0,
-            position: "nearest"
-          },
-          responsive: true,
-          scales: {
-            yAxes: [{
-
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                suggestedMin: 60,
-                suggestedMax: 120,
-                padding: 20,
-                fontColor: "#9e9e9e"
-              }
-            }],
-
-            xAxes: [{
-
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(29,140,248,0.1)',
-                zeroLineColor: "transparent",
-              },
-              ticks: {
-                padding: 20,
-                fontColor: "#9e9e9e"
-              }
-            }]
-          }
-        };
-
         var ctx = document.getElementById("CountryChart").getContext("2d");
 
         var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
         gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
         gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
+        gradientStroke.addColorStop(0, 'rgba(29,140,248,0)');
 
         var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
-
         gradientStroke1.addColorStop(1, 'rgba(248, 208, 29,0.2)');
         gradientStroke1.addColorStop(0.4, 'rgba(248, 208, 29,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)'); //blue colors
+        gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)');
 
-
-        // var myChart = new Chart(ctx, {
-        //   type: 'bar',
-        //   responsive: true,
-        //   legend: {
-        //     display: false
-        //   },
-        //   data: {
-        //     labels: labels,
-        //     datasets: [{
-        //       label: "Monero Price",
-        //       fill: true,
-        //       backgroundColor: gradientStroke,
-        //       hoverBackgroundColor: gradientStroke,
-        //       borderColor: '#1f8ef1',
-        //       borderWidth: 2,
-        //       borderDash: [],
-        //       borderDashOffset: 0.0,
-        //       data: data,
-        //     }]
-        //   },
-        //   options: gradientBarChartConfiguration
-        // });
+        var gradientBarChartConfiguration = {
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            tooltips: {
+                backgroundColor: '#f5f5f5',
+                titleFontColor: '#333',
+                bodyFontColor: '#666',
+                bodySpacing: 4,
+                xPadding: 12,
+                mode: "nearest",
+                intersect: 0,
+                position: "nearest"
+            },
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        suggestedMin: 60,
+                        suggestedMax: 120,
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }]
+            }
+        };
 
         var config = {
-          type: 'bar',
-          responsive: true,
-          legend: {
-            display: false
-          },
-          data: {
-            labels: labels,
-            datasets: [{
-              label: "Total Available",
-              fill: true,
-              backgroundColor: gradientStroke,
-              hoverBackgroundColor: gradientStroke,
-              borderColor: '#1f8ef1',
-              borderWidth: 2,
-              borderDash: [],
-              borderDashOffset: 0.0,
-              data: Stockin,
-            },{
-                backgroundColor: gradientStroke1,
-                label: 'Total Stock',
-                fill: true,
-                hoverBackgroundColor: gradientStroke,
-                borderColor: '#ffd103',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                // barPercentage: 0.5,
-                // barThickness: 6,
-                // maxBarThickness: 8,
-                // minBarLength: 2,
-                data: {{ stockval|safe }},
-            }]
-          },
-          options: gradientBarChartConfiguration
+            type: 'bar',
+            responsive: true,
+            legend: {
+                display: false
+            },
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Total Available",
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#1f8ef1',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    data: Stockin,
+                }, {
+                    backgroundColor: gradientStroke1,
+                    label: 'Total Stock',
+                    fill: true,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#ffd103',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    data: stockval,
+                }]
+            },
+            options: gradientBarChartConfiguration
         };
+
         var myChartData = new Chart(ctx, config);
-        $("#0").click(function() {
-          console.log("1",myChartData.config)
-          var data = myChartData.config.data;
-          data.datasets[0].label = "Total Available";
-          data.datasets[0].data = Stockin;
-          data.labels = labels;
-          myChartData.update();
-        });
-        $("#1").click(function() {
-          console.log("1",myChartData.config)
-          var data = myChartData.config.data;
-          data.datasets[0].label = "Pending Retirement";
-          data.datasets[0].data = stockpending;
-          data.labels = labels;
-          myChartData.update();
+
+        $("#0").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Total Available";
+            data.datasets[0].data = Stockin;
+            data.labels = labels;
+            myChartData.update();
         });
 
-        $("#2").click(function() {
-          // Code for #2
-          console.log("1",myChartData.config)
-          var data = myChartData.config.data;
-          data.datasets[0].label = "Reserved";
-          data.datasets[0].data = stockreserved;
-          data.labels = labels;
-          myChartData.update();
+        $("#1").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Pending Retirement";
+            data.datasets[0].data = stockpending;
+            data.labels = labels;
+            myChartData.update();
         });
 
-        $("#3").click(function() {
-          // Code for #2
-          console.log("1",myChartData.config)
-          var data = myChartData.config.data;
-          data.datasets[0].label = "Not Available";
-          data.datasets[0].data = stockout;
-          data.labels = labels;
-          myChartData.update();
+        $("#2").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Reserved";
+            data.datasets[0].data = stockreserved;
+            data.labels = labels;
+            myChartData.update();
+        });
+
+        $("#3").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Not Available";
+            data.datasets[0].data = stockout;
+            data.labels = labels;
+            myChartData.update();
         });
     });
-    </script>
-
-    </div>
+</script>
 
 {% endblock content %}
