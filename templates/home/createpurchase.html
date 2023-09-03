@@ -156,18 +156,21 @@
 <script>
 // Attach the populateTable function to the form submission event
 document.querySelector('#item-form').addEventListener('submit', function (event) {
+    console.log(event,'event')
     event.preventDefault(); // Prevent the default form submission
     populateTable();
 });
 
 // Attach the addNewFields function to the "Add New+" button click event
 document.querySelector('.dropdown.purchase').addEventListener('click', function (event) {
+    console.log(event,'event')
     if (event.target.classList.contains('add-new-btn')) {
         addNewFields();
     }
 });
 
 function populateTable() {
+    console.log(document.querySelector('#vendortable tbody'),'tbody')
     // Get the values from the form fields
     var itemName = document.getElementById("name").value;
     var itemType = document.getElementById("type").value;
@@ -202,6 +205,7 @@ function populateTable() {
 }
 
 function addNewFields() {
+    console.log(document.querySelector('#item-form'),'document.querySelector')
     var clonedForm = document.querySelector('#item-form').cloneNode(true);
 
     // Clear the input fields in the cloned form
