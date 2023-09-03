@@ -218,10 +218,10 @@ block title %} Home {% endblock title %} {% block content %}
       if (event.target.classList.contains("add-new-btn")) {
         // Remove the first submit button and the "Add New+" button from the previous form
         var form = document.querySelector("#item-form");
-        var submitBtn = form.querySelector('.global-btn[type="submit"]');
-        var addNewBtn = form.querySelector(".add-new-btn");
-        submitBtn.remove();
-        addNewBtn.remove();
+        // var submitBtn = form.querySelector('.global-btn[type="submit"]');
+        // var addNewBtn = form.querySelector(".add-new-btn");
+        // submitBtn.remove();
+        // addNewBtn.remove();
 
         // Clone the form and clear the input fields in the cloned form
         var clonedForm = form.cloneNode(true);
@@ -230,14 +230,14 @@ block title %} Home {% endblock title %} {% block content %}
         });
 
         // Append the submit and add new buttons to the cloned form
-        var formRow = clonedForm.querySelector(".form-row");
-        formRow.innerHTML +=
-          '<div class="form-group col-md-6">' +
-          '<button type="submit" class="global-btn">Submit</button>' +
-          "</div>" +
-          '<div class="form-group col-md-6">' +
-          '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
-          "</div>";
+        // var formRow = clonedForm.querySelector(".form-row");
+        // formRow.innerHTML +=
+        //   '<div class="form-group col-md-6">' +
+        //   '<button type="submit" class="global-btn">Submit</button>' +
+        //   "</div>" +
+        //   '<div class="form-group col-md-6">' +
+        //   '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
+        //   "</div>";
 
         // Append the cloned form to the list
         document
