@@ -801,25 +801,25 @@
       rows.each(function () {
         var row = $(this);
         var cells = row.find("td");
-        var showRow = false;
-
+        var showRow = true; // Default to showing the row
+    
         cells.each(function (index) {
           if (
-            selectedColumns.length === 0 ||
-            selectedColumns.includes(Heads.eq(index).text())
+            selectedColumns.length > 0 &&
+            !selectedColumns.includes(Heads.eq(index).text())
           ) {
-            showRow = true;
-            return false; // Exit the loop since we already found a match
+            showRow = false;
+            return false; // Exit the loop since we already found a non-matching column
           }
         });
-
+    
         if (showRow) {
           row.show();
         } else {
           row.hide();
         }
       });
-
+    
       currentPage = 0; // Reset to the first page when filtering
       paginate(currentPage, numPerPage);
       filterPages(); // Update page controllers based on filtering
@@ -832,7 +832,7 @@
           return $(this).val();
         })
         .get();
-
+    
       updateDisplayedData(); // Call the function to update table display
     });
   };
