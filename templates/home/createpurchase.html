@@ -173,14 +173,13 @@
     }
   });
 
-    function populateTable() {
+    function populateTable(form) {
       // Get the values from the form fields
-      var itemName = document.getElementById("name").value;
-      var itemType = document.getElementById("type").value;
-      var itemQuantity = document.getElementById("quantity").value;
-      var itemLink = document.getElementById("link").value;
-      var itemDescription = document.getElementById("description").value;
-      console.log(itemName, itemType, itemQuantity, itemLink, itemDescription);
+      var itemName = form.querySelector("#name").value;
+      var itemType = form.querySelector("#type").value;
+      var itemQuantity = form.querySelector("#quantity").value;
+      var itemLink = form.querySelector("#link").value;
+      var itemDescription = form.querySelector("#description").value;
 
       // Create a new table row with the entered values
       var table = document.querySelector("#vendortable tbody");
@@ -201,11 +200,11 @@
       cells[4].textContent = itemDescription;
 
       // Clear the input fields
-      document.getElementById("name").value = "";
-      document.getElementById("type").value = "";
-      document.getElementById("quantity").value = "";
-      document.getElementById("link").value = "";
-      document.getElementById("description").value = "";
+      form.querySelector("#name").value = "";
+      form.querySelector("#type").value = "";
+      form.querySelector("#quantity").value = "";
+      form.querySelector("#link").value = "";
+      form.querySelector("#description").value = "";
     }
 
     function addNewFields(event) {
