@@ -20250,8 +20250,6 @@ a.card-link.purchase-link {
   margin: 10px 20px;
   background: #fff;
 }
-
-
 span.purchase.caret {
     top: 17px;
     left: 85px;
@@ -20264,6 +20262,7 @@ button.dropdown-toggle.purchase {
   background: #fff;
   border: 1px solid #190e4f;
   color: #190e4f;
+  width: 25%;
 }
 ul.dropdown-menu.purchase {
   padding: 10px;
