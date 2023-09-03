@@ -20286,4 +20286,30 @@ ul.dropdown-menu.purchase {
     display: none;
   }
 }
+/* Define the styles for the underline effect */
+.nav li.active a {
+  position: relative;
+  color: #190e4f; /* Color of the underline */
+  text-decoration: none;
+}
+
+.nav li.active a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  background-color: #190e4f; /* Color of the underline */
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0); /* Initially, no width */
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out; /* Transition effect with ease-in-out */
+}
+
+/* Add the hover effect to show the underline */
+.nav li.active a:hover::before {
+  transform: scaleX(1); /* Full width on hover */
+  transform-origin: bottom left;
+}
+
 /*# sourceMappingURL=black-dashboard.css.map */
