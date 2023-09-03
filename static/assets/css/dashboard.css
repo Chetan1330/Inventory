@@ -19999,6 +19999,8 @@ h3 input.search-input {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  max-height: 350px;
+  overflow-y: scroll;
 }
 
 #filter-dropdown.visible {
@@ -20034,12 +20036,7 @@ h3 input.search-input {
 
 
 #filter-dropdown input[type='checkbox'] {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  opacity: 1;
   cursor: pointer;
 }
 
