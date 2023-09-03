@@ -155,62 +155,72 @@
 
 (function (document) {
     'use strict '
-// Attach the populateTable function to the form submission event
-
-
-// Attach the addNewFields function to the "Add New+" button click event
-
-
-function populateTable() {
-    console.log(document.querySelector('#vendortable tbody'),'tbody')
-    // Get the values from the form fields
-    var itemName = document.getElementById("name").value;
-    var itemType = document.getElementById("type").value;
-    var itemQuantity = document.getElementById("quantity").value;
-    var itemLink = document.getElementById("link").value;
-    var itemDescription = document.getElementById("description").value;
-
-    // Create a new table row with the entered values
-    var table = document.querySelector('#vendortable tbody');
-    var newRow = table.insertRow(table.rows.length);
-    var cells = [
-        newRow.insertCell(0),
-        newRow.insertCell(1),
-        newRow.insertCell(2),
-        newRow.insertCell(3),
-        newRow.insertCell(4)
-    ];
-
-    // Populate the cells with the entered values
-    cells[0].textContent = itemName;
-    cells[1].textContent = itemType;
-    cells[2].textContent = itemQuantity;
-    cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + '</a>';
-    cells[4].textContent = itemDescription;
-
-    // Clear the input fields
-    document.getElementById("name").value = "";
-    document.getElementById("type").value = "";
-    document.getElementById("quantity").value = "";
-    document.getElementById("link").value = "";
-    document.getElementById("description").value = "";
-}
-
-function addNewFields() {
-    console.log(document.querySelector('#item-form'),'document.querySelector')
-    var clonedForm = document.querySelector('#item-form').cloneNode(true);
-
-    // Clear the input fields in the cloned form
-    clonedForm.querySelectorAll('input').forEach(function (input) {
-        input.value = '';
+    
+    // Attach the populateTable function to the form submission event
+    document.querySelector('#item-form').addEventListener('submit', function (event) {
+        
+        event.preventDefault(); // Prevent the default form submission
+        populateTable();
     });
 
-    // Remove the first submit button from the cloned form
-    clonedForm.querySelector('.global-btn[type="submit"]').remove();
+    // Attach the addNewFields function to the "Add New+" button click event
+    document.querySelector('.dropdown.purchase').addEventListener('click', function (event) {
+        if (event.target.classList.contains('add-new-btn')) {
+            addNewFields();
+        }
+    });
 
-    // Append the cloned form to the list
-    document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
-}
+    function populateTable() {
+
+        // Get the values from the form fields
+        var itemName = document.getElementById("name").value;
+        var itemType = document.getElementById("type").value;
+        var itemQuantity = document.getElementById("quantity").value;
+        var itemLink = document.getElementById("link").value;
+        var itemDescription = document.getElementById("description").value;
+        console.log(itemName, itemType, itemQuantity, itemLink, itemDescription);
+
+        // Create a new table row with the entered values
+        var table = document.querySelector('#vendortable tbody');
+        var newRow = table.insertRow(table.rows.length);
+        var cells = [
+            newRow.insertCell(0),
+            newRow.insertCell(1),
+            newRow.insertCell(2),
+            newRow.insertCell(3),
+            newRow.insertCell(4)
+        ];
+
+        // Populate the cells with the entered values
+        cells[0].textContent = itemName;
+        cells[1].textContent = itemType;
+        cells[2].textContent = itemQuantity;
+        cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + '</a>';
+        cells[4].textContent = itemDescription;
+
+        // Clear the input fields
+        document.getElementById("name").value = "";
+        document.getElementById("type").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("link").value = "";
+        document.getElementById("description").value = "";
+    }
+
+    function addNewFields() {
+        var clonedForm = document.querySelector('#item-form').cloneNode(true);
+
+        // Clear the input fields in the cloned form
+        clonedForm.querySelectorAll('input').forEach(function (input) {
+            input.value = '';
+        });
+
+        // Remove the first submit button from the cloned form
+        clonedForm.querySelector('.global-btn[type="submit"]').remove();
+
+        // Append the cloned form to the list
+        document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
+    }
 })(document);
+
 </script>
 {% endblock content %}
