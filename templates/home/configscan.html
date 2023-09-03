@@ -19,7 +19,7 @@ CreateConfig {% endblock title %} {% block stylesheets %}
   <form id="createform" method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div style="background-color: #fffcf6; padding: 1em">
+    <div style="background-color: #f4f4f4; padding: 1em">
       <!-- </form> -->
 
       <h2 class="my-3">Select a Config to show details</h2>
@@ -37,8 +37,7 @@ CreateConfig {% endblock title %} {% block stylesheets %}
 
       <div class="table-responsive">
         <table
-          style="width: 100%"
-          class="table tablemanager mt32 customers-list"
+          class="table tablemanager table-bordered mt32 customers-list"
         >
           <thead>
             <tr class="kie-tablelist__row kie-tablelist__row--header">

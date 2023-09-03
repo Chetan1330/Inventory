@@ -13,14 +13,14 @@
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div style="background-color: #fffcf6; padding: 2em;">
+            <div style="background-color: #f4f4f4; padding: 2em;">
                 <div style="color:#464646; font-style: bold; font-size: 3rem; border-bottom: 1px solid #464646;">Build Config</div>
 
                 <!-- {% for i in all_configs %}
                     <a href="viewconfig/">{{i}}</a>
                 {% endfor %} -->
                 <h2 style="margin-top: 20px;" >List of existing Configs</h2>
-                <select id="selconfig" name="selconfig" class=" form-control" onchange="configchange()">
+                <select id="selconfig" name="selconfig" class="form-control mb-4" onchange="configchange()">
                     <option selected>--- Select Config ---</option>
                     {% for i in all_configs %}
                         <option value="{{i.id}}">{{i}}</option>
@@ -30,7 +30,7 @@
 
                 <div class="wrapper">
                     <div class="table-responsive">
-                        <table class="table table-hover table-responsive kie-tablelist">
+                        <table class="table table-hover table-bordered kie-tablelist">
                         <thead>
                             <tr class="kie-tablelist__row kie-tablelist__row--header">
                             <th class="kie-tablelist__cell kie-tablelist__cell--header">Class</th>
