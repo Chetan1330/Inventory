@@ -33,7 +33,7 @@
                 </button>
                 <ul class="dropdown-menu purchase">
                   <li>
-                    <form>
+                    <form id="item-form">
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="name">Name:</label>
@@ -155,7 +155,7 @@
 {% block javascript %}
 <script>
 // Attach the populateTable function to the form submission event
-document.querySelector('form').addEventListener('submit', function (event) {
+document.querySelector('#item-form').addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the default form submission
     populateTable();
 });
@@ -166,7 +166,7 @@ document.querySelector('.add-new-btn').addEventListener('click', function () {
 });
 
 function populateTable() {
-    // Get the values from the dropdown fields
+    // Get the values from the form fields
     var itemName = document.getElementById("name").value;
     var itemType = document.getElementById("type").value;
     var itemQuantity = document.getElementById("quantity").value;
@@ -174,7 +174,7 @@ function populateTable() {
     var itemDescription = document.getElementById("description").value;
 
     // Create a new table row with the entered values
-    var table = document.getElementById("vendortable").getElementsByTagName('tbody')[0];
+    var table = document.querySelector('#vendortable tbody');
     var newRow = table.insertRow(table.rows.length);
     var cells = [
         newRow.insertCell(0),
@@ -185,11 +185,11 @@ function populateTable() {
     ];
 
     // Populate the cells with the entered values
-    cells[0].innerHTML = itemName;
-    cells[1].innerHTML = itemType;
-    cells[2].innerHTML = itemQuantity;
+    cells[0].textContent = itemName;
+    cells[1].textContent = itemType;
+    cells[2].textContent = itemQuantity;
     cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + '</a>';
-    cells[4].innerHTML = itemDescription;
+    cells[4].textContent = itemDescription;
 
     // Clear the input fields
     document.getElementById("name").value = "";
@@ -198,14 +198,17 @@ function populateTable() {
     document.getElementById("link").value = "";
     document.getElementById("description").value = "";
 }
+
 function addNewFields() {
-    var form = document.querySelector('form');
-    var clonedForm = form.cloneNode(true);
+    var clonedForm = document.querySelector('#item-form').cloneNode(true);
 
     // Clear the input fields in the cloned form
     clonedForm.querySelectorAll('input').forEach(function (input) {
         input.value = '';
     });
+
+    // Remove the first submit button from the cloned form
+    clonedForm.querySelector('.global-btn[type="submit"]').remove();
 
     // Append the cloned form to the list
     document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
