@@ -232,7 +232,7 @@
         // Remove the submit and "Add New" buttons from the previous form
         var submitBtn = document.querySelector('.global-btn[type="submit"]')  ;
         var addNewBtn = document.querySelector(".add-new-btn");
-        
+
         if (submitBtn) {
         clonedForm.querySelector('.global-btn[type="submit"]').remove()
         submitBtn.remove();
@@ -242,11 +242,11 @@
         }
 
         if (addNewBtn) {
-        clonedForm.querySelector(".add-new-btn")
+        clonedForm.querySelector(".add-new-btn").remove()
         addNewBtn.remove();
         }
         else{
-            document.querySelector(".add-new-btn")
+            clonedForm.querySelector(".add-new-btn").remove()
         }
   
         // Append the cloned form to the list
