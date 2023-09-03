@@ -20254,7 +20254,7 @@ a.card-link.purchase-link {
 
 span.purchase.caret {
     top: 17px;
-    left: 35px;
+    left: 85px;
 }
 ul.dropdown-menu.show.purchase {
   padding: 10px;
@@ -20279,6 +20279,7 @@ ul.dropdown-menu.purchase {
 @media screen and (max-width: 991px){
   span.purchase.caret {
     top: 16px;
+    left: 44px
   }
   .dropdown-toggle.purchase:after{
     display: none;

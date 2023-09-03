@@ -229,23 +229,23 @@
           input.value = "";
         });
 
+        // Append the cloned form to the list
+        document
+          .querySelector("ul.dropdown-menu.purchase li")
+          .appendChild(clonedForm);
+
         // Append the submit and add new buttons to the cloned form
-        var formRow = clonedForm.querySelector(".form-row");
-        formRow.innerHTML +=
+        var formGroup = clonedForm.querySelector(".form-group:last-of-type");
+        formGroup.innerHTML +=
+          '<div class="form-row">' +
           '<div class="form-group col-md-6">' +
           '<button type="submit" class="global-btn">Submit</button>' +
           "</div>" +
           '<div class="form-group col-md-6">' +
           '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
+          "</div>" +
           "</div>";
-
-        // Append the cloned form to the list
-        document
-          .querySelector("ul.dropdown-menu.purchase li")
-          .appendChild(clonedForm);
       }
-      // Prevent the default form submission behavior
-      event.preventDefault();
     }
   })(document);
 </script>
