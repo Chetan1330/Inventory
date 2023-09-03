@@ -68,10 +68,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn" onsubmit="populateTable()">Submit</button>
+                                <button type="submit" class="global-btn">Submit</button>
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn add-new-btn" onsubmit="addNewFields()">Add New+</button>
+                                <button type="submit" class="global-btn add-new-btn">Add New+</button>
                             </div>
                         </div>
                       </form>
@@ -207,19 +207,26 @@
     }
 
     function addNewFields() {
-        var clonedForm = document.querySelector('#item-form').cloneNode(true);
+    console.log(document.querySelector('#item-form'),'document.querySelector')
+    if (event.target.classList.contains('add-new-btn')) {
+        // Remove the first submit button and the "Add New+" button from the previous form
+        var form = document.querySelector('#item-form');
+        form.querySelector('.global-btn[type="submit"]').remove();
+        event.target.remove();
 
-        // Clear the input fields in the cloned form
+        // Clone the form and clear the input fields in the cloned form
+        var clonedForm = form.cloneNode(true);
         clonedForm.querySelectorAll('input').forEach(function (input) {
             input.value = '';
         });
 
-        // Remove the first submit button from the cloned form
-        clonedForm.querySelector('.global-btn[type="submit"]').remove();
-
         // Append the cloned form to the list
         document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
     }
+
+    // Prevent the default form submission behavior
+    event.preventDefault();
+}
 })(document);
 
 </script>
