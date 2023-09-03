@@ -175,7 +175,7 @@
       // Attach the addNewFields function to the "Add New+" button click event
       document.addEventListener("click", function (event) {
         if (event.target.classList.contains("add-new-btn")) {
-          addNewFields();
+          addNewFields(event.target);
         }
       });
   
@@ -213,7 +213,8 @@
         form.querySelector("#description").value = "";
       }
   
-      function addNewFields() {
+      function addNewFields(clickedButton) {
+        console.log(clickedButton,'clickedButton',document.querySelector(".item-form"),clickedButton.closest(".item-form"))
         // Increment the formCounter to generate unique IDs
         formCounter++;
   
@@ -231,8 +232,12 @@
         // Remove the submit and "Add New" buttons from the previous form
         var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
         var addNewBtn = clonedForm.querySelector(".add-new-btn");
-        submitBtn ? submitBtn.detach() :'';
-        addNewBtn ? addNewBtn.detach() : '';
+        if (submitBtn) {
+        submitBtn.remove();
+        }
+        if (addNewBtn) {
+        addNewBtn.remove();
+        }
   
         // Append the cloned form to the list
         var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
