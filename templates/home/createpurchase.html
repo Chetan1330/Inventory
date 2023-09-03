@@ -37,15 +37,15 @@ block title %} Home {% endblock title %} {% block content %}
                   <div class="form-group col-md-6">
                     <label for="name">Name:</label>
                     <select class="form-control" id="name">
-                      <option value="Net Adapter">Net Adapter</option>
-                      <option value="Memory chip">Memory chip</option>
+                      <option value="Net-Adapter">Net Adapter</option>
+                      <option value="Memory-chip">Memory chip</option>
                       <option value="Integrator">Integrator</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="type">Type:</label>
                     <select class="form-control" id="type">
-                      <option value="Semi conductor">Semi conductor</option>
+                      <option value="Semi-conductor">Semi conductor</option>
                       <option value="Resistor">Resistor</option>
                       <option value="Volter">Volter</option>
                     </select>
@@ -230,21 +230,20 @@ block title %} Home {% endblock title %} {% block content %}
         });
 
         // Append the submit and add new buttons to the cloned form
-        // var formRow = clonedForm.querySelector(".form-row");
-        // formRow.innerHTML +=
-        //   '<div class="form-group col-md-6">' +
-        //   '<button type="submit" class="global-btn">Submit</button>' +
-        //   "</div>" +
-        //   '<div class="form-group col-md-6">' +
-        //   '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
-        //   "</div>";
+        var formRow = clonedForm.querySelector(".form-row");
+        formRow.innerHTML +=
+          '<div class="form-group col-md-6">' +
+          '<button type="submit" class="global-btn">Submit</button>' +
+          "</div>" +
+          '<div class="form-group col-md-6">' +
+          '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
+          "</div>";
 
         // Append the cloned form to the list
         document
           .querySelector("ul.dropdown-menu.purchase li")
           .appendChild(clonedForm);
       }
-
       // Prevent the default form submission behavior
       event.preventDefault();
     }
