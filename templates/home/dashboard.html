@@ -15,51 +15,17 @@
                         <h5 class="card-category">Stocks</h5>
                         <h2 class="card-title">Stocks Analysis</h2>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                            <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                <input type="radio" name="options" checked>
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Total Available</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-single-02"></i>
-                                </span>
-                            </label>
-                            <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                <input type="radio" class="d-none d-sm-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pending Retirement</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-gift-2"></i>
-                                </span>
-                            </label>
-                            <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                <input type="radio" class="d-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Reserved</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-tap-02"></i>
-                                </span>
-                            </label>
-                            <label class="btn btn-sm btn-primary btn-simple" id="3">
-                                <input type="radio" class="d-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Not Available</span>
-                                <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-tap-02"></i>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="CountryChart"></canvas>
-                </div>
+                <div id="chart-container"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -70,128 +36,60 @@
         var stockpending = JSON.parse(JSON.stringify({{ stockpending|safe }}));
         var stockreserved = JSON.parse(JSON.stringify({{ stockreserved|safe }}));
 
-        var ctx = document.getElementById("CountryChart").getContext("2d");
+        // Create a Three.js scene
+        var scene = new THREE.Scene();
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-        gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
-        gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(29,140,248,0)');
+        // Create a camera
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-        var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
-        gradientStroke1.addColorStop(1, 'rgba(248, 208, 29,0.2)');
-        gradientStroke1.addColorStop(0.4, 'rgba(248, 208, 29,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)');
+        // Create a WebGL renderer
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("chart-container").appendChild(renderer.domElement);
 
-        var gradientBarChartConfiguration = {
-            maintainAspectRatio: false,
-            legend: {
-                display: false
-            },
-            tooltips: {
-                backgroundColor: '#f5f5f5',
-                titleFontColor: '#333',
-                bodyFontColor: '#666',
-                bodySpacing: 4,
-                xPadding: 12,
-                mode: "nearest",
-                intersect: 0,
-                position: "nearest"
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        color: 'rgba(29,140,248,0.1)',
-                        zeroLineColor: "transparent",
-                    },
-                    ticks: {
-                        suggestedMin: 60,
-                        suggestedMax: 120,
-                        padding: 20,
-                        fontColor: "#9e9e9e"
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        color: 'rgba(29,140,248,0.1)',
-                        zeroLineColor: "transparent",
-                    },
-                    ticks: {
-                        padding: 20,
-                        fontColor: "#9e9e9e"
-                    }
-                }]
-            }
+        // Create 3D geometries for your data (e.g., bars)
+        // You'll need to adjust the positions and sizes based on your data
+        var geometry1 = new THREE.BoxGeometry(1, Stockin[0], 1);
+        var material1 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var cube1 = new THREE.Mesh(geometry1, material1);
+        cube1.position.set(-2, 0, 0);
+        scene.add(cube1);
+
+        var geometry2 = new THREE.BoxGeometry(1, stockval[0], 1);
+        var material2 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+        var cube2 = new THREE.Mesh(geometry2, material2);
+        cube2.position.set(2, 0, 0);
+        scene.add(cube2);
+
+        // Create labels (optional)
+        var loader = new THREE.FontLoader();
+        loader.load('path/to/your/font.json', function (font) {
+            var textGeometry = new THREE.TextGeometry("Label 1", {
+                font: font,
+                size: 0.2,
+                height: 0.05,
+            });
+            var textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+            var labelText = new THREE.Mesh(textGeometry, textMaterial);
+            labelText.position.set(-2, -1, 0);
+            scene.add(labelText);
+
+            // Add more labels as needed
+        });
+
+        // Add interactivity (optional)
+
+        // Render the scene
+        var animate = function () {
+            requestAnimationFrame(animate);
+
+            // Rotate the chart or perform other animations here
+
+            renderer.render(scene, camera);
         };
 
-        var config = {
-            type: 'bar',
-            responsive: true,
-            legend: {
-                display: false
-            },
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Total Available",
-                    fill: true,
-                    backgroundColor: gradientStroke,
-                    hoverBackgroundColor: gradientStroke,
-                    borderColor: '#1f8ef1',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    data: Stockin,
-                }, {
-                    backgroundColor: gradientStroke1,
-                    label: 'Total Stock',
-                    fill: true,
-                    hoverBackgroundColor: gradientStroke,
-                    borderColor: '#ffd103',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    data: stockval,
-                }]
-            },
-            options: gradientBarChartConfiguration
-        };
-
-        var myChartData = new Chart(ctx, config);
-
-        $("#0").click(function () {
-            var data = myChartData.config.data;
-            data.datasets[0].label = "Total Available";
-            data.datasets[0].data = Stockin;
-            data.labels = labels;
-            myChartData.update();
-        });
-
-        $("#1").click(function () {
-            var data = myChartData.config.data;
-            data.datasets[0].label = "Pending Retirement";
-            data.datasets[0].data = stockpending;
-            data.labels = labels;
-            myChartData.update();
-        });
-
-        $("#2").click(function () {
-            var data = myChartData.config.data;
-            data.datasets[0].label = "Reserved";
-            data.datasets[0].data = stockreserved;
-            data.labels = labels;
-            myChartData.update();
-        });
-
-        $("#3").click(function () {
-            var data = myChartData.config.data;
-            data.datasets[0].label = "Not Available";
-            data.datasets[0].data = stockout;
-            data.labels = labels;
-            myChartData.update();
-        });
+        animate();
     });
 </script>
 
