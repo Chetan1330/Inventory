@@ -38,17 +38,17 @@
                           <div class="form-group col-md-6">
                             <label for="name">Name:</label>
                             <select class="form-control" id="name">
-                              <option value="item1">Item 1</option>
-                              <option value="item2">Item 2</option>
-                              <option value="item3">Item 3</option>
+                              <option value="item1">Net Adapter</option>
+                              <option value="item2">Memory chip</option>
+                              <option value="item3">Integrator</option>
                             </select>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="type">Type:</label>
                             <select class="form-control" id="type">
-                              <option value="type1">Type 1</option>
-                              <option value="type2">Type 2</option>
-                              <option value="type3">Type 3</option>
+                              <option value="type1">Semi conductor</option>
+                              <option value="type2">Resistor</option>
+                              <option value="type3">Volter</option>
                             </select>
                           </div>
                         </div>
@@ -150,48 +150,66 @@
       </div>
     </div>
 </div>
-  
-  <!-- Description Modal -->
-<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="descriptionModalLabel">Add Description</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
-        </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="global-btn" data-dismiss="modal">Close</button>
-        <button type="button" class="global-btn">Save changes</button>
-    </div>
-    </div>
-</div>
-</div>
-  
+    
 {% endblock content %}
 {% block javascript %}
 <script>
-$(document).on("click", ".add-new-btn", function() {
-    var newRow = $("<tr>");
-    var cols = "";
-  
-    cols += '<td><input type="text" class="form-control" name="name"></td>';
-    cols += '<td><input type="text" class="form-control" name="type"></td>';
-    cols += '<td><input type="text" class="form-control" name="quantity"></td>';
-    cols += '<td><input type="text" class="form-control" name="link"></td>';
-    cols += '<td><button type="button" class="btn btn-primary description-btn">Description</button></td>';
-  
-    newRow.append(cols);
-    $("table").append(newRow);
-  });
+// Attach the populateTable function to the form submission event
+document.querySelector('form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    populateTable();
+});
+
+// Attach the addNewFields function to the "Add New+" button click event
+document.querySelector('.add-new-btn').addEventListener('click', function () {
+    addNewFields();
+});
+
+function populateTable() {
+    // Get the values from the dropdown fields
+    var itemName = document.getElementById("name").value;
+    var itemType = document.getElementById("type").value;
+    var itemQuantity = document.getElementById("quantity").value;
+    var itemLink = document.getElementById("link").value;
+    var itemDescription = document.getElementById("description").value;
+
+    // Create a new table row with the entered values
+    var table = document.getElementById("vendortable").getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.rows.length);
+    var cells = [
+        newRow.insertCell(0),
+        newRow.insertCell(1),
+        newRow.insertCell(2),
+        newRow.insertCell(3),
+        newRow.insertCell(4)
+    ];
+
+    // Populate the cells with the entered values
+    cells[0].innerHTML = itemName;
+    cells[1].innerHTML = itemType;
+    cells[2].innerHTML = itemQuantity;
+    cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + '</a>';
+    cells[4].innerHTML = itemDescription;
+
+    // Clear the input fields
+    document.getElementById("name").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("quantity").value = "";
+    document.getElementById("link").value = "";
+    document.getElementById("description").value = "";
+}
+function addNewFields() {
+    var form = document.querySelector('form');
+    var clonedForm = form.cloneNode(true);
+
+    // Clear the input fields in the cloned form
+    clonedForm.querySelectorAll('input').forEach(function (input) {
+        input.value = '';
+    });
+
+    // Append the cloned form to the list
+    document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
+}
+
 </script>
 {% endblock javascript %}
