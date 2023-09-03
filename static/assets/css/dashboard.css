@@ -2027,7 +2027,7 @@ pre code {
 }
 
 .table-responsive {
-  display: table;
+  display: block;
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -20249,9 +20249,11 @@ a.card-link.purchase-link {
   margin: 10px 20px;
   background: #fff;
 }
+
+
 span.purchase.caret {
-  top: 21px;
-  left: 51px;
+    top: 17px;
+    left: 35px;
 }
 ul.dropdown-menu.show.purchase {
   padding: 10px;
@@ -20272,7 +20274,7 @@ ul.dropdown-menu.purchase {
 }
 @media screen and (max-width: 991px){
   span.purchase.caret {
-    top: 14px;
+    top: 16px;
   }
   .dropdown-toggle.purchase:after{
     display: none;
