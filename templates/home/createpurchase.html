@@ -1,233 +1,253 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
-{% load widget_tweaks %}
-{% block title %} Home {% endblock title %}
-
-
-{% block content %}
+{% extends "layouts/base.html" %} {% load static %} {% load widget_tweaks %} {%
+block title %} Home {% endblock title %} {% block content %}
 
 <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-sm-3">
-          <h5>ID: <span>C515LM1W</span></h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Date: <span>August'30 2023</span></h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Account: <span>Mercury</span></h5>
-        </div>
-        <div class="col-sm-3">
-          <h5>Requested By: <span>James Cameron</span></h5>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-3">
+        <h5>ID: <span>C515LM1W</span></h5>
+      </div>
+      <div class="col-sm-3">
+        <h5>Date: <span>August'30 2023</span></h5>
+      </div>
+      <div class="col-sm-3">
+        <h5>Account: <span>Mercury</span></h5>
+      </div>
+      <div class="col-sm-3">
+        <h5>Requested By: <span>James Cameron</span></h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="dropdown purchase">
+          <button
+            class="dropdown-toggle purchase"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Items
+            <span class="purchase caret"></span>
+          </button>
+          <ul class="dropdown-menu purchase">
+            <li>
+              <form id="item-form">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="name">Name:</label>
+                    <select class="form-control" id="name">
+                      <option value="Net Adapter">Net Adapter</option>
+                      <option value="Memory chip">Memory chip</option>
+                      <option value="Integrator">Integrator</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="type">Type:</label>
+                    <select class="form-control" id="type">
+                      <option value="Semi conductor">Semi conductor</option>
+                      <option value="Resistor">Resistor</option>
+                      <option value="Volter">Volter</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="link">Link:</label>
+                    <input type="text" class="form-control" id="link" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <input type="text" class="form-control" id="description" />
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <button type="submit" class="global-btn">Submit</button>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <button type="submit" class="global-btn add-new-btn">
+                      Add New+
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-6">
-            <div class="dropdown purchase">
-                <button class="dropdown-toggle purchase" type="button" data-toggle="dropdown">Items
-                  <span class="purchase caret"></span>
-                </button>
-                <ul class="dropdown-menu purchase">
-                  <li>
-                    <form id="item-form">
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="name">Name:</label>
-                            <select class="form-control" id="name">
-                              <option value="item1">Net Adapter</option>
-                              <option value="item2">Memory chip</option>
-                              <option value="item3">Integrator</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="type">Type:</label>
-                            <select class="form-control" id="type">
-                              <option value="type1">Semi conductor</option>
-                              <option value="type2">Resistor</option>
-                              <option value="type3">Volter</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="quantity">Quantity:</label>
-                            <input type="number" class="form-control" id="quantity">
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="link">Link:</label>
-                            <input type="text" class="form-control" id="link">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="description">Description:</label>
-                          <input type="text" class="form-control" id="description">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn">Submit</button>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <button type="submit" class="global-btn add-new-btn">Add New+</button>
-                            </div>
-                        </div>
-                      </form>
-                  </li>
-                </ul>
-              </div>
-              
-        </div>
+    <br />
+    <div class="table-responsive">
+      <table
+        id="vendortable"
+        class="table tablemanager customers-list table-bordered"
+      >
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>TYPE</th>
+            <th>QUANTITY</th>
+            <th>LINK</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border">
+            <td>Peter</td>
+            <td>Net Adapter</td>
+            <td>5</td>
+            <td><a href="#">www.ust.com</a></td>
+            <td>This is in need for outsourcing</td>
+          </tr>
+          <tr class="border">
+            <td>Paul</td>
+            <td>Net Adapter</td>
+            <td>5</td>
+            <td><a href="#">www.ust.com</a></td>
+            <td>This is in need for outsourcing</td>
+          </tr>
+          <tr class="border">
+            <td>Jack</td>
+            <td>Net Adapter</td>
+            <td>5</td>
+            <td><a href="#">www.ust.com</a></td>
+            <td>This is in need for outsourcing</td>
+          </tr>
+          <tr class="border">
+            <td>Julius</td>
+            <td>Net Adapter</td>
+            <td>5</td>
+            <td><a href="#">www.ust.com</a></td>
+            <td>This is in need for outsourcing</td>
+          </tr>
+          <tr class="border">
+            <td>Ceaser</td>
+            <td>Net Adapter</td>
+            <td>5</td>
+            <td><a href="#">www.ust.com</a></td>
+            <td>This is in need for outsourcing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <label for="approverDetails">Approver Details:</label>
+        <ul style="list-style-type: none">
+          <li>Name: Aston Martin</li>
+          <li>Role: Manager</li>
+          <li>Location: New York,USA</li>
+        </ul>
       </div>
-      <br>
-      <div class="table-responsive">
-        <table id="vendortable" class="table tablemanager customers-list table-bordered">
-          <thead>
-            <tr>
-              <th>NAME</th>
-              <th>TYPE</th>
-              <th>QUANTITY</th>
-              <th>LINK</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border">
-              <td>Peter</td>
-              <td>Net Adapter</td>
-              <td>5</td>
-              <td><a href="#">www.ust.com</a></td>
-              <td>This is in need for outsourcing</td>
-            </tr>
-            <tr class="border">
-              <td>Paul</td>
-              <td>Net Adapter</td>
-              <td>5</td>
-              <td><a href="#">www.ust.com</a></td>
-              <td>This is in need for outsourcing</td>
-            </tr>
-            <tr class="border">
-              <td>Jack</td>
-              <td>Net Adapter</td>
-              <td>5</td>
-              <td><a href="#">www.ust.com</a></td>
-              <td>This is in need for outsourcing</td>
-            </tr>
-            <tr class="border">
-              <td>Julius</td>
-              <td>Net Adapter</td>
-              <td>5</td>
-              <td><a href="#">www.ust.com</a></td>
-              <td>This is in need for outsourcing</td>
-            </tr>
-            <tr class="border">
-              <td>Ceaser</td>
-              <td>Net Adapter</td>
-              <td>5</td>
-              <td><a href="#">www.ust.com</a></td>
-              <td>This is in need for outsourcing</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-sm-4">
+        <button type="button" class="global-btn">Submit</button>
       </div>
-      <div class="row">
-        <div class="col-sm-4">
-                <label for="approverDetails">Approver Details:</label>
-                <ul style="list-style-type: none;">
-                        <li>Name: Aston Martin</li>
-                        <li>Role: Manager</li>
-                        <li>Location: New York,USA</li>
-                </ul>
-        </div>
-        <div class="col-sm-4">
-          <button type="button" class="global-btn">Submit</button>
-        </div>
-        <div class="col-sm-4 text-right">
-          <button type="button" class="global-btn">+Save Template</button>
-        </div>
+      <div class="col-sm-4 text-right">
+        <button type="button" class="global-btn">+Save Template</button>
       </div>
     </div>
+  </div>
 </div>
-    
-<script>
 
-(function (document) {
-    'use strict '
-    
+<script>
+  (function (document) {
+    "use strict ";
+
     // Attach the populateTable function to the form submission event
-    document.querySelector('#item-form').addEventListener('submit', function (event) {
-        
+    document
+      .querySelector("#item-form")
+      .addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent the default form submission
         populateTable();
-    });
+      });
 
     // Attach the addNewFields function to the "Add New+" button click event
-    document.querySelector('.dropdown.purchase').addEventListener('click', function (event) {
-        if (event.target.classList.contains('add-new-btn')) {
-            addNewFields();
+    document
+      .querySelector(".dropdown.purchase")
+      .addEventListener("click", function (event) {
+        if (event.target.classList.contains("add-new-btn")) {
+          addNewFields();
         }
-    });
+      });
 
     function populateTable() {
+      // Get the values from the form fields
+      var itemName = document.getElementById("name").value;
+      var itemType = document.getElementById("type").value;
+      var itemQuantity = document.getElementById("quantity").value;
+      var itemLink = document.getElementById("link").value;
+      var itemDescription = document.getElementById("description").value;
+      console.log(itemName, itemType, itemQuantity, itemLink, itemDescription);
 
-        // Get the values from the form fields
-        var itemName = document.getElementById("name").value;
-        var itemType = document.getElementById("type").value;
-        var itemQuantity = document.getElementById("quantity").value;
-        var itemLink = document.getElementById("link").value;
-        var itemDescription = document.getElementById("description").value;
-        console.log(itemName, itemType, itemQuantity, itemLink, itemDescription);
+      // Create a new table row with the entered values
+      var table = document.querySelector("#vendortable tbody");
+      var newRow = table.insertRow(table.rows.length);
+      var cells = [
+        newRow.insertCell(0),
+        newRow.insertCell(1),
+        newRow.insertCell(2),
+        newRow.insertCell(3),
+        newRow.insertCell(4),
+      ];
 
-        // Create a new table row with the entered values
-        var table = document.querySelector('#vendortable tbody');
-        var newRow = table.insertRow(table.rows.length);
-        var cells = [
-            newRow.insertCell(0),
-            newRow.insertCell(1),
-            newRow.insertCell(2),
-            newRow.insertCell(3),
-            newRow.insertCell(4)
-        ];
+      // Populate the cells with the entered values
+      cells[0].textContent = itemName;
+      cells[1].textContent = itemType;
+      cells[2].textContent = itemQuantity;
+      cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + "</a>";
+      cells[4].textContent = itemDescription;
 
-        // Populate the cells with the entered values
-        cells[0].textContent = itemName;
-        cells[1].textContent = itemType;
-        cells[2].textContent = itemQuantity;
-        cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + '</a>';
-        cells[4].textContent = itemDescription;
-
-        // Clear the input fields
-        document.getElementById("name").value = "";
-        document.getElementById("type").value = "";
-        document.getElementById("quantity").value = "";
-        document.getElementById("link").value = "";
-        document.getElementById("description").value = "";
+      // Clear the input fields
+      document.getElementById("name").value = "";
+      document.getElementById("type").value = "";
+      document.getElementById("quantity").value = "";
+      document.getElementById("link").value = "";
+      document.getElementById("description").value = "";
     }
 
     function addNewFields() {
-    console.log(document.querySelector('#item-form'),'document.querySelector')
-    if (event.target.classList.contains('add-new-btn')) {
+      console.log(
+        document.querySelector("#item-form"),
+        "document.querySelector"
+      );
+      if (event.target.classList.contains("add-new-btn")) {
         // Remove the first submit button and the "Add New+" button from the previous form
-        var form = document.querySelector('#item-form');
-        form.querySelector('.global-btn[type="submit"]').remove();
-        event.target.remove();
+        var form = document.querySelector("#item-form");
+        var submitBtn = form.querySelector('.global-btn[type="submit"]');
+        var addNewBtn = form.querySelector(".add-new-btn");
+        submitBtn.remove();
+        addNewBtn.remove();
 
         // Clone the form and clear the input fields in the cloned form
         var clonedForm = form.cloneNode(true);
-        clonedForm.querySelectorAll('input').forEach(function (input) {
-            input.value = '';
+        clonedForm.querySelectorAll("input").forEach(function (input) {
+          input.value = "";
         });
 
+        // Append the submit and add new buttons to the cloned form
+        var formRow = clonedForm.querySelector(".form-row");
+        formRow.innerHTML +=
+          '<div class="form-group col-md-6">' +
+          '<button type="submit" class="global-btn">Submit</button>' +
+          "</div>" +
+          '<div class="form-group col-md-6">' +
+          '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
+          "</div>";
+
         // Append the cloned form to the list
-        document.querySelector('ul.dropdown-menu.purchase li').appendChild(clonedForm);
+        document
+          .querySelector("ul.dropdown-menu.purchase li")
+          .appendChild(clonedForm);
+      }
+
+      // Prevent the default form submission behavior
+      event.preventDefault();
     }
-
-    // Prevent the default form submission behavior
-    event.preventDefault();
-}
-})(document);
-
+  })(document);
 </script>
 {% endblock content %}

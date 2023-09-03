@@ -20266,6 +20266,9 @@ button.dropdown-toggle.purchase {
 }
 ul.dropdown-menu.purchase {
   padding: 10px;
+  max-height: 350px;
+  overflow-y: scroll;
+  
 }
 .req-header{
   text-align: center;
