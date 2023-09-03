@@ -234,19 +234,20 @@
         var addNewBtn = document.querySelector(".add-new-btn");
 
         if (submitBtn) {
-        clonedForm.querySelector('.global-btn[type="submit"]').remove()
+        clonedForm.querySelector('.global-btn[type="submit"]') ? clonedForm.querySelector('.global-btn[type="submit"]').remove() : '';
         submitBtn.remove();
         }
         else{
-            clonedForm.querySelector('.global-btn[type="submit"]').remove()
+            clonedForm.querySelector('.global-btn[type="submit"]') ? clonedForm.querySelector('.global-btn[type="submit"]').remove() : '';
         }
 
         if (addNewBtn) {
-        clonedForm.querySelector(".add-new-btn").remove()
+        clonedForm.querySelector(".add-new-btn") ? 
+        clonedForm.querySelector(".add-new-btn").remove() : '';
         addNewBtn.remove();
         }
         else{
-            clonedForm.querySelector(".add-new-btn").remove()
+            clonedForm.querySelector(".add-new-btn") ? clonedForm.querySelector(".add-new-btn").remove() : '';
         }
   
         // Append the cloned form to the list

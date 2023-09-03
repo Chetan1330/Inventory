@@ -20232,6 +20232,8 @@ button.global-btn {
   border: 1px solid #fff;
   padding: 10px;
   border-radius: 50px;
+  background: #fff;
+  box-shadow: -2px 7px 19px 0px #989494;
 }
 .larg-btn.purchase{
   width: 100%;
