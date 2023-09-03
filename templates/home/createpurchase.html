@@ -211,46 +211,40 @@
     }
 
     function addNewFields() {
-      console.log(
-        document.querySelector("#item-form"),
-        "document.querySelector"
-      );
-      if (event.target.classList.contains("add-new-btn")) {
-        // Remove the first submit button and the "Add New+" button from the previous form
-        var form = document.querySelector("#item-form");
-        var submitBtn = form.querySelector('.global-btn[type="submit"]');
-        var addNewBtn = form.querySelector(".add-new-btn");
-        submitBtn.remove();
-        addNewBtn.remove();
+  console.log(document.querySelector("#item-form"), "document.querySelector");
+  if (event.target.classList.contains("add-new-btn")) {
+    // Remove the first submit button and the "Add New+" button from the previous form
+    var form = document.querySelector("#item-form");
+    var submitBtn = form.querySelector('.global-btn[type="submit"]');
+    var addNewBtn = form.querySelector(".add-new-btn");
+    submitBtn.remove();
+    addNewBtn.remove();
 
-        // Clone the form and clear the input fields in the cloned form
-        var clonedForm = form.cloneNode(true);
-        clonedForm.querySelectorAll("input").forEach(function (input) {
-          input.value = "";
-        });
+    // Clone the form and clear the input fields in the cloned form
+    var clonedForm = form.cloneNode(true);
+    clonedForm.querySelectorAll("input").forEach(function (input) {
+      input.value = "";
+    });
 
-        // Append the cloned form to the list
-        document
-          .querySelector("ul.dropdown-menu.purchase li")
-          .appendChild(clonedForm);
+    // Append the cloned form to the list
+    var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
+    dropdownMenu.appendChild(clonedForm);
 
-        // Append the submit and add new buttons to the cloned form
-        // var formGroup = clonedForm.querySelector(".form-group:last-of-type");
-        var descriptionGroup = clonedForm.querySelector("#description").parentNode;
-        form.innerHTML +=
-          '<div class="form-row">' +
-          '<div class="form-group col-md-6">' +
-          '<button type="submit" class="global-btn">Submit</button>' +
-          "</div>" +
-          '<div class="form-group col-md-6">' +
-          '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
-          "</div>" +
-          "</div>"
-          ;
-        //   form.after(formGroup);
-          event.preventDefault();
-      }
-    }
+    // Create a new div for buttons and append it below the cloned form
+    var buttonsDiv = document.createElement("div");
+    buttonsDiv.className = "form-row";
+    buttonsDiv.innerHTML =
+      '<div class="form-group col-md-6">' +
+      '<button type="submit" class="global-btn">Submit</button>' +
+      "</div>" +
+      '<div class="form-group col-md-6">' +
+      '<button type="submit" class="global-btn add-new-btn">Add New+</button>' +
+      "</div>";
+
+    dropdownMenu.appendChild(buttonsDiv);
+  }
+}
+
   })(document);
 </script>
 {% endblock content %}
