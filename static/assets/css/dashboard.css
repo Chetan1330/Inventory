@@ -19972,7 +19972,11 @@ h3 input.search-input {
   /* border: 2px solid black; */
   margin-left: 49px;
 }
-
+.custom-dropdown {
+  display: none; /* Hide the dropdown by default */
+  position: absolute;
+  z-index: 1;
+}
 .custom-dropdown i {
   font-size: 16px;
   color: #333;
