@@ -810,7 +810,14 @@
         }).hide();
     
         // Hide the data cells in the columns that are not in the selected columns
-        
+        rows.each(function () {
+          var row = $(this);
+          row.find('td').each(function (index) {
+            if (selectedColumns.indexOf(Heads.eq(index).text()) === -1) {
+              $(this).hide();
+            }
+          });
+        });
       }
     
       currentPage = 0; // Reset to the first page when filtering
