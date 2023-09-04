@@ -65,14 +65,14 @@
                     <label for="description">Description:</label>
                     <input type="text" class="form-control" id="description" />
                   </div>
-                  
+                  <div class="form-group col-md-12" style="display: flex;">
+                    <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
+                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
+                      Add New+
+                    </button>
+                  </div> 
                 </form> 
-                <div class="form-group col-md-12" style="display: flex;">
-                  <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
-                  <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
-                    Add New+
-                  </button>
-                </div> 
+                
             </li>
           </ul>
         </div>
@@ -151,107 +151,48 @@
 
   
 <script>
-  (function (document) {
-"use strict";
+  document.addEventListener('DOMContentLoaded', function () {
+  const addButton = document.querySelector('.add-new-btn');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
 
-// Counter to generate unique IDs for cloned forms
-var formCounter = 0;
+  // Function to create a new form element
+  function createNewForm() {
+    // Clone the original form
+    const originalForm = document.querySelector('.item-form');
+    const newForm = originalForm.cloneNode(true);
 
-// Array to store form data
-var formDataArray = [];
+    // Remove submit and add new buttons from the previous form
+    const buttons = newForm.querySelectorAll('.form-group.col-md-12 button');
+    buttons.forEach((button) => button.remove());
 
-// Attach the populateTable function to the form submission event using event delegation
-document.addEventListener("submit", function (event) {
-  if (event.target.classList.contains("item-form")) {
-    var formData = populateTable(event.target);
-    formDataArray.push(formData); // Push form data to the array
-    updateTable(); // Update the table with all form data
+    // Add this new form to the dropdown menu
+    dropdownMenu.appendChild(newForm);
+
+    // Add click event listener to the new "Add New+" button
+    const newAddNewButton = newForm.querySelector('.add-new-btn');
+    newAddNewButton.addEventListener('click', createNewForm);
+
+    // Add submit event listener to the form
+    newForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Handle form submission logic here
+      // For demonstration purposes, you can simply alert the form data
+      const formData = new FormData(e.target);
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+      alert(JSON.stringify(formObject));
+
+      // Optionally, you can reset the form
+      e.target.reset();
+    });
   }
+
+  // Add click event listener to the initial "Add New+" button
+  addButton.addEventListener('click', createNewForm);
 });
-
-// Attach the addNewFields function to the "Add New+" button click event
-document.addEventListener("click", function (event) {
-  if (event.target.classList.contains("add-new-btn")) {
-    event.preventDefault(); // Prevent the default behavior of the "Add New" button click
-    addNewFields(event);
-  }
-});
-
-function populateTable(form) {
-  // Get the values from the form fields
-  var itemName = form.querySelector("#name").value;
-  var itemType = form.querySelector("#type").value;
-  var itemQuantity = form.querySelector("#quantity").value;
-  var itemLink = form.querySelector("#link").value;
-  var itemDescription = form.querySelector("#description").value;
-
-  // Create a new object with the entered values
-  var formData = {
-    name: itemName,
-    type: itemType,
-    quantity: itemQuantity,
-    link: itemLink,
-    description: itemDescription,
-  };
-
-  return formData;
-}
-
-function updateTable() {
-  // Get the table body
-  var tableBody = document.querySelector("#vendortable tbody");
-
-  // Loop through the formDataArray and append the data to the table
-  formDataArray.forEach(function (formData) {
-    var newRow = tableBody.insertRow(tableBody.rows.length);
-    var cells = [
-      newRow.insertCell(0),
-      newRow.insertCell(1),
-      newRow.insertCell(2),
-      newRow.insertCell(3),
-      newRow.insertCell(4),
-    ];
-
-    // Populate the cells with the form data
-    cells[0].textContent = formData.name;
-    cells[1].textContent = formData.type;
-    cells[2].textContent = formData.quantity;
-    cells[3].innerHTML = '<a href="' + formData.link + '">' + formData.link + "</a>";
-    cells[4].textContent = formData.description;
-  });
-}
-
-function addNewFields(event) {
-  event.preventDefault();
-  // Increment the formCounter to generate unique IDs
-  formCounter++;
-
-  // Clone the form and clear the input fields in the cloned form
-  var formToClone = event.target.closest(".item-form");
-  var clonedForm = formToClone.cloneNode(true);
-  clonedForm.querySelectorAll("input").forEach(function (input) {
-    // Generate unique IDs for input fields
-    input.id = input.id + "-" + formCounter;
-    input.value = "";
-  });
-
-  // Remove the "Submit" and "Add New+" buttons from the cloned form
-  // var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
-  // var addNewBtn = formToClone.querySelector(".add-new-btn");
-
-  // if (submitBtn) {
-  //   submitBtn.remove();
-  // }
-  // if (addNewBtn) {
-  //   addNewBtn.remove();
-  // }
-
-  // Append the cloned form to the list
-  var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
-  dropdownMenu.appendChild(clonedForm);
-  event.preventDefault();
-}
-})(document);
 
 </script>
   
