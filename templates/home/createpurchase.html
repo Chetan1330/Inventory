@@ -32,7 +32,7 @@
           </button>
           <ul class="dropdown-menu purchase">
             <li>
-              <div class="form-container">
+              <div class="form-container" >
                 <form class="item-form">
                   <div class="form-row">
                     <div class="form-group col-md-6">
@@ -161,9 +161,9 @@ var formCounter = 0;
 
 // Array to store form data
 var formDataArray = [];
-
+var dropdownContainer = document.getElementsByClassName("form-container");
 // Attach the populateTable function to the form submission event using event delegation
-document.addEventListener("submit", function (event) {
+dropdownContainer.addEventListener("submit", function (event) {
   if (event.target.classList.contains("item-form")) {
       event.preventDefault();
     var formData = populateTable(event.target);
