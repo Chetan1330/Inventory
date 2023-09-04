@@ -250,8 +250,8 @@
     }
 
     // Append the cloned form inside the <li> element
-    var liElement = formToClone.closest("form");
-    liElement.insertBefore(clonedForm);
+      var firstForm = document.querySelector(".item-form");
+  firstForm.insertAdjacentElement("afterend", clonedForm);
   }
 })(document);
 
