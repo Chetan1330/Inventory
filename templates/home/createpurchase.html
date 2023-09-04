@@ -162,6 +162,7 @@
 
   // Attach the populateTable function to the form submission event using event delegation
   document.querySelector('.global-btn[type="submit"]').addEventListener('click', function() {
+    event.preventDefault();
   var form = document.querySelector('.item-form');
   var formData = populateTable(form);
   formDataArray.push(formData);
