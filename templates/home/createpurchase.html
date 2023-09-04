@@ -32,7 +32,6 @@
           </button>
           <ul class="dropdown-menu purchase">
             <li>
-              <div class="form-container" >
                 <form class="item-form">
                   <div class="form-row">
                     <div class="form-group col-md-6">
@@ -72,10 +71,7 @@
                       Add New+
                     </button>
                   </div>
-                </form>
-              </div>
-                
-              
+                </form>  
             </li>
           </ul>
         </div>
@@ -166,6 +162,7 @@ var formDataArray = [];
 // Attach the populateTable function to the form submission event using event delegation
 document.addEventListener("submit", function (event) {
   if (event.target.classList.contains("item-form")) {
+      event.preventDefault();
     var formData = populateTable(event.target);
     formDataArray.push(formData); // Push form data to the array
     updateTable(); // Update the table with all form data
@@ -225,19 +222,18 @@ function updateTable() {
 }
 
 function addNewFields(event) {
-  console.log(event.target);
-  console.log(event.target.closest(".item-form"))
   // Increment the formCounter to generate unique IDs
   formCounter++;
 
   // Clone the form and clear the input fields in the cloned form
-  var formToClone = document.querySelector(".item-form");
+  var formToClone = event.target.closest(".item-form");
   var clonedForm = formToClone.cloneNode(true);
   clonedForm.querySelectorAll("input").forEach(function (input) {
     // Generate unique IDs for input fields
     input.id = input.id + "-" + formCounter;
     input.value = "";
   });
+
   // Remove the "Submit" and "Add New+" buttons from the cloned form
   var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
   var addNewBtn = formToClone.querySelector(".add-new-btn");
@@ -248,13 +244,12 @@ function addNewFields(event) {
   if (addNewBtn) {
     addNewBtn.remove();
   }
-  var formContainer = formToClone.parentNode;
-  formContainer.insertBefore(clonedForm, submitBtn);
-  formContainer.insertBefore(addNewBtn, submitBtn);
-  // Insert the cloned form before the buttons
+
+  // Append the cloned form to the list
+  var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
+  dropdownMenu.appendChild(clonedForm);
   event.preventDefault();
 }
-
 })(document);
 
 </script>
