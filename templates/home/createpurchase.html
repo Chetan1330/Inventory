@@ -223,42 +223,53 @@
     }
 
     function addNewFields(event) {
-      event.preventDefault();
-      // Increment the formCounter to generate unique IDs
-      formCounter++;
+    event.preventDefault();
+    // Increment the formCounter to generate unique IDs
+    formCounter++;
 
-      // Clone the form and clear the input fields in the cloned form
-      var formToClone = event.target.closest(".item-form");
-      var clonedForm = formToClone.cloneNode(true);
-      clonedForm.querySelectorAll("input").forEach(function (input) {
-        // Generate unique IDs for input fields
-        input.id = input.id + "-" + formCounter;
-        input.value = "";
-      });
-
-      // Remove the "Submit" and "Add New+" buttons from the cloned form
-      var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
-      var addNewBtn = clonedForm.querySelector(".add-new-btn");
-
-      if (submitBtn) {
-        submitBtn.remove();
+    // Clone the form and clear the input fields in the cloned form
+    var formToClone = event.target.closest(".item-form");
+    var clonedForm = formToClone.cloneNode(true);
+    clonedForm.querySelectorAll("input, select").forEach(function (element) {
+      // Generate unique IDs for input and select fields
+      element.id = element.id + "-" + formCounter;
+      if (element.tagName === "INPUT") {
+        element.value = ""; // Clear input field values
       }
-      if (addNewBtn) {
-        addNewBtn.remove();
-      }
+    });
 
-      // Attach the submit event listener to the cloned form
-      clonedForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent the default form submission
-        var formData = populateTable(event.target);
-        formDataArray.push(formData); // Push form data to the array
-        updateTable(); // Update the table with all form data
-      });
+    // Remove the "Submit" and "Add New+" buttons from the old form
+    var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+    var addNewBtn = formToClone.querySelector(".add-new-btn");
 
-      // Append the cloned form to the list
-      var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
-      dropdownMenu.appendChild(clonedForm);
+    if (submitBtn) {
+      submitBtn.remove();
     }
+    if (addNewBtn) {
+      addNewBtn.remove();
+    }
+
+    // Append the cloned form inside the <li> element
+    var liElement = formToClone.closest("li");
+    liElement.appendChild(clonedForm);
+
+    // Add "Submit" and "Add New+" buttons to the cloned form
+    var clonedSubmitBtn = document.createElement("button");
+    clonedSubmitBtn.setAttribute("type", "submit");
+    clonedSubmitBtn.className = "global-btn";
+    clonedSubmitBtn.style.margin = "10px";
+    clonedSubmitBtn.textContent = "Submit";
+
+    var clonedAddNewBtn = document.createElement("button");
+    clonedAddNewBtn.setAttribute("type", "button");
+    clonedAddNewBtn.className = "global-btn add-new-btn";
+    clonedAddNewBtn.style.margin = "10px";
+    clonedAddNewBtn.textContent = "Add New+";
+
+    clonedForm.appendChild(clonedSubmitBtn);
+    clonedForm.appendChild(clonedAddNewBtn);
+  }
+  
   })(document);
 </script>
   
