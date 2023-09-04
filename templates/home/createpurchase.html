@@ -223,9 +223,11 @@
         var addNewBtn = clonedForm.querySelector(".add-new-btn");
   
         if (submitBtn) {
+          document.querySelector('.global-btn[type="submit"]').remove();
           submitBtn.remove();
         }
         if (addNewBtn) {
+            document.querySelector(".add-new-btn").remove();
           addNewBtn.remove();
         }
   
