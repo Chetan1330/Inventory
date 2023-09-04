@@ -19423,9 +19423,10 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card .card-header .card-category {
-  color: #ffffff;
   margin-bottom: 5px;
-  font-weight: 300;
+  color: #190e4f;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .card .map {
@@ -20296,11 +20297,11 @@ ul.dropdown-menu.purchase {
 .nav li a::before {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 50%;
   height: 2px; /* Thickness of the underline */
   background-color: transparent; /* Initially, transparent color */
-  bottom: 0;
-  left: 0;
+  bottom: 10px;
+  left: 51px;
   transform: scaleX(0); /* Initially, no width */
   transform-origin: bottom right;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Transition effect with ease-in-out for both width and color */
