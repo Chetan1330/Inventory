@@ -798,7 +798,7 @@
     });
 
     function updateDisplayedData() {
-      console.log(selectedColumns,eads.eq(index).text(),'showRow',showRow)
+      console.log(selectedColumns,Heads.eq(index).text(),'showRow',showRow)
       rows.each(function () {
         var row = $(this);
         var cells = row.find("td");
