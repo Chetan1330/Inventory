@@ -66,11 +66,9 @@
                   <input type="text" class="form-control" id="description" />
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <button type="submit" class="global-btn">Submit</button>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <button type="submit" class="global-btn add-new-btn">
+                  <div class="form-group col-md-12" style="display: flex;">
+                    <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
+                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
                       Add New+
                     </button>
                   </div>
@@ -239,8 +237,8 @@ function addNewFields(event) {
   });
 
   // Remove the "Submit" and "Add New+" buttons from the cloned form
-  var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
-  var addNewBtn = clonedForm.querySelector(".add-new-btn");
+  var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+  var addNewBtn = formToClone.querySelector(".add-new-btn");
 
   if (submitBtn) {
     submitBtn.remove();
