@@ -161,24 +161,11 @@
       // Counter to generate unique IDs for cloned forms
       var formCounter = 0;
   
-      // Track form data
-      var formData = [];
-  
       // Attach the populateTable function to the form submission event using event delegation
       document.addEventListener("submit", function (event) {
         if (event.target.classList.contains("item-form")) {
           event.preventDefault();
-          var form = event.target;
-          var formDataObj = {
-            name: form.querySelector("#name").value,
-            type: form.querySelector("#type").value,
-            quantity: form.querySelector("#quantity").value,
-            link: form.querySelector("#link").value,
-            description: form.querySelector("#description").value,
-          };
-          formData.push(formDataObj);
-          populateTable();
-          form.reset();
+          populateTable(event.target);
         }
       });
   
@@ -189,31 +176,31 @@
         }
       });
   
-      function populateTable() {
-        // Get the table body
-        var tableBody = document.querySelector("#vendortable tbody");
+      function populateTable(form) {
+        // Get the values from the form fields
+        var itemName = form.querySelector("#name").value;
+        var itemType = form.querySelector("#type").value;
+        var itemQuantity = form.querySelector("#quantity").value;
+        var itemLink = form.querySelector("#link").value;
+        var itemDescription = form.querySelector("#description").value;
   
-        // Clear the existing table
-        tableBody.innerHTML = "";
+        // Create a new table row with the entered values
+        var table = document.querySelector("#vendortable tbody");
+        var newRow = table.insertRow(table.rows.length);
+        var cells = [
+          newRow.insertCell(0),
+          newRow.insertCell(1),
+          newRow.insertCell(2),
+          newRow.insertCell(3),
+          newRow.insertCell(4),
+        ];
   
-        // Populate the table with data from formData
-        formData.forEach(function (data) {
-          var newRow = tableBody.insertRow(tableBody.rows.length);
-          var cells = [
-            newRow.insertCell(0),
-            newRow.insertCell(1),
-            newRow.insertCell(2),
-            newRow.insertCell(3),
-            newRow.insertCell(4),
-          ];
-  
-          // Populate the cells with the data
-          cells[0].textContent = data.name;
-          cells[1].textContent = data.type;
-          cells[2].textContent = data.quantity;
-          cells[3].innerHTML = '<a href="' + data.link + '">' + data.link + "</a>";
-          cells[4].textContent = data.description;
-        });
+        // Populate the cells with the entered values
+        cells[0].textContent = itemName;
+        cells[1].textContent = itemType;
+        cells[2].textContent = itemQuantity;
+        cells[3].innerHTML = '<a href="' + itemLink + '">' + itemLink + "</a>";
+        cells[4].textContent = itemDescription;
       }
   
       function addNewFields(clickedButton) {
@@ -261,6 +248,7 @@
       }
     })(document);
   </script>
+  
   
     
   
