@@ -32,48 +32,49 @@
           </button>
           <ul class="dropdown-menu purchase">
             <li>
-              <form class="item-form">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="name">Name:</label>
-                    <select class="form-control" id="name">
-                      <option value="Net-Adapter">Net Adapter</option>
-                      <option value="Memory-chip">Memory chip</option>
-                      <option value="Integrator">Integrator</option>
-                    </select>
+              <div class="form-container">
+                <form class="item-form">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="name">Name:</label>
+                      <select class="form-control" id="name">
+                        <option value="Net-Adapter">Net Adapter</option>
+                        <option value="Memory-chip">Memory chip</option>
+                        <option value="Integrator">Integrator</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="type">Type:</label>
+                      <select class="form-control" id="type">
+                        <option value="Semi-conductor">Semi conductor</option>
+                        <option value="Resistor">Resistor</option>
+                        <option value="Volter">Volter</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="type">Type:</label>
-                    <select class="form-control" id="type">
-                      <option value="Semi-conductor">Semi conductor</option>
-                      <option value="Resistor">Resistor</option>
-                      <option value="Volter">Volter</option>
-                    </select>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="quantity">Quantity:</label>
+                      <input type="number" class="form-control" id="quantity" />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="link">Link:</label>
+                      <input type="text" class="form-control" id="link" />
+                    </div>
                   </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" class="form-control" id="quantity" />
+                  <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" id="description" />
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="link">Link:</label>
-                    <input type="text" class="form-control" id="link" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="description">Description:</label>
-                  <input type="text" class="form-control" id="description" />
-                </div>
-              </form>
-              <div class="form-row">
+                </form>
+              </div>
                 <div class="form-group col-md-12 button-container" style="display: flex;">
                   <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
                   <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
                     Add New+
                   </button>
                 </div>
-              </div>
+              
             </li>
           </ul>
         </div>
@@ -228,7 +229,7 @@ function addNewFields(event) {
   formCounter++;
 
   // Clone the form and clear the input fields in the cloned form
-  var formToClone = document.querySelector(".item-form");
+  var formToClone = event.target.closest(".form-container").querySelector(".item-form");
   var clonedForm = formToClone.cloneNode(true);
   clonedForm.querySelectorAll("input").forEach(function (input) {
     // Generate unique IDs for input fields
