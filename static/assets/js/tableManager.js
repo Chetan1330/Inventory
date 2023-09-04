@@ -767,7 +767,7 @@
 
     $("#numrows").after(filterButton);
 
-    Heads.each(function (index) {
+    Heads.each(function () {
       filterDropdown
         .find("ul")
         .append(
