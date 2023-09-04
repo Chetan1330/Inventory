@@ -180,11 +180,11 @@
 
   function populateTable(form) {
     // Get the values from the form fields
-    var itemName = form.querySelector("#name").value;
-    var itemType = form.querySelector("#type").value;
-    var itemQuantity = form.querySelector("#quantity").value;
-    var itemLink = form.querySelector("#link").value;
-    var itemDescription = form.querySelector("#description").value;
+    var itemName = form.querySelector("#name-" + formCounter).value;
+    var itemType = form.querySelector("#type-" + formCounter).value;
+    var itemQuantity = form.querySelector("#quantity-" + formCounter).value;
+    var itemLink = form.querySelector("#link-" + formCounter).value;
+    var itemDescription = form.querySelector("#description-" + formCounter).value;
 
     // Create a new object with the entered values
     var formData = {
