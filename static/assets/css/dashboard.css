@@ -20238,6 +20238,15 @@ button.global-btn {
   background: #fff;
   box-shadow: 0px -1px 4px 0px #989494;
 }
+button.global-btn:focus {
+  outline: none!important;
+  width: 50%;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0px -1px 4px 0px #989494;
+}
 .larg-btn.purchase{
   width: 100%;
   min-height: 150px;

@@ -145,8 +145,8 @@
         </ul>
       </div>
       <div class="col-sm-6" style="display: flex;">
-        <button type="button" class="global-btn" style="height: 50px;">Submit</button>
-        <button type="button" class="global-btn" style="height: 50px;">+Save Template</button>
+        <button type="button" class="global-btn" style="height: 54px; margin: 10px;">Submit</button>
+        <button type="button" class="global-btn" style="height: 54px; margin: 10px;">+Save Template</button>
       </div>
     </div>
   </div>
@@ -166,6 +166,7 @@
   // Attach the populateTable function to the form submission event using event delegation
   document.addEventListener("submit", function (event) {
     if (event.target.classList.contains("item-form")) {
+        event.preventDefault();
       var formData = populateTable(event.target);
       formDataArray.push(formData); // Push form data to the array
       updateTable(); // Update the table with all form data
@@ -265,6 +266,7 @@
     var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
     dropdownMenu.appendChild(clonedForm);
     event.stopPropogation();
+    event.preventDefault();
   }
 })(document);
 
