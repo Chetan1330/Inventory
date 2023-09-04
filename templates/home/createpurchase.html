@@ -65,13 +65,14 @@
                     <label for="description">Description:</label>
                     <input type="text" class="form-control" id="description" />
                   </div>
-                  <div class="form-group col-md-12 button-container" style="display: flex;">
-                    <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
-                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
-                      Add New+
-                    </button>
-                  </div>
-                </form>  
+                  
+                </form> 
+                <div class="form-group col-md-12" style="display: flex;">
+                  <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
+                  <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
+                    Add New+
+                  </button>
+                </div> 
             </li>
           </ul>
         </div>
@@ -162,7 +163,6 @@ var formDataArray = [];
 // Attach the populateTable function to the form submission event using event delegation
 document.addEventListener("submit", function (event) {
   if (event.target.classList.contains("item-form")) {
-      event.preventDefault();
     var formData = populateTable(event.target);
     formDataArray.push(formData); // Push form data to the array
     updateTable(); // Update the table with all form data
@@ -222,6 +222,7 @@ function updateTable() {
 }
 
 function addNewFields(event) {
+  event.preventDefault();
   // Increment the formCounter to generate unique IDs
   formCounter++;
 
@@ -235,15 +236,15 @@ function addNewFields(event) {
   });
 
   // Remove the "Submit" and "Add New+" buttons from the cloned form
-  var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
-  var addNewBtn = formToClone.querySelector(".add-new-btn");
+  // var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+  // var addNewBtn = formToClone.querySelector(".add-new-btn");
 
-  if (submitBtn) {
-    submitBtn.remove();
-  }
-  if (addNewBtn) {
-    addNewBtn.remove();
-  }
+  // if (submitBtn) {
+  //   submitBtn.remove();
+  // }
+  // if (addNewBtn) {
+  //   addNewBtn.remove();
+  // }
 
   // Append the cloned form to the list
   var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
