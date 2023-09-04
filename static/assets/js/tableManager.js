@@ -806,8 +806,8 @@
     
         cells.each(function (index) {
           if (
-            selectedColumns.length > 0 &&
-            selectedColumns.indexOf(Heads.eq(index).text()) === -1
+            selectedColumns.length > 0 ||
+            selectedColumns.includes(Heads.eq(index).text()) === -1
           ) {
             showRow = false;
             return false; // Exit the loop since we already found a non-matching column
