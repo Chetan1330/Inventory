@@ -168,7 +168,6 @@
   // Attach the populateTable function to the form submission event using event delegation
   document.addEventListener("submit", function (event) {
     if (event.target.classList.contains("item-form")) {
-      event.preventDefault();
       var formData = populateTable(event.target);
       formDataArray.push(formData); // Push form data to the array
       updateTable(); // Update the table with all form data
@@ -267,6 +266,7 @@
     // Append the cloned form to the list
     var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
     dropdownMenu.appendChild(clonedForm);
+    event.stopPropogation();
   }
 })(document);
 
