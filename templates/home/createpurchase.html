@@ -250,24 +250,8 @@
     }
 
     // Append the cloned form inside the <li> element
-    var liElement = formToClone.closest("li");
+    var liElement = formToClone.closest("form");
     liElement.appendChild(clonedForm);
-
-    // Add "Submit" and "Add New+" buttons to the cloned form
-    var clonedSubmitBtn = document.createElement("button");
-    clonedSubmitBtn.setAttribute("type", "submit");
-    clonedSubmitBtn.className = "global-btn";
-    clonedSubmitBtn.style.margin = "10px";
-    clonedSubmitBtn.textContent = "Submit";
-
-    var clonedAddNewBtn = document.createElement("button");
-    clonedAddNewBtn.setAttribute("type", "button");
-    clonedAddNewBtn.className = "global-btn add-new-btn";
-    clonedAddNewBtn.style.margin = "10px";
-    clonedAddNewBtn.textContent = "Add New+";
-
-    clonedForm.appendChild(clonedSubmitBtn);
-    clonedForm.appendChild(clonedAddNewBtn);
   }
   
   })(document);
