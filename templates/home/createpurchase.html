@@ -193,9 +193,6 @@
         // Get the table body
         var tableBody = document.querySelector("#vendortable tbody");
   
-        // Clear the existing table
-        tableBody.innerHTML = "";
-  
         // Populate the table with data from formData
         formData.forEach(function (data) {
           var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -264,6 +261,7 @@
       }
     })(document);
   </script>
+  
   
   
   
