@@ -1362,7 +1362,7 @@ def UploadFile(request):
     else:
         form = CSVUploadForm()
     
-    return render(request, 'home/upload.html')
+    return render(request, 'home/upload11.html')
 
 
 @login_required(login_url="/login/")
