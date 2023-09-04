@@ -20231,12 +20231,12 @@ h3 input.search-input {
   display: flex;
 }
 button.global-btn {
-  width: 100%;
-  border: 1px solid #fff;
+  width: 50%;
+  border: none;
   padding: 10px;
   border-radius: 50px;
   background: #fff;
-  box-shadow: -2px 7px 19px 0px #989494;
+  box-shadow: 0px -1px 4px 0px #989494;
 }
 .larg-btn.purchase{
   width: 100%;
