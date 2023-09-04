@@ -803,20 +803,19 @@
       Heads.show();
       rows.find('td').show();
     
-      selectedColumns.forEach(function (columnName) {
-        console.log(columnName,'co')
-        // Hide the table headers that are not selected
+      if (selectedColumns.length > 0) {
+        // Hide the table headers that are not in the selected columns
         Heads.filter(function () {
-          return $(this).text() !== columnName;
+          return selectedColumns.indexOf($(this).text()) === -1;
         }).hide();
     
-        // Hide the data cells in the same column that are not selected
-        rows.find('td').filter(function (index) {
-          return $(this).index() !== Heads.index(Heads.filter(function () {
-            return $(this).text() === columnName;
-          }));
-        }).toggle();
-      });
+        // Hide the data cells in the columns that are not in the selected columns
+        rows.find('td').each(function (index) {
+          if (selectedColumns.indexOf(Heads.eq(index).text()) === -1) {
+            $(this).hide();
+          }
+        });
+      }
     
       currentPage = 0; // Reset to the first page when filtering
       paginate(currentPage, numPerPage);
