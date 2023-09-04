@@ -66,14 +66,15 @@
                     <label for="description">Description:</label>
                     <input type="text" class="form-control" id="description" />
                   </div>
+                  <div class="form-group col-md-12 button-container" style="display: flex;">
+                    <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
+                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
+                      Add New+
+                    </button>
+                  </div>
                 </form>
               </div>
-                <div class="form-group col-md-12 button-container" style="display: flex;">
-                  <button type="submit" class="global-btn" style="margin: 10px;">Submit</button>
-                  <button type="submit" class="global-btn add-new-btn" style="margin: 10px;">
-                    Add New+
-                  </button>
-                </div>
+                
               
             </li>
           </ul>
@@ -161,11 +162,10 @@ var formCounter = 0;
 
 // Array to store form data
 var formDataArray = [];
-var dropdownContainer = document.getElementsByClassName("form-container");
+
 // Attach the populateTable function to the form submission event using event delegation
-dropdownContainer.addEventListener("submit", function (event) {
+document.addEventListener("submit", function (event) {
   if (event.target.classList.contains("item-form")) {
-      event.preventDefault();
     var formData = populateTable(event.target);
     formDataArray.push(formData); // Push form data to the array
     updateTable(); // Update the table with all form data
@@ -226,7 +226,7 @@ function updateTable() {
 
 function addNewFields(event) {
   console.log(event.target);
-  console.log(event.target.closest(".form-container"))
+  console.log(event.target.closest(".item-form"))
   // Increment the formCounter to generate unique IDs
   formCounter++;
 
@@ -238,11 +238,20 @@ function addNewFields(event) {
     input.id = input.id + "-" + formCounter;
     input.value = "";
   });
+  // Remove the "Submit" and "Add New+" buttons from the cloned form
+  var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+  var addNewBtn = formToClone.querySelector(".add-new-btn");
 
+  if (submitBtn) {
+    submitBtn.remove();
+  }
+  if (addNewBtn) {
+    addNewBtn.remove();
+  }
+  var formContainer = formToClone.parentNode;
+  formContainer.insertBefore(clonedForm, submitBtn);
+  formContainer.insertBefore(addNewBtn, submitBtn);
   // Insert the cloned form before the buttons
-  var buttonContainer = event.target.closest(".button-container");
-  buttonContainer.parentNode.insertBefore(clonedForm, buttonContainer);
-
   event.preventDefault();
 }
 
