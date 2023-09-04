@@ -193,6 +193,9 @@
         // Get the table body
         var tableBody = document.querySelector("#vendortable tbody");
   
+        // Clear the existing table
+        tableBody.innerHTML = "";
+  
         // Populate the table with data from formData
         formData.forEach(function (data) {
           var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -229,8 +232,8 @@
         });
   
         // Remove the "Submit" and "Add New+" buttons from the previous form
-        var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
-        var addNewBtn = clonedForm.querySelector(".add-new-btn");
+        var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+        var addNewBtn = formToClone.querySelector(".add-new-btn");
   
         if (submitBtn) {
           submitBtn.remove();
@@ -238,10 +241,6 @@
         if (addNewBtn) {
           addNewBtn.remove();
         }
-  
-        // Append the cloned form to the list
-        var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
-        dropdownMenu.appendChild(clonedForm);
   
         // Create a new div for buttons and append it below the cloned form
         var buttonsDiv = document.createElement("div");
@@ -255,9 +254,15 @@
           "</div>";
   
         clonedForm.appendChild(buttonsDiv);
+  
+        // Append the cloned form to the list
+        var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
+        dropdownMenu.appendChild(clonedForm);
       }
     })(document);
   </script>
+    
+  
   
   
   
