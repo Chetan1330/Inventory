@@ -168,6 +168,7 @@
         formDataArray.push(formData); // Push form data to the array
         updateTable(); // Update the table with all form data
       }
+      event.preventDefault();
     });
 
     // Attach the addNewFields function to the "Add New+" button click event
@@ -176,6 +177,7 @@
         event.preventDefault(); // Prevent the default behavior of the "Add New" button click
         addNewFields(event);
       }
+      event.preventDefault();
     });
 
     function populateTable(form) {
