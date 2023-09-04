@@ -161,13 +161,14 @@
   var formDataArray = [];
 
   // Attach the populateTable function to the form submission event using event delegation
-  document.querySelector('.global-btn[type="submit"]').addEventListener('click', function() {
-    event.preventDefault();
-  var form = document.querySelector('.item-form');
-  var formData = populateTable(form);
-  formDataArray.push(formData);
-  updateTable();
-});
+  document.addEventListener("submit", function (event) {
+    if (event.target.classList.contains("item-form")) {
+      event.preventDefault(); // Prevent the default form submission
+      var formData = populateTable(event.target);
+      formDataArray.push(formData); // Push form data to the array
+      updateTable(); // Update the table with all form data
+    }
+  });
 
   // Attach the addNewFields function to the "Add New+" button click event
   document.addEventListener("click", function (event) {
@@ -176,6 +177,7 @@
       addNewFields(event);
     }
   });
+
 
   function populateTable(form) {
   // Get the values from the form fields
@@ -253,6 +255,7 @@
     // Append the cloned form inside the <li> element
       var firstForm = document.querySelector(".item-form");
   firstForm.insertAdjacentElement("afterend", clonedForm);
+  event.preventDefault();
   }
 })(document);
 
