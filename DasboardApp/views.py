@@ -1992,12 +1992,23 @@ def pages(request):
 
                 for i in set(classes1):
                     labels.append(i)
+                    if Stock.objects.filter(Class__icontains = i, Type__icontains = 'Lotwise'):
+                        print("Yes")
+                        for i in Stock.objects.filter(Class__icontains = i, Type__icontains = 'Lotwise'):
+                            stockval.append(i.Count)
+                            stockin.append(i.Count)
+                            stockout.append(0)
+                            stockpending.append(0)
+                            stockreserved.append(0)
+                            print("Lotwise count:", i.Count)
+                    else:
+                        print("NO")
                     # print(f"Stock Available for {i}:", Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Available").count())
-                    stockval.append(Stock.objects.filter(Class__icontains = i).count())
-                    stockin.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Available").count())
-                    stockout.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Not Available").count())
-                    stockpending.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Pending Retirement").count())
-                    stockreserved.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Reserved").count())
+                        stockval.append(Stock.objects.filter(Class__icontains = i, Type__icontains = 'Serialwise').count())
+                        stockin.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Available", Type__icontains = 'Serialwise').count())
+                        stockout.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Not Available", Type__icontains = 'Serialwise').count())
+                        stockpending.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Pending Retirement", Type__icontains = 'Serialwise').count())
+                        stockreserved.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Reserved", Type__icontains = 'Serialwise').count())
 
                 # for i in set(classes1):
                 #     stockout.append(Stock.objects.filter(Class__icontains = i, Substatus__icontains = "Not Available").count())
