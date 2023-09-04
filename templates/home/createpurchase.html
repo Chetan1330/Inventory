@@ -221,7 +221,7 @@
         formCounter++;
   
         // Clone the last cloned form or the initial form if there is no previous clone
-        var formToClone = document.querySelector(".item-form");
+        var formToClone = clickedButton.closest(".item-form");
   
         // Clone the form and clear the input fields in the cloned form
         var clonedForm = formToClone.cloneNode(true);
@@ -232,8 +232,8 @@
         });
   
         // Remove the "Submit" and "Add New+" buttons from the previous form
-        var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
-        var addNewBtn = formToClone.querySelector(".add-new-btn");
+        var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
+        var addNewBtn = clonedForm.querySelector(".add-new-btn");
   
         if (submitBtn) {
           submitBtn.remove();
@@ -261,6 +261,7 @@
       }
     })(document);
   </script>
+  
     
   
   
