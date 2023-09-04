@@ -225,11 +225,13 @@ function updateTable() {
 }
 
 function addNewFields(event) {
+  console.log(event.target);
+  console.log(event.target.closest(".form-container"))
   // Increment the formCounter to generate unique IDs
   formCounter++;
 
   // Clone the form and clear the input fields in the cloned form
-  var formToClone = event.target.closest(".form-container").querySelector(".item-form");
+  var formToClone = document.querySelector(".item-form");
   var clonedForm = formToClone.cloneNode(true);
   clonedForm.querySelectorAll("input").forEach(function (input) {
     // Generate unique IDs for input fields
