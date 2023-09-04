@@ -153,151 +153,110 @@
 </div>
 
   
-  <script>
-    (function (document) {
-    "use strict";
+<script>
+  (function (document) {
+"use strict";
 
-    // Counter to generate unique IDs for cloned forms
-    var formCounter = 0;
+// Counter to generate unique IDs for cloned forms
+var formCounter = 0;
 
-    // Array to store form data
-    var formDataArray = [];
+// Array to store form data
+var formDataArray = [];
 
-    // Attach the populateTable function to the form submission event using event delegation
-    document.addEventListener("submit", function (event) {
-        if (event.target.classList.contains("item-form")) {
-            event.preventDefault();
-            var formData = populateTable(event.target);
-            formDataArray.push(formData); // Push form data to the array
-            updateTable(); // Update the table with all form data
-        }
-    });
+// Attach the populateTable function to the form submission event using event delegation
+document.addEventListener("submit", function (event) {
+  if (event.target.classList.contains("item-form")) {
+      event.preventDefault();
+    var formData = populateTable(event.target);
+    formDataArray.push(formData); // Push form data to the array
+    updateTable(); // Update the table with all form data
+  }
+});
 
-    // Attach the addNewFields function to the "Add New+" button click event
-    document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("add-new-btn")) {
-            event.preventDefault(); // Prevent the default behavior of the "Add New" button click
-            addNewFields(event);
-        }
-    });
+// Attach the addNewFields function to the "Add New+" button click event
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("add-new-btn")) {
+    event.preventDefault(); // Prevent the default behavior of the "Add New" button click
+    addNewFields(event);
+  }
+});
 
-    function populateTable(form) {
-        // Get the values from the form fields
-        var itemName = form.querySelector("#name").value;
-        var itemType = form.querySelector("#type").value;
-        var itemQuantity = form.querySelector("#quantity").value;
-        var itemLink = form.querySelector("#link").value;
-        var itemDescription = form.querySelector("#description").value;
+function populateTable(form) {
+  // Get the values from the form fields
+  var itemName = form.querySelector("#name").value;
+  var itemType = form.querySelector("#type").value;
+  var itemQuantity = form.querySelector("#quantity").value;
+  var itemLink = form.querySelector("#link").value;
+  var itemDescription = form.querySelector("#description").value;
 
-        // Create a new object with the entered values
-        var formData = {
-            name: itemName,
-            type: itemType,
-            quantity: itemQuantity,
-            link: itemLink,
-            description: itemDescription,
-        };
+  // Create a new object with the entered values
+  var formData = {
+    name: itemName,
+    type: itemType,
+    quantity: itemQuantity,
+    link: itemLink,
+    description: itemDescription,
+  };
 
-        return formData;
-    }
+  return formData;
+}
 
-    function updateTable() {
-        // Get the table body
-        var tableBody = document.querySelector("#vendortable tbody");
+function updateTable() {
+  // Get the table body
+  var tableBody = document.querySelector("#vendortable tbody");
 
-        // Loop through the formDataArray and append the data to the table
-        formDataArray.forEach(function (formData) {
-            var newRow = tableBody.insertRow(tableBody.rows.length);
-            var cells = [
-                newRow.insertCell(0),
-                newRow.insertCell(1),
-                newRow.insertCell(2),
-                newRow.insertCell(3),
-                newRow.insertCell(4),
-            ];
+  // Loop through the formDataArray and append the data to the table
+  formDataArray.forEach(function (formData) {
+    var newRow = tableBody.insertRow(tableBody.rows.length);
+    var cells = [
+      newRow.insertCell(0),
+      newRow.insertCell(1),
+      newRow.insertCell(2),
+      newRow.insertCell(3),
+      newRow.insertCell(4),
+    ];
 
-            // Populate the cells with the form data
-            cells[0].textContent = formData.name;
-            cells[1].textContent = formData.type;
-            cells[2].textContent = formData.quantity;
-            cells[3].innerHTML = '<a href="' + formData.link + '">' + formData.link + "</a>";
-            cells[4].textContent = formData.description;
-        });
-    }
+    // Populate the cells with the form data
+    cells[0].textContent = formData.name;
+    cells[1].textContent = formData.type;
+    cells[2].textContent = formData.quantity;
+    cells[3].innerHTML = '<a href="' + formData.link + '">' + formData.link + "</a>";
+    cells[4].textContent = formData.description;
+  });
+}
 
-    function addNewFields(event) {
-        // Increment the formCounter to generate unique IDs
-        formCounter++;
+function addNewFields(event) {
+  // Increment the formCounter to generate unique IDs
+  formCounter++;
 
-        // Clone the form and clear the input fields in the cloned form
-        var formToClone = event.target.closest(".item-form");
-        var clonedForm = formToClone.cloneNode(true);
-        clonedForm.querySelectorAll("input").forEach(function (input) {
-            // Generate unique IDs for input fields
-            input.id = input.id + "-" + formCounter;
-            input.value = "";
-        });
+  // Clone the form and clear the input fields in the cloned form
+  var formToClone = event.target.closest(".item-form");
+  var clonedForm = formToClone.cloneNode(true);
+  clonedForm.querySelectorAll("input").forEach(function (input) {
+    // Generate unique IDs for input fields
+    input.id = input.id + "-" + formCounter;
+    input.value = "";
+  });
 
-        // Remove the "Submit" and "Add New+" buttons from the cloned form
-        var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
-        var addNewBtn = formToClone.querySelector(".add-new-btn");
+  // Remove the "Submit" and "Add New+" buttons from the cloned form
+  var submitBtn = clonedForm.querySelector('.global-btn[type="submit"]');
+  var addNewBtn = clonedForm.querySelector(".add-new-btn");
 
-        if (submitBtn) {
-            submitBtn.remove();
-        }
-        if (addNewBtn) {
-            addNewBtn.remove();
-        }
+  if (submitBtn) {
+    submitBtn.remove();
+  }
+  if (addNewBtn) {
+    addNewBtn.remove();
+  }
 
-        // Create a new div for buttons and append it below the cloned form
-        var buttonsDiv = document.createElement("div");
-        buttonsDiv.className = "form-row";
-        buttonsDiv.innerHTML =
-            '<div class="form-group col-md-6">' +
-            '<button type="submit" class="global-btn" id="submit-all-btn">Submit</button>' +
-            "</div>" +
-            '<div class="form-group col-md-6">' +
-            '<button type="button" class="global-btn add-new-btn">Add New+</button>' +
-            "</div>";
-
-        clonedForm.appendChild(buttonsDiv);
-
-        // Append the cloned form to the list
-        var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
-        dropdownMenu.appendChild(clonedForm);
-    }
-
-    // Attach a click event listener to the "Submit All" button
-    submitAllButton.addEventListener("click", function () {
-        submitAllForms();
-    });
-    // Function to submit all forms
-    function submitAllForms() {
-        // Loop through the formDataArray and submit each form
-        formDataArray.forEach(function (formData) {
-            // Create a new form element
-            var form = document.createElement("form");
-            form.className = "item-form";
-            form.style.display = "none"; // Hide the form
-            form.innerHTML =
-                '<input type="text" id="name" value="' + formData.name + '" name="name">' +
-                '<input type="text" id="type" value="' + formData.type + '" name="type">' +
-                '<input type="text" id="quantity" value="' + formData.quantity + '" name="quantity">' +
-                '<input type="text" id="link" value="' + formData.link + '" name="link">' +
-                '<input type="text" id="description" value="' + formData.description + '" name="description">' +
-                '<button type="submit" class="global-btn">Submit</button>' +
-                '<button type="button" class="global-btn add-new-btn">Add New+</button>';
-
-            // Append the form to the body and submit it
-            document.body.appendChild(form);
-            form.submit();
-        });
-    }
-
-    
+  // Append the cloned form to the list
+  var dropdownMenu = document.querySelector("ul.dropdown-menu.purchase");
+  dropdownMenu.appendChild(clonedForm);
+  event.preventDefault();
+}
 })(document);
 
-  </script>
+</script>
   
     
   
