@@ -798,33 +798,31 @@
     });
 
     function updateDisplayedData() {
-      console.log(selectedColumns,Heads,'h')
-      rows.each(function () {
-        var row = $(this);
-        var cells = row.find("td");
-        var showRow = true; // Default to showing the row
+      console.log(selectedColumns, Heads, 'h');
+      // Show all table headers and data cells
+      Heads.show();
+      rows.find('td').show();
     
-        cells.each(function (index) {
-          if (
-            selectedColumns.length > 0 &&
-            !selectedColumns.indexOf(Heads.eq(index).text())
-          ) {
-            showRow = false;
-            return false; // Exit the loop since we already found a non-matching column
-          }
-        });
+      selectedColumns.forEach(function (columnName) {
+        console.log(columnName,'co')
+        // Hide the table headers that are not selected
+        Heads.filter(function () {
+          return $(this).text() !== columnName;
+        }).hide();
     
-        if (showRow) {
-          row.show();
-        } else {
-          row.hide();
-        }
+        // Hide the data cells in the same column that are not selected
+        rows.find('td').filter(function (index) {
+          return $(this).index() !== Heads.index(Heads.filter(function () {
+            return $(this).text() === columnName;
+          }));
+        }).hide();
       });
     
       currentPage = 0; // Reset to the first page when filtering
       paginate(currentPage, numPerPage);
       filterPages(); // Update page controllers based on filtering
     }
+    
 
     filterDropdown.find("input[type='checkbox']").on("change", function () {
       selectedColumns = filterDropdown
