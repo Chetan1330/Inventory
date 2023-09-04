@@ -798,6 +798,7 @@
     });
 
     function updateDisplayedData() {
+      console.log(selectedColumns,eads.eq(index).text(),'showRow',showRow)
       rows.each(function () {
         var row = $(this);
         var cells = row.find("td");
@@ -806,7 +807,7 @@
         cells.each(function (index) {
           if (
             selectedColumns.length > 0 &&
-            !selectedColumns.includes(Heads.eq(index).text())
+            selectedColumns.indexOf(Heads.eq(index).text()) === -1
           ) {
             showRow = false;
             return false; // Exit the loop since we already found a non-matching column
@@ -819,6 +820,9 @@
           row.hide();
         }
       });
+    
+      // Recalculate number of pages based on filtered rows
+      numPages = Math.ceil(rows.filter(":visible").length / numPerPage);
     
       currentPage = 0; // Reset to the first page when filtering
       paginate(currentPage, numPerPage);
