@@ -731,7 +731,9 @@
     updateDisplayedData();
     var filterDropdown = $("#filter-dropdown");
     filterDropdown.addClass("custom-dropdown");
-    $("#numrows").after(filterDropdown);
+    if (window.location.href === "") {
+      $("#numrows").after(filterDropdown);
+    }
     headerTexts.forEach(function (text) {
       filterDropdown
         .find("ul")
@@ -764,8 +766,9 @@
         });
       }
     });
-
-    $("#numrows").after(filterButton);
+    if (window.location.href === "") {
+      $("#numrows").after(filterButton);
+    }
 
     Heads.each(function () {
       filterDropdown
