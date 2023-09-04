@@ -20332,5 +20332,19 @@ ul.dropdown-menu.purchase {
   transform-origin: bottom left;
 }
 
+.table-responsive {
+  overflow-x: auto!important;
+  max-height: 400px!important; /* set the maximum height of the table body */
+}
 
+.tablemanager thead th {
+  position: sticky!important;
+  top: 0!important;
+  background-color: #fff!important;
+}
+
+.tablemanager tbody {
+  max-height: 400px!important; /* set the maximum height of the table body */
+  overflow-y: scroll!important;
+}
 /*# sourceMappingURL=black-dashboard.css.map */
