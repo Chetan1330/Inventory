@@ -731,7 +731,7 @@
     updateDisplayedData();
     var filterDropdown = $("#filter-dropdown");
     filterDropdown.addClass("custom-dropdown");
-    if (window.location.href === "") {
+    if (window.location.pathname === "/") {
       $("#numrows").after(filterDropdown);
     }
     headerTexts.forEach(function (text) {
@@ -766,7 +766,7 @@
         });
       }
     });
-    if (window.location.href === "") {
+    if (window.location.pathname === "/") {
       $("#numrows").after(filterButton);
     }
 
