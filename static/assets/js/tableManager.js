@@ -815,7 +815,7 @@
           return $(this).index() !== Heads.index(Heads.filter(function () {
             return $(this).text() === columnName;
           }));
-        }).hide();
+        }).toggle();
       });
     
       currentPage = 0; // Reset to the first page when filtering
