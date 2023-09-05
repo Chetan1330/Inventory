@@ -20273,7 +20273,7 @@ a.card-link.purchase-link {
   background: #fff;
 }
 span.purchase.caret {
-    top: 17px;
+    top: 24px;
     left: 85px;
 }
 ul.dropdown-menu.show.purchase {
@@ -20281,10 +20281,11 @@ ul.dropdown-menu.show.purchase {
 }
 button.dropdown-toggle.purchase {
   border: none;
-  background: #fff;
-  border: 1px solid #190e4f;
-  color: #190e4f;
-  width: 25%;
+  background: #190e4f;
+  text-align: center;
+  color: #fff!important;
+  border-radius: 10px;
+  box-shadow: 0px 5px 9px 0px #989494;
 }
 ul.dropdown-menu.purchase {
   padding: 10px;
@@ -20299,7 +20300,7 @@ ul.dropdown-menu.purchase {
 }
 @media screen and (max-width: 991px){
   span.purchase.caret {
-    top: 16px;
+    top: 25px;
     left: 44px
   }
   .dropdown-toggle.purchase:after{
