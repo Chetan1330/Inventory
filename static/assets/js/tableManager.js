@@ -750,6 +750,7 @@
 
     $(document).on("click", "#selectCol", function (e) {
       e.stopPropagation();
+      console.log(filterDropdown,'fil');
       filterDropdown.toggle(); // Toggle visibility directly
       if (filterDropdown.is(":visible")) {
         var iconPosition = filterButton.position();
