@@ -172,6 +172,11 @@
     var itemLink = formCounter > 0 ? form.querySelector("#link-" + formCounter).value : form.querySelector("#link").value;
     var itemDescription = formCounter > 0 ? form.querySelector("#description-" + formCounter).value :form.querySelector("#description").value ;
     console.log(formCounter,'formcounter')
+    form.querySelectorAll("select, input[type='number'], input[type='text']").forEach(function (element) {
+    if (element.id !== "name") {
+      element.value = "";
+    }
+  });
     // Create a new object with the entered values
     var formData = {
       name: itemName,
