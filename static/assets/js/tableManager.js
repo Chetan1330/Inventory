@@ -723,7 +723,7 @@
     
 
     var selectedColumns = [];
-    var headerTexts = $(this).find("thead th").map(function () {
+    var headerTexts = Heads.map(function () {
       return $(this).text();
     }).get();
     
