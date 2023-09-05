@@ -176,9 +176,8 @@
 
   function populateTable(form) {
     event.stopPropagation();
-    console.log(form,'form')
+    console.log(form,'form',formCounter)
     // Get the values from the form fields
-    var formCounter = parseInt(form.id.split("-").pop(), 10);
     var itemName = formCounter > 0 ? form.querySelector("#name-" + formCounter).value : form.querySelector("#name").value;
     var itemType = formCounter > 0 ? form.querySelector("#type-" + formCounter).value : form.querySelector("#type").value;
     var itemQuantity = formCounter > 0 ? form.querySelector("#quantity-" + formCounter).value : form.querySelector("#quantity").value;
@@ -275,7 +274,7 @@
     // Append the cloned form inside the <li> element
     var formContainer = document.querySelector("#item-form-0").parentNode;
     formContainer.insertAdjacentHTML("beforeend", clonedForm.outerHTML);
-    console.log(formContainer,clonedForm.outerHTML)
+    console.log(formContainer,clonedForm.outerHTML,'clone')
   }
 })(document);;
 
