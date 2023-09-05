@@ -32,7 +32,7 @@
           </button>
           <ul class="dropdown-menu purchase">
             <li>
-                <form class="item-form">
+                <form class="item-form" id="item-form-0">
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="name">Name:</label>
@@ -188,7 +188,7 @@
   function populateTable(form) {
     console.log(form,'form')
     // Get the values from the form fields
-    var formCounter = form.id.split("-")[1];
+    var formCounter = form.id.substring(form.id.lastIndexOf("-") + 1);
     var itemName = form.querySelector("#name-" + formCounter).value;
     var itemType = form.querySelector("#type-" + formCounter).value;
     var itemQuantity = form.querySelector("#quantity-" + formCounter).value;
@@ -216,30 +216,30 @@
 
 
   function updateTable() {
-    // Get the table body
-    var tableBody = document.querySelector("#vendortable tbody");
-    console.log(tableBody,'table')
-    // Loop through the formDataArray and append the data to the table
-    formDataArray.forEach(function (formData) {
-      var newRow = tableBody.insertRow(tableBody.rows.length);
-      var cells = [
-        newRow.insertCell(0),
-        newRow.insertCell(1),
-        newRow.insertCell(2),
-        newRow.insertCell(3),
-        newRow.insertCell(4),
-      ];
+  // Get the table body
+  var tableBody = document.querySelector("#vendortable tbody");
 
-      // Populate the cells with the form data
-      cells[0].textContent = formData.name;
-      cells[1].textContent = formData.type;
-      cells[2].textContent = formData.quantity;
-      cells[3].innerHTML =
-        '<a href="' + formData.link + '">' + formData.link + "</a>";
-      cells[4].textContent = formData.description;
-    });
-    console.log(newRow,'newRow')
-  }
+  // Loop through the formDataArray and append the data to the table
+  formDataArray.forEach(function (formData) {
+    var newRow = tableBody.insertRow(tableBody.rows.length);
+    var cells = [
+      newRow.insertCell(0),
+      newRow.insertCell(1),
+      newRow.insertCell(2),
+      newRow.insertCell(3),
+      newRow.insertCell(4),
+    ];
+
+    // Populate the cells with the form data
+    cells[0].textContent = formData.name;
+    cells[1].textContent = formData.type;
+    cells[2].textContent = formData.quantity;
+    cells[3].innerHTML =
+      '<a href="' + formData.link + '">' + formData.link + "</a>";
+    cells[4].textContent = formData.description;
+  });
+}
+
 
   function addNewFields(event) {
     event.preventDefault();
