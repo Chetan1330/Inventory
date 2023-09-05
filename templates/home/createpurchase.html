@@ -185,7 +185,17 @@
   var itemLink = '';
   var itemDescription = '';
 
-  if (formCounter > 0) {
+  if (formCounter == 0) {
+    // Use the default IDs (without the counter) to retrieve values
+    itemName = form.querySelector("#name").value;
+    itemType = form.querySelector("#type").value;
+    itemQuantity = form.querySelector("#quantity").value;
+    itemLink = form.querySelector("#link").value;
+    itemDescription = form.querySelector("#description").value;
+
+    // Clear the form fields
+    form.reset();
+  } else {
     itemName = form.querySelector("#name-" + formCounter).value;
     itemType = form.querySelector("#type-" + formCounter).value;
     itemQuantity = form.querySelector("#quantity-" + formCounter).value;
@@ -198,16 +208,7 @@
         element.value = "";
       }
     });
-  } else {
-    // Use the default IDs (without the counter) to retrieve values
-    itemName = form.querySelector("#name").value;
-    itemType = form.querySelector("#type").value;
-    itemQuantity = form.querySelector("#quantity").value;
-    itemLink = form.querySelector("#link").value;
-    itemDescription = form.querySelector("#description").value;
-
-    // Clear the form fields
-    form.reset();
+    
   }
 
   // Create a new object with the entered values
@@ -255,10 +256,12 @@
 
 
   function addNewFields(event) {
+
     event.stopPropagation()
     event.returnValue = false;
     // Increment the formCounter to generate unique IDs
     // formCounter++;
+    formCounter++;
     console.log(event,'event')
     // Clone the form and clear the input fields in the cloned form
     var formToClone = event.target.closest(".item-form");
@@ -311,7 +314,7 @@
     // Append the cloned form inside the <li> element
     var itemRowContainer = formToClone.closest(".item-row");
     itemRowContainer.appendChild(clonedForm);
-    formCounter++;
+    
   }
 })(document);;
 
