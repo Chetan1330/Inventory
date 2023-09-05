@@ -19057,7 +19057,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .main-panel {
-  background: #f4f4f4;
+  background: #ffffff29;
 }
 
 .white-content h1,
@@ -19070,7 +19070,7 @@ Copyright (c) 2015 Daniel Eden
 .white-content ol li,
 .white-content ul li,
 .white-content pre {
-  color: #1d253b;
+  color: #190e4f!important;
 }
 
 .white-content .font-icon-detail i {
@@ -19123,7 +19123,6 @@ Copyright (c) 2015 Daniel Eden
   color: #222a42;
   border-color: rgba(29, 37, 59, 0.5);
 }
-#f4f4f4
 .white-content .form-group.no-border .form-control,
 .white-content .form-group.no-border .form-control+.input-group-prepend .input-group-text,
 .white-content .form-group.no-border .form-control+.input-group-append .input-group-text,
@@ -19231,7 +19230,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .card:not(.card-white) {
-  background: #f4f4f4;
+  background: #ffffff29;
 }
 
 .white-content .card:not(.card-white) .card-header {
@@ -19291,7 +19290,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .white-content .table>tbody>tr>td {
-  color: rgba(34, 42, 66, 0.7) !important;
+  color: #190e4f!important;
 }
 
 .white-content .table>thead>tr>th,
@@ -19307,8 +19306,8 @@ Copyright (c) 2015 Daniel Eden
 
 .white-content .table>thead>tr>th,
 .white-content .table button.btn-neutral.btn-link {
-  color: #190e4f;
-  border: 1px solid #190e4f;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
 .white-content .footer ul li a {
@@ -19887,7 +19886,7 @@ th {
 }
 /* Add styles to the table header */
 .tablemanager th {
-  background-color: #f2f2f2;
+  background-color: #190e4f;
   color: #333;
   font-weight: bold;
   text-align: left;
@@ -20119,7 +20118,7 @@ h3 input.search-input {
 
 
 .sidebar[data="blue"] {
-  background-color: #f4f4f4;
+  background-color: #ffffff29;
   border-right: 1px solid black;
   border-radius: 0;
 }
@@ -20207,7 +20206,7 @@ h3 input.search-input {
 }
 .logo-text{
   margin-left: 10px;
-  color: #f4f4f4;
+  color: #ffffff29;
 }
 .larg-btn{
   width: 100%;
@@ -20223,7 +20222,7 @@ h3 input.search-input {
 }
 .btn-content{
   width: 100%;
-  background: #f4f4f4;
+  background: #ffffff29;
   height: calc(100vh - 90px);
   padding: 50px 20px;
 }
@@ -20235,8 +20234,9 @@ button.global-btn {
   border: none;
   padding: 10px;
   border-radius: 50px;
-  background: #fff;
-  box-shadow: 0px -1px 4px 0px #989494;
+  color: #fff;
+  background: #190e4f;
+  box-shadow: 0px 5px 9px 0px #989494;
 }
 button.global-btn:focus {
   outline: none!important;
@@ -20244,8 +20244,9 @@ button.global-btn:focus {
   border: none;
   padding: 10px;
   border-radius: 50px;
+  color: #190e4f;
   background: #fff;
-  box-shadow: 0px -1px 4px 0px #989494;
+  box-shadow: 0px 5px 9px 0px #989494;
 }
 .larg-btn.purchase{
   width: 100%;
@@ -20345,5 +20346,6 @@ ul.dropdown-menu.purchase {
 .tablemanager tbody {
   max-height: 400px!important; /* set the maximum height of the table body */
   overflow-y: scroll!important;
+  background-color: #ffffff29;
 }
 /*# sourceMappingURL=black-dashboard.css.map */
