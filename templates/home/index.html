@@ -177,7 +177,125 @@
         TableFilter.init();
       }
     });
+    var selectedColumns = [];
+    var headerTexts = Heads.map(function () {
+      return $(this).text();
+    }).get();
+    
+    
+    updateDisplayedData();
+    var filterDropdown = $("#filter-dropdown");
+    filterDropdown.addClass("custom-dropdown");
+    if (window.location.pathname === "/") {
+      $("#numrows").after(filterDropdown);
+    }
+    headerTexts.forEach(function (text) {
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            text +
+            '"> ' +
+            text +
+            "</label></li>"
+        );
+    });
 
+    var filterButton = $("<button id='selectCol'>Select Columns :</button>");
+
+    $(document).on("click", "#selectCol", function (e) {
+      e.stopPropagation();
+      filterDropdown.toggle(); // Toggle visibility directly
+      if (filterDropdown.is(":visible")) {
+        var iconPosition = filterButton.position();
+        var dropdownWidth = filterDropdown.outerWidth();
+        filterDropdown.css({
+          top: iconPosition.top + filterButton.outerHeight(),
+          left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
+          opacity: 1,
+          visibility: "visible",
+        });
+      } else {
+        filterDropdown.css({
+          opacity: 0,
+          visibility: "hidden",
+        });
+      }
+    });
+    if (window.location.pathname === "/") {
+      $("#numrows").after(filterButton);
+    }
+
+    Heads.each(function () {
+      filterDropdown
+        .find("ul")
+        .append(
+          '<li><label><input type="checkbox" value="' +
+            $(this).text() +
+            '"> ' +
+            $(this).text() +
+            "</label></li>"
+        );
+    });
+
+    filterDropdown
+      .find("ul")
+      .prepend(
+        '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
+      );
+
+    $(document).on("change", "#select-all-checkbox", function () {
+      var isChecked = $(this).prop("checked");
+      filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
+      selectedColumns = isChecked ? headerTexts : [];
+      updateDisplayedData();
+    });
+
+    $("select#numrows").on("change", function () {
+      numPerPage = parseInt($(this).val());
+      updateDisplayedData();
+    });
+
+    function updateDisplayedData() {
+      // Show all table headers and data cells
+      Heads.show();
+      rows.find('td').show();
+    
+      if (selectedColumns.length > 0) {
+        // Hide the table headers that are not in the selected columns
+        Heads.filter(function () {
+          return selectedColumns.indexOf($(this).text()) === -1;
+        }).hide();
+    
+        // Hide the data cells in the columns that are not in the selected columns
+        rows.each(function () {
+          var row = $(this);
+          row.find('td').each(function (index) {
+            if (selectedColumns.indexOf(Heads.eq(index).text()) === -1) {
+              $(this).hide();
+            }
+          });
+        });
+      }
+    
+      // Reinitialize pagination and update page controllers based on filtering
+      currentPage = 0;
+      numPerPage = parseInt($("select#numrows").val());
+      paginate(currentPage, numPerPage);
+      filterPages();
+    }
+    
+
+    filterDropdown.find("input[type='checkbox']").on("change", function () {
+      selectedColumns = filterDropdown
+        .find("input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
+    
+      updateDisplayedData(); // Call the function to update table display
+    });
   })(document);
 
   // if ()
