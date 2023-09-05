@@ -161,7 +161,7 @@
   var formDataArray = [];
   
   document.addEventListener("submit", function (event) {
-    if (event.target.classList.contains("item-form")) {
+    if (event.target.classList.contains("global-btn")) {
       event.preventDefault();
       populateTable(event.target);
     }
@@ -201,7 +201,6 @@
     console.log(formDataArray,'fdarr')
     // Update the table with all form data
     updateTable();
-
     // Clear the form fields
     form.reset();
   }
