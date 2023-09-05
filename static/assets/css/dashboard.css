@@ -1975,65 +1975,65 @@ pre code {
 }
 
 @media (max-width: 575.98px) {
-  .table-responsive-sm {
+  .table-sm {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-responsive-sm>.table-bordered {
+  .table-sm>.table-bordered {
     border: 0;
   }
 }
 
 @media (max-width: 767.98px) {
-  .table-responsive-md {
+  .table-md {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-responsive-md>.table-bordered {
+  .table-md>.table-bordered {
     border: 0;
   }
 }
 
 @media (max-width: 991.98px) {
-  .table-responsive-lg {
+  .table-lg {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-responsive-lg>.table-bordered {
+  .table-lg>.table-bordered {
     border: 0;
   }
 }
 
 @media (max-width: 1199.98px) {
-  .table-responsive-xl {
+  .table-xl {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-responsive-xl>.table-bordered {
+  .table-xl>.table-bordered {
     border: 0;
   }
 }
 
-.table-responsive {
+.table {
   display: block;
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.table-responsive>.table-bordered {
+.table>.table-bordered {
   border: 0;
 }
 
@@ -16453,11 +16453,11 @@ hr {
   text-transform: uppercase;
 }
 
-.table-responsive {
+.table {
   overflow: scroll;
 }
 
-#tables .table-responsive {
+#tables .table {
   margin-bottom: 30px;
 }
 
@@ -20345,7 +20345,7 @@ ul.dropdown-menu.purchase {
   transform-origin: bottom left;
 }
 
-.table-responsive {
+.table {
   overflow-y: auto!important;
   max-height: 400px!important; /* set the maximum height of the table body */
 }
