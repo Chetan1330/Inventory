@@ -169,7 +169,7 @@
       var form = event.target.closest(".item-form");
       if (form) {
         populateTable(form);
-        clearForm(form);
+        form.reset();
       }
     } else if (event.target.classList.contains("add-new-btn")) {
       event.preventDefault();
