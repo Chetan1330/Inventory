@@ -66,7 +66,7 @@
                     <input type="text" class="form-control" id="description" />
                   </div>
                   <div class="form-group col-md-12" style="display: flex;">
-                    <button type="button" class="global-btn" style="margin: 10px;" >Submit</button>
+                    <button type="button" class="global-btn submit-btn" style="margin: 10px;" >Submit</button>
                     <button type="button" class="global-btn add-new-btn" style="margin: 10px;">
                       Add New+
                     </button>
@@ -162,7 +162,7 @@
   
   // Attach event listener to the document for button clicks
   document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("global-btn")) {
+    if (event.target.classList.contains("submit-btn")) {
       event.preventDefault();
       var form = event.target.closest(".item-form");
       if (form) {
