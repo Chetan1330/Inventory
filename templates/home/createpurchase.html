@@ -189,11 +189,11 @@
     console.log(form,'form')
     // Get the values from the form fields
     var formCounter = form.id.substring(form.id.lastIndexOf("-") + 1);
-    var itemName = form.querySelector("#name-" + formCounter).value;
-    var itemType = form.querySelector("#type-" + formCounter).value;
-    var itemQuantity = form.querySelector("#quantity-" + formCounter).value;
-    var itemLink = form.querySelector("#link-" + formCounter).value;
-    var itemDescription = form.querySelector("#description-" + formCounter).value;
+    var itemName = formCounter > 0 ? form.querySelector("#name-" + formCounter).value : form.querySelector("#name").value;
+    var itemType = formCounter > 0 ? form.querySelector("#type-" + formCounter).value : form.querySelector("#type").value;
+    var itemQuantity = formCounter > 0 ? form.querySelector("#quantity-" + formCounter).value : form.querySelector("#quantity").value;
+    var itemLink = formCounter > 0 ? form.querySelector("#link-" + formCounter).value : form.querySelector("#link").value;
+    var itemDescription = formCounter > 0 ? form.querySelector("#description-" + formCounter).value :form.querySelector("#description").value ;
     console.log(formCounter,'formcounter')
     // Create a new object with the entered values
     var formData = {
