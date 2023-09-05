@@ -1975,20 +1975,8 @@ pre code {
   background-color: rgba(255, 255, 255, 0.075);
 }
 
-@media (max-width: 575.98px) {
-  .table {
-    display: block!important;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
 
-  .table-sm>.table-bordered {
-    border: 0;
-  }
-}
-
-@media (max-width: 767.98px) {
+@media (max-width: 699.98px) {
   .table {
     display: block!important;
     width: 100%;
