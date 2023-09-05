@@ -22,6 +22,7 @@
   <div class="card-body" id="form-container">
     <div class="row">
       <div class="col-sm-12">
+        <div class="item-row">
         <form class="item-form">
           <h4><strong>Items :</strong></h4>
           <div class="form-row">
@@ -63,6 +64,7 @@
             </button>
           </div> 
         </form>
+      </div>
       </div>
     </div>
     <br />
@@ -266,9 +268,8 @@
       });
     }
     // Append the cloned form inside the <li> element
-    var formContainer = document.querySelector("#item-form-0").parentNode;
-    formContainer.insertAdjacentHTML("beforeend", clonedForm.outerHTML);
-    console.log(formContainer,clonedForm.outerHTML,'clone')
+      var itemRowContainer = formToClone.closest(".item-row");
+      itemRowContainer.appendChild(clonedForm);
   }
 })(document);;
 
