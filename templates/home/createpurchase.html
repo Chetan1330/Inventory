@@ -178,7 +178,7 @@
     event.stopPropagation();
     console.log(form,'form')
     // Get the values from the form fields
-    var formCounter = form.id.substring(form.id.lastIndexOf("-") + 1);
+    var formCounter = parseInt(form.id.split("-").pop(), 10);
     var itemName = formCounter > 0 ? form.querySelector("#name-" + formCounter).value : form.querySelector("#name").value;
     var itemType = formCounter > 0 ? form.querySelector("#type-" + formCounter).value : form.querySelector("#type").value;
     var itemQuantity = formCounter > 0 ? form.querySelector("#quantity-" + formCounter).value : form.querySelector("#quantity").value;
