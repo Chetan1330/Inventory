@@ -20279,6 +20279,7 @@ span.purchase.caret {
 }
 ul.dropdown-menu.show.purchase {
   padding: 10px;
+  z-index: 99999!important;
 }
 button.dropdown-toggle.purchase {
   border: none;
