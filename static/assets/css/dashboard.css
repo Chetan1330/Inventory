@@ -1976,7 +1976,7 @@ pre code {
 }
 
 @media (max-width: 575.98px) {
-  .table-sm {
+  .table {
     display: block;
     width: 100%;
     overflow-x: auto;
@@ -1989,27 +1989,27 @@ pre code {
 }
 
 @media (max-width: 767.98px) {
-  .table-md {
+  .table {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-md>.table-bordered {
+  .table>.table-bordered {
     border: 0;
   }
 }
 
 @media (max-width: 991.98px) {
-  .table-lg {
+  .table {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-lg>.table-bordered {
+  .table>.table-bordered {
     border: 0;
   }
 }
