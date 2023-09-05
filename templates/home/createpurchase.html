@@ -3,6 +3,7 @@
 {% block content %}
 <div class="card">
   <div class="card-header">
+    <div style="color:#190e4f; font-style: bold; font-size: 3rem; border-bottom: 1px solid #190e4f;">Create Purchase</div>
     <div class="row">
       <div class="col-sm-3">
         <h5><strong>ID: </strong><span>C515LM1W</span></h5>
@@ -20,65 +21,51 @@
   </div>
   <div class="card-body" id="form-container">
     <div class="row">
-      <div class="col-sm-6">
-        <div class="dropdown purchase">
-          <button
-            class="dropdown-toggle purchase"
-            type="button"
-            data-toggle="dropdown"
-          >
-            Items
-            <span class="purchase caret"></span>
-          </button>
-          <ul class="dropdown-menu purchase">
-            <li>
-                <form class="item-form" id="item-form-0">
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="name">Name:</label>
-                      <select class="form-control" id="name">
-                        <option value="Net-Adapter">Net Adapter</option>
-                        <option value="Memory-chip">Memory chip</option>
-                        <option value="Integrator">Integrator</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="type">Type:</label>
-                      <select class="form-control" id="type">
-                        <option value="Semi-conductor">Semi conductor</option>
-                        <option value="Resistor">Resistor</option>
-                        <option value="Volter">Volter</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="quantity">Quantity:</label>
-                      <input type="number" class="form-control" id="quantity" />
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="link">Link:</label>
-                      <input type="text" class="form-control" id="link" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" />
-                  </div>
-                  <div class="form-group col-md-12" style="display: flex;">
-                    <button type="button" class="global-btn submit-btn" style="margin: 10px;" >Submit</button>
-                    <button type="button" class="global-btn add-new-btn" style="margin: 10px;">
-                      Add New+
-                    </button>
-                  </div> 
-                </form> 
-                
-            </li>
-          </ul>
-        </div>
+      <div class="col-sm-12">
+        <form class="item-form">
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="name">Name:</label>
+              <select class="form-control" id="name">
+                <option value="Net-Adapter">Net Adapter</option>
+                <option value="Memory-chip">Memory chip</option>
+                <option value="Integrator">Integrator</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="type">Type:</label>
+              <select class="form-control" id="type">
+                <option value="Semi-conductor">Semi conductor</option>
+                <option value="Resistor">Resistor</option>
+                <option value="Volter">Volter</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="quantity">Quantity:</label>
+              <input type="number" class="form-control" id="quantity" />
+            </div>
+            <div class="form-group col-md-3">
+              <label for="link">Link:</label>
+              <input type="text" class="form-control" id="link" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" id="description" />
+            </div>
+          </div>
+          <div class="form-group col-md-12" style="display: flex;">
+            <button type="button" class="global-btn submit-btn" style="margin: 10px;" >Submit</button>
+            <button type="button" class="global-btn add-new-btn" style="margin: 10px;">
+              Add New+
+            </button>
+          </div> 
+        </form>
       </div>
     </div>
     <br />
+    <h4>History:</h4>
       <table
         id="vendortable"
         class="table tablemanager customers-list table-bordered"
