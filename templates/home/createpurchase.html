@@ -167,16 +167,21 @@
 
       submitButtons.forEach(function (button) {
         button.addEventListener("click", function () {
+          if (button.target.classList.contains("item-form")) {
           populateTable(this.form);
           return false;
+          }
         });
       });
 
       addNewButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
-          event.stopPropagation()
-          addNewFields(event);
-          return false;
+          if (event.target.classList.contains("add-new-btn")) {
+            event.stopPropagation()
+            addNewFields(event);
+            return false;
+          }
+         
         });
       });
     }
