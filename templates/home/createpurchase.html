@@ -66,8 +66,8 @@
                     <input type="text" class="form-control" id="description" />
                   </div>
                   <div class="form-group col-md-12" style="display: flex;">
-                    <button type="submit" class="global-btn" style="margin: 10px;" onclick="populateTable(this.form)">Submit</button>
-                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;" onclick="addNewFields(event);">
+                    <button type="submit" class="global-btn" style="margin: 10px;" onclick="populateTable(this.form); return false;" >Submit</button>
+                    <button type="submit" class="global-btn add-new-btn" style="margin: 10px;" onclick="addNewFields(event); return false;">
                       Add New+
                     </button>
                   </div> 
@@ -161,32 +161,39 @@
   var formDataArray = [];
 
   function populateTable(form) {
-  // Get the values from the form fields
-  var formCounter = form.id.split("-")[1];
-  var itemName = form.querySelector("#name-" + formCounter).value;
-  var itemType = form.querySelector("#type-" + formCounter).value;
-  var itemQuantity = form.querySelector("#quantity-" + formCounter).value;
-  var itemLink = form.querySelector("#link-" + formCounter).value;
-  var itemDescription = form.querySelector("#description-" + formCounter).value;
+    console.log(form,'form')
+    // Get the values from the form fields
+    var formCounter = form.id.split("-")[1];
+    var itemName = form.querySelector("#name-" + formCounter).value;
+    var itemType = form.querySelector("#type-" + formCounter).value;
+    var itemQuantity = form.querySelector("#quantity-" + formCounter).value;
+    var itemLink = form.querySelector("#link-" + formCounter).value;
+    var itemDescription = form.querySelector("#description-" + formCounter).value;
+    console.log(formCounter,'formcounter')
+    // Create a new object with the entered values
+    var formData = {
+      name: itemName,
+      type: itemType,
+      quantity: itemQuantity,
+      link: itemLink,
+      description: itemDescription,
+    };
+    console.log(formData,'fd')
+    // Push form data to the array
+    formDataArray.push(formData);
+    console.log(formDataArray,'fdarr')
+    // Update the table with all form data
+    updateTable();
 
-  // Create a new object with the entered values
-  var formData = {
-    name: itemName,
-    type: itemType,
-    quantity: itemQuantity,
-    link: itemLink,
-    description: itemDescription,
-  };
-  return formData;
-  formDataArray.push(formData); // Push form data to the array
-  updateTable(); // Update the table with all form data
-}
+    // Clear the form fields
+    form.reset();
+  }
 
 
   function updateTable() {
     // Get the table body
     var tableBody = document.querySelector("#vendortable tbody");
-
+    console.log(tableBody,'table')
     // Loop through the formDataArray and append the data to the table
     formDataArray.forEach(function (formData) {
       var newRow = tableBody.insertRow(tableBody.rows.length);
@@ -202,16 +209,19 @@
       cells[0].textContent = formData.name;
       cells[1].textContent = formData.type;
       cells[2].textContent = formData.quantity;
-      cells[3].innerHTML = '<a href="' + formData.link + '">' + formData.link + "</a>";
+      cells[3].innerHTML =
+        '<a href="' + formData.link + '">' + formData.link + "</a>";
       cells[4].textContent = formData.description;
     });
+    console.log(newRow,'newRow')
   }
 
   function addNewFields(event) {
     event.preventDefault();
+
     // Increment the formCounter to generate unique IDs
     formCounter++;
-
+    console.log(event,'event')
     // Clone the form and clear the input fields in the cloned form
     var formToClone = event.target.closest(".item-form");
     var clonedForm = formToClone.cloneNode(true);
@@ -222,9 +232,9 @@
         element.value = ""; // Clear input field values
       }
     });
-
+    console.log(formToClone,formCounter)
     // Remove the "Submit" and "Add New+" buttons from the old form
-    var submitBtn = formToClone.querySelector('.global-btn[type="submit"]');
+    var submitBtn = formToClone.querySelector('.global-btn[type="button"]');
     var addNewBtn = formToClone.querySelector(".add-new-btn");
 
     if (submitBtn) {
@@ -233,12 +243,13 @@
     if (addNewBtn) {
       addNewBtn.remove();
     }
-
+    
     // Append the cloned form inside the <li> element
-      var formContainer = document.querySelector(".form-container");
+    var formContainer = document.querySelector(".form-container");
     formContainer.insertAdjacentHTML("beforeend", clonedForm.outerHTML);
+    console.log(formContainer,clonedForm.outerHTML)
   }
-})(document);
+})(document);;
 
 </script>
   
