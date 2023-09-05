@@ -2015,14 +2015,14 @@ pre code {
 }
 
 @media (max-width: 1199.98px) {
-  .table-xl {
+  .table {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-xl>.table-bordered {
+  .table{
     border: 0;
   }
 }
