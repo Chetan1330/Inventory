@@ -149,12 +149,27 @@
   var formDataArray = [];
   
   // Attach event listener to the document for button clicks
+  // document.addEventListener("click", function (event) {
+  //   if (event.target.classList.contains("submit-btn")) {
+  //     event.preventDefault();
+  //     var form = event.target.closest(".item-form");
+  //     if (form) {
+  //       populateTable(form);
+  //     }
+  //   } else if (event.target.classList.contains("add-new-btn")) {
+  //     event.preventDefault();
+  //     addNewFields(event);
+  //   }
+  // });
+
+  // Attach event listener to the document for button clicks
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("submit-btn")) {
       event.preventDefault();
       var form = event.target.closest(".item-form");
       if (form) {
         populateTable(form);
+        clearForm(form);
       }
     } else if (event.target.classList.contains("add-new-btn")) {
       event.preventDefault();
@@ -232,55 +247,60 @@
     event.stopPropagation()
     event.returnValue = false;
     // Increment the formCounter to generate unique IDs
-    formCounter++;
+    // formCounter++;
     console.log(event,'event')
     // Clone the form and clear the input fields in the cloned form
     var formToClone = event.target.closest(".item-form");
     var clonedForm = formToClone.cloneNode(true);
-    var idMap = {};
+    // var idMap = {};
 
     clonedForm.querySelectorAll("input, select").forEach(function (element) {
-    // Generate unique IDs for input and select fields
     var currentId = element.id;
     if (currentId) {
       var parts = currentId.split('-');
       var newId = parts[0] + "-" + formCounter;
       element.id = newId;
     }
+  });
+
+  // Clear input field values in the cloned form
+  clonedForm.querySelectorAll("input, select").forEach(function (element) {
     if (element.tagName === "INPUT") {
-      element.value = ""; // Clear input field values
+      element.value = "";
     }
-    });
+  });
 
     console.log(formToClone,formCounter,clonedForm)
     // Remove the "Submit" and "Add New+" buttons from the old form
-    var submitBtn = formToClone.querySelector('.global-btn[type="button"]');
+    var submitBtn = formToClone.querySelector('.submit-btn');
     var addNewBtn = formToClone.querySelector(".add-new-btn");
 
     if (submitBtn) {
-      submitBtn.remove();
+      submitBtn.style.display = 'none';
     }
     if (addNewBtn) {
-      addNewBtn.remove();
+      addNewBtn.style.display = 'none';
     }
-        var submitBtn = clonedForm.querySelector('.global-btn[type="button"]');
-    var addNewBtn = clonedForm.querySelector(".add-new-btn");
 
-    if (submitBtn) {
-      submitBtn.addEventListener("click", function () {
-        populateTable(this.form);
-        return false;
-      });
-    }
-    if (addNewBtn) {
-      addNewBtn.addEventListener("click", function (event) {
-        addNewFields(event);
-        return false;
-      });
-    }
+    // var submitBtn = clonedForm.querySelector('.global-btn[type="button"]');
+    // var addNewBtn = clonedForm.querySelector(".add-new-btn");
+
+    // if (submitBtn) {
+    //   submitBtn.addEventListener("click", function () {
+    //     populateTable(this.form);
+    //     return false;
+    //   });
+    // }
+    // if (addNewBtn) {
+    //   addNewBtn.addEventListener("click", function (event) {
+    //     addNewFields(event);
+    //     return false;
+    //   });
+    // }
     // Append the cloned form inside the <li> element
-      var itemRowContainer = formToClone.closest(".item-row");
-      itemRowContainer.appendChild(clonedForm);
+    var itemRowContainer = formToClone.closest(".item-row");
+    itemRowContainer.appendChild(clonedForm);
+    formCounter++;
   }
 })(document);;
 
