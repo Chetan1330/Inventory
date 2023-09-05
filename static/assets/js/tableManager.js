@@ -748,7 +748,8 @@
 
     var filterButton = $("<button id='selectCol'>Select Columns :</button>");
 
-    $(document).on("click", "#selectCol", function () {
+    $(document).on("click", "#selectCol", function (e) {
+      e.stopPropagation();
       filterDropdown.toggle(); // Toggle visibility directly
       if (filterDropdown.is(":visible")) {
         var iconPosition = filterButton.position();
