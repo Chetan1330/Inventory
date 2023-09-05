@@ -178,43 +178,54 @@
   });
 
   function populateTable(form) {
-    event.stopPropagation();
-    console.log(form,'form',formCounter)
-    // Get the values from the form fields
-    var itemName = formCounter > 0 ? form.querySelector("#name-" + formCounter).value : form.querySelector("#name").value;
-    var itemType = formCounter > 0 ? form.querySelector("#type-" + formCounter).value : form.querySelector("#type").value;
-    var itemQuantity = formCounter > 0 ? form.querySelector("#quantity-" + formCounter).value : form.querySelector("#quantity").value;
-    var itemLink = formCounter > 0 ? form.querySelector("#link-" + formCounter).value : form.querySelector("#link").value;
-    var itemDescription = formCounter > 0 ? form.querySelector("#description-" + formCounter).value :form.querySelector("#description").value ;
-    console.log(formCounter,'formcounter')
+  // Get the values from the form fields using the updated IDs
+  var itemName = '';
+  var itemType = '';
+  var itemQuantity = '';
+  var itemLink = '';
+  var itemDescription = '';
+
+  if (formCounter > 0) {
+    itemName = form.querySelector("#name-" + formCounter).value;
+    itemType = form.querySelector("#type-" + formCounter).value;
+    itemQuantity = form.querySelector("#quantity-" + formCounter).value;
+    itemLink = form.querySelector("#link-" + formCounter).value;
+    itemDescription = form.querySelector("#description-" + formCounter).value;
+
+    // Clear the form fields
     form.querySelectorAll("select, input[type='number'], input[type='text']").forEach(function (element) {
-    if (element.id !== "name") {
-      element.value = "";
-    }
-  });
-    // Create a new object with the entered values
-    var formData = {
-      name: itemName,
-      type: itemType,
-      quantity: itemQuantity,
-      link: itemLink,
-      description: itemDescription,
-    };
-    console.log(formData,'fd')
-    // Push form data to the array
-    formDataArray.push(formData);
-    console.log(formDataArray,'fdarr')
-    // Update the table with all form data
-    updateTable();
+      if (element.id !== "name") {
+        element.value = "";
+      }
+    });
+  } else {
+    // Use the default IDs (without the counter) to retrieve values
+    itemName = form.querySelector("#name").value;
+    itemType = form.querySelector("#type").value;
+    itemQuantity = form.querySelector("#quantity").value;
+    itemLink = form.querySelector("#link").value;
+    itemDescription = form.querySelector("#description").value;
+
     // Clear the form fields
     form.reset();
-    var itemRowContainer = form.closest(".item-row");
-    var clonedForms = itemRowContainer.querySelectorAll(".item-form:not(:first-child)");
-
-    clonedForms.forEach(function (clonedForm) {
-      clonedForm.remove();
-  });
   }
+
+  // Create a new object with the entered values
+  var formData = {
+    name: itemName,
+    type: itemType,
+    quantity: itemQuantity,
+    link: itemLink,
+    description: itemDescription,
+  };
+
+  // Push form data to the array
+  formDataArray.push(formData);
+
+  // Update the table with all form data
+  updateTable();
+}
+
 
 
   function updateTable() {

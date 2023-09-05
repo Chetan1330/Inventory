@@ -170,6 +170,7 @@
           });
         }
       };
+
     })(Array.prototype);
 
     document.addEventListener('readystatechange', function () {
@@ -215,6 +216,7 @@
   //     });
   // document.getElementById("numrows").value = 5;   
   $('.search-input').keyup(function () {
+    console.log('clicked')
     var x = document.getElementById("searchbar").value.length
     if (x == 0) {
       document.getElementById("for_numrows").remove();
