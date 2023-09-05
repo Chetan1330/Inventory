@@ -195,7 +195,8 @@
 
     // Clear the form fields
     form.reset();
-  } else {
+  } 
+  else {
     itemName = form.querySelector("#name-" + formCounter).value;
     itemType = form.querySelector("#type-" + formCounter).value;
     itemQuantity = form.querySelector("#quantity-" + formCounter).value;
@@ -209,6 +210,23 @@
       }
     });
     form.reset();
+    var itemRowContainer = form.closest(".item-row");
+    var clonedForms = itemRowContainer.querySelectorAll(".item-form:not(:first-child)");
+
+    clonedForms.forEach(function (clonedForm) {
+      clonedForm.remove();
+    });
+
+    // Show the "Submit" and "Add New" buttons for the original form
+    var submitBtn = form.querySelector('.submit-btn');
+    var addNewBtn = form.querySelector(".add-new-btn");
+
+    if (submitBtn) {
+      submitBtn.style.display = 'block'; // Assuming the buttons were originally set to display: none
+    }
+    if (addNewBtn) {
+      addNewBtn.style.display = 'block';
+    }
   }
 
   // Create a new object with the entered values
