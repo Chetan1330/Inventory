@@ -159,6 +159,31 @@
 
   // Array to store form data
   var formDataArray = [];
+  
+  // Function to attach click handlers to the buttons
+  function attachClickHandlers() {
+      var submitButtons = document.querySelectorAll('.global-btn[type="button"]');
+      var addNewButtons = document.querySelectorAll(".add-new-btn");
+
+      submitButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          populateTable(this.form);
+          return false;
+        });
+      });
+
+      addNewButtons.forEach(function (button) {
+        button.addEventListener("click", function (event) {
+          addNewFields(event);
+          return false;
+        });
+      });
+    }
+
+    // Attach click handlers after the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      attachClickHandlers();
+    });
 
   function populateTable(form) {
     console.log(form,'form')
