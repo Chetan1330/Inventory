@@ -186,6 +186,7 @@
     });
 
   function populateTable(form) {
+    event.stopPropagation();
     console.log(form,'form')
     // Get the values from the form fields
     var formCounter = form.id.substring(form.id.lastIndexOf("-") + 1);
@@ -242,6 +243,7 @@
 
 
   function addNewFields(event) {
+    event.stopPropagation();
     event.preventDefault();
 
     // Increment the formCounter to generate unique IDs
