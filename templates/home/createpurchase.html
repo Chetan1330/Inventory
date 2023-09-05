@@ -66,7 +66,7 @@
                     <input type="text" class="form-control" id="description" />
                   </div>
                   <div class="form-group col-md-12" style="display: flex;">
-                    <button type="submit" class="global-btn" style="margin: 10px;" >Submit</button>
+                    <button type="button" class="global-btn" style="margin: 10px;" >Submit</button>
                     <button type="button" class="global-btn add-new-btn" style="margin: 10px;">
                       Add New+
                     </button>
@@ -160,18 +160,16 @@
   // Array to store form data
   var formDataArray = [];
   
-  document.addEventListener("submit", function (event) {
+  // Attach event listener to the document for button clicks
+  document.addEventListener("click", function (event) {
     if (event.target.classList.contains("global-btn")) {
       event.preventDefault();
-      populateTable(event.target);
-    }
-  });
-
-  // Attach the addNewFields function to the "Add New+" button click event
-  document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("add-new-btn")) {
-      event.returnValue = false;
-      event.preventDefault(); // Prevent the default behavior of the "Add New" button click
+      var form = event.target.closest(".item-form");
+      if (form) {
+        populateTable(form);
+      }
+    } else if (event.target.classList.contains("add-new-btn")) {
+      event.preventDefault();
       addNewFields(event);
     }
   });
