@@ -1327,29 +1327,30 @@ def UploadFile(request):
         #                     Type=row['Type'])
         #         stock.save()
 
-            if Class1.objects.filter(class_name = row['Class']).exists():
-                # print("Yes")
-                pass
-            elif Manufacturer.objects.filter(manufacturer_name = row['Manufacturer'] ).exists():
-                # print("Cat exist")
-                pass
-            else:
-                if row['Class']:
-                    stock_class=Class1.objects.create(class_name = row['Class'])
-                    print('Stock class:', stock_class.class_name)
-                    stock_class.save()
-                if row['Category']:
-                    category = Category.objects.create(category_name = row['Category'], class_name = stock_class )
-                    category.save()
-                # if row['Subcategory']:
-                #     subcategory = Category.objects.create(subcategory_name = row['Subcategory'], category_name = category )
-                #     subcategory.save()
-                if row['Manufacturer']:
-                    manufacturer = Manufacturer.objects.create(manufacturer_name = row['Manufacturer'], class_name=stock_class, subcat_name = category )
-                    manufacturer.save()
-                if row['Model']:
-                    model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
-                    model.save()
+            if row['Type'] == 'Serialwise':
+                if Class1.objects.filter(class_name = row['Class']).exists():
+                    # print("Yes")
+                    pass
+                elif Manufacturer.objects.filter(manufacturer_name = row['Manufacturer'] ).exists():
+                    # print("Cat exist")
+                    pass
+                else:
+                    if row['Class']:
+                        stock_class=Class1.objects.create(class_name = row['Class'])
+                        print('Stock class:', stock_class.class_name)
+                        stock_class.save()
+                    if row['Category']:
+                        category = Category.objects.create(category_name = row['Category'], class_name = stock_class )
+                        category.save()
+                    # if row['Subcategory']:
+                    #     subcategory = Category.objects.create(subcategory_name = row['Subcategory'], category_name = category )
+                    #     subcategory.save()
+                    if row['Manufacturer']:
+                        manufacturer = Manufacturer.objects.create(manufacturer_name = row['Manufacturer'], class_name=stock_class, subcat_name = category )
+                        manufacturer.save()
+                    if row['Model']:
+                        model = Model.objects.create(model_name = row['Model'], class_name=stock_class, subcat_name = category, manufacturer_name = manufacturer )
+                        model.save()
 
 
                 # Stock.objects.create(
