@@ -66,7 +66,7 @@
                     <input type="text" class="form-control" id="description" />
                   </div>
                   <div class="form-group col-md-12" style="display: flex;">
-                    <button type="button" class="global-btn" style="margin: 10px;" onclick="populateTable(this.form);" >Submit</button>
+                    <button type="button" class="global-btn" style="margin: 10px;" >Submit</button>
                     <button type="button" class="global-btn add-new-btn" style="margin: 10px;" onclick="addNewFields(event);">
                       Add New+
                     </button>
@@ -160,36 +160,21 @@
   // Array to store form data
   var formDataArray = [];
   
-  // Function to attach click handlers to the buttons
-  function attachClickHandlers() {
-      var submitButtons = document.querySelectorAll('.global-btn[type="button"]');
-      var addNewButtons = document.querySelectorAll(".add-new-btn");
-
-      submitButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          if (button.target.classList.contains("item-form")) {
-          populateTable(this.form);
-          return false;
-          }
-        });
-      });
-
-      addNewButtons.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-          if (event.target.classList.contains("add-new-btn")) {
-            event.stopPropagation()
-            addNewFields(event);
-            return false;
-          }
-         
-        });
-      });
+  document.addEventListener("submit", function (event) {
+    if (event.target.classList.contains("item-form")) {
+      event.preventDefault();
+      populateTable(event.target);
     }
+  });
 
-    // Attach click handlers after the page loads
-    document.addEventListener("DOMContentLoaded", function () {
-      attachClickHandlers();
-    });
+  // Attach the addNewFields function to the "Add New+" button click event
+  document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("add-new-btn")) {
+      event.returnValue = false;
+      event.preventDefault(); // Prevent the default behavior of the "Add New" button click
+      addNewFields(event);
+    }
+  });
 
   function populateTable(form) {
     event.stopPropagation();
