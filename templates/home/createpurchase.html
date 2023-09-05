@@ -188,6 +188,12 @@
     updateTable();
     // Clear the form fields
     form.reset();
+    var itemRowContainer = form.closest(".item-row");
+    var clonedForms = itemRowContainer.querySelectorAll(".item-form:not(:first-child)");
+
+    clonedForms.forEach(function (clonedForm) {
+      clonedForm.remove();
+  });
   }
 
 
