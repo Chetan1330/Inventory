@@ -12606,10 +12606,7 @@ a.text-darker:focus {
     border-collapse: collapse !important;
   }
 
-  .table td,
-  .table th {
-    background-color: #ffffff !important;
-  }
+ 
 
   .table-bordered th,
   .table-bordered td {
@@ -19856,7 +19853,7 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #190e4f;
   text-align: center;
 }
 
@@ -20206,7 +20203,7 @@ h3 input.search-input {
 }
 .logo-text{
   margin-left: 10px;
-  color: #ffffff29;
+  color: #ffffff;
 }
 .larg-btn{
   width: 100%;
@@ -20216,7 +20213,7 @@ h3 input.search-input {
 }
 .larg-link{
   font-size: 16px!important;
-  color: #706c6c;
+  color: #190e4f;
   font-weight: 500;
   text-decoration: none;
 }
