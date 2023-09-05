@@ -20241,8 +20241,18 @@ button.global-btn:focus {
   border: none;
   padding: 10px;
   border-radius: 50px;
+  color: #fff;
+  background: #190e4f;
+  box-shadow: 0px 5px 9px 0px #989494;
+}
+button.global-btn:hover {
+  outline: none!important;
+  width: 50%;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
   color: #190e4f;
-  background: #fff;
+  background: #ffffff29;
   box-shadow: 0px 5px 9px 0px #989494;
 }
 .larg-btn.purchase{
