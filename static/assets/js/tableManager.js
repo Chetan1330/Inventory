@@ -801,7 +801,6 @@
     });
 
     function updateDisplayedData() {
-      console.log(selectedColumns, Heads, 'h');
       // Show all table headers and data cells
       Heads.show();
       rows.find('td').show();
@@ -823,9 +822,11 @@
         });
       }
     
-      currentPage = 0; // Reset to the first page when filtering
+      // Reinitialize pagination and update page controllers based on filtering
+      currentPage = 0;
+      numPerPage = parseInt($("select#numrows").val());
       paginate(currentPage, numPerPage);
-      filterPages(); // Update page controllers based on filtering
+      filterPages();
     }
     
 
