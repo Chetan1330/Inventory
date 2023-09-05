@@ -290,7 +290,7 @@
               return !~text.indexOf(val);
             })
             .hide();
-
+            updateDisplayedData();
           if (val == "") paginate();
         });
       }
