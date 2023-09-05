@@ -733,6 +733,7 @@
     filterDropdown.addClass("custom-dropdown");
     if (window.location.pathname === "/") {
       $("#numrows").after(filterDropdown);
+      $("#filter-container").append(filterDropdown);
     }
     headerTexts.forEach(function (text) {
       filterDropdown
