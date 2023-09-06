@@ -20184,6 +20184,7 @@ button.global-btn {
   color: #fff;
   background: #190e4f;
   box-shadow: 0px 5px 9px 0px #989494;
+  transition: transform 0.3s ease;
 }
 button.global-btn:focus {
   outline: none!important;
@@ -20196,14 +20197,7 @@ button.global-btn:focus {
   box-shadow: 0px 5px 9px 0px #989494;
 }
 button.global-btn:hover {
-  outline: none!important;
-  width: 50%;
-  border: none;
-  padding: 10px;
-  border-radius: 50px;
-  color: #190e4f;
-  background: #ffffff29;
-  box-shadow: 0px 5px 9px 0px #989494;
+  transform: scale(1.1);
 }
 .larg-btn.purchase{
   width: 100%;
