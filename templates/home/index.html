@@ -149,6 +149,7 @@
       var search_input;
 
       function _onInputSearch(e) {
+        console.log(e,'e',document.getElementsByClassName(search_input.getAttribute('data-table')))
         search_input = e.target;
         var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
         myArray.forEach.call(tables, function (table) {
