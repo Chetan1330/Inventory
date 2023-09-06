@@ -221,11 +221,7 @@
     console.log('clicked')
     var x = document.getElementById("searchbar").value.length
     if (x == 0) {
-      
-      var filterDropdown = document.getElementById("filter-dropdown");
-    if (!filterDropdown) {
-      // If the filter dropdown doesn't exist, create and append it
-      filterDropdown = $('<div id="filter-dropdown" class="custom-dropdown"><ul></ul></div>');
+      document.getElementById("filter-dropdown").show();
       document.getElementById("for_numrows").remove();
       document.getElementById("pagesControllers").remove();
       $('.tablemanager').tablemanager({
@@ -235,7 +231,7 @@
         showrows: [5, 10, 20, 50, 100],
         bFilter: false,
       });
-    }
+    
   });
   // const input = document.querySelector("input");
   // input.addEventListener("input", updateValue);
