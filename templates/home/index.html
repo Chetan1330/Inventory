@@ -217,21 +217,22 @@
   //       });
   //     });
   // document.getElementById("numrows").value = 5;   
-  // $('.search-input').keyup(function () {
-  //   console.log('clicked')
-  //   var x = document.getElementById("searchbar").value.length
-  //   if (x == 0) {
-  //     document.getElementById("for_numrows").remove();
-  //     document.getElementById("pagesControllers").remove();
-  //     $('.tablemanager').tablemanager({
-  //       pagination: true,
-  //       appendFilterby: false,
-  //       // showrows: [5],
-  //       showrows: [5, 10, 20, 50, 100],
-  //       bFilter: false,
-  //     });
-  //   }
-  // });
+  $('.search-input').keyup(function () {
+    console.log('clicked')
+    var x = document.getElementById("searchbar").value.length
+    if (x == 0) {
+      document.getElementById("for_numrows").remove();
+      document.getElementById("pagesControllers").remove();
+      $('.tablemanager').tablemanager({
+        pagination: true,
+        appendFilterby: false,
+        filterDropdown: true,
+        // showrows: [5],
+        showrows: [5, 10, 20, 50, 100],
+        bFilter: false,
+      });
+    }
+  });
   // const input = document.querySelector("input");
   // input.addEventListener("input", updateValue);
 
