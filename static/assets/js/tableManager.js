@@ -198,6 +198,12 @@
           generatePaginationValues();
         });
         
+       
+      }
+
+      if(options.filterDropdown != "" &&
+      typeof options.filterDropdown !== undefined &&
+      options.filterDropdown !== undefined){
         var selectedColumns = [];
         var headerTexts = Heads.map(function () {
           return $(this).text();
