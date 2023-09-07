@@ -231,7 +231,7 @@
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
           console.log(filterDropdown,'fil');
-          console.log(filterDropdown.style.display,'filterDropdown.is(":visible")')
+          console.log(filterDropdown[0].style.display,'filterDropdown.is(":visible")')
           // filterDropdown.toggle(); // Toggle visibility directly  
           if (filterDropdown.style.display === "none") {
             // var iconPosition = filterButton.position();
@@ -242,7 +242,7 @@
               opacity: 1,
               visibility: "visible",
             });
-            filterDropdown.style.display = "block";
+            filterDropdown[0].style.display = "block";
           } else {
             filterDropdown.css({
               opacity: 0,
