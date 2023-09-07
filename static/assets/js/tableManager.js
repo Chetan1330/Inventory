@@ -197,14 +197,6 @@
           currentPage = 0;
           generatePaginationValues();
         });
-        
-       
-      }
-
-      if(options.filterDropdown != "" &&
-      typeof options.filterDropdown !== undefined &&
-      options.filterDropdown !== undefined){
-        console.log(options,'opss207')
         var selectedColumns = [];
         var headerTexts = Heads.map(function () {
           return $(this).text();
@@ -228,6 +220,7 @@
                 "</label></li>"
             );
         });
+        filterDropdown[0].style.display = "none"
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
           console.log(filterDropdown,'fil');
@@ -313,7 +306,15 @@
         
           updateDisplayedData(); // Call the function to update table display
         });
+       
       }
+
+      // if(options.filterDropdown != "" &&
+      // typeof options.filterDropdown !== undefined &&
+      // options.filterDropdown !== undefined){
+      //   console.log(options,'opss207')
+        
+      // }
       updateDisplayedData(); // Call the function to update table display
 
       /**
@@ -835,17 +836,7 @@
       }
     }
 
-    // dropdown filter
     
-    if (
-      options.filterDropdown != "" &&
-      typeof options.filterDropdown !== undefined &&
-      options.filterDropdown !== undefined
-    ){
-      console.log(options,'op')
-     
-
-    }
     
   };
 })(jQuery);
