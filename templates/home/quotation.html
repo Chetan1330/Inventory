@@ -1,0 +1,65 @@
+{% extends "layouts/base.html" %} 
+{% load static %} 
+{% load widget_tweaks %} 
+{% block title %} View Purchase Quotation {% endblock title %} 
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div style="color:#190e4f; font-style: bold; font-size: 3rem; border-bottom: 1px solid #190e4f;">View Quotation Requests</div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+            <h2>Requested Item : </h2>
+            <p>
+                <h4><strong>Name</strong></h4>
+                <span>Net Adapter</span>
+            </p>
+            <p>
+                <h4><strong>Type</strong></h4>
+                <span>Memory chip</span>
+            </p>
+            <p>
+                <h4><strong>Quantity:</strong></h4>
+                <span>40</span>
+            </p>
+            <p>
+                <h4><strong>Link</strong></h4>
+                <span><a href="#">www.netadapter.com</a></span>
+            </p>
+            <p>
+                <h4><strong>Description</strong></h4>
+                <span>This product in need for validation and containerization.</span>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h2>Vendors</h2>
+            <label for="selectAll">Select All</label>
+            <input type="checkbox" id="selectAll" onclick="selectAllItems(this)">
+            <ul id="itemList">
+              <li><input type="checkbox" class="itemCheckbox"> Krish</li>
+              <li><input type="checkbox" class="itemCheckbox"> Mcghan</li>
+              <li><input type="checkbox" class="itemCheckbox"> Williams</li>
+              <li><input type="checkbox" class="itemCheckbox"> Rishi</li>
+              <li><input type="checkbox" class="itemCheckbox"> Krish</li>
+              <li><input type="checkbox" class="itemCheckbox"> Mcghan</li>
+              <li><input type="checkbox" class="itemCheckbox"> Williams</li>
+              <li><input type="checkbox" class="itemCheckbox"> Rishi</li>
+            </ul>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script>
+    function selectAllItems(source) {
+      var checkboxes = document.querySelectorAll('.itemCheckbox');
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+  </script>
+{% endblock content %}
