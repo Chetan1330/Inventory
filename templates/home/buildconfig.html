@@ -7,14 +7,14 @@
 
 {% block content %}
 
-    <!-- <div style="color:#190e4f; font-style: bold; font-size: 3rem; border-bottom: 1px solid #190e4f;">{{ request.user.username }} Panel</div> -->
+    <!-- <div style="color:#190e4f; font-style: bold; font-size: 24px; border-bottom: 1px solid #190e4f;margin:0 auto;">{{ request.user.username }} Panel</div> -->
 
     <div  class="build-config">
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div style="background-color: #ffffff29; padding: 2em;">
-                <div style="color:#190e4f; font-style: bold; font-size: 3rem; border-bottom: 1px solid #190e4f;">Build Config</div>
+                <div style="color:#190e4f; font-style: bold; font-size: 24px; border-bottom: 1px solid #190e4f;margin:0 auto;">Build Config</div>
 
                 <!-- {% for i in all_configs %}
                     <a href="viewconfig/">{{i}}</a>
