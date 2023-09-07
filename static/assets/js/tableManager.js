@@ -231,13 +231,13 @@
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
           console.log(filterDropdown,'fil');
-          filterDropdown.toggle(); // Toggle visibility directly
+          // filterDropdown.toggle(); // Toggle visibility directly
           if (filterDropdown.is(":visible")) {
             var iconPosition = filterButton.position();
             var dropdownWidth = filterDropdown.outerWidth();
             filterDropdown.css({
-              top: iconPosition.top + filterButton.outerHeight(),
-              left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
+              // top: iconPosition.top + filterButton.outerHeight(),
+              // left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
               opacity: 1,
               visibility: "visible",
             });
