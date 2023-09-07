@@ -230,10 +230,10 @@
         });
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
-          console.log(filterDropdown,'fil');
+          console.log(filterDropdown[0],'fil');
           console.log(filterDropdown.is(":visible"),'filterDropdown.is(":visible")')
-          // filterDropdown.toggle(); // Toggle visibility directly
-          if (filterDropdown.style.display === "none") {
+          // filterDropdown.toggle(); // Toggle visibility directly  
+          if (filterDropdown[0].style.display === "none") {
             // var iconPosition = filterButton.position();
             // var dropdownWidth = filterDropdown.outerWidth();
             filterDropdown.css({
@@ -242,13 +242,13 @@
               opacity: 1,
               visibility: "visible",
             });
-            filterDropdown.style.display = "block";
+            filterDropdown[0].style.display = "block";
           } else {
             filterDropdown.css({
               opacity: 0,
               visibility: "hidden",
             });
-            filterDropdown.style.display = "none"
+            filterDropdown[0].style.display = "none"
           }
         });
         
