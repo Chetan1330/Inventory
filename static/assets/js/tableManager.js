@@ -234,19 +234,21 @@
           console.log(filterDropdown.is(":visible"),'filterDropdown.is(":visible")')
           // filterDropdown.toggle(); // Toggle visibility directly
           if (filterDropdown.is(":visible")) {
-            var iconPosition = filterButton.position();
-            var dropdownWidth = filterDropdown.outerWidth();
+            // var iconPosition = filterButton.position();
+            // var dropdownWidth = filterDropdown.outerWidth();
             filterDropdown.css({
               // top: iconPosition.top + filterButton.outerHeight(),
               // left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
               opacity: 1,
               visibility: "visible",
             });
+            filterDropdown.is(":visible") == false;
           } else {
             filterDropdown.css({
               opacity: 0,
               visibility: "hidden",
             });
+            filterDropdown.is(":visible") == true;
           }
         });
         
