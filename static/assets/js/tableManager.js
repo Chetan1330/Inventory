@@ -163,6 +163,7 @@
         typeof options.showrows !== undefined &&
         options.showrows !== undefined
       ) {
+        console.log(option,'op')
         showrows_option = true;
 
         // div num rows
@@ -180,7 +181,6 @@
               text: showrows[i],
             })
           );
-
           // debug
           if (isNaN(showrows[i])) {
             if (debug) {
@@ -188,7 +188,6 @@
             }
           }
         }
-
         var selectNumRowsVal = $("select#numrows").val();
         numPerPage = selectNumRowsVal;
         // on select num rows change get value and call function
@@ -198,12 +197,11 @@
           currentPage = 0;
           generatePaginationValues();
         });
+        
         var selectedColumns = [];
         var headerTexts = Heads.map(function () {
           return $(this).text();
         }).get();
-        
-        
         updateDisplayedData();
         var filterDropdown = $("#filter-dropdown");
         filterDropdown.addClass("custom-dropdown");
@@ -222,9 +220,7 @@
                 "</label></li>"
             );
         });
-    
         var filterButton = $("<button id='selectCol'>Select Columns :</button>");
-    
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
           console.log(filterDropdown,'fil');
@@ -248,7 +244,6 @@
         if (window.location.pathname === "/") {
           $("#numrows").after(filterButton);
         }
-    
         Heads.each(function () {
           filterDropdown
             .find("ul")
@@ -260,36 +255,30 @@
                 "</label></li>"
             );
         });
-    
         filterDropdown
           .find("ul")
           .prepend(
             '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
           );
-    
         $(document).on("change", "#select-all-checkbox", function () {
           var isChecked = $(this).prop("checked");
           filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
           selectedColumns = isChecked ? headerTexts : [];
           updateDisplayedData();
         });
-    
         $("select#numrows").on("change", function () {
           numPerPage = parseInt($(this).val());
           updateDisplayedData();
         });
-    
         function updateDisplayedData() {
           // Show all table headers and data cells
           Heads.show();
           rows.find('td').show();
-        
           if (selectedColumns.length > 0) {
             // Hide the table headers that are not in the selected columns
             Heads.filter(function () {
               return selectedColumns.indexOf($(this).text()) === -1;
             }).hide();
-        
             // Hide the data cells in the columns that are not in the selected columns
             rows.each(function () {
               var row = $(this);
@@ -300,15 +289,12 @@
               });
             });
           }
-        
           // Reinitialize pagination and update page controllers based on filtering
           currentPage = 0;
           numPerPage = parseInt($("select#numrows").val());
           paginate(currentPage, numPerPage);
           filterPages();
         }
-        
-    
         filterDropdown.find("input[type='checkbox']").on("change", function () {
           selectedColumns = filterDropdown
             .find("input:checked")
@@ -320,6 +306,7 @@
           updateDisplayedData(); // Call the function to update table display
         });
       }
+      updateDisplayedData(); // Call the function to update table display
 
       /**
             Pagination
