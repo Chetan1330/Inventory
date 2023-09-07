@@ -207,7 +207,6 @@
           return $(this).text();
         }).get();
         updateDisplayedData();
-        document.addEventListener("DOMContentLoaded", function () {
           var filterButton = $("<button id='selectCol'>Select Columns :</button>");
           var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
           filterDropdown += '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>';
@@ -281,7 +280,6 @@
             .get();
         
           updateDisplayedData(); // Call the function to update table display
-        });
         });
         // var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
         // headerTexts.forEach(function (text) {
