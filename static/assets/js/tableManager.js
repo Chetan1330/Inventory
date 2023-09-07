@@ -163,7 +163,7 @@
         typeof options.showrows !== undefined &&
         options.showrows !== undefined
       ) {
-        console.log(option,'op')
+        console.log(options,'op')
         showrows_option = true;
 
         // div num rows
