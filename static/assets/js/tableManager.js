@@ -203,11 +203,12 @@
           return $(this).text();
         }).get();
         updateDisplayedData();
+        var filterButton = $("<button id='selectCol'>Select Columns :</button>");
         var filterDropdown = $("#filter-dropdown");
         filterDropdown.addClass("custom-dropdown");
         if (window.location.pathname === "/") {
-          $("#numrows").after(filterDropdown);
-          $("#filter-container").append(filterDropdown);
+          $("#searchbar").after(filterButton);
+          $("#searchbar").after(filterDropdown);
         }
         headerTexts.forEach(function (text) {
           filterDropdown
@@ -220,7 +221,6 @@
                 "</label></li>"
             );
         });
-        var filterButton = $("<button id='selectCol'>Select Columns :</button>");
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
           console.log(filterDropdown,'fil');
@@ -241,9 +241,7 @@
             });
           }
         });
-        if (window.location.pathname === "/") {
-          $("#numrows").after(filterButton);
-        }
+        
         Heads.each(function () {
           filterDropdown
             .find("ul")
