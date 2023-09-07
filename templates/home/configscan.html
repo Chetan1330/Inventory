@@ -18,7 +18,7 @@ CreateConfig {% endblock title %} {% block stylesheets %}
 <div class="configscan">
   <form id="createform" method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
-
+    <div style="color:#190e4f; font-style: bold; font-size: 24px; border-bottom: 1px solid #190e4f;margin:0 auto; text-align: center;">Config Scan</div>
     <div style="background-color: #ffffff29; padding: 1em">
       <!-- </form> -->
 
@@ -36,7 +36,7 @@ CreateConfig {% endblock title %} {% block stylesheets %}
       </select>
 
         <table
-          class="table tablemanager table-bordered mt32 customers-list" style="display: block;"
+          class="table tablemanager table-bordered mt32 customers-list"
         >
           <thead>
             <tr class="kie-tablelist__row kie-tablelist__row--header">
