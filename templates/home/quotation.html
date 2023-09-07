@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %} 
 {% load static %} 
 {% load widget_tweaks %} 
-{% block title %} View Purchase Quotation {% endblock title %} 
+{% block title %} Purchase {% endblock title %} 
 {% block content %}
 
 <div class="card">
@@ -12,55 +12,96 @@
     <div class="card-body">
       <div class="container">
         <div class="row">
-            
             <div class="col-md-6">
-                
-                <h2>Requested Item : </h2>
-                <div class="quotation-right">
-                    <div class="item-list">
-                        <h4><strong>Name</strong></h4>
-                        <span>Net Adapter</span>
-                    </div>
-                    <div class="item-list">
-                        <h4><strong>Type</strong></h4>
-                        <span>Memory chip</span>
-                    </div class="item-list">
-                    <div class="item-list">
-                        <h4><strong>Quantity:</strong></h4>
-                        <span>40</span>
-                    </div>
-                    <div class="item-list">
-                        <h4><strong>Link</strong></h4>
-                        <span><a href="#">www.netadapter.com</a></span>
-                    </div>
-                    <div class="item-list">
-                        <h4><strong>Description</strong></h4>
-                        <span>This product in need for validation and containerization.</span>
-                    </div>
-                </div>
-               
-            </div>
-            <div class="col-md-6">
-                <h2>Vendors</h2>
-                <div class="quotation-left">
-                    <div class="list-section">
-                    <label for="selectAll">Select All</label>
-                    <input type="checkbox" id="selectAll" onclick="selectAllItems(this)">
-                    <ul id="itemList" style="list-style-type: none;">
-                      <li><input type="checkbox" class="itemCheckbox"> Krish</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Mcghan</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Williams</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Rishi</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Krish</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Mcghan</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Williams</li>
-                      <li><input type="checkbox" class="itemCheckbox"> Rishi</li>
-                    </ul>
-                    </div>
+                    <table class="table table-manager table-bordered">
+                        <thead>
+                          <tr>
+                            <th>
+                              <label for="selectAll">Select All</label>
+                              <input type="checkbox" id="selectAll" onclick="selectAllItems(this)">
+                            </th>
+                            <th>Vendor ID</th>
+                            <th>Vendor Names</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Krish</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Mcghan</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Williams</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Rishi</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Krish</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Mcghan</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Williams</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox" class="itemCheckbox"></td>
+                            <td>&nbsp;</td>
+                            <td>Rishi</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     <div class="">
                         <button class="global-btn">Submit</button>
                     </div>
-                </div>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-manager table-bordered">
+                    <thead>
+                      <tr>
+                        <th><strong>Attribute</strong></th>
+                        <th><strong>Requested Item</strong></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Name</td>
+                        <td>Net Adapter</td>
+                      </tr>
+                      <tr>
+                        <td>Type</td>
+                        <td>Memory chip</td>
+                      </tr>
+                      <tr>
+                        <td>Quantity:</td>
+                        <td>40</td>
+                      </tr>
+                      <tr>
+                        <td>Link</td>
+                        <td><a href="#">www.netadapter.com</a></td>
+                      </tr>
+                      <tr>
+                        <td>Description</td>
+                        <td>This product is in need of validation and containerization.</td>
+                      </tr>
+                    </tbody>
+                  </table>
               </div>
           </div>
         
