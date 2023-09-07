@@ -721,8 +721,13 @@
 
     // dropdown filter
     
-
-    var selectedColumns = [];
+    if (
+      options.filterDropdown != "" &&
+      typeof options.filterDropdown !== undefined &&
+      options.filterDropdown !== undefined
+    ){
+      console.log(options,'op')
+      var selectedColumns = [];
     var headerTexts = Heads.map(function () {
       return $(this).text();
     }).get();
@@ -843,5 +848,8 @@
     
       updateDisplayedData(); // Call the function to update table display
     });
+
+    }
+    
   };
 })(jQuery);

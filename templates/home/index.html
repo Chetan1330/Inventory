@@ -218,10 +218,12 @@
   //     });
   // document.getElementById("numrows").value = 5;   
   $('.search-input').keyup(function () {
+    console.log('clicked')
     var x = document.getElementById("searchbar").value.length
     if (x == 0) {
+      document.getElementById("for_numrows").remove();
       document.getElementById("pagesControllers").remove();
-      console.log(document.getElementById("filter-dropdown"),'document.getElementById("filter-dropdown")')
+            // Add the "for_numrows" and "pagesControllers" elements if they don't exist
             $('.tablemanager').tablemanager({
                 pagination: true,
                 appendFilterby: false,
@@ -229,10 +231,10 @@
                 showrows: [5, 10, 20, 50, 100],
                 bFilter: false,
             });
+          
         }
     // if (x == 0) {
     //   console.log(document.getElementById("filter-dropdown"),'document.getElementById("filter-dropdown")')
-    //   document.getElementById("for_numrows").remove();
     //   document.getElementById("pagesControllers").remove();
     //   $('.tablemanager').tablemanager({
     //     pagination: true,
