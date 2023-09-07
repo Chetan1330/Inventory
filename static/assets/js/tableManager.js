@@ -214,7 +214,7 @@
         filterDropdown.addClass("custom-dropdown");
         if (window.location.pathname === "/") {
           $("#searchbar").after(filterButton);
-          $("#searchbar").after(filterDropdown);
+          $("#selectCol").after(filterDropdown);
         }
         headerTexts.forEach(function (text) {
           filterDropdown
