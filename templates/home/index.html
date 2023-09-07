@@ -220,9 +220,8 @@
   $('.search-input').keyup(function () {
     console.log('clicked')
     var x = document.getElementById("searchbar").value.length
-    var filterDropdown = document.getElementById("filter-dropdown");
     if (x == 0) {
-      filterDropdown.style.display = 'block';
+      document.getElementById("filter-dropdown").remove()
       document.getElementById("for_numrows").remove();
       document.getElementById("pagesControllers").remove();
             // Add the "for_numrows" and "pagesControllers" elements if they don't exist
