@@ -59,6 +59,7 @@
     var voc_filter_by = "Filter by",
       voc_type_here_filter = "Type here to filter...",
       voc_show_rows = "Show Rows";
+      voc_filterDropdown = "filterDropdown"
 
     /**
         Available options:
@@ -122,6 +123,10 @@
           options.vocabulary.voc_show_rows !== undefined
             ? options.vocabulary.voc_show_rows
             : voc_show_rows;
+            voc_filterDropdown = options.vocabulary.voc_filterDropdown != "" &&
+            options.vocabulary.voc_filterDropdown !== undefined
+              ? options.vocabulary.voc_filterDropdown
+              : voc_filterDropdown;
       }
 
       /**
@@ -226,7 +231,7 @@
           console.log(filterDropdown,'fil');
           console.log(filterDropdown[0].style.display,'filterDropdown.is(":visible")')
           // filterDropdown.toggle(); // Toggle visibility directly  
-          if (filterDropdown.style.display === "none") {
+          if (filterDropdown[0].style.display === "none") {
             // var iconPosition = filterButton.position();
             // var dropdownWidth = filterDropdown.outerWidth();
             filterDropdown.css({
