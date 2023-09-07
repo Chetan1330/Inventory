@@ -233,7 +233,7 @@
           console.log(filterDropdown,'fil');
           console.log(filterDropdown.is(":visible"),'filterDropdown.is(":visible")')
           // filterDropdown.toggle(); // Toggle visibility directly
-          if (filterDropdown.is(":visible")) {
+          if (filterDropdown.style.display === "none") {
             // var iconPosition = filterButton.position();
             // var dropdownWidth = filterDropdown.outerWidth();
             filterDropdown.css({
@@ -242,13 +242,13 @@
               opacity: 1,
               visibility: "visible",
             });
-            filterDropdown.is(":visible") == false;
+            filterDropdown.style.display = "block";
           } else {
             filterDropdown.css({
               opacity: 0,
               visibility: "hidden",
             });
-            filterDropdown.is(":visible") == true;
+            filterDropdown.style.display = "none"
           }
         });
         
