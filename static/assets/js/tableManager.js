@@ -208,19 +208,45 @@
         }).get();
         updateDisplayedData();
         var filterButton = $("<button id='selectCol'>Select Columns :</button>");
-        var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
-        headerTexts.forEach(function (text) {
-          filterDropdown +=
-            '<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>';
-        });
+        // var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
+        // headerTexts.forEach(function (text) {
+        //   filterDropdown +=
+        //     '<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>';
+        // });
 
-        filterDropdown += '</ul></div>';
+        // filterDropdown += '</ul></div>';
         // var filterDropdown = $("#filter-dropdown");
         // filterDropdown.addClass("custom-dropdown");
+        var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
+
+          // Add the "Select All" checkbox at the top
+          filterDropdown += '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>';
+
+          headerTexts.forEach(function (text) {
+            filterDropdown +=
+              '<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>';
+          });
+
+          filterDropdown += '</ul></div>';
         if (window.location.pathname === "/") {
           $("#searchbar").after(filterButton);
           $("#selectCol").after(filterDropdown);
         }
+        $(document).on("click", "#selectCol", function (e) {
+          e.stopPropagation();
+          var $filterDropdown = $("#filter-dropdown"); // Select the filterDropdown element here
+          if ($filterDropdown.is(":visible")) {
+            $filterDropdown.css({
+              opacity: 0,
+              visibility: "hidden",
+            });
+          } else {
+            $filterDropdown.css({
+              opacity: 1,
+              visibility: "visible",
+            });
+          }
+        });
         // headerTexts.forEach(function (text) {
         //   filterDropdown
         //     .find("ul")
@@ -232,47 +258,47 @@
         //         "</label></li>"
         //     );
         // });
-        filterDropdown[0].style.display = "none"
-        $(document).on("click", "#selectCol", function (e) {
-          e.stopPropagation();
-          console.log(filterDropdown,'fil');
-          console.log(filterDropdown[0].style.display,'filterDropdown.is(":visible")')
-          // filterDropdown.toggle(); // Toggle visibility directly  
-          if (filterDropdown[0].style.display === "none") {
-            // var iconPosition = filterButton.position();
-            // var dropdownWidth = filterDropdown.outerWidth();
-            filterDropdown.css({
-              // top: iconPosition.top + filterButton.outerHeight(),
-              // left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
-              opacity: 1,
-              visibility: "visible",
-            });
-            filterDropdown[0].style.display = "block";
-          } else {
-            filterDropdown.css({
-              opacity: 0,
-              visibility: "hidden",
-            });
-            filterDropdown[0].style.display = "none"
-          }
-        });
+        // filterDropdown[0].style.display = "none"
+        // $(document).on("click", "#selectCol", function (e) {
+        //   e.stopPropagation();
+        //   console.log(filterDropdown,'fil');
+        //   console.log(filterDropdown[0].style.display,'filterDropdown.is(":visible")')
+        //   // filterDropdown.toggle(); // Toggle visibility directly  
+        //   if (filterDropdown[0].style.display === "none") {
+        //     // var iconPosition = filterButton.position();
+        //     // var dropdownWidth = filterDropdown.outerWidth();
+        //     filterDropdown.css({
+        //       // top: iconPosition.top + filterButton.outerHeight(),
+        //       // left: iconPosition.left - dropdownWidth + filterButton.outerWidth(),
+        //       opacity: 1,
+        //       visibility: "visible",
+        //     });
+        //     filterDropdown[0].style.display = "block";
+        //   } else {
+        //     filterDropdown.css({
+        //       opacity: 0,
+        //       visibility: "hidden",
+        //     });
+        //     filterDropdown[0].style.display = "none"
+        //   }
+        // });
         
-        Heads.each(function () {
-          filterDropdown
-            .find("ul")
-            .append(
-              '<li><label><input type="checkbox" value="' +
-                $(this).text() +
-                '"> ' +
-                $(this).text() +
-                "</label></li>"
-            );
-        });
-        filterDropdown
-          .find("ul")
-          .prepend(
-            '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
-          );
+        // Heads.each(function () {
+        //   filterDropdown
+        //     .find("ul")
+        //     .append(
+        //       '<li><label><input type="checkbox" value="' +
+        //         $(this).text() +
+        //         '"> ' +
+        //         $(this).text() +
+        //         "</label></li>"
+        //     );
+        // });
+        // filterDropdown
+        //   .find("ul")
+        //   .prepend(
+        //     '<li><label><input type="checkbox" id="select-all-checkbox"> Select All</label></li>'
+        //   );
         $(document).on("change", "#select-all-checkbox", function () {
           var isChecked = $(this).prop("checked");
           filterDropdown.find("input[type='checkbox']").prop("checked", isChecked);
