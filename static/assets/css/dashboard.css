@@ -19921,7 +19921,10 @@ h3 input.search-input {
   /* border: 2px solid black; */
   margin-left: 49px;
 }
-
+.custom-dropdown {
+  position: absolute;
+  z-index: 1;
+}
 .custom-dropdown i {
   font-size: 16px;
   color: #333;
@@ -19941,11 +19944,11 @@ h3 input.search-input {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   max-height: 350px;
   overflow-y: scroll;
-  visibility: hidden;
-  opacity: 0;
 }
 
 #filter-dropdown.visible {

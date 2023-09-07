@@ -18,12 +18,12 @@
         <input id="searchbar" type="text" placeholder="Search stock..." class="col-9 form-control search-input"
           data-table="customers-list" />
         <!-- </h3> -->
-        <!-- <div id="filter-dropdown" class="custom-dropdown">
-          <ul></ul>
-        </div> -->
+
       </div>
       <div class="card-body">
-        
+        <div id="filter-dropdown" class="custom-dropdown">
+          <ul></ul>
+        </div>
           <table id="hometable" style="display: block;
       " class="htable table table-bordered tablemanager mt32 customers-list">
             <thead>
@@ -221,32 +221,18 @@
     console.log('clicked')
     var x = document.getElementById("searchbar").value.length
     if (x == 0) {
-      console.log(document.getElementById("selectCol"),'document.getElementById("selectCol")',document.getElementById("filter-dropdown"))
-      document.getElementById("selectCol").remove();
-      document.getElementById("filter-dropdown").remove();
+      console.log(document.getElementById("filter-dropdown"),'document.getElementById("filter-dropdown")')
+      document.getElementById("filter-dropdown").show();
       document.getElementById("for_numrows").remove();
       document.getElementById("pagesControllers").remove();
-            // Add the "for_numrows" and "pagesControllers" elements if they don't exist
-            $('.tablemanager').tablemanager({
-                pagination: true,
-                appendFilterby: false,
-                filterDropdown: true,
-                showrows: [5, 10, 20, 50, 100],
-                bFilter: false,
-            });
-          
-        }
-    // if (x == 0) {
-    //   console.log(document.getElementById("filter-dropdown"),'document.getElementById("filter-dropdown")')
-    //   document.getElementById("pagesControllers").remove();
-    //   $('.tablemanager').tablemanager({
-    //     pagination: true,
-    //     appendFilterby: false,
-    //     // showrows: [5],
-    //     showrows: [5, 10, 20, 50, 100],
-    //     bFilter: false,
-    //   });
-    // }
+      $('.tablemanager').tablemanager({
+        pagination: true,
+        appendFilterby: false,
+        // showrows: [5],
+        showrows: [5, 10, 20, 50, 100],
+        bFilter: false,
+      });
+    }
   });
   // const input = document.querySelector("input");
   // input.addEventListener("input", updateValue);
@@ -292,7 +278,6 @@
   $('.htable').tablemanager({
     pagination: true,
     appendFilterby: false,
-    filterDropdown:true,
     // showrows: [5],
     showrows: [5, 10, 20, 50, 100],
     bFilter: false,
@@ -301,7 +286,6 @@
   {% comment %} $('#hometable').tablemanager({
     pagination: true,
     appendFilterby: false,
-    filterDropdown: true,
     // showrows: [5],
     showrows: [5, 10, 20, 50, 100],
     bFilter: false,
@@ -309,7 +293,6 @@
   $('#historytable').tablemanager({
     pagination: true,
     appendFilterby: false,
-    filterDropdown: true,
     // showrows: [5],
     showrows: [5, 10, 20, 50, 100],
     bFilter: false,
