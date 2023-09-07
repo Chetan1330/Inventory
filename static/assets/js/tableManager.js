@@ -208,23 +208,30 @@
         }).get();
         updateDisplayedData();
         var filterButton = $("<button id='selectCol'>Select Columns :</button>");
-        var filterDropdown = $("#filter-dropdown");
-        filterDropdown.addClass("custom-dropdown");
+        var filterDropdown = '<div id="filter-dropdown" class="custom-dropdown"><ul>';
+        headerTexts.forEach(function (text) {
+          filterDropdown +=
+            '<li><label><input type="checkbox" value="' + text + '"> ' + text + '</label></li>';
+        });
+
+        filterDropdown += '</ul></div>';
+        // var filterDropdown = $("#filter-dropdown");
+        // filterDropdown.addClass("custom-dropdown");
         if (window.location.pathname === "/") {
           $("#searchbar").after(filterButton);
           $("#selectCol").after(filterDropdown);
         }
-        headerTexts.forEach(function (text) {
-          filterDropdown
-            .find("ul")
-            .append(
-              '<li><label><input type="checkbox" value="' +
-                text +
-                '"> ' +
-                text +
-                "</label></li>"
-            );
-        });
+        // headerTexts.forEach(function (text) {
+        //   filterDropdown
+        //     .find("ul")
+        //     .append(
+        //       '<li><label><input type="checkbox" value="' +
+        //         text +
+        //         '"> ' +
+        //         text +
+        //         "</label></li>"
+        //     );
+        // });
         filterDropdown[0].style.display = "none"
         $(document).on("click", "#selectCol", function (e) {
           e.stopPropagation();
