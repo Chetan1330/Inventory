@@ -204,6 +204,7 @@
       if(options.filterDropdown != "" &&
       typeof options.filterDropdown !== undefined &&
       options.filterDropdown !== undefined){
+        console.log(options,'opss207')
         var selectedColumns = [];
         var headerTexts = Heads.map(function () {
           return $(this).text();
