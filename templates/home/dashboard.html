@@ -5,10 +5,7 @@
 {% block title %} Dashboard {% endblock title %}
 
 {% block content %}
-<style>
-    body { margin: 0; }
-    canvas { display: block; }
-</style>
+
 <div class="row">
     <div class="col-12">
         <div class="card card-chart">
@@ -54,8 +51,7 @@
             </div>
             <div class="card-body">
                 <div class="chart-area">
-                    <!-- <canvas id="CountryChart"></canvas> -->
-                    <div id="chart-container"></div>
+                    <canvas id="CountryChart"></canvas>
                 </div>
             </div>
         </div>
@@ -63,194 +59,142 @@
 </div>
 
 <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <script>
-    // $(document).ready(function () {
-    //     var labels = JSON.parse(JSON.stringify({{ labels|safe }}));
-    //     var stockval = JSON.parse(JSON.stringify({{ stockval|safe }}));
-    //     var Stockin = JSON.parse(JSON.stringify({{ Stockin|safe }}));
-    //     var stockout = JSON.parse(JSON.stringify({{ stockout|safe }}));
-    //     var stockpending = JSON.parse(JSON.stringify({{ stockpending|safe }}));
-    //     var stockreserved = JSON.parse(JSON.stringify({{ stockreserved|safe }}));
+    $(document).ready(function () {
+        var labels = JSON.parse(JSON.stringify({{ labels|safe }}));
+        var stockval = JSON.parse(JSON.stringify({{ stockval|safe }}));
+        var Stockin = JSON.parse(JSON.stringify({{ Stockin|safe }}));
+        var stockout = JSON.parse(JSON.stringify({{ stockout|safe }}));
+        var stockpending = JSON.parse(JSON.stringify({{ stockpending|safe }}));
+        var stockreserved = JSON.parse(JSON.stringify({{ stockreserved|safe }}));
 
-    //     var ctx = document.getElementById("CountryChart").getContext("2d");
+        var ctx = document.getElementById("CountryChart").getContext("2d");
 
-    //     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-    //     gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
-    //     gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
-    //     gradientStroke.addColorStop(0, 'rgba(29,140,248,0)');
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
+        gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
+        gradientStroke.addColorStop(0, 'rgba(29,140,248,0)');
 
-    //     var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
-    //     gradientStroke1.addColorStop(1, 'rgba(248, 208, 29,0.2)');
-    //     gradientStroke1.addColorStop(0.4, 'rgba(248, 208, 29,0.0)');
-    //     gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)');
+        var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(248, 208, 29,0.2)');
+        gradientStroke1.addColorStop(0.4, 'rgba(248, 208, 29,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)');
 
-    //     var gradientBarChartConfiguration = {
-    //         maintainAspectRatio: false,
-    //         legend: {
-    //             display: false
-    //         },
-    //         tooltips: {
-    //             backgroundColor: '#f5f5f5',
-    //             titleFontColor: '#333',
-    //             bodyFontColor: '#666',
-    //             bodySpacing: 4,
-    //             xPadding: 12,
-    //             mode: "nearest",
-    //             intersect: 0,
-    //             position: "nearest"
-    //         },
-    //         responsive: true,
-    //         scales: {
-    //             yAxes: [{
-    //                 gridLines: {
-    //                     drawBorder: false,
-    //                     color: 'rgba(29,140,248,0.1)',
-    //                     zeroLineColor: "transparent",
-    //                 },
-    //                 ticks: {
-    //                     suggestedMin: 60,
-    //                     suggestedMax: 120,
-    //                     padding: 20,
-    //                     fontColor: "#9e9e9e"
-    //                 }
-    //             }],
-    //             xAxes: [{
-    //                 gridLines: {
-    //                     drawBorder: false,
-    //                     color: 'rgba(29,140,248,0.1)',
-    //                     zeroLineColor: "transparent",
-    //                 },
-    //                 ticks: {
-    //                     padding: 20,
-    //                     fontColor: "#9e9e9e"
-    //                 }
-    //             }]
-    //         }
-    //     };
+        var gradientBarChartConfiguration = {
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            tooltips: {
+                backgroundColor: '#f5f5f5',
+                titleFontColor: '#333',
+                bodyFontColor: '#666',
+                bodySpacing: 4,
+                xPadding: 12,
+                mode: "nearest",
+                intersect: 0,
+                position: "nearest"
+            },
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        suggestedMin: 60,
+                        suggestedMax: 120,
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawBorder: false,
+                        color: 'rgba(29,140,248,0.1)',
+                        zeroLineColor: "transparent",
+                    },
+                    ticks: {
+                        padding: 20,
+                        fontColor: "#9e9e9e"
+                    }
+                }]
+            }
+        };
 
-    //     var config = {
-    //         type: 'bar',
-    //         responsive: true,
-    //         legend: {
-    //             display: false
-    //         },
-    //         data: {
-    //             labels: labels,
-    //             datasets: [{
-    //                 label: "Total Available",
-    //                 fill: true,
-    //                 scale: 0,
-    //                 backgroundColor: gradientStroke,
-    //                 hoverBackgroundColor: gradientStroke,
-    //                 borderColor: '#1f8ef1',
-    //                 borderWidth: 2,
-    //                 borderDash: [],
-    //                 borderDashOffset: 0.0,
-    //                 data: Stockin,
-    //             }, {
-    //                 backgroundColor: gradientStroke1,
-    //                 label: 'Total Stock',
-    //                 fill: true,
-    //                 scale: 0,
-    //                 hoverBackgroundColor: gradientStroke,
-    //                 borderColor: '#ffd103',
-    //                 borderWidth: 2,
-    //                 borderDash: [],
-    //                 borderDashOffset: 0.0,
-    //                 data: stockval,
-    //             }]
-    //         },
-    //         options: gradientBarChartConfiguration
-    //     };
+        var config = {
+            type: 'bar',
+            responsive: true,
+            legend: {
+                display: false
+            },
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Total Available",
+                    fill: true,
+                    scale: 0,
+                    backgroundColor: gradientStroke,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#1f8ef1',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    data: Stockin,
+                }, {
+                    backgroundColor: gradientStroke1,
+                    label: 'Total Stock',
+                    fill: true,
+                    scale: 0,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#ffd103',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    data: stockval,
+                }]
+            },
+            options: gradientBarChartConfiguration
+        };
 
-    //     var myChartData = new Chart(ctx, config);
+        var myChartData = new Chart(ctx, config);
 
-    //     $("#0").click(function () {
-    //         var data = myChartData.config.data;
-    //         data.datasets[0].label = "Total Available";
-    //         data.datasets[0].data = Stockin;
-    //         data.labels = labels;
-    //         myChartData.update();
-    //     });
-
-    //     $("#1").click(function () {
-    //         var data = myChartData.config.data;
-    //         data.datasets[0].label = "Pending Retirement";
-    //         data.datasets[0].data = stockpending;
-    //         data.labels = labels;
-    //         myChartData.update();
-    //     });
-
-    //     $("#2").click(function () {
-    //         var data = myChartData.config.data;
-    //         data.datasets[0].label = "Reserved";
-    //         data.datasets[0].data = stockreserved;
-    //         data.labels = labels;
-    //         myChartData.update();
-    //     });
-
-    //     $("#3").click(function () {
-    //         var data = myChartData.config.data;
-    //         data.datasets[0].label = "Not Available";
-    //         data.datasets[0].data = stockout;
-    //         data.labels = labels;
-    //         myChartData.update();
-    //     });
-    // });
-    
-</script>
-<script>
-    // Set up the scene
-    const scene = new THREE.Scene();
-
-    // Set up the camera
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
-
-    // Set up the renderer
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // Data for the bars (label, value, color)
-    const data = [
-        { label: "Label 1", value: 30, color: 0x00ff00 },
-        { label: "Label 2", value: 40, color: 0xff0000 },
-        { label: "Label 3", value: 20, color: 0x0000ff },
-    ];
-
-    // Create bars
-    const bars = [];
-
-    for (let i = 0; i < data.length; i++) {
-        const barGeometry = new THREE.BoxGeometry(1, data[i].value, 1);
-        const barMaterial = new THREE.MeshBasicMaterial({ color: data[i].color });
-        const bar = new THREE.Mesh(barGeometry, barMaterial);
-        bar.position.x = i * 2; // Set the x-position for each bar
-        scene.add(bar);
-        bars.push(bar);
-    }
-
-    // Animation loop
-    const animate = function () {
-        requestAnimationFrame(animate);
-
-        // Rotate bars for animation
-        bars.forEach((bar) => {
-            bar.rotation.x += 0.01;
-            bar.rotation.y += 0.01;
+        $("#0").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Total Available";
+            data.datasets[0].data = Stockin;
+            data.labels = labels;
+            myChartData.update();
         });
 
-        renderer.render(scene, camera);
-    };
+        $("#1").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Pending Retirement";
+            data.datasets[0].data = stockpending;
+            data.labels = labels;
+            myChartData.update();
+        });
 
-    animate();
+        $("#2").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Reserved";
+            data.datasets[0].data = stockreserved;
+            data.labels = labels;
+            myChartData.update();
+        });
+
+        $("#3").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].label = "Not Available";
+            data.datasets[0].data = stockout;
+            data.labels = labels;
+            myChartData.update();
+        });
+    });
 </script>
-  
-  <!-- Tooltip element (customize the style) -->
-  <div id="tooltip" style="display: none; position: absolute; background-color: rgba(255, 255, 255, 0.8); padding: 10px;"></div>
-  
+
 {% endblock content %}
