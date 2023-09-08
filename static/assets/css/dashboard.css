@@ -13062,8 +13062,8 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-primary.btn-simple {
-  color: #e14eca;
-  border-color: #e14eca;
+  color: #fff;
+  border-color: #190e4f!important;
   background: transparent;
 }
 
@@ -13072,14 +13072,14 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary.btn-simple:active,
 .btn-primary.btn-simple:not(:disabled):not(.disabled):active {
   color: #e14eca;
-  border-color: #e14eca;
+  border-color: #190e4f!important;
   background-color: transparent !important;
   background-image: none !important;
   box-shadow: none;
 }
 
 .btn-primary.btn-simple.active {
-  border-color: #e14eca !important;
+  border-color: #190e4f!important;
 }
 
 .btn-primary.btn-simple.active:hover,
@@ -13087,9 +13087,9 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary.btn-simple.active:active,
 .btn-primary.btn-simple.active:not(:disabled):not(.disabled):active {
   color: #ffffff;
-  border-color: #e14eca;
-  background-image: linear-gradient(to bottom left, #e14eca, #ba54f5, #e14eca) !important;
-  background-image: -moz-linear-gradient(to bottom left, #e14eca, #ba54f5, #e14eca) !important;
+  border-color: #190e4f!important;
+  background-image: linear-gradient(to bottom left, #160f7b, #160f7b, #160f7b) !important;
+  background-image: -moz-linear-gradient(to bottom left, #160f7b, #160f7b, #160f7b) !important;
   background-color: #ba54f5 !important;
   box-shadow: none;
 }
