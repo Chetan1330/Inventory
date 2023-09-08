@@ -12103,11 +12103,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 }
 
 .btn-primary {
-  background: #e14eca;
-  background-image: linear-gradient(to bottom left, #e14eca, #ba54f5, #e14eca);
-  background-size: 210% 210%;
-  background-position: top right;
-  background-color: #e14eca;
+  background-color: #190e4f;
   transition: all 0.15s ease;
   box-shadow: none;
   color: #ffffff;
@@ -12126,8 +12122,8 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .btn-primary:active:hover,
 .btn-primary.active:focus,
 .btn-primary.active:hover {
-  background-color: #fff !important;
-  color: #190e4f!important;
+  background-color: #190e4f!important;
+  color: #ffffff!important;
   box-shadow: none;
 }
 
