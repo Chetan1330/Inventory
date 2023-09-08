@@ -82,7 +82,7 @@
         gradientStroke1.addColorStop(0.4, 'rgba(248, 208, 29,0.0)');
         gradientStroke1.addColorStop(0, 'rgba(248, 208, 29,0)');
 
-        var gradientBarChartConfiguration = {
+        var bubbleChartConfiguration = {
             maintainAspectRatio: false,
             legend: {
                 display: false
@@ -93,9 +93,10 @@
                 bodyFontColor: '#666',
                 bodySpacing: 4,
                 xPadding: 12,
-                mode: "nearest",
+                mode: "point",
                 intersect: 0,
-                position: "nearest"
+                position: "nearest",
+                intersect: true,
             },
             responsive: true,
             scales: {
@@ -127,7 +128,7 @@
         };
 
         var config = {
-            type: 'bar',
+            type: 'bubble',
             responsive: true,
             legend: {
                 display: false
@@ -144,7 +145,15 @@
                     borderWidth: 2,
                     borderDash: [],
                     borderDashOffset: 0.0,
-                    data: Stockin,
+                    // data: Stockin,
+                    data: labels.map(function (label, index) {
+                        return {
+                            x: Stockin[index],
+                            y: stockval[index],
+                            r: 10, // Customize the bubble radius as needed
+                            label: label // Use label as tooltip text
+                        };
+                    }),
                 }, {
                     backgroundColor: gradientStroke1,
                     label: 'Total Stock',
@@ -155,10 +164,18 @@
                     borderWidth: 2,
                     borderDash: [],
                     borderDashOffset: 0.0,
-                    data: stockval,
+                    // data: stockval,
+                    data: labels.map(function (label, index) {
+                        return {
+                            x: stockval[index],
+                            y: stockval[index],
+                            r: 10, // Customize the bubble radius as needed
+                            label: label // Use label as tooltip text
+                        };
+                    }),
                 }]
             },
-            options: gradientBarChartConfiguration
+            options: bubbleChartConfiguration
         };
 
         var myChartData = new Chart(ctx, config);
@@ -166,7 +183,15 @@
         $("#0").click(function () {
             var data = myChartData.config.data;
             data.datasets[0].label = "Total Available";
-            data.datasets[0].data = Stockin;
+            // data.datasets[0].data = Stockin;
+            data.datasets[0].data = labels.map(function (label, index) {
+                return {
+                    x: Stockin[index],
+                    y: stockval[index],
+                    r: 10,
+                    label: label
+                };
+            });
             data.labels = labels;
             myChartData.update();
         });
@@ -174,7 +199,15 @@
         $("#1").click(function () {
             var data = myChartData.config.data;
             data.datasets[0].label = "Pending Retirement";
-            data.datasets[0].data = stockpending;
+            // data.datasets[0].data = stockpending;
+            data.datasets[0].data = labels.map(function (label, index) {
+                return {
+                    x: stockpending[index],
+                    y: stockval[index],
+                    r: 10,
+                    label: label
+                };
+            });
             data.labels = labels;
             myChartData.update();
         });
@@ -182,7 +215,15 @@
         $("#2").click(function () {
             var data = myChartData.config.data;
             data.datasets[0].label = "Reserved";
-            data.datasets[0].data = stockreserved;
+            // data.datasets[0].data = stockreserved;
+            data.datasets[0].data = labels.map(function (label, index) {
+                return {
+                    x: stockreserved[index],
+                    y: stockval[index],
+                    r: 10,
+                    label: label
+                };
+            });
             data.labels = labels;
             myChartData.update();
         });
@@ -190,7 +231,15 @@
         $("#3").click(function () {
             var data = myChartData.config.data;
             data.datasets[0].label = "Not Available";
-            data.datasets[0].data = stockout;
+            // data.datasets[0].data = stockout;
+            data.datasets[0].data = labels.map(function (label, index) {
+                return {
+                    x: stockout[index],
+                    y: stockval[index],
+                    r: 10,
+                    label: label
+                };
+            });
             data.labels = labels;
             myChartData.update();
         });
