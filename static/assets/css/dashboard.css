@@ -12114,7 +12114,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
   transition: 0.3s ease-in-out;
 }
 
-.btn-primary:hover,
+/* .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
@@ -12125,7 +12125,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
   background-color: #190e4f!important;
   color: #ffffff!important;
   box-shadow: none;
-}
+} */
 
 .btn-primary:active {
   box-shadow: none !important;
